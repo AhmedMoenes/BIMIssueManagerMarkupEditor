@@ -36,8 +36,6 @@
     <Folder Include="ApiRoutes\" />
     <Folder Include="Commands\" />
     <Folder Include="Resources\Icons\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
   </ItemGroup>
 
 </Project>
