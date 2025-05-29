@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-
-namespace BIMIssueManagerMarkupsEditor.Helpers
+﻿namespace BIMIssueManagerMarkupsEditor.Helpers
 {
     public static class DependencyInjection
     {
