@@ -8,5 +8,7 @@ global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using BIMIssueManagerMarkupsEditor.Helpers;
 global using Microsoft.Extensions.Options;
 global using System.IO;
+global using CommunityToolkit.Mvvm.ComponentModel;
+
 
 

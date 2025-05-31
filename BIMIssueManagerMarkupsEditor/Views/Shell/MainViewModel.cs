@@ -1,6 +1,7 @@
 ﻿namespace BIMIssueManagerMarkupsEditor.Views.Shell
 {
-    public class MainViewModel
+    public partial class MainViewModel : ObservableObject
     {
+
     }
 }
