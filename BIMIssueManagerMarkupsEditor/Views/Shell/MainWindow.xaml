@@ -17,42 +17,53 @@
         <!-- Navigation Sidebar -->
         <StackPanel DockPanel.Dock="Left"
                     Width="60"
-                    Background="{StaticResource SidebarBackgroundBrush}">
+                    Background="{StaticResource SidebarBackgroundBrush}"
+                    >
+            <Border Style="{StaticResource BorderTipWarning}">
+                <Button Style="{StaticResource SidebarIconButtonStyle}"
+            Command="{Binding NavigateProfileCommand}"
+            ToolTip="Profile">
+                    <TextBlock Text="&#xE77B;" Style="{StaticResource SidebarIconTextStyle}" />
+                </Button>
+            </Border>
+            <hc:Divider Margin="4,1,0,1" LineStroke="Black" LineStrokeThickness="1"/>
 
-            <Button Style="{StaticResource SidebarIconButtonStyle}"
-                    Command="{Binding NavigateProfileCommand}"
-                    ToolTip="Profile">
-                <TextBlock Text="&#xE77B;" Style="{StaticResource SidebarIconTextStyle}" />
-            </Button>
-            <hc:Divider Style="{StaticResource SidebarDividerStyle}" />
-
-            <Button Style="{StaticResource SidebarIconButtonStyle}"
+            <Border Style="{StaticResource BorderTipWarning}">
+                <Button Style="{StaticResource SidebarIconButtonStyle}"
                     Command="{Binding NavigateProjectsCommand}"
                     ToolTip="Projects">
-                <TextBlock Text="&#xE7B8;" Style="{StaticResource SidebarIconTextStyle}" />
-            </Button>
-            <hc:Divider Style="{StaticResource SidebarDividerStyle}" />
+                    <TextBlock Text="&#xE7B8;" Style="{StaticResource SidebarIconTextStyle}" />
+                </Button>
+            </Border>
+            <hc:Divider Margin="4,1,0,1" LineStroke="Black" LineStrokeThickness="1"/>
 
-            <Button Style="{StaticResource SidebarIconButtonStyle}"
+            <Border Style="{StaticResource BorderTipWarning}">
+
+                <Button Style="{StaticResource SidebarIconButtonStyle}"
                     Command="{Binding NavigateTeamsCommand}"
                     ToolTip="Teams">
-                <TextBlock Text="&#xE902;" Style="{StaticResource SidebarIconTextStyle}" />
-            </Button>
-            <hc:Divider Style="{StaticResource SidebarDividerStyle}" />
+                    <TextBlock Text="&#xE902;" Style="{StaticResource SidebarIconTextStyle}" />
+                </Button>
+            </Border>
+            <hc:Divider Margin="4,1,0,1" LineStroke="Black" LineStrokeThickness="1"/>
 
-            <Button Style="{StaticResource SidebarIconButtonStyle}"
+            <Border Style="{StaticResource BorderTipWarning}">
+                <Button Style="{StaticResource SidebarIconButtonStyle}"
                     Command="{Binding NavigateIssuesCommand}"
                     ToolTip="Issues">
-                <TextBlock Text="&#xE8C3;" Style="{StaticResource SidebarIconTextStyle}" />
-            </Button>
-            <hc:Divider Style="{StaticResource SidebarDividerStyle}" />
+                    <TextBlock Text="&#xE8C3;" Style="{StaticResource SidebarIconTextStyle}" />
+                </Button>
+            </Border>
+            <hc:Divider Margin="4,1,0,1" LineStroke="Black" LineStrokeThickness="1"/>
 
-            <Button Style="{StaticResource SidebarIconButtonStyle}"
+            <Border Style="{StaticResource BorderTipWarning}">
+                <Button Style="{StaticResource SidebarIconButtonStyle}"
                     Command="{Binding NavigateViewerCommand}"
                     ToolTip="Viewer">
-                <TextBlock Text="&#xE773;" Style="{StaticResource SidebarIconTextStyle}" />
-            </Button>
-            <hc:Divider Style="{StaticResource SidebarDividerStyle}"/>
+                    <TextBlock Text="&#xE773;" Style="{StaticResource SidebarIconTextStyle}" />
+                </Button>
+            </Border>
+            <hc:Divider Margin="4,1,0,1" LineStroke="Black" LineStrokeThickness="1"/>
         </StackPanel>
 
         <ContentControl Content="{Binding CurrentView}" Margin="10"/>

@@ -1,6 +1,6 @@
 ﻿namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 {
-    public class ModelViewerViewModel
+    public class ModelViewerViewModel : ObservableObject
     {
     }
 }

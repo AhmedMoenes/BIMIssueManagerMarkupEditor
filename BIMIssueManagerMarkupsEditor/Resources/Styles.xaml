@@ -4,7 +4,7 @@
 
 
     <!-- Brushes -->
-    <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="#F4F4F4"/>
+    <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="LightGray"/>
 
     <!-- Sidebar Button Style -->
     <Style x:Key="SidebarIconButtonStyle" TargetType="Button">
@@ -22,13 +22,6 @@
         </Setter>
     </Style>
 
-    <!-- Divider Style -->
-    <Style x:Key="SidebarDividerStyle" TargetType="hc:Divider">
-        <Setter Property="Orientation" Value="Horizontal"/>
-        <Setter Property="LineStrokeThickness" Value="2"/>
-        <Setter Property="LineStroke" Value="DodgerBlue"/>
-        <Setter Property="Margin" Value="5"/>
-    </Style>
 
     <!-- Icon TextBlock Style -->
     <Style x:Key="SidebarIconTextStyle" TargetType="TextBlock">

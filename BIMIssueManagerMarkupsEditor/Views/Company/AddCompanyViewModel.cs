@@ -1,6 +1,6 @@
 ﻿namespace BIMIssueManagerMarkupsEditor.Views.Company
 {
-    public class AddCompanyViewModel
+    public class AddCompanyViewModel:ObservableObject
     {
     }
 }

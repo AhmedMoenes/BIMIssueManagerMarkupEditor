@@ -1,6 +1,6 @@
 ﻿namespace BIMIssueManagerMarkupsEditor.Views.User
 {
-    public class ProfileViewModel
+    public class ProfileViewModel : ObservableObject
     {
     }
 }

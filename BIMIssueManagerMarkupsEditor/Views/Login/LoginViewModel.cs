@@ -1,6 +1,6 @@
 ﻿namespace BIMIssueManagerMarkupsEditor.Views.Login
 {
-    public class LoginViewModel
+    public class LoginViewModel : ObservableObject
     {
     }
 }
