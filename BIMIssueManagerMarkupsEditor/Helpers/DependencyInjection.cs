@@ -1,19 +1,17 @@
-﻿using BIMIssueManagerMarkupsEditor.Views.Shell;
-
-namespace BIMIssueManagerMarkupsEditor.Helpers
+﻿namespace BIMIssueManagerMarkupsEditor.Helpers
 {
     public static class DependencyInjection
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.TryAddTransient<IApiService,ApiService>();
-            services.AddSingleton<MainWindow>();
-            services.AddSingleton<MainViewModel>();
-            services.AddTransient<ProfileViewModel>();
-            services.AddTransient<AddProjectViewModel>();
-            services.AddTransient<AddTeamMemberViewModel>();
-            services.AddTransient<IssuesViewModel>();
-            services.AddTransient<ModelViewerViewModel>();
+            services.TryAddTransient<MainWindow>();
+            services.TryAddTransient<MainViewModel>();
+            services.TryAddTransient<ProfileViewModel>();
+            services.TryAddTransient<AddProjectViewModel>();
+            services.TryAddTransient<AddTeamMemberViewModel>();
+            services.TryAddTransient<IssuesViewModel>();
+            services.TryAddTransient<ModelViewerViewModel>();
             return services;
         }
 
@@ -21,7 +19,7 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
         {
             services.Configure<ApiSettings>(configuration.GetSection(nameof(ApiSettings)));
 
-            services.AddHttpClient<ApiService>((sp, client) =>
+            services.AddHttpClient<IApiService,ApiService>((sp, client) =>
             {
                 var settings = sp.GetRequiredService<IOptions<ApiSettings>>().Value;
                 client.BaseAddress = new Uri(settings.BaseUrl);

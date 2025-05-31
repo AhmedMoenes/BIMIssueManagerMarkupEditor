@@ -3,7 +3,6 @@
     public partial class MainViewModel : ObservableObject
     {
         private readonly IServiceProvider _provider;
-
         public MainViewModel(IServiceProvider provider)
         {
             _provider = provider;

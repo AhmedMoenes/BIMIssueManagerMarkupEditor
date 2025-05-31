@@ -2,11 +2,42 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor"
+             xmlns:vmUser ="clr-namespace:BIMIssueManagerMarkupsEditor.Views.User"
+             xmlns:vmProject="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
+             xmlns:vmTeams="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
+             xmlns:vmIssues="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues"
+             xmlns:vmViewer="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Viewer"
+             xmlns:viewUser="clr-namespace:BIMIssueManagerMarkupsEditor.Views.User"
+             xmlns:viewProject="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
+             xmlns:viewTeams="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
+             xmlns:viewIssues="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues"
+             xmlns:viewViewer="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Viewer"
              StartupUri="/Views/Shell/MainWindow.xaml">
 
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <DataTemplate DataType="{x:Type vmUser:ProfileViewModel}">
+                        <viewUser:ProfileView />
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type vmProject:AddProjectViewModel}">
+                        <viewProject:AddProjectView />
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type vmTeams:AddTeamMemberViewModel}">
+                        <viewTeams:AddTeamMemberView />
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type vmIssues:IssuesViewModel}">
+                        <viewIssues:IssuesListView />
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type vmViewer:ModelViewerViewModel}">
+                        <viewViewer:ModelViewerView />
+                    </DataTemplate>
+                </ResourceDictionary>
                 <ResourceDictionary Source="Resources/HandyControlResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

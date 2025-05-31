@@ -1,8 +1,8 @@
 ﻿namespace BIMIssueManagerMarkupsEditor.Helpers
 {
-    public static class Startup
+    public static class StartApp
     {
-        public static IServiceProvider Initialize(this IServiceProvider serviceProvider)
+        public static IServiceProvider Initialize()
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())

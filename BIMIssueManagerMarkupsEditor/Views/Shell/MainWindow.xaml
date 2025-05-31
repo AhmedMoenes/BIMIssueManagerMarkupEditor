@@ -27,6 +27,7 @@
                 </Button>
             </Border>
             <hc:Divider Margin="4,1,0,1" LineStroke="Black" LineStrokeThickness="1"/>
+            <hc:Divider Orientation="Vertical"  LineStroke="Black" LineStrokeThickness="1"/>
 
             <Border Style="{StaticResource BorderTipWarning}">
                 <Button Style="{StaticResource SidebarIconButtonStyle}"

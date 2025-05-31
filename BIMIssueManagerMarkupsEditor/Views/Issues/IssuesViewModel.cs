@@ -1,4 +1,4 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Views.Issuess
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Issues
 {
     public class IssuesViewModel : ObservableObject
     {
