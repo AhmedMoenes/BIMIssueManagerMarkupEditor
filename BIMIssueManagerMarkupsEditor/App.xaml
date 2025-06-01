@@ -4,11 +4,13 @@
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor"
              xmlns:vmUser ="clr-namespace:BIMIssueManagerMarkupsEditor.Views.User"
              xmlns:vmProject="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
+             xmlns:vmCompany="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Company"
              xmlns:vmTeams="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
              xmlns:vmIssues="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues"
              xmlns:vmViewer="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Viewer"
              xmlns:viewUser="clr-namespace:BIMIssueManagerMarkupsEditor.Views.User"
              xmlns:viewProject="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
+             xmlns:viewCompany="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Company"
              xmlns:viewTeams="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
              xmlns:viewIssues="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues"
              xmlns:viewViewer="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Viewer"
@@ -24,6 +26,10 @@
 
                     <DataTemplate DataType="{x:Type vmProject:AddProjectViewModel}">
                         <viewProject:AddProjectView />
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type vmCompany:AddCompanyViewModel}">
+                        <viewCompany:AddCompanyView />
                     </DataTemplate>
 
                     <DataTemplate DataType="{x:Type vmTeams:AddTeamMemberViewModel}">

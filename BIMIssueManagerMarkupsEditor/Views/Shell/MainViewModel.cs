@@ -1,4 +1,6 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Views.Shell
+﻿using BIMIssueManagerMarkupsEditor.Views.Company;
+
+namespace BIMIssueManagerMarkupsEditor.Views.Shell
 {
     public partial class MainViewModel : ObservableObject
     {
@@ -24,6 +26,12 @@
             CurrentView = _provider.GetRequiredService<AddProjectViewModel>();
         }
 
+        [RelayCommand]
+        private void NavigateCompanies()
+        {
+            CurrentView = _provider.GetRequiredService<AddCompanyViewModel>();
+        }
+        
         [RelayCommand]
         private void NavigateTeams()
         {

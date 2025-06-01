@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Shell"
         mc:Ignorable="d"
         Title="BIM ISSUE MANAGER"
-        Height="600" Width="1000"
+        Height="700" Width="1000"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml"/>
@@ -15,7 +15,7 @@
 
     <DockPanel>
         <hc:SideMenu DockPanel.Dock="Left"
-                     Width="100"
+                     Width="120"
                      Margin="0"
                      Header="BIM Manager">
 
@@ -28,6 +28,12 @@
             <hc:SideMenuItem Header="Projects" Command="{Binding NavigateProjectsCommand}">
                 <hc:SideMenuItem.Icon>
                     <TextBlock Text="&#xE7B8;" Style="{StaticResource SidebarIconTextStyle}" />
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
+
+            <hc:SideMenuItem Header="Companies" Command="{Binding NavigateCompaniesCommand}">
+                <hc:SideMenuItem.Icon>
+                    <TextBlock Text="&#xE779;" Style="{StaticResource SidebarIconTextStyle}" />
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
 

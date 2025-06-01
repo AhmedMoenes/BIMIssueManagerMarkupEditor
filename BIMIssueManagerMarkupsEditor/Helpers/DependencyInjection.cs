@@ -1,4 +1,6 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Helpers
+﻿using BIMIssueManagerMarkupsEditor.Views.Company;
+
+namespace BIMIssueManagerMarkupsEditor.Helpers
 {
     public static class DependencyInjection
     {
@@ -9,6 +11,7 @@
             services.TryAddTransient<MainViewModel>();
             services.TryAddTransient<ProfileViewModel>();
             services.TryAddTransient<AddProjectViewModel>();
+            services.TryAddTransient<AddCompanyViewModel>();
             services.TryAddTransient<AddTeamMemberViewModel>();
             services.TryAddTransient<IssuesViewModel>();
             services.TryAddTransient<ModelViewerViewModel>();

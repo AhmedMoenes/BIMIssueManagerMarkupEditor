@@ -7,7 +7,105 @@
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBox FontSize="40" TextAlignment="Center">Projects</TextBox>
+    <Grid Margin="20">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Data Grid (Left Column) -->
+        <DataGrid Grid.Column="0"
+                  Grid.RowSpan="2"
+                  ItemsSource="{Binding Projects}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  Margin="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Project Name" Binding="{Binding ProjectName}" Width="*" />
+                <DataGridTextColumn Header="Start" Binding="{Binding StartDate}" Width="Auto" />
+                <DataGridTextColumn Header="End" Binding="{Binding EndDate}" Width="Auto" />
+                <DataGridTextColumn Header="Issues" Binding="{Binding IssuesCount}" Width="Auto" />
+                <DataGridTextColumn Header="Companies" Binding="{Binding CompanyNames.Count}" Width="Auto" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Form (Right Column) -->
+        <Expander Header="Create New Project" 
+                  Grid.Column="1" 
+                  Grid.Row="0"
+                  Margin="5" 
+                  IsExpanded="False">
+            <StackPanel>
+                <!-- Create Project Form -->
+                <hc:TextBox hc:InfoElement.Placeholder="Project Name" Text="{Binding Project.ProjectName}" Margin="0,5"/>
+                <hc:TextBox hc:InfoElement.Placeholder="Description" Text="{Binding Project.Description}" Margin="0,5"/>
+                <hc:DatePicker hc:InfoElement.Placeholder="Start Date" SelectedDate="{Binding Project.StartDate}" Margin="0,5"/>
+                <hc:DatePicker hc:InfoElement.Placeholder="End Date" SelectedDate="{Binding Project.EndDate}" Margin="0,5"/>
+
+                <!-- Labels Section -->
+                <TextBlock Text="Labels" FontWeight="Bold" Margin="0,10,0,0"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <hc:TextBox Width="180" Text="{Binding NewLabelName}" Margin="0,0,10,0"/>
+                </StackPanel>
+                <ItemsControl ItemsSource="{Binding Project.Labels}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding LabelName}" Margin="5,0"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <!-- Areas Section -->
+                <TextBlock Text="Areas" FontWeight="Bold" Margin="0,10,0,0"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <hc:TextBox Width="180" Text="{Binding NewAreaName}" Margin="0,0,10,0"/>
+                </StackPanel>
+                <ItemsControl ItemsSource="{Binding Project.Areas}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding AreaName}" Margin="5,0"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button Content="Add Project" Grid.Row="0" Grid.Column="1"
+                        Command="{Binding CreateProjectCommand}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Width="100"
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Expander>
+
+        <!-- Assign Companies Section -->
+        <Expander Grid.Column="1" Header="Assign Companies To Projects" 
+                  Margin="5"
+                  Grid.Row="1">
+            <StackPanel>
+                <hc:ComboBox hc:InfoElement.Placeholder="Projects"
+                             ItemsSource="{Binding Projects}"
+                             DisplayMemberPath="ProjectName"
+                             SelectedItem=""
+                             Margin="0,5"/>
+
+                <hc:CheckComboBox hc:InfoElement.Placeholder="Companies"
+                                  ItemsSource="{Binding Companies}"
+                                  DisplayMemberPath="CompanyName"
+                                  Margin="0,5"/>
+                <Button Content="Assign to Project"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Style="{StaticResource ButtonPrimary}"
+                        Command="{Binding AssignCompaniesCommand}"
+                        Margin="0,10"/>
+            </StackPanel>
+        </Expander>
     </Grid>
 </UserControl>
