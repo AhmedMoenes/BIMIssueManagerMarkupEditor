@@ -14,58 +14,42 @@
     </Window.Resources>
 
     <DockPanel>
-        <!-- Navigation Sidebar -->
-        <StackPanel DockPanel.Dock="Left"
-                    Width="60"
-                    Background="{StaticResource SidebarBackgroundBrush}"
-                    >
-            <Border Style="{StaticResource BorderTipWarning}">
-                <Button Style="{StaticResource SidebarIconButtonStyle}"
-            Command="{Binding NavigateProfileCommand}"
-            ToolTip="Profile">
+        <hc:SideMenu DockPanel.Dock="Left"
+                     Width="100"
+                     Margin="0"
+                     Header="BIM Manager">
+
+            <hc:SideMenuItem Header="Profile" Command="{Binding NavigateProfileCommand}">
+                <hc:SideMenuItem.Icon>
                     <TextBlock Text="&#xE77B;" Style="{StaticResource SidebarIconTextStyle}" />
-                </Button>
-            </Border>
-            <hc:Divider Margin="4,1,0,1" LineStroke="Black" LineStrokeThickness="1"/>
-            <hc:Divider Orientation="Vertical"  LineStroke="Black" LineStrokeThickness="1"/>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
 
-            <Border Style="{StaticResource BorderTipWarning}">
-                <Button Style="{StaticResource SidebarIconButtonStyle}"
-                    Command="{Binding NavigateProjectsCommand}"
-                    ToolTip="Projects">
+            <hc:SideMenuItem Header="Projects" Command="{Binding NavigateProjectsCommand}">
+                <hc:SideMenuItem.Icon>
                     <TextBlock Text="&#xE7B8;" Style="{StaticResource SidebarIconTextStyle}" />
-                </Button>
-            </Border>
-            <hc:Divider Margin="4,1,0,1" LineStroke="Black" LineStrokeThickness="1"/>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
 
-            <Border Style="{StaticResource BorderTipWarning}">
-
-                <Button Style="{StaticResource SidebarIconButtonStyle}"
-                    Command="{Binding NavigateTeamsCommand}"
-                    ToolTip="Teams">
+            <hc:SideMenuItem Header="Teams" Command="{Binding NavigateTeamsCommand}">
+                <hc:SideMenuItem.Icon>
                     <TextBlock Text="&#xE902;" Style="{StaticResource SidebarIconTextStyle}" />
-                </Button>
-            </Border>
-            <hc:Divider Margin="4,1,0,1" LineStroke="Black" LineStrokeThickness="1"/>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
 
-            <Border Style="{StaticResource BorderTipWarning}">
-                <Button Style="{StaticResource SidebarIconButtonStyle}"
-                    Command="{Binding NavigateIssuesCommand}"
-                    ToolTip="Issues">
+            <hc:SideMenuItem Header="Issues" Command="{Binding NavigateIssuesCommand}">
+                <hc:SideMenuItem.Icon>
                     <TextBlock Text="&#xE8C3;" Style="{StaticResource SidebarIconTextStyle}" />
-                </Button>
-            </Border>
-            <hc:Divider Margin="4,1,0,1" LineStroke="Black" LineStrokeThickness="1"/>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
 
-            <Border Style="{StaticResource BorderTipWarning}">
-                <Button Style="{StaticResource SidebarIconButtonStyle}"
-                    Command="{Binding NavigateViewerCommand}"
-                    ToolTip="Viewer">
+            <hc:SideMenuItem Header="Viewer" Command="{Binding NavigateViewerCommand}">
+                <hc:SideMenuItem.Icon>
                     <TextBlock Text="&#xE773;" Style="{StaticResource SidebarIconTextStyle}" />
-                </Button>
-            </Border>
-            <hc:Divider Margin="4,1,0,1" LineStroke="Black" LineStrokeThickness="1"/>
-        </StackPanel>
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
+
+        </hc:SideMenu>
 
         <ContentControl Content="{Binding CurrentView}" Margin="10"/>
     </DockPanel>

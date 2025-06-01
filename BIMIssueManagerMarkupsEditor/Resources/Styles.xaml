@@ -5,22 +5,6 @@
     <!-- Brushes -->
     <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="LightGray"/>
 
-    <!-- Sidebar Button Style -->
-    <Style x:Key="SidebarIconButtonStyle" TargetType="Button">
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="Margin" Value="0,10"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Background="Transparent">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <!-- Icon TextBlock Style -->
     <Style x:Key="SidebarIconTextStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
