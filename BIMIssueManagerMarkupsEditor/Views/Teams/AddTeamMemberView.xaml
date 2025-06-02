@@ -7,7 +7,88 @@
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBox FontSize="40" TextAlignment="Center">Add Team Members</TextBox>
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Data Grid (Left Column) -->
+        <DataGrid Grid.Column="0"
+                  Grid.RowSpan="2"
+                  ItemsSource="{Binding Users}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  Margin="5">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="Auto" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="Auto" />
+                <DataGridTextColumn Header="User Projects" Binding="{Binding Projects}" Width="Auto" />
+                <DataGridTextColumn Header="User Role" Binding="{Binding Role}" Width="Auto" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Create User Section -->
+        <Expander Header="Create New User" 
+                  Grid.Column="1" 
+                  Grid.Row="0"
+                  Margin="5"
+                  IsExpanded="False">
+            <StackPanel>
+                <hc:TextBox hc:InfoElement.Placeholder="First Name" Text="{Binding NewUser.FirstName}" Margin="0,5"/>
+                <hc:TextBox hc:InfoElement.Placeholder="Last Name" Text="{Binding NewUser.LastName}" Margin="0,5"/>
+                <hc:TextBox hc:InfoElement.Placeholder="Username" Text="{Binding NewUser.UserName}" Margin="0,5"/>
+                <hc:TextBox hc:InfoElement.Placeholder="Email" Text="{Binding NewUser.Email}" Margin="0,5"/>
+                <hc:PasswordBox hc:InfoElement.Placeholder="Password" x:Name="PasswordBox" Margin="0,5"/>
+                <hc:ComboBox hc:InfoElement.Placeholder="Role"
+                             ItemsSource="{Binding AvailableRoles}"
+                             SelectedItem="{Binding NewUser.Role}"
+                             Margin="0,5"/>
+                <Button Content="Create User"
+                        Command="{Binding CreateUserCommand}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Width="120"
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Expander>
+
+        <!-- Assign to Projects Section -->
+        <Expander Header="Assign User to Projects" 
+                  Grid.Column="1" 
+                  Grid.Row="1"
+                  Margin="5">
+            <StackPanel>
+                <hc:ComboBox hc:InfoElement.Placeholder="User"
+                             ItemsSource="{Binding Users}"
+                             DisplayMemberPath="FullName"
+                             SelectedItem="{Binding SelectedUser}"
+                             Margin="0,5"/>
+
+                <hc:CheckComboBox hc:InfoElement.Placeholder="Projects"
+                                  ItemsSource="{Binding Projects}"
+                                  DisplayMemberPath="ProjectName"
+                                  Margin="0,5"/>
+
+                <hc:ComboBox hc:InfoElement.Placeholder="Project Role"
+                             ItemsSource="{Binding ProjectRoles}"
+                             SelectedItem="{Binding SelectedProjectRole}"
+                             Margin="0,5"/>
+
+                <Button Content="Assign to Projects"
+                        Command="{Binding AssignToProjectsCommand}"
+                        Style="{StaticResource ButtonPrimary}"
+                        Width="150"
+                        Margin="0,10,0,0"
+                        HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Expander>
     </Grid>
 </UserControl>
