@@ -13,8 +13,7 @@
              xmlns:viewCompany="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Company"
              xmlns:viewTeams="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
              xmlns:viewIssues="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues"
-             xmlns:viewViewer="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Viewer"
-             StartupUri="/Views/Shell/MainWindow.xaml">
+             xmlns:viewViewer="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Viewer">
 
     <Application.Resources>
         <ResourceDictionary>
