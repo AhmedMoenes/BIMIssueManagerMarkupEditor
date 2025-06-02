@@ -17,7 +17,8 @@
         <hc:SideMenu DockPanel.Dock="Left"
                      Width="120"
                      Margin="0"
-                     Header="BIM Manager">
+                     Header="BIM Manager"
+                     Background="#F9FBFC">
 
             <hc:SideMenuItem Header="Profile" Command="{Binding NavigateProfileCommand}">
                 <hc:SideMenuItem.Icon>
@@ -61,9 +62,8 @@
                     <TextBlock Text="&#xE773;" Style="{StaticResource SidebarIconTextStyle}" />
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
-
         </hc:SideMenu>
 
-        <ContentControl Content="{Binding CurrentView}" Margin="10"/>
+        <ContentControl Content="{Binding CurrentView}" Margin="10" />
     </DockPanel>
 </Window>

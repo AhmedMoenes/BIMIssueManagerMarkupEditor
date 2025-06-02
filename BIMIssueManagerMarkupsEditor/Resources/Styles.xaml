@@ -3,12 +3,20 @@
                     xmlns:hc="https://handyorg.github.io/handycontrol">
 
     <!-- Brushes -->
-    <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="LightGray"/>
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#F3F3F3"/>
+    <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="#E1E1E1"/>
+    <SolidColorBrush x:Key="ContentBackgroundBrush" Color="White"/>
+    <SolidColorBrush x:Key="PrimaryAccentBrush" Color="#0078D7"/>
+    <SolidColorBrush x:Key="TextBrush" Color="#333333"/>
+    <SolidColorBrush x:Key="SecondaryTextBrush" Color="#666666"/>
+    <SolidColorBrush x:Key="DividerBrush" Color="#CCCCCC"/>
+    <SolidColorBrush x:Key="ButtonHoverBrush" Color="#D6EFFF"/>
 
     <!-- Icon TextBlock Style -->
     <Style x:Key="SidebarIconTextStyle" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="#F3F3F3"></Setter>
     </Style>
 </ResourceDictionary>
