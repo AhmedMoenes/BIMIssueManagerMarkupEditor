@@ -7,7 +7,92 @@
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Filter Section -->
+        <WrapPanel Orientation="Horizontal" Grid.Row="0" Margin="0,10" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <hc:ComboBox hc:InfoElement.Placeholder="Project"
+                         Width="150"
+                         Margin="10"
+                         ItemsSource="{Binding Projects}"
+                         SelectedItem="{Binding SelectedProject}" />
+
+            <hc:ComboBox hc:InfoElement.Placeholder="Assignee"
+                         Width="150"
+                         Margin="10"
+                         ItemsSource="{Binding AssignedToUser}"
+                         SelectedItem="{Binding SelectedAssignee}" />
+
+            <hc:ComboBox hc:InfoElement.Placeholder="Priority"
+                         Width="120"
+                         Margin="10"
+                         ItemsSource="{Binding Priorities}"
+                         SelectedItem="{Binding SelectedPriority}" />
+
+            <hc:DatePicker hc:InfoElement.Placeholder="Date"
+                           Margin="10"
+                           Width="150"
+                           SelectedDate="{Binding SelectedDate}" />
+
+            <hc:ComboBox hc:InfoElement.Placeholder="Revit Version"
+                         Width="150"
+                         Margin="10"
+                         ItemsSource="{Binding RevitVersionOptions}"
+                         SelectedItem="{Binding SelectedRevitVersion}" />
+
+            <Button Content="Apply"
+                    Style="{StaticResource ButtonPrimary}"
+                    Command="{Binding ApplyFilterCommand}"
+                    Margin="10"
+                    Width="80" />
+        </WrapPanel>
+
+        <!-- Issues Cards Display -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <WrapPanel ItemWidth="200" ItemHeight="220" Margin="0,10" Orientation="Horizontal">
+                <ItemsControl ItemsSource="{Binding Issues}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" BorderBrush="#DDD" Margin="5" CornerRadius="6" Background="#FAFAFA">
+                                <StackPanel>
+                                    <!-- Date Header -->
+                                    <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:MMM dd, yyyy}'}"
+                                               FontWeight="Bold"
+                                               Foreground="#444"
+                                               HorizontalAlignment="Center"
+                                               Margin="5"/>
+
+                                    <!-- Snapshot Image -->
+                                    <Image Source="{Binding SnapshotImagePath}"
+                                           Height="120"
+                                           Margin="5"
+                                           Stretch="UniformToFill"
+                                           SnapsToDevicePixels="True"
+                                           />
+
+                                    <!-- Priority / Assignee / Status -->
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                                        <TextBlock Text="{Binding Priority}" Foreground="#0078D7" FontWeight="SemiBold" Margin="4,0"/>
+                                        <TextBlock Text="{Binding AssignedUser}" Foreground="#666" Margin="4,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </WrapPanel>
+        </ScrollViewer>
+
     </Grid>
+
+
 </UserControl>
