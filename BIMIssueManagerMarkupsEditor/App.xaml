@@ -7,12 +7,14 @@
              xmlns:vmCompany="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Company"
              xmlns:vmTeams="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
              xmlns:vmIssues="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues"
+             xmlns:vmChat="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Chat"
              xmlns:vmViewer="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Viewer"
              xmlns:viewUser="clr-namespace:BIMIssueManagerMarkupsEditor.Views.User"
              xmlns:viewProject="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
              xmlns:viewCompany="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Company"
              xmlns:viewTeams="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
              xmlns:viewIssues="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues"
+             xmlns:viewChat="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Chat"
              xmlns:viewViewer="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Viewer">
 
     <Application.Resources>
@@ -37,6 +39,10 @@
 
                     <DataTemplate DataType="{x:Type vmIssues:IssuesViewModel}">
                         <viewIssues:IssuesListView />
+                    </DataTemplate>
+
+                    <DataTemplate DataType="{x:Type vmChat:ChatViewModel}">
+                        <viewChat:ChatView />
                     </DataTemplate>
 
                     <DataTemplate DataType="{x:Type vmViewer:ModelViewerViewModel}">

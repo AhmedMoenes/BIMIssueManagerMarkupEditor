@@ -1,6 +1,4 @@
-﻿using BIMIssueManagerMarkupsEditor.Views.Company;
-
-namespace BIMIssueManagerMarkupsEditor.Views.Shell
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Shell
 {
     public partial class MainViewModel : ObservableObject
     {
@@ -42,6 +40,12 @@ namespace BIMIssueManagerMarkupsEditor.Views.Shell
         private void NavigateIssues()
         {
             CurrentView = _provider.GetRequiredService<IssuesViewModel>();
+        }
+
+        [RelayCommand]
+        private void NavigateChat()
+        {
+            CurrentView = _provider.GetRequiredService<ChatViewModel>();
         }
 
         [RelayCommand]

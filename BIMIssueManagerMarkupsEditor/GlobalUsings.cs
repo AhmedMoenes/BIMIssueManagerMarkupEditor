@@ -16,6 +16,7 @@ global using BIMIssueManagerMarkupsEditor.Views.Viewer;
 global using CommunityToolkit.Mvvm.Input;
 global using BIMIssueManagerMarkupsEditor.Views.Issues;
 global using BIMIssueManagerMarkupsEditor.Views.Shell;
-
+global using BIMIssueManagerMarkupsEditor.Views.Chat;
+global using BIMIssueManagerMarkupsEditor.Views.Company;
 
 

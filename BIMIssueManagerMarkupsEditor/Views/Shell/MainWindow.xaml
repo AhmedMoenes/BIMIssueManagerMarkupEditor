@@ -49,6 +49,13 @@
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
 
+            <hc:SideMenuItem Header="Chat" Command="{Binding NavigateChatCommand}">
+                <hc:SideMenuItem.Icon>
+                    <TextBlock Text="&#xE8BD;" Style="{StaticResource SidebarIconTextStyle}" />
+                    <!-- Chat icon -->
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
+
             <hc:SideMenuItem Header="Viewer" Command="{Binding NavigateViewerCommand}">
                 <hc:SideMenuItem.Icon>
                     <TextBlock Text="&#xE773;" Style="{StaticResource SidebarIconTextStyle}" />
