@@ -6,11 +6,17 @@
         public MainViewModel(IServiceProvider provider)
         {
             _provider = provider;
-            NavigateProfile();
+            NavigateMarkup();
         }
 
         [ObservableProperty] 
         private ObservableObject currentView;
+
+        [RelayCommand]
+        private void NavigateMarkup()
+        {
+            CurrentView = _provider.GetRequiredService<MarkupEditorViewModel>();
+        }
 
         [RelayCommand]
         private void NavigateProfile()

@@ -33,27 +33,25 @@
 
             <!-- Identity Info -->
             <hc:UniformSpacingPanel Grid.Column="0" Orientation="Vertical" Spacing="10" Margin="10,10" HorizontalAlignment="Left" ItemHorizontalAlignment="Left">
-                <Label Content="First Name" Style="{DynamicResource LabelDefault.Small}" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left"/>
-                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="Ahmed" />
-                <Label Content="Last Name" Style="{DynamicResource LabelDefault.Small}" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left"/>
-                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="Moenes" />
+                <Label Content="Full Name" Style="{DynamicResource LabelDefault.Small}" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left"/>
+                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="Ahmed Moenes" />
                 <Label Content="Email" Style="{DynamicResource LabelDefault.Small}" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left"/>
-                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="ahmed@example.com" />
-                <Label Content="Role" Style="{DynamicResource LabelDefault.Small}" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left"/>
-                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="Project Manager" />
-            </hc:UniformSpacingPanel>
-
-            <!-- Divider -->
-            <hc:Divider Grid.Column="1" Orientation="Vertical" Margin="20"/>
-
-            <!-- Company & Stats -->
-            <hc:UniformSpacingPanel Grid.Column="2" Orientation="Vertical" Spacing="10" Margin="0,10" HorizontalAlignment="Left" ItemHorizontalAlignment="Left">
+                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="amunes.f98@gmail.com" />
                 <Label Content="Company" Style="{DynamicResource LabelDefault.Small}" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left"/>
                 <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="MicroBIM" HorizontalAlignment="Left" />
                 <Label Content="Member Since" Style="{DynamicResource LabelDefault.Small}" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left"/>
                 <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="April 12, 2023" HorizontalAlignment="Left" />
                 <Label Content="Projects Included" Style="{DynamicResource LabelDefault.Small}" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left"/>
                 <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="4" HorizontalAlignment="Left"/>
+                <Label Content="Role" Style="{DynamicResource LabelDefault.Small}" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left"/>
+                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="Editor" />
+            </hc:UniformSpacingPanel>
+
+            <!-- Divider -->
+            <hc:Divider Grid.Column="1" Orientation="Vertical" Margin="20"/>
+
+            <!-- Stats -->
+            <hc:UniformSpacingPanel Grid.Column="2" Orientation="Vertical" Spacing="10" Margin="0,10" HorizontalAlignment="Left" ItemHorizontalAlignment="Left">
                 <Label Content="Issues Created" Style="{DynamicResource LabelDefault.Small}" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left"/>
                 <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="12" HorizontalAlignment="Left"/>
                 <Label Content="Issues Assigned" Style="{DynamicResource LabelDefault.Small}" HorizontalAlignment="Left" Width="120" HorizontalContentAlignment="Left"/>

@@ -15,10 +15,16 @@
 
     <DockPanel>
         <hc:SideMenu DockPanel.Dock="Left"
-                     Width="120"
-                     Margin="0"
+                     Width="140"
+                     Margin="0,5,0,0"
                      Header="BIM Manager"
                      Background="#F9FBFC">
+
+            <hc:SideMenuItem Header="Markup Editor" Command="{Binding NavigateMarkupCommand}">
+                <hc:SideMenuItem.Icon>
+                    <TextBlock Text="&#xE8C4;" Style="{StaticResource SidebarIconTextStyle}" />
+                </hc:SideMenuItem.Icon>
+            </hc:SideMenuItem>
 
             <hc:SideMenuItem Header="Profile" Command="{Binding NavigateProfileCommand}">
                 <hc:SideMenuItem.Icon>

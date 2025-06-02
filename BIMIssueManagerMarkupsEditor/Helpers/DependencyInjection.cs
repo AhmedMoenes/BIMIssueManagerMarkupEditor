@@ -9,6 +9,7 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.TryAddTransient<IApiService,ApiService>();
             services.TryAddTransient<MainWindow>();
             services.TryAddTransient<MainViewModel>();
+            services.TryAddTransient<MarkupEditorViewModel>();
             services.TryAddTransient<ProfileViewModel>();
             services.TryAddTransient<AddProjectViewModel>();
             services.TryAddTransient<AddCompanyViewModel>();
