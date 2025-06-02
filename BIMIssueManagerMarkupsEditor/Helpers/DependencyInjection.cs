@@ -14,6 +14,7 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.TryAddTransient<AddCompanyViewModel>();
             services.TryAddTransient<AddTeamMemberViewModel>();
             services.TryAddTransient<IssuesViewModel>();
+            services.TryAddTransient<ChatViewModel>();
             services.TryAddTransient<ModelViewerViewModel>();
             return services;
         }
