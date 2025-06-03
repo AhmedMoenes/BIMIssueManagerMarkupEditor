@@ -24,7 +24,7 @@
 
         <!-- Message Entry -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
-            <hc:TextBox Width="715"
+            <hc:TextBox Width="680"
                         Text="{Binding NewMessage, UpdateSourceTrigger=PropertyChanged}"
                         hc:InfoElement.Placeholder="Write a message..."
                         Margin="0,0,10,0"/>
