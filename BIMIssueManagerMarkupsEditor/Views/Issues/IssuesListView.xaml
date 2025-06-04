@@ -62,12 +62,12 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderThickness="1" BorderBrush="{StaticResource CardBorderBrush}" Margin="5" CornerRadius="6" Background="{StaticResource CardBackgroundBrush}">
+                            <Border BorderThickness="1" BorderBrush="#DDD" Margin="5" CornerRadius="6" Background="#FAFAFA">
                                 <StackPanel>
                                     <!-- Date Header -->
                                     <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:MMM dd, yyyy}'}"
                                                FontWeight="Bold"
-                                               Foreground="{StaticResource PrimaryTextBrush}"
+                                               Foreground="#444"
                                                HorizontalAlignment="Center"
                                                Margin="5"/>
 
@@ -81,8 +81,8 @@
 
                                     <!-- Priority / Assignee / Status -->
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                                        <TextBlock Text="{Binding Priority}" Foreground="{StaticResource PrimaryColorBrush}" FontWeight="SemiBold" Margin="4,0"/>
-                                        <TextBlock Text="{Binding AssignedUser}" Foreground="{StaticResource SecondaryTextBrush}" Margin="4,0"/>
+                                        <TextBlock Text="{Binding Priority}" Foreground="#0078D7" FontWeight="SemiBold" Margin="4,0"/>
+                                        <TextBlock Text="{Binding AssignedUser}" Foreground="#666" Margin="4,0"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>

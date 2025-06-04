@@ -15,8 +15,8 @@
     </Window.Resources>
 
     <DockPanel>
-        <Border DockPanel.Dock="Top"
-                Background="{StaticResource PrimaryColorBrush}"
+        <Border DockPanel.Dock="Top" 
+                Background="{DynamicResource PrimaryBrush}" 
                 Height="35"
                 Padding="10">
 
@@ -34,7 +34,7 @@
         <hc:SideMenu DockPanel.Dock="Left"
                      Width="140"
                      Header="BIM Manager"
-                     Background="{StaticResource WindowBackgroundBrush}">
+                     Background="#F9FBFC">
 
             <hc:SideMenuItem Header="Markup Editor" Command="{Binding NavigateMarkupCommand}">
                 <hc:SideMenuItem.Icon>
