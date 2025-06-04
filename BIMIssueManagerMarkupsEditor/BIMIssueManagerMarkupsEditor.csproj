@@ -33,7 +33,6 @@
   <ItemGroup>
     <Folder Include="Messaging\" />
     <Folder Include="Controls\" />
-    <Folder Include="ApiRoutes\" />
     <Folder Include="Commands\" />
     <Folder Include="Resources\Icons\" />
   </ItemGroup>
