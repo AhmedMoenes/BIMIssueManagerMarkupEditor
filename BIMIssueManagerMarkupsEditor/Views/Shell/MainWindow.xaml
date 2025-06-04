@@ -8,15 +8,31 @@
         mc:Ignorable="d"
         Title="BIM ISSUE MANAGER"
         Height="700" Width="1000"
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        MinWidth="800" MinHeight="600"
+        ResizeMode="CanResize"  WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml"/>
     </Window.Resources>
 
     <DockPanel>
+        <Border DockPanel.Dock="Top" 
+                Background="{DynamicResource PrimaryBrush}" 
+                Height="35"
+                Padding="10">
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" >
+                <TextBlock Text="User Info: "
+                           VerticalAlignment="Center"
+                           FontWeight="Bold"
+                           Foreground="White"/>
+                <TextBlock Text="{Binding LoggedInUserInfo}" 
+                           VerticalAlignment="Center"
+                           Margin="5,0"/>
+            </StackPanel>
+        </Border>
+
         <hc:SideMenu DockPanel.Dock="Left"
                      Width="140"
-                     Margin="0,5,0,0"
                      Header="BIM Manager"
                      Background="#F9FBFC">
 
@@ -70,6 +86,6 @@
             </hc:SideMenuItem>
         </hc:SideMenu>
 
-        <ContentControl Content="{Binding CurrentView}" Margin="10" />
+        <ContentControl Content="{Binding CurrentView}" Margin="10,1,10,10" />
     </DockPanel>
 </Window>
