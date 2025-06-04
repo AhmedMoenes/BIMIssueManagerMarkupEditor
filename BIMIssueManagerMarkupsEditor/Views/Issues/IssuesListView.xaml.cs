@@ -10,6 +10,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
         public IssuesListView()
         {
             InitializeComponent();
+            DataContext = new IssuesViewModel(new IssueApiService(new HttpClient()));
         }
     }
 }

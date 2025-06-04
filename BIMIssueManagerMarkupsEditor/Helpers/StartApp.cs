@@ -7,7 +7,7 @@
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json",false, reloadOnChange:true).
-                Build();
+                 Build();
             
             var services = new ServiceCollection();
             services.AddConfiguration(configuration);

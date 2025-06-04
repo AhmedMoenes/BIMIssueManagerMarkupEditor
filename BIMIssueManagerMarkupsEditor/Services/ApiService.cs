@@ -3,7 +3,11 @@
     public class ApiService : IApiService
     {
         public readonly HttpClient _client;
-        public ApiService(HttpClient client) => _client = client;
+        public ApiService(HttpClient client)
+        {
+           _client = client;
+           _client.BaseAddress = new Uri("https://localhost:44374/");
+        }
         public async Task<T> GetAsync<T>(string url) => await _client.GetFromJsonAsync<T>(url);
         public async Task<HttpResponseMessage> PostAsync<T>(string url, T data) => await _client.PostAsJsonAsync(url, data);
         public async Task<TResponse?> PostAsync<TRequest, TResponse>(string url, TRequest data)
