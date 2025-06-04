@@ -19,6 +19,7 @@ global using BIMIssueManagerMarkupsEditor.Views.Shell;
 global using BIMIssueManagerMarkupsEditor.Views.Chat;
 global using BIMIssueManagerMarkupsEditor.Views.Company;
 global using BIMIssueManagerMarkupsEditor.Views.MarkupEditor;
+global using BIMIssueManagerMarkupsEditor.ApiRoutes;
 
 
 

@@ -12,6 +12,7 @@
             var services = new ServiceCollection();
             services.AddConfiguration(configuration);
             services.AddServices();
+            services.AddViewModels();
 
             return services.BuildServiceProvider();
         }

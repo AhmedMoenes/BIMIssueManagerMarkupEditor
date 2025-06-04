@@ -1,12 +1,16 @@
-﻿using BIMIssueManagerMarkupsEditor.Views.Company;
-
-namespace BIMIssueManagerMarkupsEditor.Helpers
+﻿namespace BIMIssueManagerMarkupsEditor.Helpers
 {
     public static class DependencyInjection
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.TryAddTransient<IApiService,ApiService>();
+            services.TryAddSingleton<HttpClient>();
+            services.TryAddSingleton<IApiService,ApiService>();
+            services.TryAddScoped<IssueApiService>();
+            return services;
+        }
+        public static IServiceCollection AddViewModels(this IServiceCollection services)
+        {
             services.TryAddTransient<MainWindow>();
             services.TryAddTransient<MainViewModel>();
             services.TryAddTransient<MarkupEditorViewModel>();
@@ -19,7 +23,6 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.TryAddTransient<ModelViewerViewModel>();
             return services;
         }
-
         public static IServiceCollection AddConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<ApiSettings>(configuration.GetSection(nameof(ApiSettings)));
@@ -29,7 +32,6 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
                 var settings = sp.GetRequiredService<IOptions<ApiSettings>>().Value;
                 client.BaseAddress = new Uri(settings.BaseUrl);
             });
-
             return services;
         }
 
