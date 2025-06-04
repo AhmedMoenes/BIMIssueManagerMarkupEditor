@@ -6,11 +6,47 @@
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#F3F3F3"/>
     <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="#E1E1E1"/>
     <SolidColorBrush x:Key="ContentBackgroundBrush" Color="White"/>
-    <SolidColorBrush x:Key="PrimaryAccentBrush" Color="#0078D7"/>
-    <SolidColorBrush x:Key="TextBrush" Color="#333333"/>
+
+    <!-- Primary/Secondary -->
+    <SolidColorBrush x:Key="PrimaryColorBrush" Color="#0078D7"/>
+    <SolidColorBrush x:Key="SecondaryColorBrush" Color="#E81123"/>
+
+    <!-- Text -->
+    <SolidColorBrush x:Key="PrimaryTextBrush" Color="#333333"/>
     <SolidColorBrush x:Key="SecondaryTextBrush" Color="#666666"/>
+
+    <!-- Cards -->
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="#FAFAFA"/>
+    <SolidColorBrush x:Key="CardBorderBrush" Color="#DDDDDD"/>
+
     <SolidColorBrush x:Key="DividerBrush" Color="#CCCCCC"/>
     <SolidColorBrush x:Key="ButtonHoverBrush" Color="#D6EFFF"/>
+    <SolidColorBrush x:Key="DangerHoverBrush" Color="#F1707A"/>
+
+    <!-- Button Styles -->
+    <Style x:Key="ButtonPrimary" TargetType="Button">
+        <Setter Property="Background" Value="{StaticResource PrimaryColorBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="BorderBrush" Value="{StaticResource PrimaryColorBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="6,2"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource ButtonHoverBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ButtonDanger" TargetType="Button" BasedOn="{StaticResource ButtonPrimary}">
+        <Setter Property="Background" Value="{StaticResource SecondaryColorBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource SecondaryColorBrush}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource DangerHoverBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
     <!-- Icon TextBlock Style -->
     <Style x:Key="SidebarIconTextStyle" TargetType="TextBlock">
