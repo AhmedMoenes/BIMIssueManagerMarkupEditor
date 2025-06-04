@@ -42,7 +42,7 @@
                     <ItemsControl ItemsSource="{Binding Messages}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border BorderBrush="#DDD" BorderThickness="1" CornerRadius="6" Padding="10" Margin="0,5">
+                                <Border BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1" CornerRadius="6" Padding="10" Margin="0,5">
                                     <StackPanel>
                                         <TextBlock FontWeight="Bold" Text="Created By: User-XXX" />
                                         <TextBlock FontStyle="Italic" FontSize="12" Foreground="Gray"
