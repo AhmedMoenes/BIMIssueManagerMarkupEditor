@@ -21,11 +21,6 @@
                          ItemsSource="{Binding Projects}"
                          SelectedItem="{Binding SelectedProject}" />
 
-            <hc:ComboBox hc:InfoElement.Placeholder="Assignee"
-                         Width="150"
-                         Margin="10"
-                         ItemsSource="{Binding AssignedToUser}"
-                         SelectedItem="{Binding SelectedAssignee}" />
 
             <hc:ComboBox hc:InfoElement.Placeholder="Priority"
                          Width="120"
@@ -62,30 +57,29 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border BorderThickness="1" BorderBrush="#DDD" Margin="5" CornerRadius="6" Background="#FAFAFA">
+                            <hc:Card Margin="5" Padding="5" Width="190" Height="210">
+                                <!-- Date Header -->
                                 <StackPanel>
-                                    <!-- Date Header -->
                                     <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:MMM dd, yyyy}'}"
-                                               FontWeight="Bold"
-                                               Foreground="#444"
+                                               Margin="2"
                                                HorizontalAlignment="Center"
-                                               Margin="5"/>
+                                               FontWeight="Bold"/>
 
                                     <!-- Snapshot Image -->
                                     <Image Source="{Binding SnapshotImagePath}"
                                            Height="120"
-                                           Margin="5"
+                                           Margin="3"
                                            Stretch="UniformToFill"
                                            SnapsToDevicePixels="True"
                                            />
 
                                     <!-- Priority / Assignee / Status -->
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,5,5,2">
                                         <TextBlock Text="{Binding Priority}" Foreground="#0078D7" FontWeight="SemiBold" Margin="4,0"/>
                                         <TextBlock Text="{Binding AssignedToUser}" Foreground="#666" Margin="4,0"/>
                                     </StackPanel>
                                 </StackPanel>
-                            </Border>
+                            </hc:Card>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

@@ -8,7 +8,8 @@
         private readonly UserSessionService _userSession;
         public IssuesViewModel(IssueApiService issueApiService, 
                                UserSessionService userSession, 
-                               ProjectApiService projectApiService, UserApiService userApiService)
+                               ProjectApiService projectApiService,
+                               UserApiService userApiService)
         {
             _issueApiService = issueApiService;
             _userSession = userSession;
@@ -16,10 +17,9 @@
             _userApiService = userApiService;
 
             LoadIssuesAsync();
+            LoadProjectsAsync();
             LoadPriorities();
             LoadRevitVersions();
-            LoadProjectsAsync();
-            LoadUsersAsync();
 
             ApplyFilterCommand = new RelayCommand(async () => await FilterIssuesAsync());
         }
@@ -80,14 +80,6 @@
             }
         }
 
-        private async void LoadUsersAsync()
-        {
-            // TODO: Replace with actual user service
-            AssignedToUser = new ObservableCollection<string>
-            {
-                "user1@bim.com", "user2@bim.com", "user3@bim.com"
-            };
-        }
         private async Task LoadIssuesAsync()
         {
             var allIssues = await _issueApiService.GetAllAsync();

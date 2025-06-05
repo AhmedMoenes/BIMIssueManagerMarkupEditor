@@ -7,9 +7,12 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
     /// </summary>
     public partial class IssuesListView : UserControl
     {
-        public IssuesListView(IssuesViewModel viewModel)
+        public IssuesListView()
         {
             InitializeComponent();
+        }
+        public IssuesListView(IssuesViewModel viewModel) : this()
+        {
             DataContext = viewModel;
         }
     }
