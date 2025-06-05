@@ -8,7 +8,7 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.TryAddSingleton<HttpClient>();
             services.TryAddSingleton<IApiService,ApiService>();
             services.TryAddSingleton<AuthApiService>();
-            services.TryAddSingleton<UserSession>();
+            services.TryAddSingleton<UserSessionService>();
             services.TryAddScoped<IssueApiService>();
             return services;
         }

@@ -8,13 +8,15 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
     {
         private readonly AuthApiService _authApiService;
         private IServiceProvider _serviceProvider;
-        public Action? CloseAction { get; set; }
+        private readonly UserSessionService _userSession;
 
-        public LoginViewModel(AuthApiService authApiService, IServiceProvider serviceProvider)
+        public LoginViewModel(AuthApiService authApiService, IServiceProvider serviceProvider, UserSessionService userSession)
         {
             _authApiService = authApiService;
             _serviceProvider = serviceProvider;
+            _userSession = userSession;
         }
+        public Action? CloseAction { get; set; }
 
         [ObservableProperty]
         private string email = string.Empty;
@@ -31,7 +33,6 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
         [RelayCommand]
         private async Task LoginAsync(PasswordBox passwordbox)
         {
-
             IsLoading = true;
             ErrorMessage = null;
 
@@ -43,38 +44,17 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
 
             try
             {
-                var response = await _authApiService.LoginAsync(dto);
-                var status = response.StatusCode.ToString();
-                var body = await response.Content.ReadAsStringAsync();
+                LoginResponseDto response = await _authApiService.LoginAsync(dto);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    string token = await response.Content.ReadAsStringAsync();
-                    UserSession.Token = token;
-                    UserSession.IsUserLoggedIn = true;
+                var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+                mainWindow.DataContext = new MainViewModel(_serviceProvider);
+                mainWindow.Show();
 
-                    //ToReview
-                    //await UserSession.LoadUserIdFromTokenAsync(new HttpClient
-                    //{
-                    //    BaseAddress = new Uri("https://localhost:44374/")
-                    //});
-
-                    var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-                    mainWindow.DataContext = new MainViewModel(_serviceProvider);
-                    mainWindow.Show();
-
-                    CloseAction?.Invoke();
-                }
-                else
-                {
-                    ErrorMessage = "Invalid email or password.";
-                    UserSession.IsUserLoggedIn = false;
-                }
+                CloseAction?.Invoke();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}");
-                UserSession.IsUserLoggedIn = false;
+                ErrorMessage = $"Error: {ex.Message}";
             }
             finally
             {

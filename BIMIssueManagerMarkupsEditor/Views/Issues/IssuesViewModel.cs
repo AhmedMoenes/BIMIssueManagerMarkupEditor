@@ -7,9 +7,11 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
     public partial class IssuesViewModel : ObservableObject
     {
         private readonly IssueApiService _issueApiService;
-        public IssuesViewModel(IssueApiService issueApiService)
+        private readonly UserSessionService _userSession;
+        public IssuesViewModel(IssueApiService issueApiService, UserSessionService userSession)
         {
             _issueApiService = issueApiService;
+            _userSession = userSession;
 
             LoadIssuesAsync();
             LoadPriorities();

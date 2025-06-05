@@ -1,16 +1,38 @@
-﻿using System.Text;
-using System.Text.Json;
-using BIMIssueManagerMarkupsEditor.ApiRoutes;
+﻿using DTOs.Login;
 using DTOs.Users;
 
 namespace BIMIssueManagerMarkupsEditor.Helpers
 {
-    public class UserSession
+    public class UserSessionService
     {
-        public CurrentUserDto CurrentUser { get; set; }
-        public bool IsInRole(string role) => CurrentUser?.Role == role;
-        public static string? Token { get; set; } = null;
-        public static bool IsUserLoggedIn { get; set; } = false;
+        public CurrentUserDto? CurrentUser { get; private set; }
+        public string? Token { get; private set; }
+        public bool IsAuthenticated => !string.IsNullOrWhiteSpace(Token);
+        public bool IsInRole(string role) =>
+            string.Equals(CurrentUser?.Role, role, StringComparison.OrdinalIgnoreCase);
+
+        public void SetSession(LoginResponseDto loginResponse)
+        {
+            if (loginResponse == null)
+                throw new ArgumentNullException(nameof(loginResponse));
+
+            Token = loginResponse.Token;
+            CurrentUser = new CurrentUserDto
+            {
+                UserId = loginResponse.UserId,
+                FullName = loginResponse.FullName,
+                Email = loginResponse.Email,
+                Role = loginResponse.Role
+            };
+        }
+        public void Clear()
+        {
+            Token = null;
+            CurrentUser = null;
+        }
+        public string? UserId => CurrentUser?.UserId;
+        public string? Email => CurrentUser?.Email;
+        public string? Role => CurrentUser?.Role;
 
         //public static string? GetEmailFromToken()
         //{
