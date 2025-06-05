@@ -1,4 +1,5 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Helpers
+﻿
+namespace BIMIssueManagerMarkupsEditor.Helpers
 {
     public static class DependencyInjection
     {
@@ -6,11 +7,14 @@
         {
             services.TryAddSingleton<HttpClient>();
             services.TryAddSingleton<IApiService,ApiService>();
+            services.TryAddSingleton<AuthApiService>();
+            services.TryAddSingleton<UserSession>();
             services.TryAddScoped<IssueApiService>();
             return services;
         }
         public static IServiceCollection AddViewModels(this IServiceCollection services)
         {
+            services.TryAddSingleton<LoginWindow>();
             services.TryAddTransient<MainWindow>();
             services.TryAddTransient<MainViewModel>();
             services.TryAddTransient<MarkupEditorViewModel>();
@@ -21,6 +25,7 @@
             services.TryAddTransient<IssuesViewModel>();
             services.TryAddTransient<ChatViewModel>();
             services.TryAddTransient<ModelViewerViewModel>();
+            services.TryAddTransient<LoginViewModel>();
             return services;
         }
         public static IServiceCollection AddConfiguration(this IServiceCollection services, IConfiguration configuration)

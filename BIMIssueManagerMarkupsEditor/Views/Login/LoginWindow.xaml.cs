@@ -5,9 +5,11 @@
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow()
+        public LoginWindow(LoginViewModel loginViewModel)
         {
             InitializeComponent();
+            loginViewModel.CloseAction = this.Close;
+            DataContext = loginViewModel;
         }
     }
 }

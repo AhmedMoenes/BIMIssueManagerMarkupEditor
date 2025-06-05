@@ -17,7 +17,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
             LoadProjectsAsync();
             LoadUsersAsync();
 
-            ApplyFilterCommand = new RelayCommand(async () => await LoadIssuesAsync());
+            ApplyFilterCommand = new RelayCommand(async () => await FilterIssuesAsync());
         }
 
         [ObservableProperty]
@@ -54,7 +54,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
         {
             RevitVersionOptions = new ObservableCollection<string>
             {
-                "2020", "2021", "2022", "2023", "2024","2025","2026"
+                "2021", "2022", "2023", "2024","2025","2026"
             };
         }
         private async void LoadProjectsAsync()

@@ -9,12 +9,9 @@
             base.OnStartup(e);
 
             _serviceProvider = StartApp.Initialize();
-
-            var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-            mainWindow.DataContext = new MainViewModel(_serviceProvider);
-            mainWindow.Show();
+            var loginWindow = _serviceProvider.GetRequiredService<LoginWindow>();
+            loginWindow.Show();
         }
-
     }
 
 }
