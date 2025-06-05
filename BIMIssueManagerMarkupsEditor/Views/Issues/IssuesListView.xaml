@@ -48,42 +48,41 @@
 
         <!-- Issues Cards Display -->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <WrapPanel ItemWidth="200" ItemHeight="220" Margin="0,10" Orientation="Horizontal">
-                <ItemsControl ItemsSource="{Binding Issues}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel IsItemsHost="True" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <hc:Card Margin="5" Padding="5" Width="190" Height="210">
+            <ItemsControl ItemsSource="{Binding Issues}" Margin="10,10">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <hc:Card Margin="10" Padding="8" Width="220" Height="210">
+                            <hc:Card.Header>
                                 <!-- Date Header -->
-                                <StackPanel>
-                                    <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:MMM dd, yyyy}'}"
+                                <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:MMM dd, yyyy}'}"
                                                Margin="2"
                                                HorizontalAlignment="Center"
                                                FontWeight="Bold"/>
+                            </hc:Card.Header>
 
-                                    <!-- Snapshot Image -->
-                                    <Image Source="{Binding SnapshotImagePath}"
+                            <!-- Snapshot Image -->
+                            <Image Source="{Binding SnapshotImagePath}"
                                            Height="120"
                                            Margin="3"
                                            Stretch="UniformToFill"
-                                           SnapsToDevicePixels="True"
-                                           />
+                                           SnapsToDevicePixels="True"/>
 
-                                    <!-- Priority / Assignee / Status -->
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5,5,5,2">
-                                        <TextBlock Text="{Binding Priority}" Foreground="#0078D7" FontWeight="SemiBold" Margin="4,0"/>
-                                        <TextBlock Text="{Binding AssignedToUser}" Foreground="#666" Margin="4,0"/>
-                                    </StackPanel>
+                            <!-- Priority / Assignee / Status -->
+                            <hc:Card.Footer>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                                    <TextBlock Text="{Binding Priority}" Foreground="#0078D7" FontWeight="SemiBold" Margin="4,0"/>
+                                    <TextBlock Text="{Binding AssignedToUser}" Foreground="#666" Margin="4,0"/>
                                 </StackPanel>
-                            </hc:Card>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </WrapPanel>
+                            </hc:Card.Footer>
+                        </hc:Card>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </ScrollViewer>
 
     </Grid>

@@ -94,9 +94,6 @@
             if (!string.IsNullOrEmpty(SelectedProject))
                 filtered = filtered.Where(i => i.ProjectName == SelectedProject);
 
-            if (!string.IsNullOrEmpty(SelectedAssignee))
-                filtered = filtered.Where(i => i.AssignedToUser == SelectedAssignee);
-
             if (!string.IsNullOrEmpty(SelectedPriority))
                 filtered = filtered.Where(i => i.Priority == SelectedPriority);
 
