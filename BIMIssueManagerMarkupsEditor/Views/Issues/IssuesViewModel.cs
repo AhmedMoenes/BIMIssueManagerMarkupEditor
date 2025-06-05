@@ -1,17 +1,19 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using DTOs.Issues;
-
-namespace BIMIssueManagerMarkupsEditor.Views.Issues
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Issues
 {
     public partial class IssuesViewModel : ObservableObject
     {
         private readonly IssueApiService _issueApiService;
+        private readonly UserApiService _userApiService;
+        private readonly ProjectApiService _projectApiService;
         private readonly UserSessionService _userSession;
-        public IssuesViewModel(IssueApiService issueApiService, UserSessionService userSession)
+        public IssuesViewModel(IssueApiService issueApiService, 
+                               UserSessionService userSession, 
+                               ProjectApiService projectApiService, UserApiService userApiService)
         {
             _issueApiService = issueApiService;
             _userSession = userSession;
+            _projectApiService = projectApiService;
+            _userApiService = userApiService;
 
             LoadIssuesAsync();
             LoadPriorities();
@@ -61,11 +63,21 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
         }
         private async void LoadProjectsAsync()
         {
-            // TODO: Replace with actual project service
-            Projects = new ObservableCollection<string>
+            string userId = _userSession.UserId;
+
+            if (string.IsNullOrEmpty(userId))
             {
-                "Project Alpha", "Project Beta", "Project Gamma"
-            };
+                MessageBox.Show("User ID is null. Session not initialized.");
+                return;
+            }
+
+            var projects = await _projectApiService.GetProjectsByUserIdAsync(userId);
+            Projects = new ObservableCollection<string>();
+
+            foreach (ProjectDto project in projects)
+            {
+                Projects.Add(project.ProjectName);
+            }
         }
 
         private async void LoadUsersAsync()

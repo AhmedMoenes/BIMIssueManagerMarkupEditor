@@ -2,12 +2,18 @@
 global using System.Windows;
 global using System.Net.Http;
 global using System.Net.Http.Json;
+global using System.Collections.ObjectModel;
+global using System.Windows.Input;
 global using CommunityToolkit.Mvvm.Input;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using Microsoft.Extensions.Options;
+
+global using DTOs.Issues;
+global using DTOs.Projects;
+
 global using BIMIssueManagerMarkupsEditor.Helpers;
 global using BIMIssueManagerMarkupsEditor.Services;
 global using BIMIssueManagerMarkupsEditor.ApiRoutes;
