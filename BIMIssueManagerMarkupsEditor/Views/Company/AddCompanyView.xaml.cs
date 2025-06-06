@@ -11,5 +11,10 @@ namespace BIMIssueManagerMarkupsEditor.Views.Company
         {
             InitializeComponent();
         }
+
+        public AddCompanyView(AddCompanyViewModel viewModel) : this()
+        {
+            DataContext= viewModel;
+        }
     }
 }

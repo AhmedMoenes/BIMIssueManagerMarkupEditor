@@ -9,8 +9,7 @@
         public static string Delete(int id) => $"{Base}/delete/{id}";
         public static string Create() => $"{Base}/create";
         public static string CreateWithAdmin() => $"{Base}/create-with-admin";
-        public static string GetCompanyOverviewForUser() => $"{Base}/overview";
-
+        public static string GetCompanyOverviewForUser(string userId) => $"{Base}/overview/{userId}";
 
     }
 }
