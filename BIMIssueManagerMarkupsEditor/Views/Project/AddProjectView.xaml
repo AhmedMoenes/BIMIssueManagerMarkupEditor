@@ -20,8 +20,8 @@
         </Grid.RowDefinitions>
 
         <!-- Data Grid (Left Column) -->
-        <ScrollViewer Grid.Column="0" Grid.RowSpan="2" HorizontalScrollBarVisibility="Visible">
         <DataGrid ItemsSource="{Binding Projects}"
+                  Grid.Column="0" Grid.RowSpan="2"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"
@@ -35,7 +35,6 @@
                 <DataGridTextColumn Header="Companies" Binding="{Binding CompanyNames.Count}" Width="Auto" />
             </DataGrid.Columns>
         </DataGrid>
-        </ScrollViewer>
 
         <!-- Form (Right Column) -->
         <Expander Header="Create New Project" 

@@ -11,5 +11,10 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
         {
             InitializeComponent();
         }
+
+        public AddTeamMemberView(AddTeamMemberViewModel viewModel) : this()
+        {
+            DataContext= viewModel;
+        }
     }
 }

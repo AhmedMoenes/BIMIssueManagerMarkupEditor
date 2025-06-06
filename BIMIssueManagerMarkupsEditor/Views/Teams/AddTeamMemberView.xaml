@@ -21,7 +21,7 @@
         <!-- Data Grid (Left Column) -->
         <DataGrid Grid.Column="0"
                   Grid.RowSpan="2"
-                  ItemsSource="{Binding Users}"
+                  ItemsSource="{Binding TeamMembers}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"
@@ -30,7 +30,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="Auto" />
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="Auto" />
-                <DataGridTextColumn Header="User Projects" Binding="{Binding Projects}" Width="Auto" />
+                <DataGridTextColumn Header="User Projects" Binding="{Binding ProjectName}" Width="Auto" />
                 <DataGridTextColumn Header="User Role" Binding="{Binding Role}" Width="Auto" />
             </DataGrid.Columns>
         </DataGrid>
