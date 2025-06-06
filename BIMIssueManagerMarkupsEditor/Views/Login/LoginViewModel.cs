@@ -47,7 +47,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
                 LoginResponseDto response = await _authApiService.LoginAsync(dto);
 
                 var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-                mainWindow.DataContext = new MainViewModel(_serviceProvider);
+                var mainWindowVM = _serviceProvider.GetRequiredService<MainViewModel>();
+                mainWindow.DataContext = mainWindowVM;
                 mainWindow.Show();
 
                 CloseAction?.Invoke();
