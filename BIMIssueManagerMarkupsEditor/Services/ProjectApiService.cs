@@ -1,4 +1,5 @@
-﻿using DTOs.Projects;
+﻿using BIMIssueManagerMarkupsEditor.ApiRoutes;
+using DTOs.Projects;
 
 namespace BIMIssueManagerMarkupsEditor.Services
 {
@@ -11,6 +12,11 @@ namespace BIMIssueManagerMarkupsEditor.Services
         public async Task<IEnumerable<ProjectDto>> GetProjectsByUserIdAsync(string userId)
         {
             return await GetAsync<IEnumerable<ProjectDto>>(Project.GetByUser(userId));
+        }
+
+        public async Task<IEnumerable<ProjectOverviewDto>> GetForCompanyAsync()
+        {
+            return await GetAsync<IEnumerable<ProjectOverviewDto>>(Project.GetForCompany());
         }
 
     }

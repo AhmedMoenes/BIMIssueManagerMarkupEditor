@@ -14,6 +14,9 @@
 
         [ObservableProperty] 
         private ObservableObject currentView;
+        public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
+        public bool IsCompanyAdmin => _userSession.IsInRole("CompanyAdmin");
+        public bool IsProjectLeader => _userSession.IsInRole("ProjectLeader");
 
         [RelayCommand]
         private void NavigateMarkup()

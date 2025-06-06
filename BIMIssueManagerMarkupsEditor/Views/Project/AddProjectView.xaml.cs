@@ -11,5 +11,10 @@ namespace BIMIssueManagerMarkupsEditor.Views.Project
         {
             InitializeComponent();
         }
+
+        public AddProjectView(ProfileViewModel viewModel) : this()
+        {
+            DataContext = viewModel;
+        }
     }
 }

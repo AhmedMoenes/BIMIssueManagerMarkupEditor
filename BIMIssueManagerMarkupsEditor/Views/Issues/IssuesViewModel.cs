@@ -27,16 +27,19 @@
 
         [ObservableProperty]
         private ObservableCollection<string> projects = new(); 
+
         [ObservableProperty]
         private string selectedProject;
 
         [ObservableProperty]
         private ObservableCollection<string> assignedToUser = new();
+
         [ObservableProperty]
         private string selectedAssignee;
 
         [ObservableProperty]
         private ObservableCollection<string> priorities = new();
+
         [ObservableProperty]
         private string selectedPriority;
 
@@ -45,6 +48,7 @@
 
         [ObservableProperty]
         private ObservableCollection<string> revitVersionOptions = new();
+
         [ObservableProperty]
         private string selectedRevitVersion;
 
@@ -70,7 +74,7 @@
                 return;
             }
 
-            var projects = await _projectApiService.GetProjectsByUserIdAsync(_userSession.UserId);
+            IEnumerable<ProjectDto> projects = await _projectApiService.GetProjectsByUserIdAsync(_userSession.UserId);
             Projects = new ObservableCollection<string>();
 
             foreach (ProjectDto project in projects)
@@ -78,13 +82,11 @@
                 Projects.Add(project.ProjectName);
             }
         }
-
         private async Task LoadIssuesAsync()
         {
             var allIssues = await _issueApiService.GetIssuesByUserIdAsync(_userSession.UserId);
             Issues = new ObservableCollection<IssueDto>(allIssues);
         }
-
         private async Task FilterIssuesAsync()
         {
             var allIssues = await _issueApiService.GetIssuesByUserIdAsync(_userSession.UserId);
