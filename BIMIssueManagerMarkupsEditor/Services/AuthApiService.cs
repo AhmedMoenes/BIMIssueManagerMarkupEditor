@@ -4,10 +4,8 @@ namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class AuthApiService : ApiService 
     {
-        private readonly UserSessionService _userSession;
-        public AuthApiService(HttpClient client, UserSessionService userSession):base(client)
+        public AuthApiService(HttpClient client, UserSessionService userSession):base(client, userSession)
         {
-            _userSession = userSession;
         }
 
         public async Task<LoginResponseDto?> LoginAsync(LoginRequestDto dto)

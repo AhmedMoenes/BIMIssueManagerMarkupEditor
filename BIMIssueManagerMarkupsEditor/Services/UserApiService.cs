@@ -2,7 +2,7 @@
 {
     public class UserApiService : ApiService
     {
-        public UserApiService(HttpClient client) : base(client)
+        public UserApiService(HttpClient client, UserSessionService userSession) : base(client, userSession)
         {
         }
     }

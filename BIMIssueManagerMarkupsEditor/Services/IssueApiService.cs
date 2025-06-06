@@ -3,7 +3,7 @@ namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class IssueApiService : ApiService
     {
-        public IssueApiService(HttpClient client) : base(client){}
+        public IssueApiService(HttpClient client, UserSessionService userSession) : base(client, userSession){}
         public Task<IEnumerable<IssueDto>> GetAllAsync() => GetAsync<IEnumerable<IssueDto>>(Issue.GetAll());
         public Task<IssueDto?> GetByIdAsync(int id) => GetAsync<IssueDto>(Issue.GetById(id));
         public async Task<IssueDto?> CreateAsync(CreateIssueDto dto)
