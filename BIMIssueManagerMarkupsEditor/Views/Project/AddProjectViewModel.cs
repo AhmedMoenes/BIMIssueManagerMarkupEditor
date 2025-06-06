@@ -19,7 +19,7 @@
 
         private async void LoadCompanyProjectsAsync()
         {
-            IEnumerable<ProjectOverviewDto> companyProjects = await _projectApiService.GetForCompanyAsync();
+            IEnumerable<ProjectOverviewDto> companyProjects = await _projectApiService.GetForCompanyAsync(_userSession.CurrentUser.CompanyId);
             foreach (ProjectOverviewDto project in companyProjects)
             {
                 projects.Add(project);

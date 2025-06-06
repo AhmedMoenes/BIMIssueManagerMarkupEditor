@@ -14,9 +14,9 @@ namespace BIMIssueManagerMarkupsEditor.Services
             return await GetAsync<IEnumerable<ProjectDto>>(Project.GetByUser(userId));
         }
 
-        public async Task<IEnumerable<ProjectOverviewDto>> GetForCompanyAsync()
+        public async Task<IEnumerable<ProjectOverviewDto>> GetForCompanyAsync(int companyId)
         {
-            return await GetAsync<IEnumerable<ProjectOverviewDto>>(Project.GetForCompany());
+            return await GetAsync<IEnumerable<ProjectOverviewDto>>(Project.GetForCompany(companyId));
         }
 
     }

@@ -23,6 +23,7 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
                 FullName = loginResponse.FullName,
                 Email = loginResponse.Email,
                 Role = loginResponse.Role,
+                CompanyId = loginResponse.CompanyId,
                 CompanyName = loginResponse.CompanyName,
                 AssignedIssues = loginResponse.AssignedIssues,
                 CreatedIssues = loginResponse.CreatedIssues,
