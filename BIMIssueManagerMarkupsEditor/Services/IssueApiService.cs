@@ -26,10 +26,13 @@ namespace BIMIssueManagerMarkupsEditor.Services
         }
         public Task<HttpResponseMessage> UpdateAsync(int id, UpdateIssueDto dto) => PutAsync(Issue.Update(id), dto);
         public Task<HttpResponseMessage> DeleteAsync(int id) => DeleteAsync(Issue.Delete(id));
-        public async Task<List<IssueDto>> GetIssuesByProjectIdAsync(int projectId)
+        public async Task<IEnumerable<IssueDto>> GetIssuesByProjectIdAsync(int projectId)
         {
             return await GetAsync<List<IssueDto>>(Issue.GetByProjectId(projectId));
         }
-
+        public async Task<IEnumerable<IssueDto>> GetIssuesByUserIdAsync(string userId)
+        {
+            return await GetAsync<List<IssueDto>>(Issue.GetByUserId(userId));
+        }
     }
 }

@@ -3,9 +3,12 @@
     public partial class MainViewModel : ObservableObject
     {
         private readonly IServiceProvider _provider;
-        public MainViewModel(IServiceProvider provider)
+        private readonly UserSessionService _userSession;
+
+        public MainViewModel(IServiceProvider provider, UserSessionService userSession)
         {
             _provider = provider;
+            _userSession = userSession;
             NavigateMarkup();
         }
 

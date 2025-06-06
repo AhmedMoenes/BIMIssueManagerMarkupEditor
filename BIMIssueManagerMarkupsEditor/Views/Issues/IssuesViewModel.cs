@@ -3,18 +3,15 @@
     public partial class IssuesViewModel : ObservableObject
     {
         private readonly IssueApiService _issueApiService;
-        private readonly UserApiService _userApiService;
         private readonly ProjectApiService _projectApiService;
         private readonly UserSessionService _userSession;
         public IssuesViewModel(IssueApiService issueApiService, 
                                UserSessionService userSession, 
-                               ProjectApiService projectApiService,
-                               UserApiService userApiService)
+                               ProjectApiService projectApiService)
         {
             _issueApiService = issueApiService;
             _userSession = userSession;
             _projectApiService = projectApiService;
-            _userApiService = userApiService;
 
             LoadIssuesAsync();
             LoadProjectsAsync();
@@ -22,6 +19,7 @@
             LoadRevitVersions();
 
             ApplyFilterCommand = new RelayCommand(async () => await FilterIssuesAsync());
+            ResetFilterCommand = new RelayCommand(async () => await LoadIssuesAsync());
         }
 
         [ObservableProperty]
@@ -49,7 +47,10 @@
         private ObservableCollection<string> revitVersionOptions = new();
         [ObservableProperty]
         private string selectedRevitVersion;
+
         public ICommand ApplyFilterCommand { get; }
+        public ICommand ResetFilterCommand { get; }
+
         private void LoadPriorities()
         {
             Priorities = new ObservableCollection<string>(Enum.GetNames(typeof(Priority)));
@@ -63,15 +64,13 @@
         }
         private async void LoadProjectsAsync()
         {
-            string userId = _userSession.UserId;
-
-            if (string.IsNullOrEmpty(userId))
+            if (string.IsNullOrEmpty(_userSession.UserId))
             {
                 MessageBox.Show("User ID is null. Session not initialized.");
                 return;
             }
 
-            var projects = await _projectApiService.GetProjectsByUserIdAsync(userId);
+            var projects = await _projectApiService.GetProjectsByUserIdAsync(_userSession.UserId);
             Projects = new ObservableCollection<string>();
 
             foreach (ProjectDto project in projects)
@@ -82,13 +81,13 @@
 
         private async Task LoadIssuesAsync()
         {
-            var allIssues = await _issueApiService.GetAllAsync();
+            var allIssues = await _issueApiService.GetIssuesByUserIdAsync(_userSession.UserId);
             Issues = new ObservableCollection<IssueDto>(allIssues);
         }
 
         private async Task FilterIssuesAsync()
         {
-            var allIssues = await _issueApiService.GetAllAsync();
+            var allIssues = await _issueApiService.GetIssuesByUserIdAsync(_userSession.UserId);
             var filtered = allIssues;
 
             if (!string.IsNullOrEmpty(SelectedProject))
@@ -102,7 +101,6 @@
 
             Issues = new ObservableCollection<IssueDto>(filtered);
         }
-
 
     }
 }

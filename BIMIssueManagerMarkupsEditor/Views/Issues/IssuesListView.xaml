@@ -23,7 +23,7 @@
 
 
             <hc:ComboBox hc:InfoElement.Placeholder="Priority"
-                         Width="120"
+                         Width="150"
                          Margin="10"
                          ItemsSource="{Binding Priorities}"
                          SelectedItem="{Binding SelectedPriority}" />
@@ -43,7 +43,13 @@
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding ApplyFilterCommand}"
                     Margin="10"
-                    Width="80" />
+                    Width="100" />
+
+            <Button Content="Reset"
+                    Style="{StaticResource ButtonDanger}"
+                    Command="{Binding ResetFilterCommand}"
+                    Margin="10"
+                    Width="100" />
         </WrapPanel>
 
         <!-- Issues Cards Display -->
