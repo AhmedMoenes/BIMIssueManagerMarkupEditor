@@ -1,6 +1,16 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Views.User
+﻿using DTOs.Users;
+
+namespace BIMIssueManagerMarkupsEditor.Views.User
 {
-    public class ProfileViewModel : ObservableObject
+    public partial class ProfileViewModel : ObservableObject
     {
+        private readonly UserSessionService _userSession;
+        public ProfileViewModel(UserSessionService userSession)
+        {
+            _userSession = userSession;
+            currentUser = _userSession.CurrentUser;
+        }
+
+        [ObservableProperty] private CurrentUserDto currentUser = new();
     }
 }

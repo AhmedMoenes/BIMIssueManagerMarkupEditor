@@ -20,9 +20,8 @@
 
                 <hc:Card.Header>
                     <StackPanel Margin="8">
-                        <TextBlock Style="{StaticResource TextBlockTitleBold}" Text="Ahmed Moenes" />
-                        <TextBlock Style="{StaticResource TextBlockSubTitle}" Text="amunes.f98@gmail.com" />
-                        <TextBlock Style="{StaticResource TextBlockDefaultSecLight}" Text="Joined: April 12, 2023"/>
+                        <TextBlock Style="{StaticResource TextBlockTitleBold}" Text="{Binding CurrentUser.FullName}" />
+                        <TextBlock Style="{StaticResource TextBlockSubTitle}" Text="{Binding CurrentUser.Email}" />
                     </StackPanel>
                 </hc:Card.Header>
 
@@ -41,8 +40,8 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0">
-                            <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="MicroBIM" />
-                            <TextBlock Style="{StaticResource TextBlockDefaultBold}" Text="Editor" />
+                            <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="{Binding CurrentUser.CompanyName}"/>
+                            <TextBlock Style="{StaticResource TextBlockDefaultBold}" Text="{Binding CurrentUser.Role}" />
                         </StackPanel>
 
                         <hc:Divider Grid.Column="1" LineStrokeThickness="4" Orientation="Vertical"/>
@@ -50,15 +49,25 @@
                         <StackPanel Grid.Column="2">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Label Content="Issues Created" Style="{DynamicResource LabelInfo.Small}" Margin="10"/>
-                                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="12" />
+                                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="{Binding CurrentUser.IssuesCreatedCount}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
                                 <Label Content="Issues Assigned" Style="{DynamicResource LabelInfo.Small}" Margin="10"/>
-                                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="8" />
+                                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="{Binding CurrentUser.IssuesAssignedCount}"  />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
                                 <Label Content="Projects Included" Style="{DynamicResource LabelInfo.Small}" Margin="10"/>
-                                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="4"/>
+                                <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="{Binding CurrentUser.ProjectsIncludedCount}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
+                                <Label Content="Projects" Style="{DynamicResource LabelInfo.Small}" Margin="10"/>
+                                <ListBox Margin="16" Width="200" ItemsSource="{Binding CurrentUser.ProjectMemberships}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding ProjectName}"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

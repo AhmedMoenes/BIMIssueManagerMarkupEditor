@@ -10,6 +10,11 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
         public ProfileView()
         {
             InitializeComponent();
+
+        }
+        public ProfileView(ProfileViewModel viewModel) : this()
+        {
+            DataContext = viewModel;
         }
     }
 }
