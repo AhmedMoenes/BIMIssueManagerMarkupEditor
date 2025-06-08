@@ -53,7 +53,7 @@
                              Command="{Binding NavigateProjectsCommand}"
                              Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}">
                 <hc:SideMenuItem.Icon>
-                    <Image Width="36" Height="36" Source="{Binding ProjectsIcon}" />
+                    <Image Width="32" Height="32" Source="{Binding ProjectsIcon}" />
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
 

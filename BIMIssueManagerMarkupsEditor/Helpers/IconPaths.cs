@@ -2,6 +2,7 @@
 {
     public enum AppIcon
     {
+        Logo,
         User,
         Markup,
         Profile,
@@ -16,6 +17,7 @@
     public static class IconPaths
     {
         private const string BaseUrl = "https://localhost:44374/icons";
+        public static string Logo => $"{BaseUrl}/logo.png";
         public static string User => $"{BaseUrl}/user.png";
         public static string Markup => $"{BaseUrl}/markup.png";
         public static string Profile => $"{BaseUrl}/profile.png";
@@ -28,6 +30,7 @@
 
         public static string GetIcon(AppIcon icon) => icon switch
         {
+            AppIcon.Logo => Logo,
             AppIcon.User => User,
             AppIcon.Markup => Markup,
             AppIcon.Profile => Profile,

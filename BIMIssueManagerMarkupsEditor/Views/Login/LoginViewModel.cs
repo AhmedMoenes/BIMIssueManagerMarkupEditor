@@ -1,6 +1,5 @@
 ﻿using DTOs.Login;
 using HandyControl.Controls;
-using MessageBox = System.Windows.MessageBox;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Login
 {
@@ -17,18 +16,12 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
             _userSession = userSession;
         }
         public Action? CloseAction { get; set; }
+        public string LogoIcon => IconPaths.GetIcon(AppIcon.Logo);
 
-        [ObservableProperty]
-        private string email = string.Empty;
-
-        [ObservableProperty]
-        private string password = string.Empty;
-
-        [ObservableProperty]
-        private bool isLoading;
-
-        [ObservableProperty]
-        private string? errorMessage;
+        [ObservableProperty] private string email = string.Empty;
+        [ObservableProperty] private string password = string.Empty;
+        [ObservableProperty] private bool isLoading;
+        [ObservableProperty] private string? errorMessage;
 
         [RelayCommand]
         private async Task LoginAsync(PasswordBox passwordbox)

@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Login"
         mc:Ignorable="d"
-        Title="LoginView" Height="360" Width="280"
+        Title="LoginView" Height="450" Width="330"
         ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
 
     <Grid Margin="20">
@@ -15,10 +15,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!-- Header -->
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,20">
-            <hc:TextBox Text="&#xE77B;" FontSize="36" FontFamily="Segoe MDL2 Assets" />
-            <TextBlock Text="Welcome back!" FontSize="18" FontWeight="Bold" Foreground="#333" Margin="0,10,0,0" />
-            <TextBlock Text="Login to continue" FontSize="12" Foreground="#777" />
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,20" >
+            <Image Source="{Binding LogoIcon}" Width="120" Height="120"/>
+            <TextBlock Text="Welcome back!" FontSize="18" FontWeight="Bold" Foreground="#333"/>
+            <TextBlock Text="Login to continue" FontSize="12" Foreground="#777" HorizontalAlignment="Center" />
         </StackPanel>
 
         <!-- Form -->
@@ -44,13 +44,13 @@
                 CommandParameter="{Binding ElementName=PasswordBox}"
                 Style="{StaticResource ButtonPrimary}"
                 Width="80"
-                Margin="15"/>
+                Margin="20"/>
 
                 <Button Content="Cancel"
                 Command="{Binding CancelCommand}"
                 Style="{StaticResource ButtonDanger}"
                 Width="80"
-                Margin="15"/>
+                Margin="20"/>
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -25,6 +25,7 @@
         public string UserCompany => _userSession.CurrentUser?.CompanyName ?? "";
 
         #endregion
+
         #region Icons
         public string UserIcon => IconPaths.GetIcon(AppIcon.User);
         public string ProfileIcon => IconPaths.GetIcon(AppIcon.Profile);
