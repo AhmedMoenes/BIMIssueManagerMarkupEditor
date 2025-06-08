@@ -11,7 +11,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
             _userSession = userSession;
             _projectTeamMemberService = projectTeamMemberServiceApi;
 
-            LoadTeamMembersByUserId();
+            LoadUsers();
         }
 
         [ObservableProperty] private ObservableCollection<ProjectTeamMemberDto> teamMembers = new();
@@ -19,6 +19,14 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
         private async void LoadTeamMembersByUserId()
         {
             IEnumerable<ProjectTeamMemberDto> members = await _projectTeamMemberService.GetByUserAsync(_userSession.UserId);
+            foreach (ProjectTeamMemberDto member in members)
+            {
+                teamMembers.Add(member);
+            }
+        }
+        private async void LoadUsers()
+        {
+            IEnumerable<ProjectTeamMemberDto> members = await _projectTeamMemberService.GetAll();
             foreach (ProjectTeamMemberDto member in members)
             {
                 teamMembers.Add(member);

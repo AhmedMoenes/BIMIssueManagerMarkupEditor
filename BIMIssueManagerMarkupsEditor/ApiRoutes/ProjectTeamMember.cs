@@ -3,6 +3,7 @@
     public class ProjectTeamMember
     {
         public static string Base => "api/ProjectTeamMembers";
+        public static string GetAll() => Base;
         public static string GetByProjectId(int projectId) => $"{Base}/team-project/{projectId}";
         public static string GetTeamByUserId(string userId) => $"{Base}/team-user/{userId}";
         public static string AssignUserToProject() => $"{Base}/user-project";

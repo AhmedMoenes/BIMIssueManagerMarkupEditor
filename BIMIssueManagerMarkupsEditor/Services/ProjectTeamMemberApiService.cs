@@ -7,6 +7,11 @@ namespace BIMIssueManagerMarkupsEditor.Services
         public ProjectTeamMemberApiService(HttpClient client, UserSessionService userSession) : base(client, userSession)
         {
         }
+
+        public async Task<IEnumerable<ProjectTeamMemberDto>> GetAll()
+        {
+            return await GetAsync<IEnumerable<ProjectTeamMemberDto>>(ProjectTeamMember.GetAll());
+        }
         public async Task<IEnumerable<ProjectTeamMemberDto>> GetByProjectAsync(int projectId)
         {
             return await GetAsync<IEnumerable<ProjectTeamMemberDto>>(ProjectTeamMember.GetByProjectId(projectId));
