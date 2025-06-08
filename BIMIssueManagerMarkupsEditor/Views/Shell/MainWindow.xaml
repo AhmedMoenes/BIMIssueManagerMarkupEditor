@@ -17,19 +17,42 @@
 
     <DockPanel>
         <Border DockPanel.Dock="Top" 
-                Background="{DynamicResource PrimaryBrush}" 
+                Background="DarkGray" 
                 Padding="10">
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <StackPanel Orientation="Vertical" Margin="0,0,10,0">
-                    <TextBlock Text="{Binding UserFullName}" FontWeight="SemiBold" Foreground="White" FontSize="13"/>
-                    <TextBlock Text="{Binding UserCompany}" Foreground="White" FontSize="11" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="{Binding UserIcon}"  Width="36" Height="36" Margin="0,0,5,0"/>
-                </StackPanel>
-            </StackPanel>
+            <Grid VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Logo -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Spacer -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- User Info -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- User Icon -->
+                </Grid.ColumnDefinitions>
 
+                <!-- Logo -->
+                <Image Source="{Binding LogoIcon}" Height="42" Grid.Column="0" VerticalAlignment="Center"/>
+
+                <!-- User Info -->
+                <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding UserFullName}"
+                               FontWeight="SemiBold"
+                               Foreground="Black"
+                               FontSize="16"/>
+                    <TextBlock Text="{Binding UserCompany}"
+                               Foreground="Black"
+                               FontSize="12"/>
+                </StackPanel>
+
+                <!-- User Icon -->
+                <Image Source="{Binding UserIcon}"
+                       Grid.Column="3"
+                       Height="32"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"/>
+            </Grid>
         </Border>
 
         <hc:SideMenu DockPanel.Dock="Left"

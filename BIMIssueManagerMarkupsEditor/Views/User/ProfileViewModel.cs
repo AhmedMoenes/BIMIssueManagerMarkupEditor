@@ -11,6 +11,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
             currentUser = _userSession.CurrentUser;
         }
 
+        public string UserIcon => IconPaths.GetIcon(AppIcon.User);
+
         [ObservableProperty] private CurrentUserDto currentUser = new();
     }
 }

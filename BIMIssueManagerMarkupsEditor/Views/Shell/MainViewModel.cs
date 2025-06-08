@@ -27,6 +27,7 @@
         #endregion
 
         #region Icons
+        public string LogoIcon => IconPaths.GetIcon(AppIcon.Logo);
         public string UserIcon => IconPaths.GetIcon(AppIcon.User);
         public string ProfileIcon => IconPaths.GetIcon(AppIcon.Profile);
         public string MarkupIcon => IconPaths.GetIcon(AppIcon.Markup);

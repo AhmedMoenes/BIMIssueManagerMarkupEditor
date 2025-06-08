@@ -25,10 +25,8 @@
                     </StackPanel>
                 </hc:Card.Header>
 
-                <StackPanel Orientation="Vertical">
-                    <Image>
-
-                    </Image>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <Image Source="{Binding UserIcon}" Height="190" Margin="8"/>
                 </StackPanel>
 
                 <hc:Card.Footer>
@@ -58,16 +56,6 @@
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
                                 <Label Content="Projects Included" Style="{DynamicResource LabelInfo.Small}" Margin="10"/>
                                 <TextBlock Style="{StaticResource TextBlockLargeBold}" Text="{Binding CurrentUser.ProjectsIncludedCount}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center">
-                                <Label Content="Projects" Style="{DynamicResource LabelInfo.Small}" Margin="10"/>
-                                <ListBox Margin="16" Width="200" ItemsSource="{Binding CurrentUser.ProjectMemberships}">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding ProjectName}"/>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
