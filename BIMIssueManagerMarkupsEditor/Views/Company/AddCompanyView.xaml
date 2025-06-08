@@ -38,7 +38,7 @@
                         VerticalAlignment="Top"
                         Margin="10,0,10,0">
 
-                <hc:TextBox hc:InfoElement.Title="Company Name"
+                <hc:TextBox hc:InfoElement.Placeholder="Company Name"
                             Text="{Binding Company.CompanyName, UpdateSourceTrigger=PropertyChanged}"
                             Margin="0,5"/>
                 <Expander Header="Company Admin Info" IsExpanded="False" Margin="0,10">
