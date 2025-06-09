@@ -1,5 +1,4 @@
-﻿using DTOs.Issues;
-namespace BIMIssueManagerMarkupsEditor.Services
+﻿namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class IssueApiService : ApiService
     {

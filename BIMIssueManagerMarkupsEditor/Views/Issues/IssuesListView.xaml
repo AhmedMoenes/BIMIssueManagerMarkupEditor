@@ -64,11 +64,27 @@
                     <DataTemplate>
                         <hc:Card Margin="10" Padding="8" Width="220" Height="210">
                             <hc:Card.Header>
-                                <!-- Date Header -->
-                                <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:MMM dd, yyyy}'}"
+                                <StackPanel Orientation="Horizontal" Margin="5">
+
+                                    <!-- Date Header -->
+                                    <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:MMM dd, yyyy}'}"
                                                Margin="2"
-                                               HorizontalAlignment="Center"
+                                               HorizontalAlignment="Left"
                                                FontWeight="Bold"/>
+
+                                    <hc:SplitButton Style="{StaticResource SplitButtonDefault.Small}"
+                                                    HitMode="Click"
+                                                    Content="Options">
+                                        <hc:SplitButton.DropDownContent>
+                                            <StackPanel>
+                                            <MenuItem Header="Comment"
+                                                      Command="{Binding AddCommentCommand}"
+                                                      CommandParameter="{Binding IssueId}"/>
+                                            </StackPanel>
+                                        </hc:SplitButton.DropDownContent>
+                                    </hc:SplitButton>
+
+                                </StackPanel>
                             </hc:Card.Header>
 
                             <!-- Snapshot Image -->
@@ -92,6 +108,4 @@
         </ScrollViewer>
 
     </Grid>
-
-
 </UserControl>

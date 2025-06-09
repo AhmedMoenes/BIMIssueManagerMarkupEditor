@@ -1,7 +1,4 @@
-﻿using BIMIssueManagerMarkupsEditor.ApiRoutes;
-using DTOs.Projects;
-
-namespace BIMIssueManagerMarkupsEditor.Services
+﻿namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class ProjectApiService : ApiService
     {

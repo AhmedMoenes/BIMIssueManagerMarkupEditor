@@ -1,4 +1,6 @@
 ﻿
+using BIMIssueManagerMarkupsEditor.Interfaces;
+
 namespace BIMIssueManagerMarkupsEditor.Helpers
 {
     public static class DependencyInjection
@@ -6,6 +8,7 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             services.TryAddSingleton<HttpClient>();
+            services.TryAddSingleton<IDialogService, DialogService>();
             services.TryAddSingleton<IApiService,ApiService>();
             services.TryAddSingleton<AuthApiService>();
             services.TryAddSingleton<UserSessionService>();
@@ -20,6 +23,7 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
         {
             services.TryAddSingleton<LoginWindow>();
             services.TryAddTransient<MainWindow>();
+            services.TryAddTransient<AddCommentView>();
             services.TryAddTransient<MainViewModel>();
             services.TryAddTransient<MarkupEditorViewModel>();
             services.TryAddTransient<ProfileViewModel>();
@@ -30,6 +34,8 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.TryAddTransient<ChatViewModel>();
             services.TryAddTransient<ModelViewerViewModel>();
             services.TryAddTransient<LoginViewModel>();
+            services.TryAddTransient<Func<int, AddCommentViewModel>>(sp => issueId =>
+                new AddCommentViewModel(sp.GetRequiredService<CommentApiService>(), issueId));
             return services;
         }
         public static IServiceCollection AddConfiguration(this IServiceCollection services, IConfiguration configuration)

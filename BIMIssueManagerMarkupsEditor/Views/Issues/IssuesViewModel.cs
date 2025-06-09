@@ -1,17 +1,25 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Views.Issues
+﻿using BIMIssueManagerMarkupsEditor.Interfaces;
+
+namespace BIMIssueManagerMarkupsEditor.Views.Issues
 {
     public partial class IssuesViewModel : ObservableObject
     {
+        private readonly IDialogService _dialogService;
         private readonly IssueApiService _issueApiService;
         private readonly ProjectApiService _projectApiService;
         private readonly UserSessionService _userSession;
+        private readonly Func<int, AddCommentViewModel> _addCommentVmFactory;
         public IssuesViewModel(IssueApiService issueApiService, 
                                UserSessionService userSession, 
-                               ProjectApiService projectApiService)
+                               ProjectApiService projectApiService,
+                               Func<int, AddCommentViewModel> addCommentVmFactory,
+                               IDialogService dialogService)
         {
             _issueApiService = issueApiService;
             _userSession = userSession;
             _projectApiService = projectApiService;
+            _addCommentVmFactory = addCommentVmFactory;
+            _dialogService = dialogService;
 
             LoadIssuesAsync();
             LoadProjectsAsync();
@@ -22,35 +30,25 @@
             ResetFilterCommand = new RelayCommand(async () => await LoadIssuesAsync());
         }
 
-        [ObservableProperty]
-        private ObservableCollection<IssueDto> issues = new();
+        [ObservableProperty] private ObservableCollection<IssueDto> issues = new();
 
-        [ObservableProperty]
-        private ObservableCollection<string> projects = new(); 
+        [ObservableProperty] private ObservableCollection<string> projects = new(); 
 
-        [ObservableProperty]
-        private string selectedProject;
+        [ObservableProperty] private string selectedProject;
 
-        [ObservableProperty]
-        private ObservableCollection<string> assignedToUser = new();
+        [ObservableProperty] private ObservableCollection<string> assignedToUser = new();
 
-        [ObservableProperty]
-        private string selectedAssignee;
+        [ObservableProperty] private string selectedAssignee;
 
-        [ObservableProperty]
-        private ObservableCollection<string> priorities = new();
+        [ObservableProperty] private ObservableCollection<string> priorities = new();
 
-        [ObservableProperty]
-        private string selectedPriority;
+        [ObservableProperty] private string selectedPriority;
 
-        [ObservableProperty]
-        private DateTime? selectedDate;
+        [ObservableProperty] private DateTime? selectedDate;
 
-        [ObservableProperty]
-        private ObservableCollection<string> revitVersionOptions = new();
+        [ObservableProperty] private ObservableCollection<string> revitVersionOptions = new();
 
-        [ObservableProperty]
-        private string selectedRevitVersion;
+        [ObservableProperty] private string selectedRevitVersion;
 
         public ICommand ApplyFilterCommand { get; }
         public ICommand ResetFilterCommand { get; }
@@ -103,6 +101,12 @@
 
             Issues = new ObservableCollection<IssueDto>(filtered);
         }
+        [RelayCommand]
 
+        private async Task AddCommentAsync(int IssueId)
+        {
+            var vm = _addCommentVmFactory(IssueId);
+            await _dialogService.ShowDialogAsync<AddCommentView, AddCommentViewModel>(vm);
+        }
     }
 }
