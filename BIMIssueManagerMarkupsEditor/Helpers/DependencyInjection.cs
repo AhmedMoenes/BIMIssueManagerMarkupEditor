@@ -39,7 +39,6 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.AddHttpClient<IApiService,ApiService>((sp, client) =>
             {
                 var settings = sp.GetRequiredService<IOptions<ApiSettings>>().Value;
-                client.BaseAddress = new Uri(settings.BaseUrl);
             });
             return services;
         }

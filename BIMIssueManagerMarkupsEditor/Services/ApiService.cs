@@ -6,11 +6,11 @@ namespace BIMIssueManagerMarkupsEditor.Services
     {
         public readonly HttpClient _client;
         protected readonly UserSessionService _userSession;
-        public ApiService(HttpClient client, UserSessionService userSession)
+        public ApiService(HttpClient client, UserSessionService userSession, IOptions<ApiSettings> settings)
         {
             _client = client;
             _userSession = userSession;
-            _client.BaseAddress = new Uri("https://localhost:44374/");
+            _client.BaseAddress = new Uri(settings.Value.BaseUrl);
         }
         private void ApplyAuthHeader()
         {

@@ -4,7 +4,8 @@ namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class AuthApiService : ApiService 
     {
-        public AuthApiService(HttpClient client, UserSessionService userSession):base(client, userSession)
+        public AuthApiService(HttpClient client, UserSessionService userSession, IOptions<ApiSettings> settings)
+                             : base(client, userSession, settings)
         {
         }
 

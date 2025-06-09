@@ -16,17 +16,17 @@
 
     public static class IconPaths
     {
-        private const string BaseUrl = "https://localhost:44374/icons";
-        public static string Logo => $"{BaseUrl}/logo.png";
-        public static string User => $"{BaseUrl}/user.png";
-        public static string Markup => $"{BaseUrl}/markup.png";
-        public static string Profile => $"{BaseUrl}/profile.png";
-        public static string Projects => $"{BaseUrl}/projects.png";
-        public static string Company => $"{BaseUrl}/company.png";
-        public static string Teams => $"{BaseUrl}/teams.png";
-        public static string Issues => $"{BaseUrl}/issues.png";
-        public static string Chat => $"{BaseUrl}/chat.png";
-        public static string Viewer => $"{BaseUrl}/viewer.png";
+        private const string BasePath = "pack://application:,,,/Resources/Icons";
+        public static string Logo => $"{BasePath}/logo.png";
+        public static string User => $"{BasePath}/user.png";
+        public static string Markup => $"{BasePath}/markup.png";
+        public static string Profile => $"{BasePath}/profile.png";
+        public static string Projects => $"{BasePath}/projects.png";
+        public static string Company => $"{BasePath}/company.png";
+        public static string Teams => $"{BasePath}/teams.png";
+        public static string Issues => $"{BasePath}/issues.png";
+        public static string Chat => $"{BasePath}/chat.png";
+        public static string Viewer => $"{BasePath}/viewer.png";
 
         public static string GetIcon(AppIcon icon) => icon switch
         {

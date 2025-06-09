@@ -5,7 +5,8 @@ namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class ProjectApiService : ApiService
     {
-        public ProjectApiService(HttpClient client, UserSessionService userSession) : base(client,userSession)
+        public ProjectApiService(HttpClient client, UserSessionService userSession, IOptions<ApiSettings> settings)
+                                : base(client, userSession, settings)
         {
         }
 

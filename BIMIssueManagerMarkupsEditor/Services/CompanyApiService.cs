@@ -4,7 +4,8 @@ namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class CompanyApiService : ApiService
     {
-        public CompanyApiService(HttpClient client, UserSessionService userSession) : base(client, userSession)
+        public CompanyApiService(HttpClient client, UserSessionService userSession, IOptions<ApiSettings> settings)
+                                : base(client, userSession,settings)
         {
         }
         public async Task<IEnumerable<CompanyOverviewDto>> GetAllCompaniesAsync()
