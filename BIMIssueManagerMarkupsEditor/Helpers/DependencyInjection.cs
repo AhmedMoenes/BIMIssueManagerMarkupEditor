@@ -1,5 +1,4 @@
-﻿
-using BIMIssueManagerMarkupsEditor.Interfaces;
+﻿using BIMIssueManagerMarkupsEditor.Interfaces;
 
 namespace BIMIssueManagerMarkupsEditor.Helpers
 {
@@ -23,7 +22,7 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
         {
             services.TryAddSingleton<LoginWindow>();
             services.TryAddTransient<MainWindow>();
-            services.TryAddTransient<AddCommentView>();
+            services.TryAddTransient<CommentView>();
             services.TryAddTransient<MainViewModel>();
             services.TryAddTransient<MarkupEditorViewModel>();
             services.TryAddTransient<ProfileViewModel>();
@@ -34,8 +33,9 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.TryAddTransient<ChatViewModel>();
             services.TryAddTransient<ModelViewerViewModel>();
             services.TryAddTransient<LoginViewModel>();
-            services.TryAddTransient<Func<int, AddCommentViewModel>>(sp => issueId =>
-                new AddCommentViewModel(sp.GetRequiredService<CommentApiService>(), issueId));
+            services.TryAddTransient<CommentViewModel>();
+            services.TryAddTransient<Func<int, CommentViewModel>>(sp => issueId =>
+                new CommentViewModel(sp.GetRequiredService<CommentApiService>(), issueId));
             return services;
         }
         public static IServiceCollection AddConfiguration(this IServiceCollection services, IConfiguration configuration)

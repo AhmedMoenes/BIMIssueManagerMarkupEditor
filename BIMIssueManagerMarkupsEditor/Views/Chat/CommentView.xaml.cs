@@ -1,11 +1,11 @@
 ﻿namespace BIMIssueManagerMarkupsEditor.Views.Chat
 {
     /// <summary>
-    /// Interaction logic for AddCommentView.xaml
+    /// Interaction logic for CommentView.xaml
     /// </summary>
-    public partial class AddCommentView : Window
+    public partial class CommentView : Window
     {
-        public AddCommentView()
+        public CommentView()
         {
             InitializeComponent();
         }

@@ -2,16 +2,19 @@
 
 namespace BIMIssueManagerMarkupsEditor.Views.Chat
 {
-    public partial class AddCommentViewModel : ObservableObject
+    public partial class CommentViewModel : ObservableObject
     {
         private readonly CommentApiService _commentApiService;
         [ObservableProperty] private string commentText;
-     
-        public AddCommentViewModel(CommentApiService commentApiService, int issueId)
+        [ObservableProperty] private ObservableCollection<CommentDto> issueComments = new();
+        public CommentViewModel(CommentApiService commentApiService, int issueId)
         {
             _commentApiService = commentApiService;
             IssueId = issueId;
+
+            LoadIssueCommentsAsync();
         }
+
         public int IssueId { get; }
 
         [RelayCommand]
@@ -26,8 +29,14 @@ namespace BIMIssueManagerMarkupsEditor.Views.Chat
                 };
 
                 await _commentApiService.CreateForIssueAsync(IssueId, dto);
-                // Optional: notify parent view or close dialog
+                CommentText = string.Empty;
+                await LoadIssueCommentsAsync();
             }
+        }
+        private async Task LoadIssueCommentsAsync()
+        {
+            var comments = await _commentApiService.GetByIssueIdAsync(IssueId);
+            IssueComments = new ObservableCollection<CommentDto>(comments);
         }
     }
 }

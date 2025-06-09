@@ -9,17 +9,17 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
         private readonly IssueApiService _issueApiService;
         private readonly ProjectApiService _projectApiService;
         private readonly UserSessionService _userSession;
-        private readonly Func<int, AddCommentViewModel> _addCommentVmFactory;
+        private readonly Func<int, CommentViewModel> _CommentVmFactory;
         public IssuesViewModel(IssueApiService issueApiService, 
                                UserSessionService userSession, 
                                ProjectApiService projectApiService,
-                               Func<int, AddCommentViewModel> addCommentVmFactory,
+                               Func<int, CommentViewModel> CommentVmFactory,
                                IDialogService dialogService)
         {
             _issueApiService = issueApiService;
             _userSession = userSession;
             _projectApiService = projectApiService;
-            _addCommentVmFactory = addCommentVmFactory;
+            _CommentVmFactory = CommentVmFactory;
             _dialogService = dialogService;
 
             LoadIssuesAsync();
@@ -29,7 +29,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
 
             ApplyFilterCommand = new RelayCommand(async () => await FilterIssuesAsync());
             ResetFilterCommand = new RelayCommand(async () => await LoadIssuesAsync());
-            AddCommentCommand = new RelayCommand<int>(async IssueId => await CreateCommentAsync(IssueId));
+            AddCommentCommand = new RelayCommand<IssueDto>(async issue => await CreateCommentAsync(issue?.IssueId ?? 0));
         }
 
         [ObservableProperty] private ObservableCollection<IssueDto> issues = new();
@@ -107,8 +107,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
 
         private async Task CreateCommentAsync(int IssueId)
         {
-            AddCommentViewModel vm = _addCommentVmFactory(IssueId);
-            await _dialogService.ShowDialogAsync<AddCommentView, AddCommentViewModel>(vm);
+            CommentViewModel vm = _CommentVmFactory(IssueId);
+            await _dialogService.ShowDialogAsync<CommentView, CommentViewModel>(vm);
         }
     }
 }
