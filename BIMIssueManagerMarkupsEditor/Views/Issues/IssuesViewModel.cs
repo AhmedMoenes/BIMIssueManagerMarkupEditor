@@ -1,4 +1,5 @@
-﻿using BIMIssueManagerMarkupsEditor.Interfaces;
+﻿using BIMIssueManagerMarkupsEditor.ApiRoutes;
+using BIMIssueManagerMarkupsEditor.Interfaces;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Issues
 {
@@ -28,6 +29,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
 
             ApplyFilterCommand = new RelayCommand(async () => await FilterIssuesAsync());
             ResetFilterCommand = new RelayCommand(async () => await LoadIssuesAsync());
+            AddCommentCommand = new RelayCommand<int>(async IssueId => await CreateCommentAsync(IssueId));
         }
 
         [ObservableProperty] private ObservableCollection<IssueDto> issues = new();
@@ -52,6 +54,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
 
         public ICommand ApplyFilterCommand { get; }
         public ICommand ResetFilterCommand { get; }
+        public ICommand AddCommentCommand { get; }
 
         private void LoadPriorities()
         {
@@ -82,13 +85,13 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
         }
         private async Task LoadIssuesAsync()
         {
-            var allIssues = await _issueApiService.GetIssuesByUserIdAsync(_userSession.UserId);
+            IEnumerable<IssueDto> allIssues = await _issueApiService.GetIssuesByUserIdAsync(_userSession.UserId);
             Issues = new ObservableCollection<IssueDto>(allIssues);
         }
         private async Task FilterIssuesAsync()
         {
-            var allIssues = await _issueApiService.GetIssuesByUserIdAsync(_userSession.UserId);
-            var filtered = allIssues;
+            IEnumerable<IssueDto> allIssues = await _issueApiService.GetIssuesByUserIdAsync(_userSession.UserId);
+            IEnumerable<IssueDto> filtered = allIssues;
 
             if (!string.IsNullOrEmpty(SelectedProject))
                 filtered = filtered.Where(i => i.ProjectName == SelectedProject);
@@ -101,11 +104,10 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
 
             Issues = new ObservableCollection<IssueDto>(filtered);
         }
-        [RelayCommand]
 
-        private async Task AddCommentAsync(int IssueId)
+        private async Task CreateCommentAsync(int IssueId)
         {
-            var vm = _addCommentVmFactory(IssueId);
+            AddCommentViewModel vm = _addCommentVmFactory(IssueId);
             await _dialogService.ShowDialogAsync<AddCommentView, AddCommentViewModel>(vm);
         }
     }

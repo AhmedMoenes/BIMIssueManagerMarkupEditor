@@ -7,7 +7,6 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.TryAddSingleton<HttpClient>();
             services.TryAddSingleton<IDialogService, DialogService>();
             services.TryAddSingleton<IApiService,ApiService>();
             services.TryAddSingleton<AuthApiService>();
@@ -16,6 +15,7 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.TryAddScoped<ProjectTeamMemberApiService>();
             services.TryAddScoped<ProjectApiService>();
             services.TryAddScoped<UserApiService>();
+            services.TryAddScoped<CommentApiService>();
             services.TryAddScoped<CompanyApiService>();
             return services;
         }

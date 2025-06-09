@@ -77,8 +77,9 @@
                                                     Content="Options">
                                         <hc:SplitButton.DropDownContent>
                                             <StackPanel>
-                                            <MenuItem Header="Comment"
-                                                      Command="{Binding AddCommentCommand}"
+                                                <MenuItem Header="Comment"
+                                                      Command="{Binding DataContext.AddCommentCommand,
+                                                      RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                       CommandParameter="{Binding IssueId}"/>
                                             </StackPanel>
                                         </hc:SplitButton.DropDownContent>
