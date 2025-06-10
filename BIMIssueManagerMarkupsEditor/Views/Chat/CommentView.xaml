@@ -10,7 +10,7 @@
     <DockPanel Margin="10">
         <!-- Comments List -->
         <Border DockPanel.Dock="Top"
-                Height="220"
+                Height="Auto"
                 BorderBrush="{StaticResource BorderBrush}"
                 BorderThickness="1"
                 CornerRadius="4"
@@ -21,7 +21,7 @@
                            FontWeight="Bold"
                            FontSize="12"
                            Margin="3,3"/>
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer VerticalScrollBarVisibility="Visible">
                     <ItemsControl ItemsSource="{Binding IssueComments}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>

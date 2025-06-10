@@ -10,8 +10,7 @@
         public static string GetBySnapshotId(int snapshotId) => $"{Base}/snapshot/{snapshotId}";
 
         public static string Create() => $"{Base}/create";
-        public static string CreateForIssue(int issueId) => $"{Base}/create/issue/{issueId}";
-
+        public static string CreateForIssue(int issueId) => $"{Base}/issue/{issueId}/create";
         public static string Delete(int commentId) => $"{Base}/delete/{commentId}";
         public static string Update(int commentId) => $"{Base}/{commentId}";
     }

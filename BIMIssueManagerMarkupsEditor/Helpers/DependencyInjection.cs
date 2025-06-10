@@ -34,8 +34,14 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.TryAddTransient<ModelViewerViewModel>();
             services.TryAddTransient<LoginViewModel>();
             services.TryAddTransient<CommentViewModel>();
+
             services.TryAddTransient<Func<int, CommentViewModel>>(sp => issueId =>
-                new CommentViewModel(sp.GetRequiredService<CommentApiService>(), issueId));
+                new CommentViewModel(
+                    sp.GetRequiredService<CommentApiService>(),
+                    sp.GetRequiredService<UserSessionService>(),
+                    issueId
+                ));
+
             return services;
         }
         public static IServiceCollection AddConfiguration(this IServiceCollection services, IConfiguration configuration)
