@@ -26,12 +26,8 @@ namespace BIMIssueManagerMarkupsEditor.Services
 
         public Task<CommentDto?> CreateAsync(CreateCommentDto dto)
             => PostAsync<CreateCommentDto, CommentDto>(Comment.Create(), dto);
-
-        public Task<CommentDto?> CreateForIssueAsync(int issueId, CreateCommentDto dto)
+        public Task<CommentDto?> CreateForSnapshotAsync(int issueId, CreateCommentDto dto)
             => PostAsync<CreateCommentDto, CommentDto>(Comment.CreateForIssue(issueId), dto);
-
-        public Task<CommentDto?> CreateForSnapshotAsync(int snapshotId, CreateCommentDto dto)
-            => PostAsync<CreateCommentDto, CommentDto>(Comment.CreateForSnapshot(snapshotId), dto);
 
         public Task<HttpResponseMessage> UpdateAsync(int id, CommentDto dto)
             => PutAsync(Comment.GetById(id), dto);

@@ -9,11 +9,11 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
         private readonly IssueApiService _issueApiService;
         private readonly ProjectApiService _projectApiService;
         private readonly UserSessionService _userSession;
-        private readonly Func<int, CommentViewModel> _CommentVmFactory;
+        private readonly Func<int,CommentViewModel> _CommentVmFactory;
         public IssuesViewModel(IssueApiService issueApiService, 
                                UserSessionService userSession, 
                                ProjectApiService projectApiService,
-                               Func<int, CommentViewModel> CommentVmFactory,
+                               Func<int,CommentViewModel> CommentVmFactory,
                                IDialogService dialogService)
         {
             _issueApiService = issueApiService;
@@ -29,7 +29,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
 
             ApplyFilterCommand = new RelayCommand(async () => await FilterIssuesAsync());
             ResetFilterCommand = new RelayCommand(async () => await LoadIssuesAsync());
-            AddCommentCommand = new RelayCommand<IssueDto>(async issue => await CreateCommentAsync(issue?.IssueId ?? 0));
+            AddCommentCommand = new RelayCommand<IssueDto>(async issue => await CreateCommentAsync(issue.IssueId));
         }
 
         [ObservableProperty] private ObservableCollection<IssueDto> issues = new();
@@ -108,6 +108,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
         private async Task CreateCommentAsync(int IssueId)
         {
             CommentViewModel vm = _CommentVmFactory(IssueId);
+            await vm.LoadIssueCommentsAsync();
             await _dialogService.ShowDialogAsync<CommentView, CommentViewModel>(vm);
         }
     }

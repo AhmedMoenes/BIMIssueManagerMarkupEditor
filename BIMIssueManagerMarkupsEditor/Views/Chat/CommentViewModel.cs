@@ -11,31 +11,27 @@ namespace BIMIssueManagerMarkupsEditor.Views.Chat
         {
             _commentApiService = commentApiService;
             IssueId = issueId;
-
-            LoadIssueCommentsAsync();
         }
-
         public int IssueId { get; }
 
-        [RelayCommand]
-        private async Task SubmitAsync()
+        [RelayCommand] private async Task SubmitAsync()
         {
             if (!string.IsNullOrWhiteSpace(CommentText))
             {
-                var dto = new CreateCommentDto
+                CreateCommentDto dto = new CreateCommentDto
                 {
-                    IssueId = IssueId,
                     Message = CommentText
                 };
 
-                await _commentApiService.CreateForIssueAsync(IssueId, dto);
+                await _commentApiService.CreateForSnapshotAsync(IssueId, dto);
+                MessageBox.Show("Comment Added");
                 CommentText = string.Empty;
                 await LoadIssueCommentsAsync();
             }
         }
-        private async Task LoadIssueCommentsAsync()
+        public async Task LoadIssueCommentsAsync()
         {
-            var comments = await _commentApiService.GetByIssueIdAsync(IssueId);
+            IEnumerable<CommentDto> comments = await _commentApiService.GetByIssueIdAsync(IssueId);
             IssueComments = new ObservableCollection<CommentDto>(comments);
         }
     }
