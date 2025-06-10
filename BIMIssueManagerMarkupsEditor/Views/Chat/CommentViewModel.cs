@@ -20,7 +20,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.Chat
             {
                 CreateCommentDto dto = new CreateCommentDto
                 {
-                    Message = CommentText
+                    Message = CommentText,
+                    IssueId = IssueId
                 };
 
                 await _commentApiService.CreateForSnapshotAsync(IssueId, dto);
