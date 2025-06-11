@@ -65,18 +65,18 @@
                         <hc:Card Margin="10" Padding="8" Width="220" Height="210">
                             <hc:Card.Header>
                                 <StackPanel Orientation="Horizontal" Margin="5">
-                                    <Button Command="{Binding DataContext.AddCommentCommand,
-                                            RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding .}"
-                                            Content="Add Comment"
-                                            Margin="5"/>
-                                            
 
                                     <!-- Date Header -->
                                     <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:MMM dd, yyyy}'}"
                                                Margin="5"
                                                FontWeight="Bold"
                                                VerticalAlignment="Center"/>
+
+                                    <Button Command="{Binding DataContext.AddCommentCommand,
+                                        RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding .}"
+                                            Content="Add Comment"
+                                            Margin="5"/>
 
                                     <!--Check why it is not working?-->
                                     <!--<hc:SplitButton Style="{StaticResource SplitButtonDefault.Small}"

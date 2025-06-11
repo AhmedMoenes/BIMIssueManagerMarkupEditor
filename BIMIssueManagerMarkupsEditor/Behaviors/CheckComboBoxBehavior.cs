@@ -35,7 +35,6 @@ public static class CheckComboBoxBehavior
         }
     }
 
-
     private static void ComboBoxSelectedItemsChanged(object sender, RoutedEventArgs e)
     {
         var comboBox = (CheckComboBox)sender;
