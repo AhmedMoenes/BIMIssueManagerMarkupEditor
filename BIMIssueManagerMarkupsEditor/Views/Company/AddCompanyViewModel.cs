@@ -1,4 +1,5 @@
 ﻿using DTOs.Companies;
+using HandyControl.Controls;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Company
 {
@@ -10,12 +11,23 @@ namespace BIMIssueManagerMarkupsEditor.Views.Company
         {
             _companyApiService = companyApiService;
             _userSession = userSession;
+            Company = new CreateCompanyWithAdminDto();
 
             LoadCompaniesAsync();
         }
 
         [ObservableProperty] private ObservableCollection<CompanyOverviewDto> companies = new();
+        [ObservableProperty] private CreateCompanyWithAdminDto company;
 
+
+        [RelayCommand] private async Task CreateCompanyAsync(PasswordBox passwordbox)
+        {
+            Company.Password = passwordbox.Password;
+            await _companyApiService.CreateCompanyWithAdminAsync(Company);
+            Company.Password = null;
+            Company = new CreateCompanyWithAdminDto();
+            await LoadCompaniesAsync();
+        }
         private async Task LoadCompaniesAsync()
         {
             IEnumerable<CompanyOverviewDto> allCompanies = Enumerable.Empty<CompanyOverviewDto>();

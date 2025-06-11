@@ -73,15 +73,15 @@
             </hc:SideMenuItem>
 
             <hc:SideMenuItem Header="Projects"
-                             Command="{Binding NavigateProjectsCommand}"
-                             Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}">
+                             Command="{Binding NavigateProjectsCommand}">
+                             Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                 <hc:SideMenuItem.Icon>
                     <Image Width="32" Height="32" Source="{Binding ProjectsIcon}" />
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
 
-            <hc:SideMenuItem Header="Companies" Command="{Binding NavigateCompaniesCommand}"
-                             Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}">>
+            <hc:SideMenuItem Header="Companies" Command="{Binding NavigateCompaniesCommand}">
+                Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}">>
                 <hc:SideMenuItem.Icon>
                     <Image Width="36" Height="36" Source="{Binding CompanyIcon}" />
                 </hc:SideMenuItem.Icon>

@@ -38,6 +38,7 @@
                 hc:InfoElement.Placeholder="Enter your password"
                 x:Name="PasswordBox"
                 Width="Auto"
+                ShowEyeButton="True"
                 Height="35"/>
 
             <StackPanel Orientation= "Horizontal">

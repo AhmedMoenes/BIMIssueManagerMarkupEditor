@@ -59,7 +59,7 @@
                         <!-- No binding on Password; handle it-->
                         <hc:PasswordBox x:Name="PasswordBox"
                                         hc:InfoElement.Placeholder="Password"
-                                        hc:InfoElement.ShowClearButton="True"
+                                        ShowEyeButton="True"
                                         Margin="0,5"/>
                     </StackPanel>
                 </Expander>
@@ -67,6 +67,7 @@
                 <Button Content="Add Company"
                            Style="{StaticResource ButtonPrimary}"
                            Command="{Binding CreateCompanyCommand}"
+                           CommandParameter="{Binding ElementName=PasswordBox}"
                            Width="100"
                            Margin="0,10,0,0"
                            HorizontalAlignment="Center"/>

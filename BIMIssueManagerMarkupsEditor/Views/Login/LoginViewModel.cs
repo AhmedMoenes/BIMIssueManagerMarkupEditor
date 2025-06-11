@@ -23,8 +23,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
         [ObservableProperty] private bool isLoading;
         [ObservableProperty] private string? errorMessage;
 
-        [RelayCommand]
-        private async Task LoginAsync(PasswordBox passwordbox)
+        [RelayCommand] private async Task LoginAsync(PasswordBox passwordbox)
         {
             IsLoading = true;
             ErrorMessage = null;
@@ -56,8 +55,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
             }
         }
 
-        [RelayCommand]
-        private void Cancel()
+        [RelayCommand] private void Cancel()
         {
             CloseAction?.Invoke();
         }

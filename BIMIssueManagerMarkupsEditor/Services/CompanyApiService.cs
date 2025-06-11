@@ -16,5 +16,9 @@ namespace BIMIssueManagerMarkupsEditor.Services
         {
             return await GetAsync<IEnumerable<CompanyOverviewDto>>(Company.GetCompanyOverviewForUser(userId));
         }
+        public async Task<CompanyDto> CreateCompanyWithAdminAsync(CreateCompanyWithAdminDto dto)
+        {
+            return await PostAsync<CreateCompanyWithAdminDto, CompanyDto>(Company.CreateWithAdmin(), dto);
+        }
     }
 }
