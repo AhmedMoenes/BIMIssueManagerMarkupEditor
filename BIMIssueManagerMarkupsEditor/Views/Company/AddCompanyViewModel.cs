@@ -2,7 +2,7 @@
 
 namespace BIMIssueManagerMarkupsEditor.Views.Company
 {
-    public partial class AddCompanyViewModel:ObservableObject
+    public partial class AddCompanyViewModel : ObservableObject
     {
         private readonly CompanyApiService _companyApiService;
         private readonly UserSessionService _userSession;
@@ -11,32 +11,26 @@ namespace BIMIssueManagerMarkupsEditor.Views.Company
             _companyApiService = companyApiService;
             _userSession = userSession;
 
-            if (_userSession.IsInRole("SuperAdmin"))
-                LoadCompanies();
-
-            if (_userSession.IsInRole("CompanyAdmin"))
-                LoadUserCompanies();
-
+            LoadCompaniesAsync();
         }
 
         [ObservableProperty] private ObservableCollection<CompanyOverviewDto> companies = new();
 
-        private async void LoadCompanies()
+        private async Task LoadCompaniesAsync()
         {
-            IEnumerable<CompanyOverviewDto> allCompanies = await _companyApiService.GetAllCompaniesAsync();
-            foreach (CompanyOverviewDto company in allCompanies)
+            IEnumerable<CompanyOverviewDto> allCompanies = Enumerable.Empty<CompanyOverviewDto>();
+
+            if (_userSession.Role == "SuperAdmin")
             {
-                companies.Add(company);
+                allCompanies = await _companyApiService.GetAllCompaniesAsync();
             }
+            else
+            {
+                allCompanies = await _companyApiService.GetCompanyOverviewForUserAsync(_userSession.UserId);
+            }
+
+            Companies = new ObservableCollection<CompanyOverviewDto>(allCompanies);
         }
 
-        private async void LoadUserCompanies()
-        {
-            IEnumerable<CompanyOverviewDto> userCompanies = await _companyApiService.GetCompanyOverviewForUserAsync(_userSession.UserId);
-            foreach (CompanyOverviewDto company in userCompanies)
-            {
-                companies.Add(company);
-            }
-        }
     }
 }

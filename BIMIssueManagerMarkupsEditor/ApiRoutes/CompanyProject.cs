@@ -3,7 +3,7 @@
     public class CompanyProject
     {
         public static string Base => "api/companyproject";
-        public static string AssignCompanies => $"{Base}/assign-companies";
+        public static string AssignCompanies() => $"{Base}/assign-companies";
 
     }
 }
