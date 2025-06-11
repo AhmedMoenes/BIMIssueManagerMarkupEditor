@@ -25,7 +25,7 @@
                       HeadersVisibility="Column"
                       Margin="5">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Company Name" Binding="{Binding CompanyName}" Width="*" />
+                    <DataGridTextColumn Header="Company Name" Binding="{Binding CompanyName}" Width="Auto" />
                     <DataGridTextColumn Header="Users" Binding="{Binding UsersCount}" Width="Auto" />
                     <DataGridTextColumn Header="Projects" Binding="{Binding ProjectsCount}" Width="Auto" />
                     <DataGridTextColumn Header="Issues" Binding="{Binding IssuesCount}" Width="Auto" />

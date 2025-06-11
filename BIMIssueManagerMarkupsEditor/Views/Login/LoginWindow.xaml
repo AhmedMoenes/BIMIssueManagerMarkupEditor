@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Login"
         mc:Ignorable="d"
-        Title="LoginView" Height="420" Width="330"
+        Title="Login" Height="420" Width="330"
         ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
 
     <Grid Margin="20">
@@ -27,7 +27,8 @@
                                 Orientation="Vertical">
 
             <TextBlock Text="Email" Margin="0 0 0 ,4" FontWeight="Bold"/>
-            <hc:AutoCompleteTextBox
+            <hc:TextBox
+                hc:InfoElement.Placeholder="Enter your email"
                 Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
                 Width="Auto"
                 Height="35"/>

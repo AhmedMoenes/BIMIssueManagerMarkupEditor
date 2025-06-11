@@ -1,27 +1,42 @@
 ﻿<Window x:Class="BIMIssueManagerMarkupsEditor.Views.Chat.CommentView"
-                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                 xmlns:hc="https://handyorg.github.io/handycontrol"
-                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                 xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Chat"
-                 mc:Ignorable="d"
-                 Title="Comments" Height="500" Width="450">
-    <DockPanel Margin="10">
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Chat"
+        mc:Ignorable="d"
+        Title="Comments" Height="700" Width="700" WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
         <!-- Comments List -->
-        <Border DockPanel.Dock="Top"
-                Height="Auto"
+        <Border Grid.Row="0"
                 BorderBrush="{StaticResource BorderBrush}"
                 BorderThickness="1"
                 CornerRadius="4"
                 Padding="5"
                 Background="{StaticResource RegionBrush}">
-            <StackPanel>
-                <TextBlock Text="Comments:" 
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Text="Comments:" 
                            FontWeight="Bold"
                            FontSize="12"
                            Margin="3,3"/>
-                <ScrollViewer VerticalScrollBarVisibility="Visible">
+
+                <ScrollViewer Grid.Row="1"
+                              hc:ScrollViewerAttach.Orientation="Vertical"
+                              VerticalScrollBarVisibility="Auto">
                     <ItemsControl ItemsSource="{Binding IssueComments}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -38,16 +53,17 @@
                                                    FontWeight="SemiBold"
                                                    HorizontalAlignment="Left"/>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="By: " 
+                                            <TextBlock Text="By:" 
                                                        FontWeight="Bold"
                                                        FontSize="10"/>
                                             <TextBlock Text="{Binding CreatedBy}" 
                                                        Margin="5,0,10,0"
                                                        FontSize="10"/>
-                                            <TextBlock Text="At: " 
+                                            <TextBlock Text="At:" 
                                                        FontWeight="Bold"
                                                        FontSize="10"/>
-                                            <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:MMM dd, yyyy HH:mm}'}"
+                                            <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:dd MMM, yyyy HH:mm}'}"
+                                                       Margin="5,0,10,0"
                                                        FontSize="10"/>
                                         </StackPanel>
                                     </StackPanel>
@@ -56,24 +72,27 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </ScrollViewer>
-            </StackPanel>
+            </Grid>
         </Border>
 
-        <hc:Divider Orientation="Horizontal" Margin="0,10"/>
+        <!-- Divider -->
+        <hc:Divider Grid.Row="1" Orientation="Horizontal" Margin="0,10"/>
 
         <!-- Comment Input -->
-        <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
-            <TextBox   hc:InfoElement.Placeholder="Write a Comment"
-                       VerticalContentAlignment="Top"
-                       Padding="5,5"
-                       Style="{StaticResource TextBoxExtend}"
-                       Text="{Binding CommentText, UpdateSourceTrigger=PropertyChanged}" 
-                       AcceptsReturn="True" Height="80" Margin="0,10,0,15"/>
+        <StackPanel Grid.Row="2" Margin="0,10,0,0">
+            <TextBox hc:InfoElement.Placeholder="Write a Comment"
+                     VerticalContentAlignment="Top"
+                     Padding="5,5"
+                     Style="{StaticResource TextBoxExtend}"
+                     Text="{Binding CommentText, UpdateSourceTrigger=PropertyChanged}" 
+                     AcceptsReturn="True" 
+                     Height="80" 
+                     Margin="0,10,0,15"/>
             <Button Content="Submit"
-                        Width="80"
-                        Style="{StaticResource ButtonPrimary}"
-                        Command="{Binding SubmitCommand}" 
-                        HorizontalAlignment="Right"/>
+                    Width="80"
+                    Style="{StaticResource ButtonPrimary}"
+                    Command="{Binding SubmitCommand}" 
+                    HorizontalAlignment="Right"/>
         </StackPanel>
-    </DockPanel>
+    </Grid>
 </Window>
