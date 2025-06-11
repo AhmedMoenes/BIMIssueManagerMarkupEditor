@@ -23,7 +23,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
         [ObservableProperty] private bool isLoading;
         [ObservableProperty] private string? errorMessage;
 
-        [RelayCommand] private async Task LoginAsync(PasswordBox passwordbox)
+        [RelayCommand] private async Task LoginAsync(PasswordBox passwordBox)
         {
             IsLoading = true;
             ErrorMessage = null;
@@ -31,7 +31,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
             LoginRequestDto dto = new LoginRequestDto
             {
                 Email = Email,
-                Password = passwordbox.Password
+                Password = passwordBox.Password
             };
 
             try

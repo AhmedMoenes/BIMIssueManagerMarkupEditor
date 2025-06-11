@@ -1,10 +1,16 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Services
+﻿using DTOs.Users;
+
+namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class UserApiService : ApiService
     {
         public UserApiService(HttpClient client, UserSessionService userSession, IOptions<ApiSettings> settings)
                              : base(client, userSession, settings)
         {
+        }
+        public async Task<UserOverviewDto> RegisterUserAsync(RegisterUserDto dto)
+        {
+            return await PostAsync<RegisterUserDto, UserOverviewDto>(User.Create(), dto);
         }
     }
 }

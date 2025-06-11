@@ -20,9 +20,9 @@ namespace BIMIssueManagerMarkupsEditor.Views.Company
         [ObservableProperty] private CreateCompanyWithAdminDto company;
 
 
-        [RelayCommand] private async Task CreateCompanyAsync(PasswordBox passwordbox)
+        [RelayCommand] private async Task CreateCompanyAsync(PasswordBox passwordBox)
         {
-            Company.Password = passwordbox.Password;
+            Company.Password = passwordBox.Password;
             await _companyApiService.CreateCompanyWithAdminAsync(Company);
             Company.Password = null;
             Company = new CreateCompanyWithAdminDto();

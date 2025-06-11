@@ -53,6 +53,7 @@
                              Margin="0,5"/>
                 <Button Content="Create User"
                         Command="{Binding CreateUserCommand}"
+                        CommandParameter="{Binding ElementName=PasswordBox}"
                         Style="{StaticResource ButtonPrimary}"
                         Width="120"
                         Margin="0,10,0,0"
@@ -72,15 +73,10 @@
                              SelectedItem="{Binding SelectedUser}"
                              Margin="0,5"/>
 
-                <hc:CheckComboBox hc:InfoElement.Placeholder="Projects"
+                <hc:ComboBox hc:InfoElement.Placeholder="Projects"
                                   ItemsSource="{Binding Projects}"
                                   DisplayMemberPath="ProjectName"
                                   Margin="0,5"/>
-
-                <hc:ComboBox hc:InfoElement.Placeholder="Project Role"
-                             ItemsSource="{Binding ProjectRoles}"
-                             SelectedItem="{Binding SelectedProjectRole}"
-                             Margin="0,5"/>
 
                 <Button Content="Assign to Projects"
                         Command="{Binding AssignToProjectsCommand}"

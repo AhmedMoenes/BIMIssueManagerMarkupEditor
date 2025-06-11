@@ -1,4 +1,6 @@
 ﻿using DTOs.ProjectTeamMember;
+using DTOs.Users;
+using HandyControl.Controls;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Teams
 {
@@ -6,31 +8,66 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
     {
         private readonly UserSessionService _userSession;
         private readonly ProjectTeamMemberApiService _projectTeamMemberService;
-        public AddTeamMemberViewModel(UserSessionService userSession, ProjectTeamMemberApiService projectTeamMemberServiceApi)
+        private readonly UserApiService _userApiService;
+        public AddTeamMemberViewModel(UserSessionService userSession, 
+                                      ProjectTeamMemberApiService projectTeamMemberServiceApi, 
+                                      UserApiService userApiService)
         {
             _userSession = userSession;
             _projectTeamMemberService = projectTeamMemberServiceApi;
+            _userApiService = userApiService;
 
-            LoadUsers();
+            newUser = new RegisterUserDto();
+            LoadUsersAsync();
         }
 
+        [ObservableProperty] private ObservableCollection<UserDto> users = new();
         [ObservableProperty] private ObservableCollection<ProjectTeamMemberDto> teamMembers = new();
+        [ObservableProperty] private ObservableCollection<ProjectOverviewDto> projects = new();
+        [ObservableProperty] private ObservableCollection<string> availableRoles = new(new[] { "Editor", "Viewer", "Reviewer" });
+        [ObservableProperty] private RegisterUserDto newUser;
+        [ObservableProperty] private UserDto selectedUser;
+        [ObservableProperty] private ProjectDto selectedProject;
 
-        private async void LoadTeamMembersByUserId()
+        [RelayCommand] private async Task CreateUserAsync(PasswordBox passwordBox)
         {
-            IEnumerable<ProjectTeamMemberDto> members = await _projectTeamMemberService.GetByUserAsync(_userSession.UserId);
-            foreach (ProjectTeamMemberDto member in members)
-            {
-                teamMembers.Add(member);
-            }
+            newUser.CompanyId = _userSession.CurrentUser.CompanyId;
+            newUser.Password = passwordBox.Password;
+            await _userApiService.RegisterUserAsync(newUser);
+            newUser = new RegisterUserDto();
+            newUser.Password = null;
+            LoadUsersAsync();
         }
-        private async void LoadUsers()
+
+        [RelayCommand] private async Task AssignToProjectsAsync()
         {
-            IEnumerable<ProjectTeamMemberDto> members = await _projectTeamMemberService.GetAll();
-            foreach (ProjectTeamMemberDto member in members)
+            if (SelectedUser == null || SelectedProject == null)
             {
-                teamMembers.Add(member);
+                return;
             }
+
+            var dto = new CreateProjectTeamMemberDto
+            {
+                ProjectId = SelectedProject.ProjectId,
+                Role = selectedUser.Role
+            };
+
+            //await _projectTeamMemberService.AssignUserToProjectsAsync(dto);
+        }
+        private async void LoadUsersAsync()
+        {
+            IEnumerable<ProjectTeamMemberDto> members = Enumerable.Empty<ProjectTeamMemberDto>();
+
+            if (_userSession.IsInRole("SuperAdmin"))
+            {
+                members = await _projectTeamMemberService.GetAll();
+            }
+            else
+            {
+                members = await _projectTeamMemberService.GetByUserAsync(_userSession.UserId);
+            }
+
+            TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(members);
         }
 
     }

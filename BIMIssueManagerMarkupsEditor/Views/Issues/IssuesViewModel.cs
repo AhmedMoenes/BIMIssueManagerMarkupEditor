@@ -1,5 +1,4 @@
-﻿using BIMIssueManagerMarkupsEditor.ApiRoutes;
-using BIMIssueManagerMarkupsEditor.Interfaces;
+﻿using BIMIssueManagerMarkupsEditor.Interfaces;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Issues
 {
