@@ -1,25 +1,30 @@
-﻿using HandyControl.Tools.Extension;
+﻿using BIMIssueManagerMarkupsEditor.Interfaces;
+using HandyControl.Tools.Extension;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Project
 {
     public partial class ProjectsViewModel : ObservableObject
     {
+        private readonly IDialogService _dialogService;
         private IServiceProvider _serviceProvider;
         private readonly UserSessionService _userSession;
         private readonly ProjectApiService _projectApiService;
 
         public ProjectsViewModel(UserSessionService userSession,
                                  ProjectApiService projectApiService,
-                                 IServiceProvider serviceProvider) 
+                                 IServiceProvider serviceProvider, 
+                                 IDialogService dialogService) 
             
         {
             _userSession = userSession;
             _projectApiService = projectApiService;
             _serviceProvider = serviceProvider;
+            _dialogService = dialogService;
 
             LoadProjectsAsync();
         }
 
+        private ObservableCollection<ProjectOverviewDto> allProjects = new();
         [ObservableProperty] private ObservableCollection<ProjectOverviewDto> projects = new();
         [ObservableProperty] private string searchQuery;
 
@@ -40,15 +45,33 @@ namespace BIMIssueManagerMarkupsEditor.Views.Project
                 userProjects = await _projectApiService.GetForUserAsync(_userSession.UserId);
             }
 
+            allProjects = new ObservableCollection<ProjectOverviewDto>(userProjects);
             Projects = new ObservableCollection<ProjectOverviewDto>(userProjects);
         }
 
         [RelayCommand] private async Task OpenAddProjectViewAsync()
         {
-            var addProjectWindow = _serviceProvider.GetRequiredService<AddProjectView>();
-            var addProjectWindowViewModel = _serviceProvider.GetRequiredService<AddProjectViewModel>();
-            addProjectWindow.DataContext = addProjectWindowViewModel;
-            addProjectWindow.Show();
+            AddProjectViewModel addProjectViewModel = _serviceProvider.GetRequiredService<AddProjectViewModel>();
+            await _dialogService.ShowDialogAsync<AddProjectView, AddProjectViewModel>(addProjectViewModel);
+
+            await LoadProjectsAsync();
+        }
+
+        [RelayCommand] private void Search(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))   
+            {
+                Projects = new ObservableCollection<ProjectOverviewDto>(allProjects);
+            }
+            else
+            {
+                var filtered = allProjects
+                    .Where(p => p.ProjectName.Contains(query, StringComparison.OrdinalIgnoreCase)
+                                || p.Description?.Contains(query, StringComparison.OrdinalIgnoreCase) == true)
+                    .ToList();
+
+                Projects = new ObservableCollection<ProjectOverviewDto>(filtered);
+            }
         }
     }
 }

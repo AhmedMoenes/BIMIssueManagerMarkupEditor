@@ -15,6 +15,14 @@ namespace BIMIssueManagerMarkupsEditor.Services
             };
 
             var tcs = new TaskCompletionSource<bool>();
+            if (viewModel is IDialogAware dialogAware)
+            {
+                dialogAware.RequestClose += () =>
+                {
+                    window.Close();
+                };
+            }
+
             window.Closed += (_, _) => tcs.SetResult(true);
             window.ShowDialog();
 

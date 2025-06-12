@@ -1,7 +1,10 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Views.Project
+﻿using BIMIssueManagerMarkupsEditor.Interfaces;
+
+namespace BIMIssueManagerMarkupsEditor.Views.Project
 {
-    public partial class AddProjectViewModel : ObservableObject
+    public partial class AddProjectViewModel : ObservableObject, IDialogAware
     {
+        public event Action RequestClose;
         private readonly UserSessionService _userSession;
         private readonly ProjectApiService _projectApiService;
         private readonly CompanyApiService _companyApiService;
@@ -64,7 +67,7 @@
             ProjectAreas.Clear();
 
             await LoadProjectsAsync();
-
+            RequestClose?.Invoke();
         }
 
         [RelayCommand] async Task AssignCompaniesAsync()

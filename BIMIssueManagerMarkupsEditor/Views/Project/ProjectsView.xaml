@@ -21,12 +21,12 @@
             </Grid.ColumnDefinitions>
 
             <!-- Search box on the left -->
-            <TextBox Grid.Column="0"
-                     HorizontalAlignment="Left"
-                     Width="200"
-                     hc:InfoElement.Placeholder="Search projects..."
-                     Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}" />
-
+            <hc:SearchBar Grid.Column="0"
+                          hc:InfoElement.ShowClearButton="True"
+                          hc:InfoElement.Placeholder="Search projects..."
+                          HorizontalAlignment="Left"
+                          Width="200"
+                          Command="{Binding SearchCommand}" CommandParameter="{Binding Text,RelativeSource={RelativeSource Self}}"/>
             <!-- Button aligned right -->
             <Button Grid.Column="1"
                     Content="Add Project"

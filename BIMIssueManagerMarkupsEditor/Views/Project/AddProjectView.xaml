@@ -6,7 +6,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
              mc:Ignorable="d" 
-             Height="500" Width="300" WindowStartupLocation="CenterScreen">
+             Height="600" Width="350" WindowStartupLocation="CenterScreen">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="30" HorizontalAlignment="Center">
