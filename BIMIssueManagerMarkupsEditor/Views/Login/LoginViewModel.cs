@@ -7,19 +7,17 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
     {
         private readonly AuthApiService _authApiService;
         private IServiceProvider _serviceProvider;
-        private readonly UserSessionService _userSession;
 
         public LoginViewModel(AuthApiService authApiService, IServiceProvider serviceProvider, UserSessionService userSession)
         {
             _authApiService = authApiService;
             _serviceProvider = serviceProvider;
-            _userSession = userSession;
         }
         public Action? CloseAction { get; set; }
         public string LogoIcon => IconPaths.GetIcon(AppIcon.Logo);
 
-        [ObservableProperty] private string email = string.Empty;
-        [ObservableProperty] private string password = string.Empty;
+        [ObservableProperty] private string email = "amunes.f98@gmail.com";
+        [ObservableProperty] private string password = "Issue@33";
         [ObservableProperty] private bool isLoading;
         [ObservableProperty] private string? errorMessage;
 

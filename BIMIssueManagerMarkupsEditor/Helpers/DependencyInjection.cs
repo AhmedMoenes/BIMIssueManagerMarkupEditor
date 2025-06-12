@@ -23,10 +23,12 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.TryAddSingleton<LoginWindow>();
             services.TryAddTransient<MainWindow>();
             services.TryAddTransient<CommentView>();
+            services.TryAddTransient<AddProjectView>();
             services.TryAddTransient<MainViewModel>();
             services.TryAddTransient<MarkupEditorViewModel>();
             services.TryAddTransient<ProfileViewModel>();
             services.TryAddTransient<AddProjectViewModel>();
+            services.TryAddTransient<ProjectsViewModel>();
             services.TryAddTransient<AddCompanyViewModel>();
             services.TryAddTransient<AddTeamMemberViewModel>();
             services.TryAddTransient<IssuesViewModel>();
