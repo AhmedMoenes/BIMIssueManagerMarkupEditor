@@ -3,6 +3,7 @@
                     xmlns:hc="https://handyorg.github.io/handycontrol">
 
     <!-- Brushes -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="#244061"/>
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#F3F3F3"/>
     <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="#E1E1E1"/>
     <SolidColorBrush x:Key="ContentBackgroundBrush" Color="White"/>

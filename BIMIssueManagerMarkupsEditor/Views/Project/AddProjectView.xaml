@@ -60,7 +60,7 @@
                 <hc:TagContainer ItemsSource="{Binding ProjectLabels}" Margin="3">
                     <hc:TagContainer.ItemTemplate>
                         <DataTemplate>
-                            <hc:Tag Content="{Binding LabelName}"/>
+                            <hc:Tag Content="{Binding LabelName}" ShowCloseButton="False"/>
                         </DataTemplate>
                     </hc:TagContainer.ItemTemplate>
                 </hc:TagContainer>
@@ -76,7 +76,7 @@
                 <hc:TagContainer ItemsSource="{Binding ProjectAreas}" Margin="3">
                     <hc:TagContainer.ItemTemplate>
                         <DataTemplate>
-                            <hc:Tag Content="{Binding AreaName}"/>
+                            <hc:Tag Content="{Binding AreaName}" ShowCloseButton="False"/>
                         </DataTemplate>
                     </hc:TagContainer.ItemTemplate>
                 </hc:TagContainer>

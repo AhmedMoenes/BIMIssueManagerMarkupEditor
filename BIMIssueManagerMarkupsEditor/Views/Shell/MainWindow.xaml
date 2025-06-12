@@ -60,30 +60,34 @@
                      Header="BIM Manager"
                      Background="#F9FBFC">
 
-            <hc:SideMenuItem Header="Markup Editor" Command="{Binding NavigateMarkupCommand}">
+            <hc:SideMenuItem Header="Markup Editor" 
+                             Command="{Binding NavigateMarkupCommand}">
                 <hc:SideMenuItem.Icon>
                     <Image Width="36" Height="36" Source="{Binding MarkupIcon}" />
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
 
-            <hc:SideMenuItem Header="Profile" Command="{Binding NavigateProfileCommand}">
+            <hc:SideMenuItem Header="Profile" 
+                             Command="{Binding NavigateProfileCommand}">
                 <hc:SideMenuItem.Icon>
                     <Image Width="36" Height="36" Source="{Binding ProfileIcon}" />
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
 
             <hc:SideMenuItem Header="Projects"
-                             Command="{Binding NavigateProjectsCommand}">
-                             Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
+                             Command="{Binding NavigateProjectsCommand}"
+                             Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}">
                 <hc:SideMenuItem.Icon>
-                    <Image Width="32" Height="32" Source="{Binding ProjectsIcon}" />
+                    <Image Width="32" Height="32" Source="{Binding ProjectsIcon}" Stretch="UniformToFill"/>
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
 
-            <hc:SideMenuItem Header="Companies" Command="{Binding NavigateCompaniesCommand}">
-                Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}">>
+            <hc:SideMenuItem Header="Companies" 
+                             Command="{Binding NavigateCompaniesCommand}"
+                             Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}
+                ,ConverterParameter=Companies}">>
                 <hc:SideMenuItem.Icon>
-                    <Image Width="36" Height="36" Source="{Binding CompanyIcon}" />
+                    <Image Width="32" Height="32" Source="{Binding CompanyIcon}" Stretch="UniformToFill" />
                 </hc:SideMenuItem.Icon>
             </hc:SideMenuItem>
 
