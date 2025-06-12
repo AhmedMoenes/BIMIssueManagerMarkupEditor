@@ -12,5 +12,10 @@ namespace BIMIssueManagerMarkupsEditor.Services
         {
             return await PostAsync<RegisterUserDto, UserOverviewDto>(User.Create(), dto);
         }
+
+        public async Task<IEnumerable<UserOverviewDto>> GetAllUsersAsync()
+        {
+            return await GetAsync<IEnumerable<UserOverviewDto>>(User.GetAll());
+        }
     }
 }

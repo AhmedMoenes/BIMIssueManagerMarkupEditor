@@ -10,6 +10,5 @@
         public static string Delete(int userId) => $"{Base}/delete/{userId}";
         public static string GetUsersByProject(int projectId) => $"{Base}/project-users/{projectId}";
 
-
     }
 }
