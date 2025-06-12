@@ -62,11 +62,28 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <hc:Card Margin="10" Padding="8" Width="220" Height="210">
+                        <hc:Card Margin="10" Padding="8" Width="220" Height="250">
+                            <!-- Priority / Assignee / Status -->
                             <hc:Card.Header>
-                                <StackPanel Orientation="Horizontal" Margin="5">
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5">
+                                    <TextBlock Text="{Binding Title}" Foreground="Black" FontWeight="Bold" Margin="4,0" HorizontalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                                        <TextBlock Text="{Binding Priority}" Foreground="#0078D7" FontWeight="SemiBold" Margin="4,0"/>
+                                        <TextBlock Text="{Binding AssignedToUser}" Foreground="#666" Margin="4,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </hc:Card.Header>
+                            <!-- Snapshot Image -->
+                            <Image Source="{Binding ImagePath}"
+                                           Height="160"
+                                           Margin="3"
+                                           Stretch="Uniform"
+                                           SnapsToDevicePixels="True"/>
 
-                                    <!-- Date Header -->
+                            <!-- Date / Comment / Actions -->
+                            <hc:Card.Footer>
+                                <StackPanel Orientation="Horizontal" Margin="5">
+                                    <!-- Date -->
                                     <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:MMM dd, yyyy}'}"
                                                Margin="5"
                                                FontWeight="Bold"
@@ -77,35 +94,6 @@
                                             CommandParameter="{Binding .}"
                                             Content="Add Comment"
                                             Margin="5"/>
-
-                                    <!--Check why it is not working?-->
-                                    <!--<hc:SplitButton Style="{StaticResource SplitButtonDefault.Small}"
-                                                    HitMode="Click"
-                                                    Content="Options">
-                                        <hc:SplitButton.DropDownContent>
-                                            <StackPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
-                                                <MenuItem Header="Comment"
-                                                      Command="{Binding DataContext.AddCommentCommand,
-                                                      RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                      CommandParameter="{Binding .}"/>
-                                            </StackPanel>
-                                        </hc:SplitButton.DropDownContent>
-                                    </hc:SplitButton>-->
-                                </StackPanel>
-                            </hc:Card.Header>
-
-                            <!-- Snapshot Image -->
-                            <Image Source="{Binding SnapshotImagePath}"
-                                           Height="120"
-                                           Margin="3"
-                                           Stretch="UniformToFill"
-                                           SnapsToDevicePixels="True"/>
-
-                            <!-- Priority / Assignee / Status -->
-                            <hc:Card.Footer>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                                    <TextBlock Text="{Binding Priority}" Foreground="#0078D7" FontWeight="SemiBold" Margin="4,0"/>
-                                    <TextBlock Text="{Binding AssignedToUser}" Foreground="#666" Margin="4,0"/>
                                 </StackPanel>
                             </hc:Card.Footer>
                         </hc:Card>
