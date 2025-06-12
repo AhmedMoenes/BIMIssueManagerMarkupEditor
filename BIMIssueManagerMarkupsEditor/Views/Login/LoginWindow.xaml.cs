@@ -9,6 +9,7 @@
         {
             InitializeComponent();
             loginViewModel.CloseAction = this.Close;
+            PasswordBox.Password = "Issue@33";
             DataContext = loginViewModel;
         }
     }

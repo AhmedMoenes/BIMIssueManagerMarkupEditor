@@ -57,7 +57,7 @@
         [RelayCommand]
         private void NavigateProjects()
         {
-            CurrentView = _provider.GetRequiredService<AddProjectViewModel>();
+            CurrentView = _provider.GetRequiredService<ProjectsViewModel>();
         }
 
         [RelayCommand]

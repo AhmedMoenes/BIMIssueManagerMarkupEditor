@@ -35,6 +35,10 @@
                         <viewProject:AddProjectView />
                     </DataTemplate>
 
+                    <DataTemplate DataType="{x:Type vmProject:ProjectsViewModel}">
+                        <viewProject:ProjectsView />
+                    </DataTemplate>
+
                     <DataTemplate DataType="{x:Type vmCompany:AddCompanyViewModel}">
                         <viewCompany:AddCompanyView />
                     </DataTemplate>

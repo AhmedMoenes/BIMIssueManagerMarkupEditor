@@ -8,7 +8,9 @@ namespace BIMIssueManagerMarkupsEditor.Views.Chat
         private readonly UserSessionService _userSession;
         [ObservableProperty] private string commentText;
         [ObservableProperty] private ObservableCollection<CommentDto> issueComments = new();
-        public CommentViewModel(CommentApiService commentApiService, UserSessionService userSession, int issueId)
+        public CommentViewModel(CommentApiService commentApiService, 
+                                UserSessionService userSession, 
+                                int issueId)
         {
             _commentApiService = commentApiService;
             IssueId = issueId;

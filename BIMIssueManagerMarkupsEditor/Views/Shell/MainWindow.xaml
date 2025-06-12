@@ -8,28 +8,36 @@
         xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
         mc:Ignorable="d"
         Title="BIM ISSUE MANAGER"
-        Height="700" Width="1000"
+        Width="1000" Height="700"
         MinWidth="800" MinHeight="600"
-        ResizeMode="CanResize"  WindowStartupLocation="CenterScreen">
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen">
+
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </Window.Resources>
 
-    <DockPanel>
-        <Border DockPanel.Dock="Top" 
-                Background="DarkGray" 
-                Padding="10">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Top bar -->
+        <Border Grid.Row="0" Grid.ColumnSpan="2"
+                Background="{StaticResource ContentBackgroundBrush}"
+                Padding="10">
             <Grid VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
-                    <!-- Logo -->
                     <ColumnDefinition Width="*"/>
-                    <!-- Spacer -->
                     <ColumnDefinition Width="Auto"/>
-                    <!-- User Info -->
                     <ColumnDefinition Width="Auto"/>
-                    <!-- User Icon -->
                 </Grid.ColumnDefinitions>
 
                 <!-- Logo -->
@@ -37,85 +45,75 @@
 
                 <!-- User Info -->
                 <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding UserFullName}"
-                               FontWeight="SemiBold"
-                               Foreground="Black"
-                               FontSize="16"/>
-                    <TextBlock Text="{Binding UserCompany}"
-                               Foreground="Black"
-                               FontSize="12"/>
+                    <TextBlock Text="{Binding UserFullName}" FontWeight="SemiBold" Foreground="Black" FontSize="16"/>
+                    <TextBlock Text="{Binding UserCompany}" Foreground="Black" FontSize="12"/>
                 </StackPanel>
 
                 <!-- User Icon -->
-                <Image Source="{Binding UserIcon}"
-                       Grid.Column="3"
-                       Height="32"
-                       VerticalAlignment="Center"
-                       Margin="10,0,0,0"/>
+                <Image Source="{Binding UserIcon}" Grid.Column="3" Height="32" VerticalAlignment="Center" Margin="10,0,0,0"/>
             </Grid>
         </Border>
 
-        <hc:SideMenu DockPanel.Dock="Left"
-                     Width="140"
-                     Header="BIM Manager"
-                     Background="#F9FBFC">
+        <!-- Sidebar -->
+        <StackPanel Grid.Row="1" Grid.Column="0"
+                    Background="{StaticResource ContentBackgroundBrush}"
+                    Orientation="Vertical"
+                    Margin="10">
 
-            <hc:SideMenuItem Header="Markup Editor" Command="{Binding NavigateMarkupCommand}">
-                <hc:SideMenuItem.Icon>
-                    <Image Width="36" Height="36" Source="{Binding MarkupIcon}" />
-                </hc:SideMenuItem.Icon>
-            </hc:SideMenuItem>
+            <RadioButton Content="Markup Editor"
+                         GroupName="Nav"
+                         HorizontalAlignment="Left"
+                         Command="{Binding NavigateMarkupCommand}"
+                         Margin="0,5"/>
 
-            <hc:SideMenuItem Header="Profile" Command="{Binding NavigateProfileCommand}">
-                <hc:SideMenuItem.Icon>
-                    <Image Width="36" Height="36" Source="{Binding ProfileIcon}" />
-                </hc:SideMenuItem.Icon>
-            </hc:SideMenuItem>
+            <RadioButton Content="Profile"
+                         GroupName="Nav"
+                         HorizontalAlignment="Left"
+                         Command="{Binding NavigateProfileCommand}"
+                         Margin="0,5"/>
 
-            <hc:SideMenuItem Header="Projects"
-                             Command="{Binding NavigateProjectsCommand}">
-                             Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
-                <hc:SideMenuItem.Icon>
-                    <Image Width="32" Height="32" Source="{Binding ProjectsIcon}" />
-                </hc:SideMenuItem.Icon>
-            </hc:SideMenuItem>
+            <RadioButton Content="Projects"
+                         GroupName="Nav"
+                         HorizontalAlignment="Left"
+                         Command="{Binding NavigateProjectsCommand}"
+                         Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
+                         Margin="0,5"/>
 
-            <hc:SideMenuItem Header="Companies" Command="{Binding NavigateCompaniesCommand}">
-                Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}">>
-                <hc:SideMenuItem.Icon>
-                    <Image Width="36" Height="36" Source="{Binding CompanyIcon}" />
-                </hc:SideMenuItem.Icon>
-            </hc:SideMenuItem>
+            <RadioButton Content="Companies"
+                         GroupName="Nav"
+                         HorizontalAlignment="Left"
+                         Command="{Binding NavigateCompaniesCommand}"
+                         Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
+                         Margin="0,5"/>
 
-            <hc:SideMenuItem Header="Teams"
-                             Command="{Binding NavigateTeamsCommand}">
-                <hc:SideMenuItem.Icon>
-                    <Image Width="36" Height="36" Source="{Binding TeamsIcon}" />
-                </hc:SideMenuItem.Icon>
-            </hc:SideMenuItem>
+            <RadioButton Content="Teams"
+                         GroupName="Nav"
+                         HorizontalAlignment="Left"
+                         Command="{Binding NavigateTeamsCommand}"
+                         Margin="0,5"/>
 
-            <hc:SideMenuItem Header="Issues" 
-                             Command="{Binding NavigateIssuesCommand}">
-                <hc:SideMenuItem.Icon>
-                    <Image Width="36" Height="36" Source="{Binding IssuesIcon}" />
-                </hc:SideMenuItem.Icon>
-            </hc:SideMenuItem>
+            <RadioButton Content="Issues"
+                         GroupName="Nav"
+                         HorizontalAlignment="Left"
+                         Command="{Binding NavigateIssuesCommand}"
+                         Margin="0,5"/>
 
-            <hc:SideMenuItem Header="Chat" 
-                             Command="{Binding NavigateChatCommand}">
-                <hc:SideMenuItem.Icon>
-                    <Image Width="36" Height="36" Source="{Binding ChatIcon}" />
-                </hc:SideMenuItem.Icon>
-            </hc:SideMenuItem>
+            <RadioButton Content="Chat"
+                         GroupName="Nav"
+                         HorizontalAlignment="Left"
+                         Command="{Binding NavigateChatCommand}"
+                         Margin="0,5"/>
 
-            <hc:SideMenuItem Header="Viewer" 
-                             Command="{Binding NavigateViewerCommand}">
-                <hc:SideMenuItem.Icon>
-                    <Image Width="36" Height="36" Source="{Binding ViewerIcon}" />
-                </hc:SideMenuItem.Icon>
-            </hc:SideMenuItem>
-        </hc:SideMenu>
+            <RadioButton Content="Viewer"
+                         GroupName="Nav"
+                         HorizontalAlignment="Left"
+                         Command="{Binding NavigateViewerCommand}"
+                         Margin="0,5"/>
+        </StackPanel>
 
-        <ContentControl Content="{Binding CurrentView}" Margin="10,1,10,10" />
-    </DockPanel>
+        <!-- Main content area -->
+        <ContentControl Grid.Row="1" Grid.Column="1"
+                        Content="{Binding CurrentView}"
+                        Margin="10,1,10,10" />
+    </Grid>
 </Window>

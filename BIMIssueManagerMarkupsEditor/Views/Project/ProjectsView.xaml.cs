@@ -3,13 +3,15 @@
 namespace BIMIssueManagerMarkupsEditor.Views.Project
 {
     /// <summary>
-    /// Interaction logic for AddProjectView.xaml
+    /// Interaction logic for ProjectsView.xaml
     /// </summary>
-    public partial class AddProjectView : Window
+    public partial class ProjectsView : UserControl
     {
-        public AddProjectView()
+        public ProjectsView()
         {
             InitializeComponent();
         }
+
     }
 }
+
