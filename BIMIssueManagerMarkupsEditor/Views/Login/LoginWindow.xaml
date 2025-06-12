@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Login"
         mc:Ignorable="d"
         Title="Login" Height="420" Width="330"
-        ResizeMode="CanResize" WindowStartupLocation="CenterScreen">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -24,7 +24,8 @@
         <StackPanel Grid.Row="1" 
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
-                                Orientation="Vertical">
+                                Orientation="Vertical"
+                                Width="250">
 
             <TextBlock Text="Email" Margin="0 0 0 ,4" FontWeight="Bold"/>
             <hc:TextBox
@@ -41,7 +42,7 @@
                 ShowEyeButton="True"
                 Height="35"/>
 
-            <StackPanel Orientation= "Horizontal">
+            <StackPanel Orientation= "Horizontal" HorizontalAlignment="Center"> 
                 <Button Content="Login"
                 Command="{Binding LoginCommand}"
                 CommandParameter="{Binding ElementName=PasswordBox}"
@@ -49,11 +50,6 @@
                 Width="80"
                 Margin="20"/>
 
-                <Button Content="Cancel"
-                Command="{Binding CancelCommand}"
-                Style="{StaticResource ButtonDanger}"
-                Width="80"
-                Margin="20"/>
             </StackPanel>
         </StackPanel>
     </Grid>
