@@ -5,16 +5,11 @@ namespace BIMIssueManagerMarkupsEditor.Views.Project
     /// <summary>
     /// Interaction logic for AddProjectView.xaml
     /// </summary>
-    public partial class AddProjectView : UserControl
+    public partial class AddProjectView : Window
     {
         public AddProjectView()
         {
             InitializeComponent();
-        }
-
-        public AddProjectView(AddProjectViewModel viewModel) : this()
-        {
-            DataContext = viewModel;
         }
     }
 }

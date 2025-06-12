@@ -52,10 +52,5 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
                 IsLoading = false;
             }
         }
-
-        [RelayCommand] private void Cancel()
-        {
-            CloseAction?.Invoke();
-        }
     }
 }

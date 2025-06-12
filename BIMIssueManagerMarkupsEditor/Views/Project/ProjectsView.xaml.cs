@@ -12,10 +12,6 @@ namespace BIMIssueManagerMarkupsEditor.Views.Project
             InitializeComponent();
         }
 
-        public ProjectsView(ProjectsViewModel viewModel) : this()
-        {
-            DataContext = viewModel;
-        }
     }
 }
 

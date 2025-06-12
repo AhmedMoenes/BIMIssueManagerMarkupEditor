@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             d:DataContext="{d:DesignInstance Type=local:ProjectsViewModel, IsDesignTimeCreatable=True}"
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -30,7 +30,7 @@
             <!-- Button aligned right -->
             <Button Grid.Column="1"
                     Content="Add Project"
-                    Width="120"
+                    Width="Auto"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAddProjectViewCommand}"
                     HorizontalAlignment="Right"

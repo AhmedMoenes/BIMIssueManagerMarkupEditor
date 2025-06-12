@@ -13,6 +13,10 @@ global using Microsoft.Extensions.Options;
 
 global using DTOs.Issues;
 global using DTOs.Projects;
+global using DTOs.Areas;
+global using DTOs.Companies;
+global using DTOs.CompanyProject;
+global using DTOs.Labels;
 
 global using BIMIssueManagerMarkupsEditor.Helpers;
 global using BIMIssueManagerMarkupsEditor.Services;

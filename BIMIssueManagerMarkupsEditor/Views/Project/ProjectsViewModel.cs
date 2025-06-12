@@ -1,15 +1,21 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Views.Project
+﻿using HandyControl.Tools.Extension;
+
+namespace BIMIssueManagerMarkupsEditor.Views.Project
 {
     public partial class ProjectsViewModel : ObservableObject
     {
+        private IServiceProvider _serviceProvider;
         private readonly UserSessionService _userSession;
         private readonly ProjectApiService _projectApiService;
+
         public ProjectsViewModel(UserSessionService userSession,
-                                 ProjectApiService projectApiService)
+                                 ProjectApiService projectApiService,
+                                 IServiceProvider serviceProvider) 
             
         {
             _userSession = userSession;
             _projectApiService = projectApiService;
+            _serviceProvider = serviceProvider;
 
             LoadProjectsAsync();
         }
@@ -37,9 +43,12 @@
             Projects = new ObservableCollection<ProjectOverviewDto>(userProjects);
         }
 
-        [RelayCommand] void OpenAddProjectView()
+        [RelayCommand] private async Task OpenAddProjectViewAsync()
         {
-            // Navigate to or open project creation view/dialog
+            var addProjectWindow = _serviceProvider.GetRequiredService<AddProjectView>();
+            var addProjectWindowViewModel = _serviceProvider.GetRequiredService<AddProjectViewModel>();
+            addProjectWindow.DataContext = addProjectWindowViewModel;
+            addProjectWindow.Show();
         }
     }
 }

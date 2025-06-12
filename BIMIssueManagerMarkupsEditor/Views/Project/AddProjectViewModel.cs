@@ -1,9 +1,4 @@
-﻿using DTOs.Areas;
-using DTOs.Companies;
-using DTOs.CompanyProject;
-using DTOs.Labels;
-
-namespace BIMIssueManagerMarkupsEditor.Views.Project
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Project
 {
     public partial class AddProjectViewModel : ObservableObject
     {
@@ -69,6 +64,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Project
             ProjectAreas.Clear();
 
             await LoadProjectsAsync();
+
         }
 
         [RelayCommand] async Task AssignCompaniesAsync()
