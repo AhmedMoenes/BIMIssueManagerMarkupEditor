@@ -68,13 +68,14 @@
                   Margin="5">
             <StackPanel>
                 <hc:ComboBox hc:InfoElement.Placeholder="User"
-                             ItemsSource="{Binding Users}"
+                             ItemsSource="{Binding TeamMembers}"
                              DisplayMemberPath="FullName"
-                             SelectedItem="{Binding SelectedUser}"
+                             SelectedItem="{Binding SelectedMember}"
                              Margin="0,5"/>
 
                 <hc:ComboBox hc:InfoElement.Placeholder="Projects"
                                   ItemsSource="{Binding Projects}"
+                                  SelectedItem="{Binding SelectedProject}"
                                   DisplayMemberPath="ProjectName"
                                   Margin="0,5"/>
 

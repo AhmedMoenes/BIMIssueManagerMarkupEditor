@@ -1,4 +1,5 @@
 ﻿using DTOs.ProjectTeamMember;
+using DTOs.Users;
 
 namespace BIMIssueManagerMarkupsEditor.Services
 {
@@ -21,6 +22,11 @@ namespace BIMIssueManagerMarkupsEditor.Services
         public async Task<IEnumerable<ProjectTeamMemberDto>> GetByUserAsync(string userId)
         {
             return await GetAsync<IEnumerable<ProjectTeamMemberDto>>(ProjectTeamMember.GetTeamByUserId(userId));
+        }
+
+        public async Task<ProjectTeamMemberDto> AssignUserToProjectsAsync(AssignUserToProjectDto dto)
+        {
+            return await PostAsync<AssignUserToProjectDto, ProjectTeamMemberDto>(ProjectTeamMember.AssignUserToProject(), dto);
         }
     }
 }

@@ -8,17 +8,21 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
     {
         private readonly UserSessionService _userSession;
         private readonly ProjectTeamMemberApiService _projectTeamMemberService;
+        private readonly ProjectApiService _projectApiService;
         private readonly UserApiService _userApiService;
         public AddTeamMemberViewModel(UserSessionService userSession, 
                                       ProjectTeamMemberApiService projectTeamMemberServiceApi, 
-                                      UserApiService userApiService)
+                                      UserApiService userApiService,
+                                      ProjectApiService projectApiService)
         {
             _userSession = userSession;
             _projectTeamMemberService = projectTeamMemberServiceApi;
             _userApiService = userApiService;
+            _projectApiService = projectApiService;
 
             newUser = new RegisterUserDto();
             LoadUsersAsync();
+            LoadProjectsAsync();
         }
 
         [ObservableProperty] private ObservableCollection<UserDto> users = new();
@@ -26,8 +30,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
         [ObservableProperty] private ObservableCollection<ProjectOverviewDto> projects = new();
         [ObservableProperty] private ObservableCollection<string> availableRoles = new(new[] { "Editor", "Viewer", "Reviewer" });
         [ObservableProperty] private RegisterUserDto newUser;
-        [ObservableProperty] private UserDto selectedUser;
-        [ObservableProperty] private ProjectDto selectedProject;
+        [ObservableProperty] private ProjectTeamMemberDto selectedMember;
+        [ObservableProperty] private ProjectOverviewDto selectedProject;
 
         [RelayCommand] private async Task CreateUserAsync(PasswordBox passwordBox)
         {
@@ -37,23 +41,31 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
             newUser = new RegisterUserDto();
             newUser.Password = null;
             LoadUsersAsync();
+            LoadProjectsAsync();
         }
 
         [RelayCommand] private async Task AssignToProjectsAsync()
         {
-            if (SelectedUser == null || SelectedProject == null)
+            if (SelectedMember == null || SelectedProject == null)
             {
                 return;
             }
 
-            var dto = new CreateProjectTeamMemberDto
+            AssignUserToProjectDto dto = new AssignUserToProjectDto
             {
+                UserId = selectedMember.UserId,
                 ProjectId = SelectedProject.ProjectId,
-                Role = selectedUser.Role
+                Role = selectedMember.Role
             };
 
-            //await _projectTeamMemberService.AssignUserToProjectsAsync(dto);
+            await _projectTeamMemberService.AssignUserToProjectsAsync(dto);
+            LoadUsersAsync();
+            LoadProjectsAsync();
+            selectedMember = null;
+            selectedProject = null;
         }
+
+
         private async void LoadUsersAsync()
         {
             IEnumerable<ProjectTeamMemberDto> members = Enumerable.Empty<ProjectTeamMemberDto>();
@@ -70,5 +82,12 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
             TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(members);
         }
 
+        private async void LoadProjectsAsync()
+        {
+            IEnumerable<ProjectOverviewDto> companyProjects = Enumerable.Empty<ProjectOverviewDto>();
+
+            companyProjects = await _projectApiService.GetForCompanyAsync(_userSession.CurrentUser.CompanyId);
+            Projects = new ObservableCollection<ProjectOverviewDto>(companyProjects);
+        }
     }
 }
