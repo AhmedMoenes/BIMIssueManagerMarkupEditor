@@ -64,8 +64,8 @@
             ProjectLabels.Clear();
             ProjectAreas.Clear();
 
-            RequestClose?.Invoke();
             await LoadProjectsAsync();
+            RequestClose?.Invoke();
         }
 
         private async Task LoadProjectsAsync()

@@ -1,47 +1,49 @@
 ﻿using DTOs.ProjectTeamMember;
 using DTOs.Users;
-using HandyControl.Controls;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Teams
 {
-    public partial class AddTeamMemberViewModel : ObservableObject
+    public partial class AssignUserToProjectViewModel : ObservableObject
     {
-        private readonly UserSessionService _userSession;
         private readonly ProjectTeamMemberApiService _projectTeamMemberService;
         private readonly ProjectApiService _projectApiService;
-        private readonly UserApiService _userApiService;
-        public AddTeamMemberViewModel(UserSessionService userSession, 
-                                      ProjectTeamMemberApiService projectTeamMemberServiceApi, 
-                                      UserApiService userApiService,
-                                      ProjectApiService projectApiService)
-        {
-            _userSession = userSession;
-            _projectTeamMemberService = projectTeamMemberServiceApi;
-            _userApiService = userApiService;
-            _projectApiService = projectApiService;
+        private readonly UserSessionService _userSession;
 
-            newUser = new RegisterUserDto();
-            LoadUsersAsync();
-            LoadProjectsAsync();
+
+        public AssignUserToProjectViewModel(ProjectTeamMemberApiService projectTeamMemberService,
+                                            ProjectApiService projectApiService,
+                                            UserSessionService userSession)
+        {
+            _projectTeamMemberService = projectTeamMemberService;
+            _projectApiService = projectApiService;
+            _userSession = userSession;
         }
 
-        [ObservableProperty] private ObservableCollection<UserDto> users = new();
         [ObservableProperty] private ObservableCollection<ProjectTeamMemberDto> teamMembers = new();
         [ObservableProperty] private ObservableCollection<ProjectOverviewDto> projects = new();
-        [ObservableProperty] private ObservableCollection<string> availableRoles = new(new[] { "Editor", "Viewer", "Reviewer" });
-        [ObservableProperty] private RegisterUserDto newUser;
         [ObservableProperty] private ProjectTeamMemberDto selectedMember;
         [ObservableProperty] private ProjectOverviewDto selectedProject;
 
-        [RelayCommand] private async Task CreateUserAsync(PasswordBox passwordBox)
+        [RelayCommand]
+        private async Task AssignToProjectsAsync()
         {
-            newUser.CompanyId = _userSession.CurrentUser.CompanyId;
-            newUser.Password = passwordBox.Password;
-            await _userApiService.RegisterUserAsync(newUser);
-            newUser = new RegisterUserDto();
-            newUser.Password = null;
+            if (SelectedMember == null || SelectedProject == null)
+            {
+                return;
+            }
+
+            AssignUserToProjectDto dto = new AssignUserToProjectDto
+            {
+                UserId = selectedMember.UserId,
+                ProjectId = SelectedProject.ProjectId,
+                Role = selectedMember.Role
+            };
+
+            await _projectTeamMemberService.AssignUserToProjectsAsync(dto);
             LoadUsersAsync();
             LoadProjectsAsync();
+            selectedMember = null;
+            selectedProject = null;
         }
 
         private async void LoadUsersAsync()

@@ -24,8 +24,7 @@
         [ObservableProperty] private ProjectOverviewDto selectedProject;
         [ObservableProperty] private ObservableCollection<CompanyOverviewDto> selectedCompanies = new();
 
-        [RelayCommand]
-        async Task AssignCompaniesAsync()
+        [RelayCommand] async Task AssignCompaniesAsync()
         {
             if (selectedProject == null || selectedCompanies.Count == 0)
                 return;
@@ -40,8 +39,8 @@
             selectedProject = null;
             selectedCompanies = null;
 
-            RequestClose.Invoke();
             LoadProjectsAsync();
+            RequestClose.Invoke();
         }
 
         private async Task LoadProjectsAsync()

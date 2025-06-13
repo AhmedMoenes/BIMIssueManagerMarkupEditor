@@ -1,11 +1,11 @@
 ﻿namespace BIMIssueManagerMarkupsEditor.Views.Teams
 {
     /// <summary>
-    /// Interaction logic for AddTeamMemberView.xaml
+    /// Interaction logic for AssignUserToProjectView.xaml
     /// </summary>
-    public partial class AddTeamMemberView : Window
+    public partial class AssignUserToProjectView : Window
     {
-        public AddTeamMemberView()
+        public AssignUserToProjectView()
         {
             InitializeComponent();
         }

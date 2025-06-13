@@ -69,7 +69,7 @@
         [RelayCommand]
         private void NavigateTeams()
         {
-            CurrentView = _provider.GetRequiredService<AddTeamMemberViewModel>();
+            CurrentView = _provider.GetRequiredService<TeamMembersViewModel>();
         }
 
         [RelayCommand]

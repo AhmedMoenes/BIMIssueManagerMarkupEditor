@@ -1,6 +1,4 @@
-﻿using DTOs.Users;
-
-namespace BIMIssueManagerMarkupsEditor.Views.User
+﻿namespace BIMIssueManagerMarkupsEditor.Views.User
 {
     public partial class ProfileViewModel : ObservableObject
     {

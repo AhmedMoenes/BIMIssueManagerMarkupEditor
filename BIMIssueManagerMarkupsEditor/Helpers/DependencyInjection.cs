@@ -22,6 +22,7 @@
             services.TryAddTransient<MainWindow>();
             services.TryAddTransient<CommentView>();
             services.TryAddTransient<AddProjectView>();
+            services.TryAddTransient<AddTeamMemberView>();
             services.TryAddTransient<AssignCompaniesToProjectView>();
             services.TryAddTransient<AddCompanyView>();
             services.TryAddTransient<MainViewModel>();
@@ -33,6 +34,7 @@
             services.TryAddTransient<AssignCompaniesToProjectViewModel>();
             services.TryAddTransient<AddCompanyViewModel>();
             services.TryAddTransient<AddTeamMemberViewModel>();
+            services.TryAddTransient<TeamMembersViewModel>();
             services.TryAddTransient<IssuesViewModel>();
             services.TryAddTransient<ChatViewModel>();
             services.TryAddTransient<ModelViewerViewModel>();

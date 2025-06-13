@@ -34,23 +34,13 @@
                         <viewProject:ProjectsView />
                     </DataTemplate>
 
-                    <DataTemplate DataType="{x:Type vmProject:AddProjectViewModel}">
-                        <viewProject:AddProjectView />
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type vmProject:AssignCompaniesToProjectViewModel}">
-                        <viewProject:AssignCompaniesToProjectView />
-                    </DataTemplate>
-
                     <DataTemplate DataType="{x:Type vmCompany:CompaniesViewModel}">
                         <viewCompany:CompaniesView />
                     </DataTemplate>
 
-                    <DataTemplate DataType="{x:Type vmCompany:AddCompanyViewModel}">
-                        <viewCompany:AddCompanyView />
-                    </DataTemplate>
 
-                    <DataTemplate DataType="{x:Type vmTeams:AddTeamMemberViewModel}">
-                        <viewTeams:AddTeamMemberView />
+                    <DataTemplate DataType="{x:Type vmTeams:TeamMembersViewModel}">
+                        <viewTeams:TeamMembersView />
                     </DataTemplate>
 
                     <DataTemplate DataType="{x:Type vmIssues:IssuesViewModel}">
