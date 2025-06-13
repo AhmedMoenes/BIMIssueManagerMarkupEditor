@@ -31,12 +31,16 @@
                         <viewUser:ProfileView />
                     </DataTemplate>
 
+                    <DataTemplate DataType="{x:Type vmProject:ProjectsViewModel}">
+                        <viewProject:ProjectsView />
+                    </DataTemplate>
+
                     <DataTemplate DataType="{x:Type vmProject:AddProjectViewModel}">
                         <viewProject:AddProjectView />
                     </DataTemplate>
 
-                    <DataTemplate DataType="{x:Type vmProject:ProjectsViewModel}">
-                        <viewProject:ProjectsView />
+                    <DataTemplate DataType="{x:Type vmCompany:CompaniesViewModel}">
+                        <viewCompany:CompaniesView />
                     </DataTemplate>
 
                     <DataTemplate DataType="{x:Type vmCompany:AddCompanyViewModel}">

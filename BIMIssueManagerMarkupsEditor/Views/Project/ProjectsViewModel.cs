@@ -1,7 +1,4 @@
-﻿using BIMIssueManagerMarkupsEditor.Interfaces;
-using HandyControl.Tools.Extension;
-
-namespace BIMIssueManagerMarkupsEditor.Views.Project
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Project
 {
     public partial class ProjectsViewModel : ObservableObject
     {
@@ -65,7 +62,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Project
             }
             else
             {
-                var filtered = allProjects
+                IEnumerable<ProjectOverviewDto> filtered = allProjects
                     .Where(p => p.ProjectName.Contains(query, StringComparison.OrdinalIgnoreCase)
                                 || p.Description?.Contains(query, StringComparison.OrdinalIgnoreCase) == true)
                     .ToList();

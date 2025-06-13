@@ -63,7 +63,7 @@
         [RelayCommand]
         private void NavigateCompanies()
         {
-            CurrentView = _provider.GetRequiredService<AddCompanyViewModel>();
+            CurrentView = _provider.GetRequiredService<CompaniesViewModel>();
         }
 
         [RelayCommand]

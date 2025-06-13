@@ -3,11 +3,11 @@
 namespace BIMIssueManagerMarkupsEditor.Views.Company
 {
     /// <summary>
-    /// Interaction logic for AddCompanyView.xaml
+    /// Interaction logic for CompaniesView.xaml
     /// </summary>
-    public partial class AddCompanyView : Window
+    public partial class CompaniesView : UserControl
     {
-        public AddCompanyView()
+        public CompaniesView()
         {
             InitializeComponent();
         }

@@ -1,6 +1,4 @@
-﻿using BIMIssueManagerMarkupsEditor.Interfaces;
-
-namespace BIMIssueManagerMarkupsEditor.Views.Project
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Project
 {
     public partial class AddProjectViewModel : ObservableObject, IDialogAware
     {

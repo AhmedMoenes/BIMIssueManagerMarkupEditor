@@ -31,6 +31,8 @@ global using BIMIssueManagerMarkupsEditor.Views.Chat;
 global using BIMIssueManagerMarkupsEditor.Views.Company;
 global using BIMIssueManagerMarkupsEditor.Views.MarkupEditor;
 global using BIMIssueManagerMarkupsEditor.Views.Login;
+global using BIMIssueManagerMarkupsEditor.Interfaces;
+
 
 
 
