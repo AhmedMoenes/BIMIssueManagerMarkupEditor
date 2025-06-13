@@ -43,7 +43,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
 
         [ObservableProperty] private ObservableCollection<string> priorities = new();
 
-        [ObservableProperty] private string selectedPriority;
+        [ObservableProperty] private Priority selectedPriority;
 
         [ObservableProperty] private DateTime? selectedDate;
 
@@ -95,7 +95,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
             if (!string.IsNullOrEmpty(SelectedProject))
                 filtered = filtered.Where(i => i.ProjectName == SelectedProject);
 
-            if (!string.IsNullOrEmpty(SelectedPriority))
+            if (SelectedPriority != null)
                 filtered = filtered.Where(i => i.Priority == SelectedPriority);
 
             if (SelectedDate != null)
