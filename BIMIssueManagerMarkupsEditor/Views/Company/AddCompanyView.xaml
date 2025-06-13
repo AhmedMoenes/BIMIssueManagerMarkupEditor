@@ -38,12 +38,12 @@
                         Text="{Binding Company.LastName, UpdateSourceTrigger=PropertyChanged}"
                         Margin="0,5"/>
 
-            <hc:TextBox hc:InfoElement.Placeholder="Email"
-                        Text="{Binding Company.Email, UpdateSourceTrigger=PropertyChanged}"
-                        Margin="0,5"/>
-
             <hc:TextBox hc:InfoElement.Placeholder="Username"
                         Text="{Binding Company.UserName, UpdateSourceTrigger=PropertyChanged}"
+                        Margin="0,5"/>
+
+            <hc:TextBox hc:InfoElement.Placeholder="Email"
+                        Text="{Binding Company.Email, UpdateSourceTrigger=PropertyChanged}"
                         Margin="0,5"/>
 
             <!-- Password Field -->
@@ -56,7 +56,7 @@
             <Button Content="Create Company"
                     Command="{Binding CreateCompanyCommand}"
                     Style="{StaticResource ButtonPrimary}"
-                    Width="150"
+                    CommandParameter="{Binding ElementName=PasswordBox}"
                     Margin="0,20,0,0"
                     HorizontalAlignment="Center"/>
         </StackPanel>

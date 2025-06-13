@@ -20,12 +20,12 @@
             <hc:DatePicker hc:InfoElement.Placeholder="End Date" SelectedDate="{Binding Project.EndDate}" Margin="0,5"/>
 
             <!-- Labels -->
-            <TextBlock Text="Labels" FontWeight="Bold" Margin="0,15,0,5"/>
+            <TextBlock Text="Labels" FontWeight="Bold" Margin="0,15,0,1"/>
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <TextBox Width="180" Text="{Binding NewLabelName, UpdateSourceTrigger=PropertyChanged}" />
-                <Button Content="Add" Command="{Binding AddLabelCommand}" Margin="5,0,0,0"/>
+                <Button Content="+" Command="{Binding AddLabelCommand}" Margin="5,0,0,0"/>
             </StackPanel>
-            <hc:TagContainer ItemsSource="{Binding ProjectLabels}" Margin="3">
+            <hc:TagContainer ItemsSource="{Binding ProjectLabels}">
                 <hc:TagContainer.ItemTemplate>
                     <DataTemplate>
                         <hc:Tag Content="{Binding LabelName}" ShowCloseButton="False"/>
@@ -34,15 +34,15 @@
             </hc:TagContainer>
 
             <!-- Areas -->
-            <TextBlock Text="Areas" FontWeight="Bold" Margin="0,15,0,5"/>
+            <TextBlock Text="Areas" FontWeight="Bold" Margin="0,15,0,1"/>
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <TextBox Width="180" Text="{Binding NewAreaName, UpdateSourceTrigger=PropertyChanged}" />
-                <Button Content="Add" Command="{Binding AddAreaCommand}" Margin="5,0,0,0"/>
+                <Button Content="+" Command="{Binding AddAreaCommand}" Margin="5,0,0,0"/>
             </StackPanel>
-            <hc:TagContainer ItemsSource="{Binding ProjectAreas}" Margin="3">
+            <hc:TagContainer ItemsSource="{Binding ProjectAreas}" >
                 <hc:TagContainer.ItemTemplate>
                     <DataTemplate>
-                        <hc:Tag Content="{Binding AreaName}" ShowCloseButton="False"/>
+                        <hc:Tag Content="{Binding AreaName}" ShowCloseButton="False" />
                     </DataTemplate>
                 </hc:TagContainer.ItemTemplate>
             </hc:TagContainer>
@@ -51,7 +51,6 @@
             <Button Content="Create Project"
                     Command="{Binding CreateProjectCommand}"
                     Style="{StaticResource ButtonPrimary}"
-                    Width="150"
                     Margin="0,20,0,0"
                     HorizontalAlignment="Center"/>
         </StackPanel>
