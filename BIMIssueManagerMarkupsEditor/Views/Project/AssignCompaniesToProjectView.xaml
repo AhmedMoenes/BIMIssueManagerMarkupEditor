@@ -1,0 +1,48 @@
+﻿<Window x:Class="BIMIssueManagerMarkupsEditor.Views.Project.AssignCompaniesToProjectView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
+        xmlns:global="clr-namespace:"
+        d:DataContext="{d:DesignInstance Type = local:AssignCompaniesToProjectViewModel, IsDesignTimeCreatable=True}"
+        mc:Ignorable="d"
+        MaxWidth="350" MaxHeight="400" WindowStartupLocation="CenterScreen">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="30" HorizontalAlignment="Center">
+
+            <!-- Title -->
+            <TextBlock Text="Assign Companies to Project"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="0,0,0,20"
+                       HorizontalAlignment="Center"/>
+
+            <!-- Project Selector -->
+            <TextBlock Text="Select Project" FontWeight="SemiBold" FontSize="12" Margin="0,0,0,5"/>
+            <ComboBox ItemsSource="{Binding Projects}"
+                      SelectedItem="{Binding SelectedProject}"
+                      DisplayMemberPath="ProjectName"
+                      Margin="0,5"
+                      Height="30"/>
+
+            <!-- Companies Multi-Selector -->
+            <TextBlock Text="Select Companies" FontWeight="SemiBold" FontSize="12" Margin="0,0,0,5"/>
+            <hc:CheckComboBox ItemsSource="{Binding Companies}"
+                              global:CheckComboBoxBehavior.SelectedItems="{Binding SelectedCompanies}"
+                              DisplayMemberPath="CompanyName"
+                              Margin="0,5"
+                              Height="30"/>
+
+            <!-- Submit Button -->
+            <Button Content="Assign"
+                    Command="{Binding AssignCompaniesCommand}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Width="150"/>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

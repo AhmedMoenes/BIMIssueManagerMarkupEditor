@@ -26,8 +26,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.Company
             Company.Password = null;
             Company = new CreateCompanyWithAdminDto();
 
-            await LoadCompaniesAsync();
             RequestClose?.Invoke();
+            await LoadCompaniesAsync();
 
         }
         private async Task LoadCompaniesAsync()

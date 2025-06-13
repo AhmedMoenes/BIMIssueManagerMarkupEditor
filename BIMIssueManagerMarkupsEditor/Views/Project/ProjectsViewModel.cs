@@ -50,8 +50,14 @@
         {
             AddProjectViewModel addProjectViewModel = _serviceProvider.GetRequiredService<AddProjectViewModel>();
             await _dialogService.ShowDialogAsync<AddProjectView, AddProjectViewModel>(addProjectViewModel);
+        }
 
-            await LoadProjectsAsync();
+        [RelayCommand] private async Task OpenAssignCompaniesView()
+        {
+            AssignCompaniesToProjectViewModel assignCompaniesToProjectViewModel =
+                _serviceProvider.GetRequiredService<AssignCompaniesToProjectViewModel>();
+            await _dialogService.ShowDialogAsync<AssignCompaniesToProjectView, AssignCompaniesToProjectViewModel>(assignCompaniesToProjectViewModel);
+
         }
 
         [RelayCommand] private void Search(string query)
