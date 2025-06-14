@@ -4,9 +4,44 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
+        xmlns:global="clr-namespace:"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        d:DataContext="{d:DesignInstance Type = local:AssignUserToProjectViewModel, IsDesignTimeCreatable=True}"
         mc:Ignorable="d"
-        Title="AssignUserToProjectView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        MaxWidth="350" MaxHeight="400" WindowStartupLocation="CenterScreen">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="30" HorizontalAlignment="Center">
+
+            <!-- Title -->
+            <TextBlock Text="Assign Users to Project"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="0,0,0,20"
+                       HorizontalAlignment="Center"/>
+
+            <!-- Project Selector -->
+            <TextBlock Text="Select Project" FontWeight="SemiBold" FontSize="12" Margin="0,0,0,5"/>
+            <hc:ComboBox ItemsSource="{Binding Projects}"
+                      SelectedItem="{Binding SelectedProject}"
+                      DisplayMemberPath="ProjectName"
+                      Margin="0,5"
+                      Height="30"/>
+
+            <!-- Users Multi-Selector -->
+            <TextBlock Text="Select Member" FontWeight="SemiBold" FontSize="12" Margin="0,0,0,5"/>
+            <hc:ComboBox ItemsSource="{Binding TeamMembers}"
+                              DisplayMemberPath="FullName"
+                              Margin="0,5"
+                              Height="30"/>
+
+            <!-- Submit Button -->
+            <Button Content="Assign"
+                    Command="{Binding AssignCompaniesCommand}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center"
+                    Width="150"/>
+        </StackPanel>
+    </ScrollViewer>
 </Window>

@@ -1,7 +1,4 @@
-﻿using BIMIssueManagerMarkupsEditor.ApiRoutes;
-using DTOs.ProjectTeamMember;
-
-namespace BIMIssueManagerMarkupsEditor.Views.Teams
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Teams
 {
     public partial class TeamMembersViewModel : ObservableObject
     {
@@ -11,10 +8,14 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
         private readonly ProjectTeamMemberApiService _projectTeamMemberService;
 
         public TeamMembersViewModel(ProjectTeamMemberApiService projectTeamMemberService,
-                                    UserSessionService userSession)
+                                    UserSessionService userSession,
+                                    IServiceProvider serviceProvider,
+                                    IDialogService dialogService)
         {
             _projectTeamMemberService = projectTeamMemberService;
             _userSession = userSession;
+            _serviceProvider = serviceProvider;
+            _dialogService = dialogService;
 
             LoadUsersAsync();
         }

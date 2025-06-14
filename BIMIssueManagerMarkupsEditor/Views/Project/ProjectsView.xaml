@@ -68,12 +68,13 @@
                   HeadersVisibility="Column"
                   Grid.Row="1"
                   Margin="0">
-            <DataGrid.Columns>
+            <DataGrid.Columns >
                 <DataGridTextColumn Header="Project Name" Binding="{Binding ProjectName}" Width="Auto" />
                 <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='{}{0:dd MMM, yyyy}'}" Width="Auto" />
                 <DataGridTextColumn Header="End Date" Binding="{Binding EndDate, StringFormat='{}{0:dd MMM, yyyy}'}" Width="Auto" />
-                <DataGridTextColumn Header="Issues Count" Binding="{Binding IssuesCount}" Width="Auto" />
+                <DataGridTextColumn Header="Issues Count" Binding="{Binding IssuesCount}" Width="Auto"/>
                 <DataGridTextColumn Header="Companies In Project" Binding="{Binding CompanyNames.Count}" Width="Auto" />
+                <DataGridTextColumn Header="Members In Project" Binding="{Binding MembersCount}" Width="Auto" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

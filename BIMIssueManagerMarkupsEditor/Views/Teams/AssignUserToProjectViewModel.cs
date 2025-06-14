@@ -1,15 +1,11 @@
-﻿using DTOs.ProjectTeamMember;
-using DTOs.Users;
-
-namespace BIMIssueManagerMarkupsEditor.Views.Teams
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Teams
 {
-    public partial class AssignUserToProjectViewModel : ObservableObject
+    public partial class AssignUserToProjectViewModel : ObservableObject, IDialogAware
     {
         private readonly ProjectTeamMemberApiService _projectTeamMemberService;
         private readonly ProjectApiService _projectApiService;
         private readonly UserSessionService _userSession;
-
-
+        public event Action? RequestClose;
         public AssignUserToProjectViewModel(ProjectTeamMemberApiService projectTeamMemberService,
                                             ProjectApiService projectApiService,
                                             UserSessionService userSession)
@@ -17,6 +13,9 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
             _projectTeamMemberService = projectTeamMemberService;
             _projectApiService = projectApiService;
             _userSession = userSession;
+
+            LoadProjectsAsync();
+            LoadUsersAsync();
         }
 
         [ObservableProperty] private ObservableCollection<ProjectTeamMemberDto> teamMembers = new();
@@ -44,6 +43,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
             LoadProjectsAsync();
             selectedMember = null;
             selectedProject = null;
+
+            RequestClose.Invoke();
         }
 
         private async void LoadUsersAsync()
@@ -69,5 +70,6 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
             companyProjects = await _projectApiService.GetForCompanyAsync(_userSession.CurrentUser.CompanyId);
             Projects = new ObservableCollection<ProjectOverviewDto>(companyProjects);
         }
+
     }
 }

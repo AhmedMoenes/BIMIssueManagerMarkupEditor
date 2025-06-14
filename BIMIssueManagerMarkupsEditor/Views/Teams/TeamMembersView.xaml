@@ -32,13 +32,13 @@
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"/>
 
             <Button Grid.Column="1"
-                    Content="Add Project"
+                    Content="Add Member"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAddTeamMemberViewCommand}"
                     Margin="10,0,0,0"/>
 
             <Button Grid.Column="2"
-                    Content="Assign User To Project"
+                    Content="Assign Member To Project"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAssignToProjectViewCommand}"
                     Margin="10,0,0,0"/>

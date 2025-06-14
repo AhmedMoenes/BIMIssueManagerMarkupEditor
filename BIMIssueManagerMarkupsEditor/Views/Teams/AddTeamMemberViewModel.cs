@@ -1,6 +1,4 @@
-﻿using DTOs.ProjectTeamMember;
-using DTOs.Users;
-using HandyControl.Controls;
+﻿using HandyControl.Controls;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Teams
 {

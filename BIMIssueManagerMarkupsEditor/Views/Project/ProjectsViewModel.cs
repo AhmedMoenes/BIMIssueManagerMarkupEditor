@@ -54,8 +54,7 @@
 
         [RelayCommand] private async Task OpenAssignCompaniesView()
         {
-            AssignCompaniesToProjectViewModel assignCompaniesToProjectViewModel =
-                _serviceProvider.GetRequiredService<AssignCompaniesToProjectViewModel>();
+            AssignCompaniesToProjectViewModel assignCompaniesToProjectViewModel = _serviceProvider.GetRequiredService<AssignCompaniesToProjectViewModel>();
             await _dialogService.ShowDialogAsync<AssignCompaniesToProjectView, AssignCompaniesToProjectViewModel>(assignCompaniesToProjectViewModel);
 
         }
@@ -70,8 +69,9 @@
             {
                 IEnumerable<ProjectOverviewDto> filtered = allProjects
                     .Where(p => p.ProjectName.Contains(query, StringComparison.OrdinalIgnoreCase)
-                                || p.Description?.Contains(query, StringComparison.OrdinalIgnoreCase) == true)
-                    .ToList();
+                                             || p.Description?.Contains(query, StringComparison.OrdinalIgnoreCase)
+                                             == true)
+                                             .ToList();
 
                 Projects = new ObservableCollection<ProjectOverviewDto>(filtered);
             }
