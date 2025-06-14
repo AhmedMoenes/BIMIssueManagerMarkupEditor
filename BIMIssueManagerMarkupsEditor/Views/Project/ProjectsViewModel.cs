@@ -23,6 +23,7 @@
 
         private ObservableCollection<ProjectOverviewDto> allProjects = new();
         [ObservableProperty] private ObservableCollection<ProjectOverviewDto> projects = new();
+        [ObservableProperty] private ProjectOverviewDto selectedProject;
         [ObservableProperty] private string searchQuery;
 
         private async Task LoadProjectsAsync()
@@ -57,6 +58,17 @@
             AssignCompaniesToProjectViewModel assignCompaniesToProjectViewModel = _serviceProvider.GetRequiredService<AssignCompaniesToProjectViewModel>();
             await _dialogService.ShowDialogAsync<AssignCompaniesToProjectView, AssignCompaniesToProjectViewModel>(assignCompaniesToProjectViewModel);
 
+        }
+
+        [RelayCommand]
+        private async Task DeleteSelectedProjectAsync()
+        {
+            if (selectedProject == null)
+                return;
+
+            await _projectApiService.DeleteAsync(selectedProject.ProjectId);
+            selectedProject = null;
+            await LoadProjectsAsync();
         }
 
         [RelayCommand] private void Search(string query)

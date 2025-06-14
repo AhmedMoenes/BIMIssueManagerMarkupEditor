@@ -6,22 +6,25 @@
         private readonly IDialogService _dialogService;
         private readonly UserSessionService _userSession;
         private readonly ProjectTeamMemberApiService _projectTeamMemberService;
-
+        private readonly UserApiService _userApiService;
         public TeamMembersViewModel(ProjectTeamMemberApiService projectTeamMemberService,
                                     UserSessionService userSession,
                                     IServiceProvider serviceProvider,
-                                    IDialogService dialogService)
+                                    IDialogService dialogService,
+                                    UserApiService userApiService)
         {
             _projectTeamMemberService = projectTeamMemberService;
             _userSession = userSession;
             _serviceProvider = serviceProvider;
             _dialogService = dialogService;
+            _userApiService = userApiService;
 
             LoadUsersAsync();
         }
 
         private ObservableCollection<ProjectTeamMemberDto> allMembers = new();
         [ObservableProperty] private ObservableCollection<ProjectTeamMemberDto> teamMembers = new();
+        [ObservableProperty] private ProjectTeamMemberDto selectedMember;
         [ObservableProperty] private string searchQuery;
 
       
@@ -52,6 +55,17 @@
         {
             AssignUserToProjectViewModel assignUserToProjectViewModel = _serviceProvider.GetRequiredService<AssignUserToProjectViewModel>();
             await _dialogService.ShowDialogAsync<AssignUserToProjectView, AssignUserToProjectViewModel>(assignUserToProjectViewModel);
+        }
+
+        [RelayCommand]
+        private async Task DeleteSelectedMemberAsync()
+        {
+            if (selectedMember == null)
+                return;
+
+            await _userApiService.DeleteAsync(selectedMember.UserId);
+            selectedMember = null;
+            LoadUsersAsync();
         }
 
         [RelayCommand]
