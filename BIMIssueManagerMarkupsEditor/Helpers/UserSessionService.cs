@@ -1,6 +1,4 @@
-﻿using DTOs.Login;
-
-namespace BIMIssueManagerMarkupsEditor.Helpers
+﻿namespace BIMIssueManagerMarkupsEditor.Helpers
 {
     public class UserSessionService
     {

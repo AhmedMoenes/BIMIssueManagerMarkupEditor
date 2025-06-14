@@ -1,5 +1,4 @@
-﻿using DTOs.Login;
-using HandyControl.Controls;
+﻿using HandyControl.Controls;
 using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Login

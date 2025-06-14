@@ -1,6 +1,4 @@
-﻿using DTOs.Login;
-
-namespace BIMIssueManagerMarkupsEditor.Services
+﻿namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class AuthApiService : ApiService 
     {
@@ -8,7 +6,6 @@ namespace BIMIssueManagerMarkupsEditor.Services
                              : base(client, userSession, settings)
         {
         }
-
         public async Task<LoginResponseDto?> LoginAsync(LoginRequestDto dto)
         {
             var response = await PostAsync<LoginRequestDto,LoginResponseDto>(Auth.Login(), dto);
@@ -20,6 +17,12 @@ namespace BIMIssueManagerMarkupsEditor.Services
 
             return response;
         }
-        
+
+        public async Task LogoutAsync()
+        {
+            await PostAsync(Auth.Logout(), string.Empty);
+            _userSession.Clear();
+        }
+
     }
 }

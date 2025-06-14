@@ -5,12 +5,17 @@
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow(LoginViewModel loginViewModel)
+        public LoginWindow()
+        {
+            
+        }
+        public LoginWindow(LoginViewModel loginViewModel) : this()
         {
             InitializeComponent();
             loginViewModel.CloseAction = this.Close;
             PasswordBox.Password = "Sasa@123";
             DataContext = loginViewModel;
         }
+
     }
 }
