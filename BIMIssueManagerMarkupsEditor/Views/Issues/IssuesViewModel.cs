@@ -3,21 +3,24 @@
     public partial class IssuesViewModel : ObservableObject
     {
         private readonly IDialogService _dialogService;
+        private readonly IServiceProvider _serviceProvider;
         private readonly IssueApiService _issueApiService;
         private readonly ProjectApiService _projectApiService;
         private readonly UserSessionService _userSession;
         private readonly Func<int,CommentViewModel> _CommentVmFactory;
         public IssuesViewModel(IssueApiService issueApiService, 
-                               UserSessionService userSession, 
+                               UserSessionService userSession,
                                ProjectApiService projectApiService,
-                               Func<int,CommentViewModel> CommentVmFactory,
-                               IDialogService dialogService)
+                               Func<int, CommentViewModel> CommentVmFactory,
+                               IDialogService dialogService,
+                               IServiceProvider serviceProvider)
         {
             _issueApiService = issueApiService;
             _userSession = userSession;
             _projectApiService = projectApiService;
             _CommentVmFactory = CommentVmFactory;
             _dialogService = dialogService;
+            _serviceProvider = serviceProvider;
 
             LoadIssuesAsync();
             LoadProjectsAsync();
@@ -107,6 +110,13 @@
             CommentViewModel vm = _CommentVmFactory(IssueId);
             await vm.LoadIssueCommentsAsync();
             await _dialogService.ShowDialogAsync<CommentView, CommentViewModel>(vm);
+        }
+
+        [RelayCommand]
+        public async Task OpenIssueDetailsViewAsync (int Id)
+        {
+            IssueDetailsViewModel vm = _serviceProvider.GetRequiredService<IssueDetailsViewModel>();
+            await _dialogService.ShowDialogAsync<IssueDetailsView, IssueDetailsViewModel>(vm);
         }
     }
 }
