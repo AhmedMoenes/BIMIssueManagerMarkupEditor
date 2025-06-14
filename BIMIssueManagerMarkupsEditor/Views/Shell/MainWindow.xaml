@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="160"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -42,17 +42,24 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Logo -->
-                <Image Source="{Binding LogoIcon}" Height="42" Grid.Column="0" VerticalAlignment="Center"/>
+                <Image Source="{Binding LogoIcon}" Height="50" Grid.Column="0" VerticalAlignment="Center" Margin="5,0"/>
 
                 <!-- User Info -->
                 <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding UserFullName}" FontWeight="SemiBold" Foreground="Black" FontSize="16"/>
-                    <TextBlock Text="{Binding UserCompany}" Foreground="Black" FontSize="12"/>
+                    <TextBlock Text="{Binding UserFullName}" FontWeight="Bold" Foreground="#FF173656" FontSize="16"/>
+                    <TextBlock Text="{Binding UserCompany}" Foreground="#FF173656" FontSize="12"/>
                 </StackPanel>
 
                 <!-- Profile Button -->
                 <hc:SplitButton Grid.Column="3" Margin="10,0,0,0" Command="{Binding NavigateProfileCommand}" Height="45">
-                    <Image Source="{Binding UserIcon}" Height="32" />
+
+                    <Path Data="{StaticResource User}"
+                          Fill="#FF173656"
+                          Width="32"
+                          Height="32"
+                          Stretch="Uniform"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
                     <hc:SplitButton.DropDownContent>
                         <StackPanel>
                             <MenuItem Header="Logout" Command="{Binding LogoutCommand}" Width="70"  />
@@ -70,53 +77,53 @@
 
             <RadioButton Content="Markup Editor"
                          GroupName="Nav"
-                         HorizontalAlignment="Left"
                          Command="{Binding NavigateMarkupCommand}"
-                         Margin="0,5"/>
+                         Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Tag="{StaticResource Markup}" />
 
             <RadioButton Content="Profile"
                          GroupName="Nav"
-                         HorizontalAlignment="Left"
                          Command="{Binding NavigateProfileCommand}"
-                         Margin="0,5"/>
+                         Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Tag="{StaticResource Profile}" />
 
             <RadioButton Content="Projects"
                          GroupName="Nav"
-                         HorizontalAlignment="Left"
                          Command="{Binding NavigateProjectsCommand}"
-                         Margin="0,5"/>
-                         <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
+                         Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Tag="{StaticResource Project}" />
+            <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
 
             <RadioButton Content="Companies"
                          GroupName="Nav"
-                         HorizontalAlignment="Left"
                          Command="{Binding NavigateCompaniesCommand}"
-                         Margin="0,5"/>
-                         <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
+                         Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Tag="{StaticResource Company}" />
+            <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
 
             <RadioButton Content="Teams"
                          GroupName="Nav"
-                         HorizontalAlignment="Left"
                          Command="{Binding NavigateTeamsCommand}"
-                         Margin="0,5"/>
+                         Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Tag="{StaticResource Teams}" />
 
             <RadioButton Content="Issues"
                          GroupName="Nav"
-                         HorizontalAlignment="Left"
                          Command="{Binding NavigateIssuesCommand}"
-                         Margin="0,5"/>
+                         Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Tag="{StaticResource Issues}" />
 
             <RadioButton Content="Chat"
                          GroupName="Nav"
-                         HorizontalAlignment="Left"
                          Command="{Binding NavigateChatCommand}"
-                         Margin="0,5"/>
+                         Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Tag="{StaticResource Chat}" />
 
             <RadioButton Content="Viewer"
                          GroupName="Nav"
-                         HorizontalAlignment="Left"
                          Command="{Binding NavigateViewerCommand}"
-                         Margin="0,5"/>
+                         Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Tag="{StaticResource Viewer}" />
         </StackPanel>
 
         <!-- Main content area -->

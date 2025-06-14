@@ -13,11 +13,46 @@
     <SolidColorBrush x:Key="DividerBrush" Color="#CCCCCC"/>
     <SolidColorBrush x:Key="ButtonHoverBrush" Color="#D6EFFF"/>
 
-    <!-- Icon TextBlock Style -->
-    <Style x:Key="SidebarIconTextStyle" TargetType="TextBlock">
-        <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="Background" Value="#F3F3F3"></Setter>
+    <!--SideBar Icons-->
+    <Style x:Key="SidebarIconPathStyle" TargetType="Path">
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Fill" Value="Black"/>
+        <Setter Property="Stretch" Value="Uniform"/>
+        <Setter Property="Margin" Value="0,0,8,0"/>
     </Style>
+
+    <!--SideBar RadioButton-->
+    <Style x:Key="SidebarIconRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="#FF173656"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="0,5,0,5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Background="Transparent"
+                            Padding="4"
+                            Cursor="Hand">
+                        <StackPanel Orientation="Horizontal">
+                            <Path x:Name="IconPath"
+                                  Data="{TemplateBinding Tag}" 
+                                  Fill="#FF173656"
+                                  Width="24"
+                                  Height="24"
+                                  Stretch="Uniform"
+                                  Margin="0,0,8,0"/>
+                            <TextBlock x:Name="Label"
+                                       Text="{TemplateBinding Content}"
+                                       Foreground="#FF173656"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
 </ResourceDictionary>

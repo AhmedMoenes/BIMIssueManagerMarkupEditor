@@ -26,7 +26,14 @@
                 </hc:Card.Header>
 
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <Image Source="{Binding UserIcon}" Height="190" Margin="8"/>
+
+                    <Path Data="{StaticResource User}"
+                          Fill="#FF173656"
+                          Width="200"
+                          Height="200"
+                          Stretch="Uniform"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
                 </StackPanel>
 
                 <hc:Card.Footer>
