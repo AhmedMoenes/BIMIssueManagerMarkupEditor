@@ -9,11 +9,13 @@
         public event Action? RequestClose;
         public AssignUserToProjectViewModel(ProjectTeamMemberApiService projectTeamMemberService,
                                             ProjectApiService projectApiService,
-                                            UserSessionService userSession)
+                                            UserSessionService userSession,
+                                            UserApiService userApiService)
         {
             _projectTeamMemberService = projectTeamMemberService;
             _projectApiService = projectApiService;
             _userSession = userSession;
+            _userApiService = userApiService;
 
             LoadProjectsAsync();
             LoadUsersAsync();
@@ -50,10 +52,10 @@
 
         private async void LoadUsersAsync()
         {
-            IEnumerable<CompanyUserDto> allmembers = Enumerable.Empty<CompanyUserDto>();
-            allmembers = await _userApiService.GetCompanyUsers(_userSession.CurrentUser.CompanyId);
+            IEnumerable<CompanyUserDto> allMembers = Enumerable.Empty<CompanyUserDto>();
+            allMembers = await _userApiService.GetCompanyUsers(_userSession.CurrentUser.CompanyId);
 
-            Members = new ObservableCollection<CompanyUserDto>(allmembers);
+            Members = new ObservableCollection<CompanyUserDto>(allMembers);
         }
 
         private async void LoadProjectsAsync()
