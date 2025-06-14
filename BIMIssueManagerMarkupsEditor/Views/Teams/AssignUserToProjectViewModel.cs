@@ -5,6 +5,7 @@
         private readonly ProjectTeamMemberApiService _projectTeamMemberService;
         private readonly ProjectApiService _projectApiService;
         private readonly UserSessionService _userSession;
+        private readonly UserApiService _userApiService;
         public event Action? RequestClose;
         public AssignUserToProjectViewModel(ProjectTeamMemberApiService projectTeamMemberService,
                                             ProjectApiService projectApiService,
@@ -18,9 +19,9 @@
             LoadUsersAsync();
         }
 
-        [ObservableProperty] private ObservableCollection<ProjectTeamMemberDto> teamMembers = new();
+        [ObservableProperty] private ObservableCollection<CompanyUserDto> members = new();
         [ObservableProperty] private ObservableCollection<ProjectOverviewDto> projects = new();
-        [ObservableProperty] private ProjectTeamMemberDto selectedMember;
+        [ObservableProperty] private CompanyUserDto selectedMember;
         [ObservableProperty] private ProjectOverviewDto selectedProject;
 
         [RelayCommand]
@@ -33,7 +34,7 @@
 
             AssignUserToProjectDto dto = new AssignUserToProjectDto
             {
-                UserId = selectedMember.UserId,
+                UserId = selectedMember.Id,
                 ProjectId = SelectedProject.ProjectId,
                 Role = selectedMember.Role
             };
@@ -49,18 +50,10 @@
 
         private async void LoadUsersAsync()
         {
-            IEnumerable<ProjectTeamMemberDto> members = Enumerable.Empty<ProjectTeamMemberDto>();
+            IEnumerable<CompanyUserDto> allmembers = Enumerable.Empty<CompanyUserDto>();
+            allmembers = await _userApiService.GetCompanyUsers(_userSession.CurrentUser.CompanyId);
 
-            if (_userSession.IsInRole("SuperAdmin"))
-            {
-                members = await _projectTeamMemberService.GetAll();
-            }
-            else
-            {
-                members = await _projectTeamMemberService.GetByUserAsync(_userSession.UserId);
-            }
-
-            TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(members);
+            Members = new ObservableCollection<CompanyUserDto>(allmembers);
         }
 
         private async void LoadProjectsAsync()

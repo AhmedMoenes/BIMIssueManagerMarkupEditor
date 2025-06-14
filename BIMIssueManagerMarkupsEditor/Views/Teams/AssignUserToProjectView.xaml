@@ -30,7 +30,7 @@
 
             <!-- Users Multi-Selector -->
             <TextBlock Text="Select Member" FontWeight="SemiBold" FontSize="12" Margin="0,0,0,5"/>
-            <hc:ComboBox ItemsSource="{Binding TeamMembers}"
+            <hc:ComboBox ItemsSource="{Binding Members}"
                               DisplayMemberPath="FullName"
                               Margin="0,5"
                               Height="30"/>

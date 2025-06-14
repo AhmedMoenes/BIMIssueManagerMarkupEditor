@@ -15,5 +15,10 @@
         {
             return await GetAsync<IEnumerable<UserOverviewDto>>(User.GetAll());
         }
+
+        public async Task<IEnumerable<CompanyUserDto>> GetCompanyUsers(int companyId)
+        {
+            return await GetAsync<IEnumerable<CompanyUserDto>>(User.GetUsersByCompany(companyId));
+        }
     }
 }
