@@ -1,7 +1,4 @@
-﻿using BIMIssueManagerMarkupsEditor.Interfaces;
-using HandyControl.Tools.Extension;
-
-namespace BIMIssueManagerMarkupsEditor.Views.Project
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Project
 {
     public partial class ProjectsViewModel : ObservableObject
     {
@@ -53,8 +50,13 @@ namespace BIMIssueManagerMarkupsEditor.Views.Project
         {
             AddProjectViewModel addProjectViewModel = _serviceProvider.GetRequiredService<AddProjectViewModel>();
             await _dialogService.ShowDialogAsync<AddProjectView, AddProjectViewModel>(addProjectViewModel);
+        }
 
-            await LoadProjectsAsync();
+        [RelayCommand] private async Task OpenAssignCompaniesView()
+        {
+            AssignCompaniesToProjectViewModel assignCompaniesToProjectViewModel = _serviceProvider.GetRequiredService<AssignCompaniesToProjectViewModel>();
+            await _dialogService.ShowDialogAsync<AssignCompaniesToProjectView, AssignCompaniesToProjectViewModel>(assignCompaniesToProjectViewModel);
+
         }
 
         [RelayCommand] private void Search(string query)
@@ -65,10 +67,11 @@ namespace BIMIssueManagerMarkupsEditor.Views.Project
             }
             else
             {
-                var filtered = allProjects
+                IEnumerable<ProjectOverviewDto> filtered = allProjects
                     .Where(p => p.ProjectName.Contains(query, StringComparison.OrdinalIgnoreCase)
-                                || p.Description?.Contains(query, StringComparison.OrdinalIgnoreCase) == true)
-                    .ToList();
+                                             || p.Description?.Contains(query, StringComparison.OrdinalIgnoreCase)
+                                             == true)
+                                             .ToList();
 
                 Projects = new ObservableCollection<ProjectOverviewDto>(filtered);
             }

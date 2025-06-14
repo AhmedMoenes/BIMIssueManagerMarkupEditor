@@ -1,7 +1,6 @@
 ﻿<Application x:Class="BIMIssueManagerMarkupsEditor.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor"
              xmlns:vmMarkup="clr-namespace:BIMIssueManagerMarkupsEditor.Views.MarkupEditor"
              xmlns:vmUser ="clr-namespace:BIMIssueManagerMarkupsEditor.Views.User"
              xmlns:vmProject="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
@@ -31,20 +30,17 @@
                         <viewUser:ProfileView />
                     </DataTemplate>
 
-                    <DataTemplate DataType="{x:Type vmProject:AddProjectViewModel}">
-                        <viewProject:AddProjectView />
-                    </DataTemplate>
-
                     <DataTemplate DataType="{x:Type vmProject:ProjectsViewModel}">
                         <viewProject:ProjectsView />
                     </DataTemplate>
 
-                    <DataTemplate DataType="{x:Type vmCompany:AddCompanyViewModel}">
-                        <viewCompany:AddCompanyView />
+                    <DataTemplate DataType="{x:Type vmCompany:CompaniesViewModel}">
+                        <viewCompany:CompaniesView />
                     </DataTemplate>
 
-                    <DataTemplate DataType="{x:Type vmTeams:AddTeamMemberViewModel}">
-                        <viewTeams:AddTeamMemberView />
+
+                    <DataTemplate DataType="{x:Type vmTeams:TeamMembersViewModel}">
+                        <viewTeams:TeamMembersView />
                     </DataTemplate>
 
                     <DataTemplate DataType="{x:Type vmIssues:IssuesViewModel}">

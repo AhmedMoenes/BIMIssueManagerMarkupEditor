@@ -1,5 +1,4 @@
 ﻿using DTOs.Login;
-using DTOs.Users;
 
 namespace BIMIssueManagerMarkupsEditor.Helpers
 {

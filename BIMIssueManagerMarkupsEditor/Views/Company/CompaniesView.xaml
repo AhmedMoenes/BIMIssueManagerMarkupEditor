@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="BIMIssueManagerMarkupsEditor.Views.Company.CompaniesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Company"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type = local:CompaniesViewModel, IsDesignTimeCreatable=True}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Search box on the left -->
+            <hc:SearchBar Grid.Column="0"
+                          hc:InfoElement.ShowClearButton="True"
+                          hc:InfoElement.Placeholder="Search companies..."
+                          HorizontalAlignment="Left"
+                          Width="200"
+                          Command="{Binding SearchCommand}"
+                          CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"/>
+
+            <!-- Add Company button -->
+            <Button Grid.Column="1"
+                    Content="Add Company"
+                    Width="Auto"
+                    Style="{StaticResource ButtonPrimary}"
+                    Command="{Binding OpenAddCompanyViewCommand}"
+                    HorizontalAlignment="Right"
+                    Margin="10,0,0,0"/>
+
+            <!-- Delete Company button -->
+            <Button Grid.Column="2"
+                    Content="Delete Company"
+                    Width="Auto"
+                    Style="{StaticResource ButtonDanger}" 
+                    Command="{Binding DeleteSelectedCompanyCommand}"
+                    HorizontalAlignment="Right"
+                    Margin="10,0,0,0"/>
+        </Grid>
+
+        <DataGrid ItemsSource="{Binding Companies}" 
+              AutoGenerateColumns="False"
+              CanUserAddRows="False"
+              IsReadOnly="True"
+              HeadersVisibility="Column"
+              Grid.Row="1"
+              Margin="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Company Name" Binding="{Binding CompanyName}" Width="Auto" />
+                <DataGridTextColumn Header="Company Users" Binding="{Binding UsersCount}" Width="Auto" />
+                <DataGridTextColumn Header="Company Projects" Binding="{Binding ProjectsCount}" Width="Auto" />
+                <DataGridTextColumn Header="Company Issues" Binding="{Binding IssuesCount}" Width="Auto" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

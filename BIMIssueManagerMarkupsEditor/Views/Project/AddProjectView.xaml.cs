@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace BIMIssueManagerMarkupsEditor.Views.Project
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Project
 {
     /// <summary>
     /// Interaction logic for AddProjectView.xaml

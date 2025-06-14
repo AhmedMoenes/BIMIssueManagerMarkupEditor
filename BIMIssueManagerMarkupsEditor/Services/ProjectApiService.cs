@@ -1,6 +1,4 @@
-﻿using DTOs.CompanyProject;
-
-namespace BIMIssueManagerMarkupsEditor.Services
+﻿namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class ProjectApiService : ApiService
     {
@@ -16,7 +14,7 @@ namespace BIMIssueManagerMarkupsEditor.Services
 
         public async Task<IEnumerable<ProjectOverviewDto>> GetForCompanyAsync(int companyId)
         {
-            return await GetAsync<IEnumerable<ProjectOverviewDto>>(Project.GetForCompany(companyId));
+            return await GetAsync<IEnumerable<ProjectOverviewDto>>(CompanyProject.GetForCompany(companyId));
         }
         public async Task<IEnumerable<ProjectOverviewDto>> GetForUserAsync(string userId)
         {

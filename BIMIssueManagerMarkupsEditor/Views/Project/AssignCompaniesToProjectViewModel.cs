@@ -1,71 +1,46 @@
 ﻿namespace BIMIssueManagerMarkupsEditor.Views.Project
 {
-    public partial class AddProjectViewModel : ObservableObject, IDialogAware
+    public partial class AssignCompaniesToProjectViewModel : ObservableObject, IDialogAware
     {
-        public event Action RequestClose;
-        private readonly UserSessionService _userSession;
+        public event Action? RequestClose;
         private readonly ProjectApiService _projectApiService;
         private readonly CompanyApiService _companyApiService;
-        public AddProjectViewModel(UserSessionService userSession,
-                                   ProjectApiService projectApiService,
-                                   CompanyApiService companyApiService)
+        private readonly UserSessionService _userSession;
+
+        public AssignCompaniesToProjectViewModel(ProjectApiService projectApiService,
+                                                 UserSessionService userSession,
+                                                 CompanyApiService companyApiService)
         {
-            _userSession = userSession;
             _projectApiService = projectApiService;
+            _userSession = userSession;
             _companyApiService = companyApiService;
 
-            Project = new CreateProjectDto();
             LoadProjectsAsync();
             LoadCompaniesAsync();
         }
 
         [ObservableProperty] private ObservableCollection<ProjectOverviewDto> projects = new();
         [ObservableProperty] private ObservableCollection<CompanyOverviewDto> companies = new();
-        [ObservableProperty] private CreateProjectDto project;
         [ObservableProperty] private ProjectOverviewDto selectedProject;
         [ObservableProperty] private ObservableCollection<CompanyOverviewDto> selectedCompanies = new();
-        [ObservableProperty] private ObservableCollection<CreateLabelDto> projectLabels = new();
-        [ObservableProperty] private ObservableCollection<CreateAreaDto> projectAreas = new();
-        [ObservableProperty] private string newLabelName;
-        [ObservableProperty] private string newAreaName;
 
-        [RelayCommand] private void AddLabel()
+        [RelayCommand] async Task AssignCompaniesAsync()
         {
-            if (!string.IsNullOrWhiteSpace(NewLabelName))
-            {
-                ProjectLabels.Add(new CreateLabelDto { LabelName = NewLabelName });
-                NewLabelName = string.Empty;
-            }
-        }
-
-        [RelayCommand] private void AddArea()
-        {
-            if (!string.IsNullOrWhiteSpace(NewAreaName))
-            {
-                ProjectAreas.Add(new CreateAreaDto { AreaName = NewAreaName });
-                NewAreaName = string.Empty;
-            }
-        }
-
-        [RelayCommand] async Task CreateProjectAsync()
-        {
-            if (Project == null || string.IsNullOrWhiteSpace(Project.ProjectName))
+            if (selectedProject == null || selectedCompanies.Count == 0)
                 return;
-            Project.Labels = ProjectLabels.ToList();
-            Project.Areas = ProjectAreas.ToList();
 
-            await _projectApiService.CreateProjectAsync(Project);
-
-            Project = new CreateProjectDto
+            AssignCompaniesToProjectDto dto = new AssignCompaniesToProjectDto()
             {
-                StartDate = null,
-                EndDate = null
+                ProjectId = selectedProject.ProjectId,
+                CompanyIds = selectedCompanies.Select(c => c.CompanyId).ToList()
             };
-            ProjectLabels.Clear();
-            ProjectAreas.Clear();
 
-            await LoadProjectsAsync();
-            RequestClose?.Invoke();
+            await _projectApiService.AssignCompanyToProjectAsync(dto);
+            selectedProject = null;
+            selectedCompanies = null;
+
+            LoadProjectsAsync();
+            RequestClose.Invoke();
         }
 
         private async Task LoadProjectsAsync()
@@ -103,5 +78,8 @@
 
             Companies = new ObservableCollection<CompanyOverviewDto>(allCompanies);
         }
+
     }
+
+
 }

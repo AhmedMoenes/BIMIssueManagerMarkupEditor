@@ -76,15 +76,15 @@
                          GroupName="Nav"
                          HorizontalAlignment="Left"
                          Command="{Binding NavigateProjectsCommand}"
-                         Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                          Margin="0,5"/>
+                         <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
 
             <RadioButton Content="Companies"
                          GroupName="Nav"
                          HorizontalAlignment="Left"
                          Command="{Binding NavigateCompaniesCommand}"
-                         Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                          Margin="0,5"/>
+                         <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
 
             <RadioButton Content="Teams"
                          GroupName="Nav"

@@ -1,91 +1,58 @@
-﻿<UserControl x:Class="BIMIssueManagerMarkupsEditor.Views.Teams.AddTeamMemberView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="250" />
-        </Grid.ColumnDefinitions>
+﻿<Window x:Class="BIMIssueManagerMarkupsEditor.Views.Teams.AddTeamMemberView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
+        mc:Ignorable="d" 
+        MaxWidth="300" MaxHeight="600" 
+        WindowStartupLocation="CenterScreen" ResizeMode="CanResize">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="30" HorizontalAlignment="Center">
 
-        <!-- Data Grid (Left Column) -->
-        <DataGrid Grid.Column="0"
-                  Grid.RowSpan="2"
-                  ItemsSource="{Binding TeamMembers}"
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  IsReadOnly="True"
-                  HeadersVisibility="Column"
-                  Margin="5">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="Auto" />
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="Auto" />
-                <DataGridTextColumn Header="User Projects" Binding="{Binding ProjectName}" Width="Auto" />
-                <DataGridTextColumn Header="User Role" Binding="{Binding Role}" Width="Auto" />
-            </DataGrid.Columns>
-        </DataGrid>
+            <TextBlock Text="Add Team Member" FontSize="18" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Center"/>
 
-        <!-- Create User Section -->
-        <Expander Header="Create New User" 
-                  Grid.Column="1" 
-                  Grid.Row="0"
-                  Margin="5"
-                  IsExpanded="False">
-            <StackPanel>
-                <hc:TextBox hc:InfoElement.Placeholder="First Name" Text="{Binding NewUser.FirstName}" Margin="0,5"/>
-                <hc:TextBox hc:InfoElement.Placeholder="Last Name" Text="{Binding NewUser.LastName}" Margin="0,5"/>
-                <hc:TextBox hc:InfoElement.Placeholder="Username" Text="{Binding NewUser.UserName}" Margin="0,5"/>
-                <hc:TextBox hc:InfoElement.Placeholder="Email" Text="{Binding NewUser.Email}" Margin="0,5"/>
-                <hc:PasswordBox hc:InfoElement.Placeholder="Password" x:Name="PasswordBox" Margin="0,5"/>
-                <hc:ComboBox hc:InfoElement.Placeholder="Role"
-                             ItemsSource="{Binding AvailableRoles}"
-                             SelectedItem="{Binding NewUser.Role}"
-                             Margin="0,5"/>
-                <Button Content="Create User"
-                        Command="{Binding CreateUserCommand}"
-                        CommandParameter="{Binding ElementName=PasswordBox}"
-                        Style="{StaticResource ButtonPrimary}"
-                        Width="120"
-                        Margin="0,10,0,0"
-                        HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Expander>
+            <!-- User Fields -->
+            <hc:TextBox hc:InfoElement.Placeholder="First Name" Text="{Binding NewUser.FirstName}" Margin="0,5"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Last Name" Text="{Binding NewUser.LastName}" Margin="0,5"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Username" Text="{Binding NewUser.UserName}" Margin="0,5"/>
+            <hc:TextBox hc:InfoElement.Placeholder="Email" Text="{Binding NewUser.Email}" Margin="0,5"/>
+            <hc:PasswordBox hc:InfoElement.Placeholder="Password" x:Name="PasswordBox" Margin="0,5"/>
+            <hc:ComboBox hc:InfoElement.Placeholder="Role"
+                         ItemsSource="{Binding AvailableRoles}"
+                         SelectedItem="{Binding NewUser.Role}"
+                         Margin="0,5"/>
 
-        <!-- Assign to Projects Section -->
-        <Expander Header="Assign User to Projects" 
-                  Grid.Column="1" 
-                  Grid.Row="1"
-                  Margin="5">
-            <StackPanel>
-                <hc:ComboBox hc:InfoElement.Placeholder="User"
-                             ItemsSource="{Binding TeamMembers}"
-                             DisplayMemberPath="FullName"
-                             SelectedItem="{Binding SelectedMember}"
-                             Margin="0,5"/>
+            <Button Content="Create User"
+                    Command="{Binding CreateUserCommand}"
+                    CommandParameter="{Binding ElementName=PasswordBox}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Width="120"
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Center"/>
 
-                <hc:ComboBox hc:InfoElement.Placeholder="Projects"
-                                  ItemsSource="{Binding Projects}"
-                                  SelectedItem="{Binding SelectedProject}"
-                                  DisplayMemberPath="ProjectName"
-                                  Margin="0,5"/>
+            <!-- Assign to Project -->
+            <TextBlock Text="Assign to Project" FontWeight="Bold" Margin="0,20,0,5"/>
+            <hc:ComboBox hc:InfoElement.Placeholder="User"
+                         ItemsSource="{Binding TeamMembers}"
+                         DisplayMemberPath="FullName"
+                         SelectedItem="{Binding SelectedMember}"
+                         Margin="0,5"/>
+            <hc:ComboBox hc:InfoElement.Placeholder="Projects"
+                         ItemsSource="{Binding Projects}"
+                         SelectedItem="{Binding SelectedProject}"
+                         DisplayMemberPath="ProjectName"
+                         Margin="0,5"/>
 
-                <Button Content="Assign to Projects"
-                        Command="{Binding AssignToProjectsCommand}"
-                        Style="{StaticResource ButtonPrimary}"
-                        Width="150"
-                        Margin="0,10,0,0"
-                        HorizontalAlignment="Center"/>
-            </StackPanel>
-        </Expander>
-    </Grid>
-</UserControl>
+            <Button Content="Assign to Projects"
+                    Command="{Binding AssignToProjectsCommand}"
+                    Style="{StaticResource ButtonPrimary}"
+                    Width="150"
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Center"/>
+
+        </StackPanel>
+    </ScrollViewer>
+</Window>

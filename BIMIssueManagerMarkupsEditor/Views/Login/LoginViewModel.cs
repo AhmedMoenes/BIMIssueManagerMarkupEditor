@@ -16,8 +16,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
         public Action? CloseAction { get; set; }
         public string LogoIcon => IconPaths.GetIcon(AppIcon.Logo);
 
-        [ObservableProperty] private string email = "amunes.f98@gmail.com";
-        [ObservableProperty] private string password = "Issue@33";
+        [ObservableProperty] private string email = "mostafa123@gmail.com";
+        [ObservableProperty] private string password = string.Empty;
         [ObservableProperty] private bool isLoading;
         [ObservableProperty] private string? errorMessage;
 

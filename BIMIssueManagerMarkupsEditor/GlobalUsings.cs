@@ -17,6 +17,8 @@ global using DTOs.Areas;
 global using DTOs.Companies;
 global using DTOs.CompanyProject;
 global using DTOs.Labels;
+global using DTOs.ProjectTeamMember;
+global using DTOs.Users;
 
 global using BIMIssueManagerMarkupsEditor.Helpers;
 global using BIMIssueManagerMarkupsEditor.Services;
@@ -31,6 +33,8 @@ global using BIMIssueManagerMarkupsEditor.Views.Chat;
 global using BIMIssueManagerMarkupsEditor.Views.Company;
 global using BIMIssueManagerMarkupsEditor.Views.MarkupEditor;
 global using BIMIssueManagerMarkupsEditor.Views.Login;
+global using BIMIssueManagerMarkupsEditor.Interfaces;
+
 
 
 

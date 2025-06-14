@@ -1,6 +1,4 @@
-﻿using DTOs.ProjectTeamMember;
-using DTOs.Users;
-using HandyControl.Controls;
+﻿using HandyControl.Controls;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Teams
 {
@@ -43,28 +41,6 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
             LoadUsersAsync();
             LoadProjectsAsync();
         }
-
-        [RelayCommand] private async Task AssignToProjectsAsync()
-        {
-            if (SelectedMember == null || SelectedProject == null)
-            {
-                return;
-            }
-
-            AssignUserToProjectDto dto = new AssignUserToProjectDto
-            {
-                UserId = selectedMember.UserId,
-                ProjectId = SelectedProject.ProjectId,
-                Role = selectedMember.Role
-            };
-
-            await _projectTeamMemberService.AssignUserToProjectsAsync(dto);
-            LoadUsersAsync();
-            LoadProjectsAsync();
-            selectedMember = null;
-            selectedProject = null;
-        }
-
 
         private async void LoadUsersAsync()
         {

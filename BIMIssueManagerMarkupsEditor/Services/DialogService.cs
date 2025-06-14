@@ -1,6 +1,4 @@
-﻿using BIMIssueManagerMarkupsEditor.Interfaces;
-
-namespace BIMIssueManagerMarkupsEditor.Services
+﻿namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class DialogService : IDialogService
     {

@@ -1,13 +1,13 @@
-﻿using DTOs.Companies;
-using HandyControl.Controls;
+﻿using HandyControl.Controls;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Company
 {
-    public partial class AddCompanyViewModel : ObservableObject
+    public partial class AddCompanyViewModel : ObservableObject, IDialogAware
     {
         private readonly CompanyApiService _companyApiService;
         private readonly UserSessionService _userSession;
-        public AddCompanyViewModel(CompanyApiService companyApiService, UserSessionService userSession)
+        public AddCompanyViewModel(CompanyApiService companyApiService,
+                                   UserSessionService userSession)
         {
             _companyApiService = companyApiService;
             _userSession = userSession;
@@ -19,14 +19,16 @@ namespace BIMIssueManagerMarkupsEditor.Views.Company
         [ObservableProperty] private ObservableCollection<CompanyOverviewDto> companies = new();
         [ObservableProperty] private CreateCompanyWithAdminDto company;
 
-
         [RelayCommand] private async Task CreateCompanyAsync(PasswordBox passwordBox)
         {
             Company.Password = passwordBox.Password;
             await _companyApiService.CreateCompanyWithAdminAsync(Company);
             Company.Password = null;
             Company = new CreateCompanyWithAdminDto();
+
             await LoadCompaniesAsync();
+            RequestClose?.Invoke();
+
         }
         private async Task LoadCompaniesAsync()
         {
@@ -44,5 +46,6 @@ namespace BIMIssueManagerMarkupsEditor.Views.Company
             Companies = new ObservableCollection<CompanyOverviewDto>(allCompanies);
         }
 
+        public event Action? RequestClose;
     }
 }

@@ -1,7 +1,4 @@
-﻿using DTOs.ProjectTeamMember;
-using DTOs.Users;
-
-namespace BIMIssueManagerMarkupsEditor.Services
+﻿namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class ProjectTeamMemberApiService : ApiService
     {

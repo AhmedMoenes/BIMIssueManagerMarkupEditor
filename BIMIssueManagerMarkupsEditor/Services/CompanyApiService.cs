@@ -1,6 +1,4 @@
-﻿using DTOs.Companies;
-
-namespace BIMIssueManagerMarkupsEditor.Services
+﻿namespace BIMIssueManagerMarkupsEditor.Services
 {
     public class CompanyApiService : ApiService
     {

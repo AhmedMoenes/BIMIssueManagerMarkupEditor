@@ -1,6 +1,4 @@
-﻿using BIMIssueManagerMarkupsEditor.Interfaces;
-
-namespace BIMIssueManagerMarkupsEditor.Views.Issues
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Issues
 {
     public partial class IssuesViewModel : ObservableObject
     {
