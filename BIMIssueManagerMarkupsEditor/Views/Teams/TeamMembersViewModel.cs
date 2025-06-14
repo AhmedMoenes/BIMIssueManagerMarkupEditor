@@ -22,7 +22,9 @@
 
         private ObservableCollection<ProjectTeamMemberDto> allMembers = new();
         [ObservableProperty] private ObservableCollection<ProjectTeamMemberDto> teamMembers = new();
+        [ObservableProperty] private string searchQuery;
 
+      
         private async void LoadUsersAsync()
         {
             IEnumerable<ProjectTeamMemberDto> members = Enumerable.Empty<ProjectTeamMemberDto>();
@@ -70,6 +72,10 @@
 
                 TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(filtered);
             }
+        }
+        partial void OnSearchQueryChanged(string value)
+        {
+            Search(value);
         }
     }
 }

@@ -27,6 +27,7 @@
                           hc:InfoElement.Placeholder="Search companies..."
                           HorizontalAlignment="Left"
                           Width="200"
+                          Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                           Command="{Binding SearchCommand}"
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"/>
 

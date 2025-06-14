@@ -76,5 +76,9 @@
                 Projects = new ObservableCollection<ProjectOverviewDto>(filtered);
             }
         }
+        partial void OnSearchQueryChanged(string value)
+        {
+            Search(value);
+        }
     }
 }
