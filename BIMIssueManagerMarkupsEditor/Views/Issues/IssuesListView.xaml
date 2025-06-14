@@ -74,11 +74,21 @@
                                 </StackPanel>
                             </hc:Card.Header>
                             <!-- Snapshot Image -->
-                            <Image Source="{Binding ImagePath}"
+                            <Button Command="{Binding YourCommand}" 
+                                    CommandParameter="{Binding}" 
+                                    Background="Transparent" 
+                                    BorderThickness="0" 
+                                    Padding="0" 
+                                    Height="auto"
+                                    Width="auto"
+                                    Cursor="Hand">
+                                <Image Source="{Binding ImagePath}"
                                            Height="160"
                                            Margin="3"
                                            Stretch="Uniform"
                                            SnapsToDevicePixels="True"/>
+                            </Button>
+
 
                             <!-- Date / Comment / Actions -->
                             <hc:Card.Footer>
