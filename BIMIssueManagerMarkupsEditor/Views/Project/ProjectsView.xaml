@@ -46,7 +46,7 @@
                           Stretch="Uniform"
                           Margin="0,0,8,0"
                           Data="{StaticResource Add}"/>
-                    <TextBlock Text="Add Company" VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock Text="Create Project" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
 
