@@ -41,7 +41,7 @@
                                   Width="24"
                                   Height="24"
                                   Stretch="Uniform"
-                                  Margin="8,0,8,0"/>
+                                  Margin="10,0,10,0"/>
                             <TextBlock x:Name="Label"
                                        Text="{TemplateBinding Content}"
                                        Foreground="{TemplateBinding Foreground}"

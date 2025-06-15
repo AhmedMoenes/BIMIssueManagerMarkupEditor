@@ -15,7 +15,7 @@
         <converters:BoolToColorConverter x:Key="BoolToColorConverter" />
     </Window.Resources>
 
-    <Grid Background="#FAFAFA">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -164,7 +164,6 @@
                            Margin="4"/>
                 </Border>
             </StackPanel>
-
         </Grid>
 
         <!-- 🔹 Divider -->
