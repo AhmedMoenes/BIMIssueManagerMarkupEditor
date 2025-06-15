@@ -3,21 +3,24 @@
     public partial class IssuesViewModel : ObservableObject
     {
         private readonly IDialogService _dialogService;
+        private readonly IServiceProvider _serviceProvider;
         private readonly IssueApiService _issueApiService;
         private readonly ProjectApiService _projectApiService;
         private readonly UserSessionService _userSession;
         private readonly Func<int,CommentViewModel> _CommentVmFactory;
         public IssuesViewModel(IssueApiService issueApiService, 
-                               UserSessionService userSession, 
+                               UserSessionService userSession,
                                ProjectApiService projectApiService,
-                               Func<int,CommentViewModel> CommentVmFactory,
-                               IDialogService dialogService)
+                               Func<int, CommentViewModel> CommentVmFactory,
+                               IDialogService dialogService,
+                               IServiceProvider serviceProvider)
         {
             _issueApiService = issueApiService;
             _userSession = userSession;
             _projectApiService = projectApiService;
             _CommentVmFactory = CommentVmFactory;
             _dialogService = dialogService;
+            _serviceProvider = serviceProvider;
 
             LoadIssuesAsync();
             LoadProjectsAsync();
@@ -27,6 +30,7 @@
             ApplyFilterCommand = new RelayCommand(async () => await FilterIssuesAsync());
             ResetFilterCommand = new RelayCommand(async () => await LoadIssuesAsync());
             AddCommentCommand = new RelayCommand<IssueDto>(async issue => await CreateCommentAsync(issue.IssueId));
+            OpenIssueDetailsViewCommand = new RelayCommand<IssueDto>(async issue => await OpenIssueDetailsViewAsync(issue.IssueId));
         }
 
         [ObservableProperty] private ObservableCollection<IssueDto> issues = new();
@@ -52,6 +56,7 @@
         public ICommand ApplyFilterCommand { get; }
         public ICommand ResetFilterCommand { get; }
         public ICommand AddCommentCommand { get; }
+        public ICommand OpenIssueDetailsViewCommand { get; }
 
         private void LoadPriorities()
         {
@@ -107,6 +112,14 @@
             CommentViewModel vm = _CommentVmFactory(IssueId);
             await vm.LoadIssueCommentsAsync();
             await _dialogService.ShowDialogAsync<CommentView, CommentViewModel>(vm);
+        }
+
+        private async Task OpenIssueDetailsViewAsync (int Id)
+        {
+            IssueDetailsViewModel vm = _serviceProvider.GetRequiredService<IssueDetailsViewModel>();
+            await vm.LoadIssueAsync(Id);
+            await _dialogService.ShowDialogAsync<IssueDetailsView, IssueDetailsViewModel>(vm);
+
         }
     }
 }

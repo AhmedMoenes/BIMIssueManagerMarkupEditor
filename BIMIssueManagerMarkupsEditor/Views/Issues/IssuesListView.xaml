@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues"
+             xmlns:viewModels="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=viewModels:IssuesViewModel, IsDesignTimeCreatable=True}">
+
+
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -74,13 +78,14 @@
                                 </StackPanel>
                             </hc:Card.Header>
                             <!-- Snapshot Image -->
-                            <Button Command="{Binding YourCommand}" 
-                                    CommandParameter="{Binding}" 
+                            <Button Command="{Binding DataContext.OpenIssueDetailsViewCommand,
+                                    RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding .}"
                                     Background="Transparent" 
                                     BorderThickness="0" 
                                     Padding="0" 
-                                    Height="auto"
-                                    Width="auto"
+                                    Height="160"
+                                    Width="220"
                                     Cursor="Hand">
                                 <Image Source="{Binding ImagePath}"
                                            Height="160"
