@@ -66,6 +66,10 @@
 
         <DataGrid ItemsSource="{Binding Companies}" 
                   SelectedItem="{Binding SelectedCompany}"
+                  ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
+                  BorderThickness="0"
+                  BorderBrush="Transparent"
+                  Background="White"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"

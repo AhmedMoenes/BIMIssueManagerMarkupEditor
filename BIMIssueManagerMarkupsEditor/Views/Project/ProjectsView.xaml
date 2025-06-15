@@ -85,6 +85,8 @@
 
         <DataGrid ItemsSource="{Binding Projects}" 
                   SelectedItem="{Binding SelectedProject}"
+                  Background="White"
+                  ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"

@@ -54,4 +54,14 @@
         </Setter>
     </Style>
 
+    <!--DataGrid Header Style-->
+    <Style x:Key="CustomColumnHeaderStyle" TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+    </Style>
+
 </ResourceDictionary>
