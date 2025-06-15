@@ -37,42 +37,19 @@
                        DockPanel.Dock="Left"
                        Margin="0,0,20,0"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
-                <Button Command="{Binding MarkAsResolvedCommand}"
+                <Button Content="Mark as Resolved"
+                        Command="{Binding MarkAsResolvedCommand}"
                         IsEnabled="{Binding Issue.IsResolved, Converter={StaticResource InverseBoolConverter}}"
-                        Style="{StaticResource ButtonPrimary}" Margin="5">
-                    <StackPanel Orientation="Horizontal">
-                        <Path Width="16" Height="16"
-                              Fill="White"
-                              Stretch="Uniform"
-                              Margin="0,0,8,0"
-                              Data="{StaticResource Resolved}"/>
-                        <TextBlock Text="Mark as Resolved" VerticalAlignment="Center" Foreground="White"/>
-                    </StackPanel>
-                </Button>
-
-                <Button Command="{Binding EditIssueCommand}"
-                        Style="{StaticResource ButtonPrimary}" Margin="5">
-                    <StackPanel Orientation="Horizontal">
-                        <Path Width="16" Height="16"
-                              Fill="White"
-                              Stretch="Uniform"
-                              Margin="0,0,8,0"
-                              Data="{StaticResource Edit}"/>
-                        <TextBlock Text="Edit" VerticalAlignment="Center" Foreground="White"/>
-                    </StackPanel>
-                </Button>
-
-                <Button Command="{Binding DeleteIssueCommand}"
-                        Style="{StaticResource ButtonDanger}" Margin="5">
-                    <StackPanel Orientation="Horizontal">
-                        <Path Width="16" Height="16"
-                              Fill="White"
-                              Stretch="Uniform"
-                              Margin="0,0,8,0"
-                              Data="{StaticResource Delete}"/>
-                        <TextBlock Text="Delete" VerticalAlignment="Center" Foreground="White"/>
-                    </StackPanel>
-                </Button>
+                        Style="{StaticResource ButtonPrimary}" Margin="5"/>
+                <Button Content="Add Comment"
+                        Command="{Binding AddCommentCommand}"
+                        Style ="{StaticResource ButtonDefault}" Margin="5"/>
+                <Button Content="Edit"
+                        Command="{Binding EditIssueCommand}"
+                        Style="{StaticResource ButtonInfo}" Margin="5"/>
+                <Button Content="Delete"
+                        Command="{Binding DeleteIssueCommand}"
+                        Style="{StaticResource ButtonDanger}" Margin="5"/>
             </StackPanel>
         </DockPanel>
 
@@ -150,7 +127,7 @@
         </Grid>
 
         <!-- 🔹 Divider -->
-        <hc:Divider Grid.Row="2" LineStrokeThickness="1" Margin="0"/>
+        <hc:Divider Grid.Row="2" LineStrokeThickness="3" Margin="0"/>
 
         <!-- 🔹 Description & Comments -->
         <Grid Grid.Row="3" Margin="10">
@@ -163,9 +140,9 @@
                 <TextBlock Text="📝 Description:" FontWeight="SemiBold" FontSize="14"/>
                 <TextBlock Text="{Binding Issue.Description}" TextWrapping="Wrap" Margin="4" Foreground="#444"/>
             </StackPanel>
-            <hc:Divider Grid.Column="1" LineStrokeThickness="2" Orientation="Vertical" Margin="0"/>
+            <hc:Divider Grid.Column="1" LineStrokeThickness="2" Orientation="Vertical"/>
             <StackPanel Grid.Column="2">
-                
+
                 <TextBlock Text="💬 Comments:" FontWeight="SemiBold" Margin="4,0,0,0" FontSize="14"/>
                 <ItemsControl ItemsSource="{Binding Issue.Comments}">
                     <ItemsControl.ItemTemplate>
