@@ -24,10 +24,10 @@
 
     <!--SideBar RadioButton-->
     <Style x:Key="SidebarIconRadioButtonStyle" TargetType="RadioButton">
-        <Setter Property="Foreground" Value="#FF173656"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Margin" Value="0,5,0,5"/>
+        <Setter Property="Margin" Value="0,10,0,10"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
@@ -41,11 +41,11 @@
                                   Width="24"
                                   Height="24"
                                   Stretch="Uniform"
-                                  Margin="0,0,8,0"/>
+                                  Margin="8,0,8,0"/>
                             <TextBlock x:Name="Label"
                                        Text="{TemplateBinding Content}"
                                        Foreground="{TemplateBinding Foreground}"
-                                       FontWeight="SemiBold"
+                                       FontWeight="Light"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
                     </Border>
