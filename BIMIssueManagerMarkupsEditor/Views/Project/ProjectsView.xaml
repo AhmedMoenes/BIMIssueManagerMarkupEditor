@@ -36,34 +36,57 @@
 
             <!-- Add Project button -->
             <Button Grid.Column="1"
-                    Content="Add Project"
-                    Width="Auto"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAddProjectViewCommand}"
                     HorizontalAlignment="Right"
-                    Margin="10,0,0,0"/>
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Add}"/>
+                    <TextBlock Text="Create Project" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
 
             <!-- Assign Companies button -->
             <Button Grid.Column="2"
-                    Content="Assign To Companies"
-                    Width="Auto"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAssignCompaniesViewCommand}"
                     HorizontalAlignment="Right"
-                    Margin="10,0,0,0"/>
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Assign}"/>
+                    <TextBlock Text="Assign To Project" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
 
             <!-- Delete Project button -->
             <Button Grid.Column="3"
-                    Content="Delete Project"
-                    Width="Auto"
                     Style="{StaticResource ButtonDanger}"
                     Command="{Binding DeleteSelectedProjectCommand}"
                     HorizontalAlignment="Right"
-                    Margin="10,0,0,0"/>
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Delete}"/>
+                    <TextBlock Text="Delete Company" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
         </Grid>
 
         <DataGrid ItemsSource="{Binding Projects}" 
                   SelectedItem="{Binding SelectedProject}"
+                  Background="White"
+                  ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"

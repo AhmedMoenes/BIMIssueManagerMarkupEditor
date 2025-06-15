@@ -33,25 +33,43 @@
 
             <!-- Add Company button -->
             <Button Grid.Column="1"
-                    Content="Add Company"
-                    Width="Auto"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAddCompanyViewCommand}"
                     HorizontalAlignment="Right"
-                    Margin="10,0,0,0"/>
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Add}"/>
+                    <TextBlock Text="Add Company" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
 
-            <!-- Delete Company button -->
+                    <!-- Delete Company button -->
             <Button Grid.Column="2"
-                    Content="Delete Company"
-                    Width="Auto"
                     Style="{StaticResource ButtonDanger}" 
                     Command="{Binding DeleteSelectedCompanyCommand}"
                     HorizontalAlignment="Right"
-                    Margin="10,0,0,0"/>
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Add}"/>
+                    <TextBlock Text="Delete Company" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
         </Grid>
 
         <DataGrid ItemsSource="{Binding Companies}" 
                   SelectedItem="{Binding SelectedCompany}"
+                  ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
+                  BorderThickness="0"
+                  BorderBrush="Transparent"
+                  Background="White"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"

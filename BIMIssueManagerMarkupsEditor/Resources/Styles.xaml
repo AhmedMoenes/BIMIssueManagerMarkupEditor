@@ -24,28 +24,28 @@
 
     <!--SideBar RadioButton-->
     <Style x:Key="SidebarIconRadioButtonStyle" TargetType="RadioButton">
-        <Setter Property="Foreground" Value="#FF173656"/>
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Margin" Value="0,5,0,5"/>
+        <Setter Property="Margin" Value="0,10,0,10"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border Background="Transparent"
-                            Padding="4"
+                    <Border Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
                             Cursor="Hand">
                         <StackPanel Orientation="Horizontal">
                             <Path x:Name="IconPath"
                                   Data="{TemplateBinding Tag}" 
-                                  Fill="#FF173656"
+                                  Fill="{TemplateBinding Foreground}"
                                   Width="24"
                                   Height="24"
                                   Stretch="Uniform"
-                                  Margin="0,0,8,0"/>
+                                  Margin="10,0,10,0"/>
                             <TextBlock x:Name="Label"
                                        Text="{TemplateBinding Content}"
-                                       Foreground="#FF173656"
-                                       FontWeight="SemiBold"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontWeight="Light"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
                     </Border>
@@ -54,5 +54,14 @@
         </Setter>
     </Style>
 
+    <!--DataGrid Header Style-->
+    <Style x:Key="CustomColumnHeaderStyle" TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="BorderBrush" Value="White"/>
+        <Setter Property="BorderThickness" Value="0,0,0,1"/>
+    </Style>
 
 </ResourceDictionary>
