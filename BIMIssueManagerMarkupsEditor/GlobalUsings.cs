@@ -37,6 +37,11 @@ global using BIMIssueManagerMarkupsEditor.Views.MarkupEditor;
 global using BIMIssueManagerMarkupsEditor.Views.Login;
 global using BIMIssueManagerMarkupsEditor.Interfaces;
 
+global using LiveChartsCore;
+global using LiveChartsCore.SkiaSharpView;
+global using LiveChartsCore.SkiaSharpView.Painting;
+global using SkiaSharp;
+
 
 
 
