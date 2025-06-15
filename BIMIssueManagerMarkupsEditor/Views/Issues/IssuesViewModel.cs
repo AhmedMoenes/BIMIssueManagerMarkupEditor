@@ -30,6 +30,7 @@
             ApplyFilterCommand = new RelayCommand(async () => await FilterIssuesAsync());
             ResetFilterCommand = new RelayCommand(async () => await LoadIssuesAsync());
             AddCommentCommand = new RelayCommand<IssueDto>(async issue => await CreateCommentAsync(issue.IssueId));
+            OpenIssueDetailsViewCommand = new RelayCommand<IssueDto>(async issue => await OpenIssueDetailsViewAsync(issue.IssueId));
         }
 
         [ObservableProperty] private ObservableCollection<IssueDto> issues = new();
@@ -55,6 +56,7 @@
         public ICommand ApplyFilterCommand { get; }
         public ICommand ResetFilterCommand { get; }
         public ICommand AddCommentCommand { get; }
+        public ICommand OpenIssueDetailsViewCommand { get; }
 
         private void LoadPriorities()
         {
@@ -112,11 +114,12 @@
             await _dialogService.ShowDialogAsync<CommentView, CommentViewModel>(vm);
         }
 
-        [RelayCommand]
-        public async Task OpenIssueDetailsViewAsync (int Id)
+        private async Task OpenIssueDetailsViewAsync (int Id)
         {
             IssueDetailsViewModel vm = _serviceProvider.GetRequiredService<IssueDetailsViewModel>();
+            await vm.LoadIssueAsync(Id);
             await _dialogService.ShowDialogAsync<IssueDetailsView, IssueDetailsViewModel>(vm);
+
         }
     }
 }
