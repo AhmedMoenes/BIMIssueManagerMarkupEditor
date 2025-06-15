@@ -31,20 +31,20 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border Background="Transparent"
-                            Padding="4"
+                    <Border Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}"
                             Cursor="Hand">
                         <StackPanel Orientation="Horizontal">
                             <Path x:Name="IconPath"
                                   Data="{TemplateBinding Tag}" 
-                                  Fill="#FF173656"
+                                  Fill="{TemplateBinding Foreground}"
                                   Width="24"
                                   Height="24"
                                   Stretch="Uniform"
                                   Margin="0,0,8,0"/>
                             <TextBlock x:Name="Label"
                                        Text="{TemplateBinding Content}"
-                                       Foreground="#FF173656"
+                                       Foreground="{TemplateBinding Foreground}"
                                        FontWeight="SemiBold"
                                        VerticalAlignment="Center"/>
                         </StackPanel>
@@ -53,6 +53,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 
 </ResourceDictionary>

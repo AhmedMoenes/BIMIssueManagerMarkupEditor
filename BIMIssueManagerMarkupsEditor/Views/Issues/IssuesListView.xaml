@@ -43,17 +43,31 @@
                          ItemsSource="{Binding RevitVersionOptions}"
                          SelectedItem="{Binding SelectedRevitVersion}" />
 
-            <Button Content="Apply"
-                    Style="{StaticResource ButtonPrimary}"
+            <Button Style="{StaticResource ButtonPrimary}"
                     Command="{Binding ApplyFilterCommand}"
-                    Margin="10"
-                    Width="100" />
+                    Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Filter}"/>
+                    <TextBlock Text="Apply" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
 
-            <Button Content="Reset"
-                    Style="{StaticResource ButtonDanger}"
+            <Button Style="{StaticResource ButtonDanger}"
                     Command="{Binding ResetFilterCommand}"
-                    Margin="10"
-                    Width="100" />
+                    Margin="10">
+            <StackPanel Orientation="Horizontal">
+                <Path Width="16" Height="16"
+                      Fill="White"
+                      Stretch="Uniform"
+                      Margin="0,0,8,0"
+                      Data="{StaticResource Reset}"/>
+                <TextBlock Text="Reset" VerticalAlignment="Center" Foreground="White"/>
+            </StackPanel>
+            </Button>
         </WrapPanel>
 
         <!-- Issues Cards Display -->
