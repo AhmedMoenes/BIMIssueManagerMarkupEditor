@@ -21,6 +21,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <hc:SearchBar Grid.Column="0"
@@ -28,6 +29,7 @@
                           hc:InfoElement.Placeholder="Search projects..."
                           HorizontalAlignment="Left"
                           Width="200"
+                          Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                           Command="{Binding SearchCommand}"
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"/>
 
@@ -42,12 +44,19 @@
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAssignToProjectViewCommand}"
                     Margin="10,0,0,0"/>
+
+            <Button Grid.Column="3"
+                    Content="Delete Member"
+                    Style="{StaticResource ButtonDanger}"
+                    Command="{Binding DeleteSelectedMemberCommand}"
+                    Margin="10,0,0,0"/>
         </Grid>
 
         <!-- Members List -->
         <DataGrid Grid.Column="0"
                   Grid.Row="1"
                   ItemsSource="{Binding TeamMembers}"
+                  SelectedItem="{Binding SelectedMember}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"

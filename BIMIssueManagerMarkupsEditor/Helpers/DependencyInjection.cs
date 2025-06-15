@@ -18,7 +18,7 @@
         }
         public static IServiceCollection AddViewModels(this IServiceCollection services)
         {
-            services.TryAddSingleton<LoginWindow>();
+            services.TryAddTransient<LoginWindow>();
             services.TryAddTransient<MainWindow>();
             services.TryAddTransient<CommentView>();
             services.TryAddTransient<AddProjectView>();

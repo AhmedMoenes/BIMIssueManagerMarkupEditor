@@ -18,5 +18,7 @@
         {
             return await PostAsync<CreateCompanyWithAdminDto, CompanyDto>(Company.CreateWithAdmin(), dto);
         }
+        public Task<HttpResponseMessage> DeleteAsync(int companyId)
+            => base.DeleteAsync(Company.Delete(companyId));
     }
 }

@@ -1,5 +1,5 @@
-﻿using DTOs.Login;
-using HandyControl.Controls;
+﻿using HandyControl.Controls;
+using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Login
 {
@@ -7,11 +7,13 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
     {
         private readonly AuthApiService _authApiService;
         private IServiceProvider _serviceProvider;
+        private readonly UserSessionService _userSession;
 
         public LoginViewModel(AuthApiService authApiService, IServiceProvider serviceProvider, UserSessionService userSession)
         {
             _authApiService = authApiService;
             _serviceProvider = serviceProvider;
+            _userSession = userSession;
         }
         public Action? CloseAction { get; set; }
         public string LogoIcon => IconPaths.GetIcon(AppIcon.Logo);
@@ -36,8 +38,14 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
             {
                 LoginResponseDto response = await _authApiService.LoginAsync(dto);
 
-                var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-                var mainWindowVM = _serviceProvider.GetRequiredService<MainViewModel>();
+                if (response is null || !_userSession.IsAuthenticated)
+                {
+                    MessageBox.Show("Invalid email or password");
+                    return;
+                }
+
+                MainWindow mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+                MainViewModel mainWindowVM = _serviceProvider.GetRequiredService<MainViewModel>();
                 mainWindow.DataContext = mainWindowVM;
                 mainWindow.Show();
 

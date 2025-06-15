@@ -6,12 +6,10 @@
                                 : base(client, userSession, settings)
         {
         }
-
         public async Task<IEnumerable<ProjectDto>> GetProjectsByUserIdAsync(string userId)
         {
             return await GetAsync<IEnumerable<ProjectDto>>(Project.GetByUser(userId));
         }
-
         public async Task<IEnumerable<ProjectOverviewDto>> GetForCompanyAsync(int companyId)
         {
             return await GetAsync<IEnumerable<ProjectOverviewDto>>(CompanyProject.GetForCompany(companyId));
@@ -24,16 +22,16 @@
         {
             return await GetAsync<IEnumerable<ProjectOverviewDto>>(Project.GetForSubscriber());
         }
-
         public async Task<ProjectDto> CreateProjectAsync(CreateProjectDto dto)
         {
             return await PostAsync<CreateProjectDto, ProjectDto>(Project.Create(),dto);
         }
-
         public async Task<HttpResponseMessage> AssignCompanyToProjectAsync(AssignCompaniesToProjectDto dto)
         {
             return await PostAsync (CompanyProject.AssignCompanies(), dto);
         }
+        public Task<HttpResponseMessage> DeleteAsync(int projectId)
+            => base.DeleteAsync(Project.Delete(projectId));
 
     }
 }

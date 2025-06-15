@@ -38,6 +38,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Logo -->
@@ -49,8 +50,15 @@
                     <TextBlock Text="{Binding UserCompany}" Foreground="Black" FontSize="12"/>
                 </StackPanel>
 
-                <!-- User Icon -->
-                <Image Source="{Binding UserIcon}" Grid.Column="3" Height="32" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                <!-- Profile Button -->
+                <hc:SplitButton Grid.Column="3" Margin="10,0,0,0" Command="{Binding NavigateProfileCommand}" Height="45">
+                    <Image Source="{Binding UserIcon}" Height="32" />
+                    <hc:SplitButton.DropDownContent>
+                        <StackPanel>
+                            <MenuItem Header="Logout" Command="{Binding LogoutCommand}" Width="70"  />
+                        </StackPanel>
+                    </hc:SplitButton.DropDownContent>
+                </hc:SplitButton>
             </Grid>
         </Border>
 

@@ -30,6 +30,7 @@
                           hc:InfoElement.Placeholder="Search projects..."
                           HorizontalAlignment="Left"
                           Width="200"
+                          Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                           Command="{Binding SearchCommand}" 
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"/>
 
@@ -62,6 +63,7 @@
         </Grid>
 
         <DataGrid ItemsSource="{Binding Projects}" 
+                  SelectedItem="{Binding SelectedProject}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"

@@ -27,6 +27,7 @@
                           hc:InfoElement.Placeholder="Search companies..."
                           HorizontalAlignment="Left"
                           Width="200"
+                          Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                           Command="{Binding SearchCommand}"
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"/>
 
@@ -50,12 +51,13 @@
         </Grid>
 
         <DataGrid ItemsSource="{Binding Companies}" 
-              AutoGenerateColumns="False"
-              CanUserAddRows="False"
-              IsReadOnly="True"
-              HeadersVisibility="Column"
-              Grid.Row="1"
-              Margin="0">
+                  SelectedItem="{Binding SelectedCompany}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  Grid.Row="1"
+                  Margin="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Company Name" Binding="{Binding CompanyName}" Width="Auto" />
                 <DataGridTextColumn Header="Company Users" Binding="{Binding UsersCount}" Width="Auto" />

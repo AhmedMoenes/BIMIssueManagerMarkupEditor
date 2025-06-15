@@ -6,23 +6,28 @@
         private readonly IDialogService _dialogService;
         private readonly UserSessionService _userSession;
         private readonly ProjectTeamMemberApiService _projectTeamMemberService;
-
+        private readonly UserApiService _userApiService;
         public TeamMembersViewModel(ProjectTeamMemberApiService projectTeamMemberService,
                                     UserSessionService userSession,
                                     IServiceProvider serviceProvider,
-                                    IDialogService dialogService)
+                                    IDialogService dialogService,
+                                    UserApiService userApiService)
         {
             _projectTeamMemberService = projectTeamMemberService;
             _userSession = userSession;
             _serviceProvider = serviceProvider;
             _dialogService = dialogService;
+            _userApiService = userApiService;
 
             LoadUsersAsync();
         }
 
         private ObservableCollection<ProjectTeamMemberDto> allMembers = new();
         [ObservableProperty] private ObservableCollection<ProjectTeamMemberDto> teamMembers = new();
+        [ObservableProperty] private ProjectTeamMemberDto selectedMember;
+        [ObservableProperty] private string searchQuery;
 
+      
         private async void LoadUsersAsync()
         {
             IEnumerable<ProjectTeamMemberDto> members = Enumerable.Empty<ProjectTeamMemberDto>();
@@ -53,6 +58,17 @@
         }
 
         [RelayCommand]
+        private async Task DeleteSelectedMemberAsync()
+        {
+            if (selectedMember == null)
+                return;
+
+            await _userApiService.DeleteAsync(selectedMember.UserId);
+            selectedMember = null;
+            LoadUsersAsync();
+        }
+
+        [RelayCommand]
        private void Search(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
@@ -70,6 +86,10 @@
 
                 TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(filtered);
             }
+        }
+        partial void OnSearchQueryChanged(string value)
+        {
+            Search(value);
         }
     }
 }

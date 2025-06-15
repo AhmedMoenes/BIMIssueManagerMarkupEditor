@@ -21,22 +21,24 @@
 
         private ObservableCollection<CompanyOverviewDto> allCompanies = new();
         [ObservableProperty] private ObservableCollection<CompanyOverviewDto> companies = new();
+        [ObservableProperty] private CompanyOverviewDto selectedCompany;
         [ObservableProperty] private string searchQuery;
 
         private async Task LoadCompaniesAsync()
         {
-            IEnumerable<CompanyOverviewDto> allCompanies = Enumerable.Empty<CompanyOverviewDto>();
+            IEnumerable<CompanyOverviewDto> companies = Enumerable.Empty<CompanyOverviewDto>();
 
             if (_userSession.Role == "SuperAdmin")
             {
-                allCompanies = await _companyApiService.GetAllCompaniesAsync();
+                companies = await _companyApiService.GetAllCompaniesAsync();
             }
             else
             {
-                allCompanies = await _companyApiService.GetCompanyOverviewForUserAsync(_userSession.UserId);
+                companies = await _companyApiService.GetCompanyOverviewForUserAsync(_userSession.UserId);
             }
 
-            Companies = new ObservableCollection<CompanyOverviewDto>(allCompanies);
+            allCompanies = new ObservableCollection<CompanyOverviewDto>(companies);
+            Companies = new ObservableCollection<CompanyOverviewDto>(companies);
         }
 
         [RelayCommand]
@@ -45,6 +47,17 @@
             AddCompanyViewModel addCompanyViewModel = _serviceProvider.GetRequiredService<AddCompanyViewModel>();
             await _dialogService.ShowDialogAsync<AddCompanyView, AddCompanyViewModel>(addCompanyViewModel);
 
+            await LoadCompaniesAsync();
+        }
+
+        [RelayCommand]
+        private async Task DeleteSelectedCompanyAsync()
+        {
+            if (selectedCompany == null)
+                return;
+
+            await _companyApiService.DeleteAsync(selectedCompany.CompanyId);
+            selectedCompany = null;
             await LoadCompaniesAsync();
         }
 
@@ -63,6 +76,10 @@
 
                 Companies = new ObservableCollection<CompanyOverviewDto>(filtered);
             }
+        }
+        partial void OnSearchQueryChanged(string value)
+        {
+            Search(value);
         }
     }
 }
