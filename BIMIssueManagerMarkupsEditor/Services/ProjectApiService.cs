@@ -10,6 +10,10 @@
         {
             return await GetAsync<IEnumerable<ProjectDto>>(Project.GetByUser(userId));
         }
+        public async Task<ProjectDto> GetProjectByIssueIdAsync(int issueId)
+        {
+            return await GetAsync<ProjectDto>(Project.GetByIssue(issueId));
+        }
         public async Task<IEnumerable<ProjectOverviewDto>> GetForCompanyAsync(int companyId)
         {
             return await GetAsync<IEnumerable<ProjectOverviewDto>>(CompanyProject.GetForCompany(companyId));

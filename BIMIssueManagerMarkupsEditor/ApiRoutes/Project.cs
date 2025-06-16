@@ -11,6 +11,7 @@
         public static string GetForSubscriber() => $"{Base}/overview/subscriber";
         public static string GetForUser(string userId) => $"{Base}/overview/user/{userId}";
         public static string GetByUser(string userId) => $"{Base}/user/{userId}";
+        public static string GetByIssue(int issueId) => $"{Base}/issue/{issueId}";
 
     }
 }

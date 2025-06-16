@@ -1,0 +1,76 @@
+﻿<hc:Window x:Class="BIMIssueManagerMarkupsEditor.Views.Issues.EditIssueView"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:hc="https://handyorg.github.io/handycontrol"
+           mc:Ignorable="d"
+           Title="Edit Issue"
+           Height="400" Width="300"
+           ResizeMode="NoResize"
+           WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 🔹 Vertical Form Content -->
+        <StackPanel Grid.Row="0" Margin="0 0 0 10">
+
+            <!-- Title -->
+            <TextBlock Text="Title:" />
+            <TextBox Height="30" Margin="0 0 0 10"
+                     Text="{Binding IssueForm.Title, UpdateSourceTrigger=PropertyChanged}" />
+
+            <!-- Priority -->
+            <TextBlock Text="Priority:" />
+            <ComboBox Height="30" Margin="0 0 0 10"
+                      ItemsSource="{Binding PriorityOptions}"
+                      SelectedItem="{Binding IssueForm.Priority}" />
+
+            <!-- Assigned To -->
+            <TextBlock Text="Assigned To:" />
+            <ComboBox Height="30" Margin="0 0 0 10"
+                      ItemsSource="{Binding Users}"
+                      DisplayMemberPath="FirstName"
+                      SelectedValuePath="Id"
+                      SelectedValue="{Binding IssueForm.AssignedToUserId}" />
+
+            <!-- Area -->
+            <TextBlock Text="Area:" />
+            <ComboBox Height="30" Margin="0 0 0 10"
+                      ItemsSource="{Binding Areas}"
+                      DisplayMemberPath="AreaName"
+                      SelectedValuePath="AreaId"
+                      SelectedValue="{Binding IssueForm.AreaId}" />
+
+            <!-- Labels -->
+            <TextBlock Text="Labels:" />
+            <ComboBox Height="30" Margin="0 0 0 10"
+                      ItemsSource="{Binding Labels}"
+                      DisplayMemberPath="LabelName"
+                      SelectedValuePath="LabelId"
+                      SelectedValue="{Binding SelectedLabelId}" />
+
+            <!-- Resolved -->
+            <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Resolved:" />
+            <CheckBox IsChecked="{Binding IssueForm.IsResolved}" Margin="10 0 0 10"/>
+                
+            </StackPanel>
+
+        </StackPanel>
+
+        <!-- 🔹 Bottom Buttons -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Save" Width="70" Margin="4"
+                    Style="{StaticResource ButtonPrimary}"
+                    Command="{Binding SaveCommand}" />
+            <Button Content="Cancel" Width="70" Margin="4"
+                    Style="{StaticResource ButtonDanger}"
+                    Command="{Binding CancelCommand}" />
+        </StackPanel>
+    </Grid>
+</hc:Window>

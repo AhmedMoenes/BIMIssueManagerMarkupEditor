@@ -42,10 +42,13 @@
     }
 
     [RelayCommand]
-    private void EditIssue()
+    private async Task EditIssue()
     {
-        MessageBox.Show("Edit Issue flow to be implemented...");
-        // TODO: Launch dialog with pre-filled form for editing
+        var vmFactory = _serviceProvider.GetRequiredService<Func<int, EditIssueViewModel>>();
+        var vm = vmFactory(Issue.IssueId);
+        await vm.LoadAsync();
+        await _dialogService.ShowDialogAsync<EditIssueView, EditIssueViewModel>(vm);
+        Issue = await _issueApiService.GetByIdAsync(Issue.IssueId);
     }
 
     [RelayCommand]

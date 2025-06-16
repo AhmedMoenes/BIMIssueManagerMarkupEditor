@@ -14,6 +14,7 @@
             services.TryAddScoped<UserApiService>();
             services.TryAddScoped<CommentApiService>();
             services.TryAddScoped<CompanyApiService>();
+            services.TryAddTransient<LookupApiService>();
             return services;
         }
         public static IServiceCollection AddViewModels(this IServiceCollection services)
@@ -44,6 +45,15 @@
             services.TryAddTransient<ModelViewerViewModel>();
             services.TryAddTransient<LoginViewModel>();
             services.TryAddTransient<CommentViewModel>();
+            services.AddTransient<EditIssueViewModel>();
+            services.AddTransient<EditIssueView>();
+
+            services.AddTransient<Func<int, EditIssueViewModel>>(provider => issueId =>
+                new EditIssueViewModel(
+                    provider.GetRequiredService<IssueApiService>(),
+                    provider.GetRequiredService<LookupApiService>(),
+                    provider.GetRequiredService<ProjectApiService>(),
+                    issueId));
 
             services.TryAddTransient<Func<int, CommentViewModel>>(sp => issueId =>
                 new CommentViewModel(
