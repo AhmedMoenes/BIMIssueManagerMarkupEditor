@@ -13,6 +13,7 @@
     <None Remove="Resources\Icons\company.png" />
     <None Remove="Resources\Icons\issues.png" />
     <None Remove="Resources\Icons\iti.png" />
+    <None Remove="Resources\Icons\logo-in.png" />
     <None Remove="Resources\Icons\logo.png" />
     <None Remove="Resources\Icons\markup.png" />
     <None Remove="Resources\Icons\microbim.png" />
@@ -28,6 +29,7 @@
     <Resource Include="Resources\Icons\company.png" />
     <Resource Include="Resources\Icons\issues.png" />
     <Resource Include="Resources\Icons\iti.png" />
+    <Resource Include="Resources\Icons\logo-in.png" />
     <Resource Include="Resources\Icons\logo.png" />
     <Resource Include="Resources\Icons\markup.png" />
     <Resource Include="Resources\Icons\microbim.png" />

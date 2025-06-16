@@ -8,10 +8,11 @@
         xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
         mc:Ignorable="d"
         Title="BIM ISSUE MANAGER"
-        Width="1300" Height="730"
+        WindowState="Maximized"
         MinWidth="800" MinHeight="600"
         ResizeMode="CanResize"
-        WindowStartupLocation="CenterScreen" Icon="pack://application:,,,/Resources/Icons/logo.png">
+        WindowStartupLocation="CenterScreen" Icon="pack://application:,,,/Resources/Icons/logo.png"
+        d:DataContext="{d:DesignInstance Type = local:MainViewModel, IsDesignTimeCreatable=True}">
 
     <Window.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -31,8 +32,7 @@
         <!-- Top bar -->
         <Border Grid.Row="0" Grid.ColumnSpan="2"
                 BorderThickness="0,0,0,0"
-                BorderBrush="{StaticResource PrimaryBrush}"
-                Padding="10">
+                BorderBrush="{StaticResource PrimaryBrush}">
             <Grid VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -42,9 +42,17 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Logo -->
-                <Image Source="{Binding LogoIcon}" Height="50" Grid.Column="0" VerticalAlignment="Center" Margin="5,0"/>
-
+                <!-- Logo --><!--
+                <Border BorderThickness="0"
+                                      BorderBrush="{StaticResource PrimaryBrush}">
+                    <StackPanel Grid.Column="0" Background="{StaticResource PrimaryBrush}"
+                                Width="160">
+                        <Image Source="{Binding LogoInIcon}"
+                               Height="70" 
+                               VerticalAlignment="Center" 
+                               Margin="5,0"/>
+                    </StackPanel>
+                </Border>-->
                 <!-- User Info -->
                 <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
                     <TextBlock Text="{Binding UserFullName}" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}" FontSize="16"/>
@@ -52,10 +60,13 @@
                 </StackPanel>
 
                 <!-- Profile Button -->
-                <hc:SplitButton Grid.Column="3" Margin="10,0,0,0" Command="{Binding NavigateProfileCommand}" Height="45">
+                <hc:SplitButton Grid.Column="3" Margin="10,0,0,0"
+                                Command="{Binding NavigateProfileCommand}"
+                                Background="{StaticResource PrimaryBrush}"
+                                Height="45">
 
                     <Path Data="{StaticResource User}"
-                          Fill="#FF173656"
+                          Fill="{StaticResource ContentBackgroundBrush}"
                           Width="32"
                           Height="32"
                           Stretch="Uniform"
@@ -71,9 +82,15 @@
         </Border>
 
         <!-- Sidebar -->
-        <Border Grid.Row="1" Grid.Column="0" BorderThickness="0" BorderBrush="{StaticResource PrimaryBrush}">
-            <StackPanel Background="{StaticResource PrimaryBrush}"
+        <Border Grid.RowSpan="2" Grid.Column="0" BorderThickness="0" BorderBrush="{StaticResource PrimaryBrush}">
+            <StackPanel Background="{StaticResource PrimaryBrush}" 
                     Orientation="Vertical">
+
+                <Image Source="{Binding LogoInIcon}"
+                       Height="80"
+                       Margin="10,10,10,40"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"/>
 
                 <!--<RadioButton Content="Markup Editor"
                          GroupName="Nav"

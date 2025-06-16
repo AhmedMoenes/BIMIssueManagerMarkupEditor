@@ -38,11 +38,11 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
             await _userApiService.RegisterUserAsync(newUser);
             newUser = new RegisterUserDto();
             newUser.Password = null;
-            LoadUsersAsync();
-            LoadProjectsAsync();
+            await LoadUsersAsync();
+            await LoadProjectsAsync();
         }
 
-        private async void LoadUsersAsync()
+        private async Task LoadUsersAsync()
         {
             IEnumerable<ProjectTeamMemberDto> members = Enumerable.Empty<ProjectTeamMemberDto>();
 
@@ -58,7 +58,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
             TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(members);
         }
 
-        private async void LoadProjectsAsync()
+        private async Task LoadProjectsAsync()
         {
             IEnumerable<ProjectOverviewDto> companyProjects = Enumerable.Empty<ProjectOverviewDto>();
 

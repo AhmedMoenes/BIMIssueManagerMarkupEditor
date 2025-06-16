@@ -42,15 +42,14 @@
             };
 
             await _projectTeamMemberService.AssignUserToProjectsAsync(dto);
-            LoadUsersAsync();
-            LoadProjectsAsync();
             selectedMember = null;
             selectedProject = null;
-
+            await LoadUsersAsync();
+            await LoadProjectsAsync();
             RequestClose.Invoke();
         }
 
-        private async void LoadUsersAsync()
+        private async Task LoadUsersAsync()
         {
             IEnumerable<CompanyUserDto> allMembers = Enumerable.Empty<CompanyUserDto>();
             allMembers = await _userApiService.GetCompanyUsers(_userSession.CurrentUser.CompanyId);
@@ -58,7 +57,7 @@
             Members = new ObservableCollection<CompanyUserDto>(allMembers);
         }
 
-        private async void LoadProjectsAsync()
+        private async Task LoadProjectsAsync()
         {
             IEnumerable<ProjectOverviewDto> companyProjects = Enumerable.Empty<ProjectOverviewDto>();
 
