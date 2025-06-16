@@ -23,6 +23,7 @@
         [ObservableProperty] private ObservableCollection<CompanyOverviewDto> companies = new();
         [ObservableProperty] private CompanyOverviewDto selectedCompany;
         [ObservableProperty] private string searchQuery;
+        public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
 
         private async Task LoadCompaniesAsync()
         {

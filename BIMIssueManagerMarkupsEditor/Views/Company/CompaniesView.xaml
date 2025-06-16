@@ -5,9 +5,15 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Company"
+             xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type = local:CompaniesViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
+
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -36,6 +42,7 @@
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAddCompanyViewCommand}"
                     HorizontalAlignment="Right"
+                    Visibility="{Binding IsSuperAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                     Margin="10,0,0,0">
                 <StackPanel Orientation="Horizontal">
                     <Path Width="16" Height="16"
@@ -52,6 +59,7 @@
                     Style="{StaticResource ButtonDanger}" 
                     Command="{Binding DeleteSelectedCompanyCommand}"
                     HorizontalAlignment="Right"
+                    Visibility="{Binding IsSuperAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                     Margin="10,0,0,0">
                 <StackPanel Orientation="Horizontal">
                     <Path Width="16" Height="16"
@@ -67,15 +75,11 @@
         <DataGrid ItemsSource="{Binding Companies}" 
                   SelectedItem="{Binding SelectedCompany}"
                   ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
-                  BorderThickness="0"
-                  BorderBrush="Transparent"
-                  Background="White"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"
                   HeadersVisibility="Column"
-                  Grid.Row="1"
-                  Margin="0">
+                  Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Company Name" Binding="{Binding CompanyName}" Width="Auto" />
                 <DataGridTextColumn Header="Company Users" Binding="{Binding UsersCount}" Width="Auto" />

@@ -3,7 +3,6 @@
     public partial class MainViewModel : ObservableObject, IDialogAware
     {
         private readonly IServiceProvider _provider;
-        private readonly IDialogService _dialogService;
         private readonly UserSessionService _userSession;
         private readonly AuthApiService _authApiService;
         public event Action? RequestClose;
@@ -13,8 +12,7 @@
             _provider = provider;
             _userSession = userSession;
             _authApiService = authApiService;
-            _dialogService = dialogService;
-            NavigateMarkup();
+            NavigateIssues();
         }
 
         #region Roles
