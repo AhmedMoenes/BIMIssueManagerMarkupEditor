@@ -54,6 +54,7 @@
         var vm = _commentVmFactory(Issue.IssueId);
         await vm.LoadIssueCommentsAsync();
         await _dialogService.ShowDialogAsync<CommentView, CommentViewModel>(vm);
+        Issue = await _issueApiService.GetByIdAsync(Issue.IssueId);
     }
 
     public async Task LoadIssueAsync(int issueId)
