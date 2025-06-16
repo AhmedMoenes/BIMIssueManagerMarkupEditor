@@ -1,6 +1,16 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Views.Viewer
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Text.Json;
+
+namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 {
-    public class ModelViewerViewModel : ObservableObject
+    public partial class ModelViewerViewModel : ObservableObject
     {
+        [ObservableProperty]
+        private string? selectedElementJson;
+
+        [ObservableProperty]
+        private string? selectedElementId;
+
+        
     }
 }
