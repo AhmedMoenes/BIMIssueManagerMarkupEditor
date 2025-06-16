@@ -5,9 +5,14 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
+             xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type = local:TeamMembersViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -36,6 +41,7 @@
             <Button Grid.Column="1"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAddTeamMemberViewCommand}"
+                    Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                     Margin="10,0,0,0">
                 <StackPanel Orientation="Horizontal">
                     <Path Width="16" Height="16"
@@ -50,6 +56,7 @@
             <Button Grid.Column="2"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAssignToProjectViewCommand}"
+                    Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                     Margin="10,0,0,0">
                 <StackPanel Orientation="Horizontal">
                     <Path Width="16" Height="16"
@@ -64,6 +71,7 @@
             <Button Grid.Column="3"
                     Style="{StaticResource ButtonDanger}"
                     Command="{Binding DeleteSelectedMemberCommand}"
+                    Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                     Margin="10,0,0,0">
                 <StackPanel Orientation="Horizontal">
                     <Path Width="16" Height="16"
@@ -85,8 +93,7 @@
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"
-                  HeadersVisibility="Column"
-                  Margin="5">
+                  HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="Auto" />
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="Auto" />

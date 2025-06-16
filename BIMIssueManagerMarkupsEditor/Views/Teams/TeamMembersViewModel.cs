@@ -26,8 +26,11 @@
         [ObservableProperty] private ObservableCollection<ProjectTeamMemberDto> teamMembers = new();
         [ObservableProperty] private ProjectTeamMemberDto selectedMember;
         [ObservableProperty] private string searchQuery;
+        public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
+        public bool IsCompanyAdmin => _userSession.IsInRole("CompanyAdmin");
 
-      
+
+
         private async void LoadUsersAsync()
         {
             IEnumerable<ProjectTeamMemberDto> members = Enumerable.Empty<ProjectTeamMemberDto>();

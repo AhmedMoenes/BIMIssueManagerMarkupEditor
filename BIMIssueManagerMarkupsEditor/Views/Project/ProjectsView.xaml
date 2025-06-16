@@ -5,10 +5,14 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
+             xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type = local:ProjectsViewModel, IsDesignTimeCreatable=True}">
 
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -38,6 +42,7 @@
             <Button Grid.Column="1"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAddProjectViewCommand}"
+                    Visibility="{Binding IsSuperAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                     HorizontalAlignment="Right"
                     Margin="10,0,0,0">
                 <StackPanel Orientation="Horizontal">
@@ -54,6 +59,7 @@
             <Button Grid.Column="2"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAssignCompaniesViewCommand}"
+                    Visibility="{Binding IsSuperAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                     HorizontalAlignment="Right"
                     Margin="10,0,0,0">
                 <StackPanel Orientation="Horizontal">
@@ -70,6 +76,7 @@
             <Button Grid.Column="3"
                     Style="{StaticResource ButtonDanger}"
                     Command="{Binding DeleteSelectedProjectCommand}"
+                    Visibility="{Binding IsSuperAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                     HorizontalAlignment="Right"
                     Margin="10,0,0,0">
                 <StackPanel Orientation="Horizontal">
@@ -85,14 +92,12 @@
 
         <DataGrid ItemsSource="{Binding Projects}" 
                   SelectedItem="{Binding SelectedProject}"
-                  Background="White"
                   ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"
                   HeadersVisibility="Column"
-                  Grid.Row="1"
-                  Margin="0">
+                  Grid.Row="1">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Project Name" Binding="{Binding ProjectName}" Width="Auto" />
                 <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='{}{0:dd MMM, yyyy}'}" Width="Auto" />

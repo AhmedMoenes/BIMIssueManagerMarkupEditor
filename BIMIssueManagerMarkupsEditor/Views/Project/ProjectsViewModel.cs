@@ -25,6 +25,8 @@
         [ObservableProperty] private ObservableCollection<ProjectOverviewDto> projects = new();
         [ObservableProperty] private ProjectOverviewDto selectedProject;
         [ObservableProperty] private string searchQuery;
+        public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
+
 
         private async Task LoadProjectsAsync()
         {
