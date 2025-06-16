@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf">
     <Grid>
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="2*" />
-        </Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>-->
 
         <!-- Viewer -->
         <wv2:WebView2 x:Name="WebView" Grid.Column="0" />
