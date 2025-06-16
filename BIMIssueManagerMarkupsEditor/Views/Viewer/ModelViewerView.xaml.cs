@@ -35,6 +35,17 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
             WebView.Source = new Uri("http://localhost:5173/");
         }
 
-       
+        private void WebView_WebMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
+        {
+            string? json = e.TryGetWebMessageAsString();
+            Console.WriteLine("📥 Web message received:\n" + json);
+
+            if (!string.IsNullOrWhiteSpace(json))
+            {
+                _viewModel.HandleWebMessage(json);
+            }
+        }
+
+
     }
 }
