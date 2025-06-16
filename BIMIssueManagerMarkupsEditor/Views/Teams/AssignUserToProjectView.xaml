@@ -8,7 +8,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         d:DataContext="{d:DesignInstance Type = local:AssignUserToProjectViewModel, IsDesignTimeCreatable=True}"
         mc:Ignorable="d"
-        MaxWidth="350" MaxHeight="400" WindowStartupLocation="CenterScreen">
+        MaxWidth="300" MaxHeight="320" WindowStartupLocation="CenterScreen">
 
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="30" HorizontalAlignment="Center">
@@ -37,11 +37,11 @@
 
             <!-- Submit Button -->
             <Button Content="Assign"
-                    Command="{Binding AssignCompaniesCommand}"
+                    Command="{Binding AssignToProjectsCommand}"
                     Style="{StaticResource ButtonPrimary}"
                     Margin="0,20,0,0"
                     HorizontalAlignment="Center"
-                    Width="150"/>
+                    Width="100"/>
         </StackPanel>
     </ScrollViewer>
 </Window>
