@@ -18,27 +18,27 @@
         </Grid.RowDefinitions>
 
         <!--Filter Section -->
-        <WrapPanel Orientation="Horizontal" Grid.Row="0" Margin="0,10" VerticalAlignment="Top" HorizontalAlignment="Left" >
+        <WrapPanel Orientation="Horizontal" Grid.Row="0" Margin="10,10" VerticalAlignment="Top" HorizontalAlignment="Left" >
             <hc:ComboBox hc:InfoElement.Placeholder="Project"
-                         Width="150"
+                         Width="160"
                          Margin="10"
                          ItemsSource="{Binding Projects}"
                          SelectedItem="{Binding SelectedProject}" />
 
 
             <hc:ComboBox hc:InfoElement.Placeholder="Priority"
-                         Width="150"
+                         Width="160"
                          Margin="10"
                          ItemsSource="{Binding Priorities}"
                          SelectedItem="{Binding SelectedPriority}" />
 
             <hc:DatePicker hc:InfoElement.Placeholder="Date"
+                           Width="160"
                            Margin="10"
-                           Width="150"
                            SelectedDate="{Binding SelectedDate}" />
 
             <hc:ComboBox hc:InfoElement.Placeholder="Revit Version"
-                         Width="150"
+                         Width="160"
                          Margin="10"
                          ItemsSource="{Binding RevitVersionOptions}"
                          SelectedItem="{Binding SelectedRevitVersion}" />

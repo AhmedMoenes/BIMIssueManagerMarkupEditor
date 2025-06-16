@@ -8,7 +8,7 @@
         xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
         mc:Ignorable="d"
         Title="BIM ISSUE MANAGER"
-        Width="1300" Height="700"
+        Width="1300" Height="730"
         MinWidth="800" MinHeight="600"
         ResizeMode="CanResize"
         WindowStartupLocation="CenterScreen" Icon="pack://application:,,,/Resources/Icons/logo.png">
@@ -30,7 +30,8 @@
 
         <!-- Top bar -->
         <Border Grid.Row="0" Grid.ColumnSpan="2"
-                Background="{StaticResource PrimaryBrush}"
+                BorderThickness="0,0,0,0"
+                BorderBrush="{StaticResource PrimaryBrush}"
                 Padding="10">
             <Grid VerticalAlignment="Center">
                 <Grid.ColumnDefinitions>
@@ -46,8 +47,8 @@
 
                 <!-- User Info -->
                 <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding UserFullName}" FontWeight="Bold" Foreground="White" FontSize="16"/>
-                    <TextBlock Text="{Binding UserCompany}" Foreground="White" FontSize="12"/>
+                    <TextBlock Text="{Binding UserFullName}" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}" FontSize="16"/>
+                    <TextBlock Text="{Binding UserCompany}" Foreground="{StaticResource PrimaryBrush}" FontSize="12"/>
                 </StackPanel>
 
                 <!-- Profile Button -->
@@ -70,60 +71,61 @@
         </Border>
 
         <!-- Sidebar -->
-        <StackPanel Grid.Row="1" Grid.Column="0"
-                    Background="{StaticResource PrimaryBrush}"
+        <Border Grid.Row="1" Grid.Column="0" BorderThickness="0" BorderBrush="{StaticResource PrimaryBrush}">
+            <StackPanel Background="{StaticResource PrimaryBrush}"
                     Orientation="Vertical">
 
-            <RadioButton Content="Markup Editor"
+                <!--<RadioButton Content="Markup Editor"
                          GroupName="Nav"
                          Command="{Binding NavigateMarkupCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
-                         Tag="{StaticResource Markup}" />
+                         Tag="{StaticResource Markup}" />-->
 
-            <RadioButton Content="Profile"
+                <RadioButton Content="Profile"
                          GroupName="Nav"
                          Command="{Binding NavigateProfileCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
                          Tag="{StaticResource Profile}" />
 
-            <RadioButton Content="Projects"
+                <RadioButton Content="Projects"
                          GroupName="Nav"
                          Command="{Binding NavigateProjectsCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
                          Tag="{StaticResource Project}" />
-            <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
+                <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
 
-            <RadioButton Content="Companies"
+                <RadioButton Content="Companies"
                          GroupName="Nav"
                          Command="{Binding NavigateCompaniesCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
                          Tag="{StaticResource Company}" />
-            <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
+                <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
 
-            <RadioButton Content="Teams"
+                <RadioButton Content="Teams"
                          GroupName="Nav"
                          Command="{Binding NavigateTeamsCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
                          Tag="{StaticResource Teams}" />
 
-            <RadioButton Content="Issues"
+                <RadioButton Content="Issues"
                          GroupName="Nav"
                          Command="{Binding NavigateIssuesCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
                          Tag="{StaticResource Issues}" />
 
-            <RadioButton Content="Chat"
+                <!--<RadioButton Content="Chat"
                          GroupName="Nav"
                          Command="{Binding NavigateChatCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
-                         Tag="{StaticResource Chat}" />
+                         Tag="{StaticResource Chat}" />-->
 
-            <RadioButton Content="Viewer"
+                <RadioButton Content="Viewer"
                          GroupName="Nav"
                          Command="{Binding NavigateViewerCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
                          Tag="{StaticResource Viewer}" />
-        </StackPanel>
+            </StackPanel>
+        </Border>
 
         <!-- Main content area -->
         <ContentControl Grid.Row="1" Grid.Column="1"

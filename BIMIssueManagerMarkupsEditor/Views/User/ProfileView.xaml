@@ -15,45 +15,73 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- 🔹 Profile Card -->
-        <hc:Card Grid.Row="0" Padding="16" Margin="0,0,0,16">
-            <hc:Card.Header>
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Style="{StaticResource TextBlockTitleBold}" Text="{Binding CurrentUser.FullName}" />
-                        <TextBlock Style="{StaticResource TextBlockSubTitle}" Text="{Binding CurrentUser.Email}" />
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 👤 User Info (Avatar + Identity) -->
+            <Grid Grid.Row="0" Margin="0,0,0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- 🟣 Avatar -->
+                <Border Width="80" Height="80" Background="#FF173656" CornerRadius="40"
+                VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Margin="12,0">
+                    <Path Data="{StaticResource User}" Fill="White" Width="40" Height="40" Stretch="Uniform" Margin="20"/>
+                </Border>
+
+                <!-- 🔵 Name + Email -->
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="20,0">
+                    <TextBlock Text="{Binding CurrentUser.FullName}" FontSize="20" FontWeight="Bold"/>
+                    <TextBlock Text="Email:" FontSize="11" Foreground="Gray" Margin="0,4,0,0"/>
+                    <TextBlock Text="{Binding CurrentUser.Email}" FontSize="13" FontWeight="SemiBold"/>
                 </StackPanel>
-            </hc:Card.Header>
 
-            <Grid Margin="10">
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                    <TextBlock Text="{Binding CurrentUser.CompanyName}" Style="{StaticResource TextBlockLargeBold}" />
-                    <TextBlock Text="{Binding CurrentUser.Role}" Style="{StaticResource TextBlockDefaultBold}" Margin="0,0,0,8" />
-
-                    <WrapPanel Margin="0,6" HorizontalAlignment="Center">
-                        <Border Background="#DDEEFF" CornerRadius="6" Padding="12" Margin="6">
-                            <StackPanel>
-                                <TextBlock Text="Issues Created" FontWeight="SemiBold" Foreground="#173656"/>
-                                <TextBlock Text="{Binding CurrentUser.IssuesCreatedCount}" FontSize="18" FontWeight="Bold" />
-                            </StackPanel>
-                        </Border>
-
-                        <Border Background="#E5FAD5" CornerRadius="6" Padding="12" Margin="6">
-                            <StackPanel>
-                                <TextBlock Text="Assigned Issues" FontWeight="SemiBold" Foreground="#173656"/>
-                                <TextBlock Text="{Binding CurrentUser.IssuesAssignedCount}" FontSize="18" FontWeight="Bold"/>
-                            </StackPanel>
-                        </Border>
-
-                        <Border Background="#FFF4DD" CornerRadius="6" Padding="12" Margin="6">
-                            <StackPanel>
-                                <TextBlock Text="Projects Joined" FontWeight="SemiBold" Foreground="#173656"/>
-                                <TextBlock Text="{Binding CurrentUser.ProjectsIncludedCount}" FontSize="18" FontWeight="Bold"/>
-                            </StackPanel>
-                        </Border>
-                    </WrapPanel>
+                <!-- 🟢 Company + Role -->
+                <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="20,0">
+                    <TextBlock Text="Company:" FontSize="11" Foreground="Gray"/>
+                    <TextBlock Text="{Binding CurrentUser.CompanyName}" FontSize="14" FontWeight="SemiBold"/>
+                    <TextBlock Text="Role:" FontSize="11" Foreground="Gray" Margin="0,6,0,0"/>
+                    <TextBlock Text="{Binding CurrentUser.Role}" FontSize="13" FontWeight="SemiBold" Foreground="DarkSlateGray"/>
                 </StackPanel>
             </Grid>
-        </hc:Card>
+
+            <!-- 📊 Stats Summary -->
+            <UniformGrid Grid.Row="1" Columns="3" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <!-- Created Issues -->
+                <Border Background="#EDF4FF" CornerRadius="6" Padding="10" Margin="4">
+                    <StackPanel>
+                        <TextBlock Text="Created" FontWeight="SemiBold" Foreground="#173656"/>
+                        <TextBlock Text="{Binding CurrentUser.IssuesCreatedCount}" FontSize="20" FontWeight="Bold"/>
+                        <TextBlock Text="Issues" FontSize="11" Foreground="Gray"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Assigned Issues -->
+                <Border Background="#E8FAE6" CornerRadius="6" Padding="10" Margin="4">
+                    <StackPanel>
+                        <TextBlock Text="Assigned" FontWeight="SemiBold" Foreground="#173656"/>
+                        <TextBlock Text="{Binding CurrentUser.IssuesAssignedCount}" FontSize="20" FontWeight="Bold"/>
+                        <TextBlock Text="Issues" FontSize="11" Foreground="Gray"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Projects Joined -->
+                <Border Background="#FFF5E5" CornerRadius="6" Padding="10" Margin="4">
+                    <StackPanel>
+                        <TextBlock Text="Joined" FontWeight="SemiBold" Foreground="#173656"/>
+                        <TextBlock Text="{Binding CurrentUser.ProjectsIncludedCount}" FontSize="20" FontWeight="Bold"/>
+                        <TextBlock Text="Projects" FontSize="11" Foreground="Gray"/>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+        </Grid>
+
 
         <!-- 🔹 Dashboard Charts -->
         <Grid Grid.Row="1">

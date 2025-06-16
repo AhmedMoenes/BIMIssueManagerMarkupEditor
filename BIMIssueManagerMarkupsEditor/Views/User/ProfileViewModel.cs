@@ -1,11 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using DTOs.Users;
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
-using LiveChartsCore.SkiaSharpView.Painting;
-using SkiaSharp;
-using System.Collections.Generic;
-using System.Linq;
+﻿using LiveChartsCore.Drawing;
 
 namespace BIMIssueManagerMarkupsEditor.Views.User
 {
@@ -94,7 +87,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
                 new Axis
                 {
                     Labeler = value => value.ToString("N0"),
-                    Name = "Count"
+                    Name = "Issues Count",
+                    LabelsAlignment = Align.Middle,
                 }
             };
         }
