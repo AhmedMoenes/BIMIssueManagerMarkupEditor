@@ -5,9 +5,14 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
+             xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type = local:TeamMembersViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -21,6 +26,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <hc:SearchBar Grid.Column="0"
@@ -28,31 +34,66 @@
                           hc:InfoElement.Placeholder="Search projects..."
                           HorizontalAlignment="Left"
                           Width="200"
+                          Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                           Command="{Binding SearchCommand}"
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"/>
 
             <Button Grid.Column="1"
-                    Content="Add Project"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAddTeamMemberViewCommand}"
-                    Margin="10,0,0,0"/>
+                    Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Add}"/>
+                    <TextBlock Text="Add Member" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
 
             <Button Grid.Column="2"
-                    Content="Assign User To Project"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAssignToProjectViewCommand}"
-                    Margin="10,0,0,0"/>
+                    Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Assign}"/>
+                    <TextBlock Text="Assign To Project" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
+
+            <Button Grid.Column="3"
+                    Style="{StaticResource ButtonDanger}"
+                    Command="{Binding DeleteSelectedMemberCommand}"
+                    Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Delete}"/>
+                    <TextBlock Text="Delete Member" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
         </Grid>
 
         <!-- Members List -->
         <DataGrid Grid.Column="0"
                   Grid.Row="1"
                   ItemsSource="{Binding TeamMembers}"
+                  SelectedItem="{Binding SelectedMember}"
+                  ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"
-                  HeadersVisibility="Column"
-                  Margin="5">
+                  HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="Auto" />
                 <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="Auto" />

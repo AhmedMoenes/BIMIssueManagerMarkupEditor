@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace BIMIssueManagerMarkupsEditor.Views.Company
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Company
 {
     /// <summary>
     /// Interaction logic for AddCompanyView.xaml

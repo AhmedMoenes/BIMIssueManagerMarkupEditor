@@ -9,6 +9,7 @@
         public static string Update(int userId) => $"{Base}/edit/{userId}";
         public static string Delete(int userId) => $"{Base}/delete/{userId}";
         public static string GetUsersByProject(int projectId) => $"{Base}/project-users/{projectId}";
+        public static string GetUsersByCompany(int companyId) => $"{Base}/company-users/{companyId}";
 
     }
 }

@@ -5,10 +5,14 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
+             xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type = local:ProjectsViewModel, IsDesignTimeCreatable=True}">
 
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -30,50 +34,77 @@
                           hc:InfoElement.Placeholder="Search projects..."
                           HorizontalAlignment="Left"
                           Width="200"
+                          Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                           Command="{Binding SearchCommand}" 
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"/>
 
             <!-- Add Project button -->
             <Button Grid.Column="1"
-                    Content="Add Project"
-                    Width="Auto"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAddProjectViewCommand}"
+                    Visibility="{Binding IsSuperAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                     HorizontalAlignment="Right"
-                    Margin="10,0,0,0"/>
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Add}"/>
+                    <TextBlock Text="Create Project" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
 
             <!-- Assign Companies button -->
             <Button Grid.Column="2"
-                    Content="Assign To Companies"
-                    Width="Auto"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAssignCompaniesViewCommand}"
+                    Visibility="{Binding IsSuperAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                     HorizontalAlignment="Right"
-                    Margin="10,0,0,0"/>
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Assign}"/>
+                    <TextBlock Text="Assign To Project" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
 
             <!-- Delete Project button -->
             <Button Grid.Column="3"
-                    Content="Delete Project"
-                    Width="Auto"
                     Style="{StaticResource ButtonDanger}"
                     Command="{Binding DeleteSelectedProjectCommand}"
+                    Visibility="{Binding IsSuperAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                     HorizontalAlignment="Right"
-                    Margin="10,0,0,0"/>
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Delete}"/>
+                    <TextBlock Text="Delete Company" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
         </Grid>
 
         <DataGrid ItemsSource="{Binding Projects}" 
+                  SelectedItem="{Binding SelectedProject}"
+                  ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"
                   HeadersVisibility="Column"
-                  Grid.Row="1"
-                  Margin="0">
-            <DataGrid.Columns>
+                  Grid.Row="1">
+            <DataGrid.Columns >
                 <DataGridTextColumn Header="Project Name" Binding="{Binding ProjectName}" Width="Auto" />
                 <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='{}{0:dd MMM, yyyy}'}" Width="Auto" />
                 <DataGridTextColumn Header="End Date" Binding="{Binding EndDate, StringFormat='{}{0:dd MMM, yyyy}'}" Width="Auto" />
-                <DataGridTextColumn Header="Issues Count" Binding="{Binding IssuesCount}" Width="Auto" />
+                <DataGridTextColumn Header="Issues Count" Binding="{Binding IssuesCount}" Width="Auto"/>
                 <DataGridTextColumn Header="Companies In Project" Binding="{Binding CompanyNames.Count}" Width="Auto" />
+                <DataGridTextColumn Header="Members In Project" Binding="{Binding MembersCount}" Width="Auto" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

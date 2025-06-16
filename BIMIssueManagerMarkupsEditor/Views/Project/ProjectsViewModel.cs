@@ -23,7 +23,10 @@
 
         private ObservableCollection<ProjectOverviewDto> allProjects = new();
         [ObservableProperty] private ObservableCollection<ProjectOverviewDto> projects = new();
+        [ObservableProperty] private ProjectOverviewDto selectedProject;
         [ObservableProperty] private string searchQuery;
+        public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
+
 
         private async Task LoadProjectsAsync()
         {
@@ -54,10 +57,20 @@
 
         [RelayCommand] private async Task OpenAssignCompaniesView()
         {
-            AssignCompaniesToProjectViewModel assignCompaniesToProjectViewModel =
-                _serviceProvider.GetRequiredService<AssignCompaniesToProjectViewModel>();
+            AssignCompaniesToProjectViewModel assignCompaniesToProjectViewModel = _serviceProvider.GetRequiredService<AssignCompaniesToProjectViewModel>();
             await _dialogService.ShowDialogAsync<AssignCompaniesToProjectView, AssignCompaniesToProjectViewModel>(assignCompaniesToProjectViewModel);
 
+        }
+
+        [RelayCommand]
+        private async Task DeleteSelectedProjectAsync()
+        {
+            if (selectedProject == null)
+                return;
+
+            await _projectApiService.DeleteAsync(selectedProject.ProjectId);
+            selectedProject = null;
+            await LoadProjectsAsync();
         }
 
         [RelayCommand] private void Search(string query)
@@ -70,11 +83,16 @@
             {
                 IEnumerable<ProjectOverviewDto> filtered = allProjects
                     .Where(p => p.ProjectName.Contains(query, StringComparison.OrdinalIgnoreCase)
-                                || p.Description?.Contains(query, StringComparison.OrdinalIgnoreCase) == true)
-                    .ToList();
+                                             || p.Description?.Contains(query, StringComparison.OrdinalIgnoreCase)
+                                             == true)
+                                             .ToList();
 
                 Projects = new ObservableCollection<ProjectOverviewDto>(filtered);
             }
+        }
+        partial void OnSearchQueryChanged(string value)
+        {
+            Search(value);
         }
     }
 }

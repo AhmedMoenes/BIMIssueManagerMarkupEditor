@@ -1,7 +1,4 @@
-﻿using BIMIssueManagerMarkupsEditor.ApiRoutes;
-using DTOs.ProjectTeamMember;
-
-namespace BIMIssueManagerMarkupsEditor.Views.Teams
+﻿namespace BIMIssueManagerMarkupsEditor.Views.Teams
 {
     public partial class TeamMembersViewModel : ObservableObject
     {
@@ -9,18 +6,30 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
         private readonly IDialogService _dialogService;
         private readonly UserSessionService _userSession;
         private readonly ProjectTeamMemberApiService _projectTeamMemberService;
-
+        private readonly UserApiService _userApiService;
         public TeamMembersViewModel(ProjectTeamMemberApiService projectTeamMemberService,
-                                    UserSessionService userSession)
+                                    UserSessionService userSession,
+                                    IServiceProvider serviceProvider,
+                                    IDialogService dialogService,
+                                    UserApiService userApiService)
         {
             _projectTeamMemberService = projectTeamMemberService;
             _userSession = userSession;
+            _serviceProvider = serviceProvider;
+            _dialogService = dialogService;
+            _userApiService = userApiService;
 
             LoadUsersAsync();
         }
 
         private ObservableCollection<ProjectTeamMemberDto> allMembers = new();
         [ObservableProperty] private ObservableCollection<ProjectTeamMemberDto> teamMembers = new();
+        [ObservableProperty] private ProjectTeamMemberDto selectedMember;
+        [ObservableProperty] private string searchQuery;
+        public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
+        public bool IsCompanyAdmin => _userSession.IsInRole("CompanyAdmin");
+
+
 
         private async void LoadUsersAsync()
         {
@@ -52,6 +61,17 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
         }
 
         [RelayCommand]
+        private async Task DeleteSelectedMemberAsync()
+        {
+            if (selectedMember == null)
+                return;
+
+            await _userApiService.DeleteAsync(selectedMember.UserId);
+            selectedMember = null;
+            LoadUsersAsync();
+        }
+
+        [RelayCommand]
        private void Search(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
@@ -69,6 +89,10 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
 
                 TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(filtered);
             }
+        }
+        partial void OnSearchQueryChanged(string value)
+        {
+            Search(value);
         }
     }
 }

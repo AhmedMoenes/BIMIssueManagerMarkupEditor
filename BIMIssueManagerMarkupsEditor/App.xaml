@@ -57,6 +57,7 @@
                 </ResourceDictionary>
                 <ResourceDictionary Source="Resources/HandyControlResources.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml"/>
+                <ResourceDictionary Source="Resources/IconResources.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

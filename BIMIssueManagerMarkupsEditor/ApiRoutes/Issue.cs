@@ -10,5 +10,6 @@
         public static string Delete(int id) => $"{Base}/delete/{id}";
         public static string GetByProjectId(int projectId) => $"{Base}/project/{projectId}";
         public static string GetByUserId(string userId) => $"{Base}/user/{userId}";
+        public static string MarkAsResolved(int id) => $"{Base}/resolve/{id}";
     }
 }

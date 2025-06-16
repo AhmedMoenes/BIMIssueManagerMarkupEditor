@@ -22,7 +22,7 @@
 
             <!-- Project Selector -->
             <TextBlock Text="Select Project" FontWeight="SemiBold" FontSize="12" Margin="0,0,0,5"/>
-            <ComboBox ItemsSource="{Binding Projects}"
+            <hc:ComboBox ItemsSource="{Binding Projects}"
                       SelectedItem="{Binding SelectedProject}"
                       DisplayMemberPath="ProjectName"
                       Margin="0,5"

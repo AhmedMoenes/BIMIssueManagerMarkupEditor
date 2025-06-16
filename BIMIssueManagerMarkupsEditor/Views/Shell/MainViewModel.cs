@@ -1,15 +1,18 @@
 ﻿namespace BIMIssueManagerMarkupsEditor.Views.Shell
 {
-    public partial class MainViewModel : ObservableObject
+    public partial class MainViewModel : ObservableObject, IDialogAware
     {
         private readonly IServiceProvider _provider;
         private readonly UserSessionService _userSession;
+        private readonly AuthApiService _authApiService;
+        public event Action? RequestClose;
 
-        public MainViewModel(IServiceProvider provider, UserSessionService userSession)
+        public MainViewModel(IServiceProvider provider, UserSessionService userSession, AuthApiService authApiService, IDialogService dialogService)
         {
             _provider = provider;
             _userSession = userSession;
-            NavigateMarkup();
+            _authApiService = authApiService;
+            NavigateIssues();
         }
 
         #region Roles
@@ -90,7 +93,20 @@
             CurrentView = _provider.GetRequiredService<ModelViewerViewModel>();
         }
         #endregion
+        [RelayCommand]
+        private async Task LogoutAsync()
+        {
+            await _authApiService.LogoutAsync();
 
+            LoginWindow loginWindow = _provider.GetRequiredService<LoginWindow>();
+            LoginViewModel loginViewModel = _provider.GetRequiredService<LoginViewModel>();
+            loginViewModel.CloseAction = loginWindow.Close;
+            loginWindow.DataContext = loginViewModel;
+            loginWindow.Show();
+
+            Application.Current.Windows.OfType<MainWindow>()
+                .FirstOrDefault(w => Equals(w.DataContext, this))?.Close();
+        }
 
     }
 }

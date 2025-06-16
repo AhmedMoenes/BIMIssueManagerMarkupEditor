@@ -5,9 +5,15 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Company"
+             xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type = local:CompaniesViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
+
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -27,40 +33,58 @@
                           hc:InfoElement.Placeholder="Search companies..."
                           HorizontalAlignment="Left"
                           Width="200"
+                          Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                           Command="{Binding SearchCommand}"
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"/>
 
             <!-- Add Company button -->
             <Button Grid.Column="1"
-                    Content="Add Company"
-                    Width="Auto"
                     Style="{StaticResource ButtonPrimary}"
                     Command="{Binding OpenAddCompanyViewCommand}"
                     HorizontalAlignment="Right"
-                    Margin="10,0,0,0"/>
+                    Visibility="{Binding IsSuperAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Add}"/>
+                    <TextBlock Text="Add Company" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
 
-            <!-- Delete Company button -->
+                    <!-- Delete Company button -->
             <Button Grid.Column="2"
-                    Content="Delete Company"
-                    Width="Auto"
                     Style="{StaticResource ButtonDanger}" 
                     Command="{Binding DeleteSelectedCompanyCommand}"
                     HorizontalAlignment="Right"
-                    Margin="10,0,0,0"/>
+                    Visibility="{Binding IsSuperAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
+                    Margin="10,0,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Path Width="16" Height="16"
+                          Fill="White"
+                          Stretch="Uniform"
+                          Margin="0,0,8,0"
+                          Data="{StaticResource Add}"/>
+                    <TextBlock Text="Delete Company" VerticalAlignment="Center" Foreground="White"/>
+                </StackPanel>
+            </Button>
         </Grid>
 
         <DataGrid ItemsSource="{Binding Companies}" 
-              AutoGenerateColumns="False"
-              CanUserAddRows="False"
-              IsReadOnly="True"
-              HeadersVisibility="Column"
-              Grid.Row="1"
-              Margin="0">
+                  SelectedItem="{Binding SelectedCompany}"
+                  ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  HeadersVisibility="Column"
+                  Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Company Name" Binding="{Binding CompanyName}" Width="Auto" />
-                <DataGridTextColumn Header="Users" Binding="{Binding UsersCount}" Width="Auto" />
-                <DataGridTextColumn Header="Projects" Binding="{Binding ProjectsCount}" Width="Auto" />
-                <DataGridTextColumn Header="Issues" Binding="{Binding IssuesCount}" Width="Auto" />
+                <DataGridTextColumn Header="Company Users" Binding="{Binding UsersCount}" Width="Auto" />
+                <DataGridTextColumn Header="Company Projects" Binding="{Binding ProjectsCount}" Width="Auto" />
+                <DataGridTextColumn Header="Company Issues" Binding="{Binding IssuesCount}" Width="Auto" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

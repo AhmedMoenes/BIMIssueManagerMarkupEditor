@@ -2,6 +2,7 @@
 global using System.Windows;
 global using System.Net.Http;
 global using System.Net.Http.Json;
+global using System.Linq;
 global using System.Collections.ObjectModel;
 global using System.Windows.Input;
 global using CommunityToolkit.Mvvm.Input;
@@ -19,6 +20,7 @@ global using DTOs.CompanyProject;
 global using DTOs.Labels;
 global using DTOs.ProjectTeamMember;
 global using DTOs.Users;
+global using DTOs.Login;
 
 global using BIMIssueManagerMarkupsEditor.Helpers;
 global using BIMIssueManagerMarkupsEditor.Services;
@@ -34,6 +36,11 @@ global using BIMIssueManagerMarkupsEditor.Views.Company;
 global using BIMIssueManagerMarkupsEditor.Views.MarkupEditor;
 global using BIMIssueManagerMarkupsEditor.Views.Login;
 global using BIMIssueManagerMarkupsEditor.Interfaces;
+
+global using LiveChartsCore;
+global using LiveChartsCore.SkiaSharpView;
+global using LiveChartsCore.SkiaSharpView.Painting;
+global using SkiaSharp;
 
 
 
