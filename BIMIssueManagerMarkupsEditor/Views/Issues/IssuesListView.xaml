@@ -11,14 +11,14 @@
              d:DataContext="{d:DesignInstance Type=viewModels:IssuesViewModel, IsDesignTimeCreatable=True}">
 
 
-    <Grid Margin="20">
+    <Grid Margin="20,0,20,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!--Filter Section -->
-        <WrapPanel Orientation="Horizontal" Grid.Row="0" Margin="10,10" VerticalAlignment="Top" HorizontalAlignment="Left" >
+        <WrapPanel Orientation="Horizontal" Grid.Row="0" Margin="10,0,10,10" VerticalAlignment="Top" HorizontalAlignment="Left" >
             <hc:ComboBox hc:InfoElement.Placeholder="Project"
                          Width="160"
                          Margin="10"
