@@ -85,7 +85,7 @@
                           Stretch="Uniform"
                           Margin="0,0,8,0"
                           Data="{StaticResource Delete}"/>
-                    <TextBlock Text="Delete Company" VerticalAlignment="Center" Foreground="White"/>
+                    <TextBlock Text="Delete Project" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
             </Button>
         </Grid>

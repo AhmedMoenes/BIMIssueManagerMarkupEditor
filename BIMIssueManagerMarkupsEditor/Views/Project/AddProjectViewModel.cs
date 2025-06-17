@@ -61,10 +61,9 @@
                 StartDate = null,
                 EndDate = null
             };
+            await LoadProjectsAsync();
             ProjectLabels.Clear();
             ProjectAreas.Clear();
-
-            await LoadProjectsAsync();
             RequestClose?.Invoke();
         }
 
