@@ -62,11 +62,11 @@
                 <!-- Profile Button -->
                 <hc:SplitButton Grid.Column="3" Margin="10,0,0,0"
                                 Command="{Binding NavigateProfileCommand}"
-                                Background="{StaticResource PrimaryBrush}"
+                                Background="{StaticResource ContentBackgroundBrush}"
                                 Height="45">
 
                     <Path Data="{StaticResource User}"
-                          Fill="{StaticResource ContentBackgroundBrush}"
+                          Fill="{StaticResource PrimaryBrush}"
                           Width="32"
                           Height="32"
                           Stretch="Uniform"
@@ -88,7 +88,7 @@
 
                 <Image Source="{Binding LogoInIcon}"
                        Height="80"
-                       Margin="10,10,10,40"
+                       Margin="10,10,10,25"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"/>
 
