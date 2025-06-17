@@ -63,34 +63,39 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
                 .OrderBy(g => g.First().CreatedAt)
                 .ToDictionary(g => g.Key, g => g.Count());
 
-            MonthlyActivitySeries = new ISeries[]
-            {
-                new ColumnSeries<int>
+                MonthlyActivitySeries = new ISeries[]
                 {
-                    Values = groupedByMonth.Values.ToArray(),
-                    Name = "Issues Created",
-                    Fill = new SolidColorPaint(SKColors.SteelBlue)
-                }
-            };
+                    new ColumnSeries<int>
+                    {
+                        Values = groupedByMonth.Values.ToArray(),
+                        Name = "Issues Created",
+                        Fill = new SolidColorPaint(SKColors.SteelBlue)
+                    }
+                };
 
-            XAxes = new Axis[]
-            {
-                new Axis
+                XAxes = new Axis[]
                 {
-                    Labels = groupedByMonth.Keys.ToArray(),
-                    LabelsRotation = 15
-                }
-            };
+                    new Axis
+                    {
+                        Labels = groupedByMonth.Keys.ToArray(),
+                        LabelsRotation = 15
+                    }
+                };
 
-            YAxes = new Axis[]
-            {
-                new Axis
+                YAxes = new Axis[]
                 {
-                    Labeler = value => value.ToString("N0"),
-                    Name = "Issues Count",
-                    LabelsAlignment = Align.Middle,
-                }
-            };
+                    new Axis
+                    {
+                        Labeler = value => value.ToString("N0"),
+                        Name = "Issues Count",
+                        MinLimit = 0,
+                        MaxLimit = Math.Max(3, groupedByMonth.Values.Max() + 1),
+                        LabelsAlignment = Align.Middle,
+                        SeparatorsPaint = new SolidColorPaint(SKColors.LightGray),
+                        UnitWidth = 1,           
+                        MinStep = 1              
+                    }
+                };
         }
     }
 }
