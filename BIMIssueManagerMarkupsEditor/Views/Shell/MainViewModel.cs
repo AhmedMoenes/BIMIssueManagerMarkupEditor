@@ -12,7 +12,7 @@
             _provider = provider;
             _userSession = userSession;
             _authApiService = authApiService;
-            NavigateIssues();
+            NavigateProfile();
         }
 
         #region Roles
