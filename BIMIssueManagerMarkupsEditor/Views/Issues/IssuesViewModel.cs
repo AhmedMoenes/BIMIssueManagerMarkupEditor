@@ -1,4 +1,6 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Views.Issues
+﻿using BIMIssueManagerMarkupsEditor.ViewModels.Issues;
+
+namespace BIMIssueManagerMarkupsEditor.Views.Issues
 {
     public partial class IssuesViewModel : ObservableObject
     {
@@ -22,6 +24,7 @@
             _dialogService = dialogService;
             _serviceProvider = serviceProvider;
 
+            OpenTabs.Add(new IssuesListTabViewModel(this, issueApiService, userSession, serviceProvider, projectApiService));
             LoadIssuesAsync();
             LoadProjectsAsync();
             LoadPriorities();
@@ -35,24 +38,14 @@
 
         [ObservableProperty] private ObservableCollection<IssueDto> issues = new();
         [ObservableProperty] private ObservableCollection<IssueDetailsViewModel> openIssueTabs = new();
-
+        [ObservableProperty] private ObservableCollection<object> openTabs = new();
         [ObservableProperty] private ObservableCollection<string> projects = new(); 
-
         [ObservableProperty] private string selectedProject;
-
         [ObservableProperty] private ObservableCollection<string> assignedToUser = new();
-
         [ObservableProperty] private string selectedAssignee;
-
         [ObservableProperty] private ObservableCollection<string> priorities = new();
-
         [ObservableProperty] private Priority selectedPriority;
-
         [ObservableProperty] private DateTime? selectedDate;
-
-        [ObservableProperty] private ObservableCollection<string> revitVersionOptions = new();
-
-        [ObservableProperty] private string selectedRevitVersion;
 
         public ICommand ApplyFilterCommand { get; }
         public ICommand ResetFilterCommand { get; }
@@ -109,9 +102,28 @@
         }
         private async Task OpenIssueDetailsViewAsync (int Id)
         {
+            var existingTab = OpenTabs.OfType<IssueDetailsViewModel>().FirstOrDefault(t => t.Issue?.IssueId == Id);
+            if (existingTab != null)
+            {
+                // Tab already exists, just select it
+                return;
+            }
+
             IssueDetailsViewModel vm = _serviceProvider.GetRequiredService<IssueDetailsViewModel>();
             await vm.LoadIssueAsync(Id);
-            OpenIssueTabs.Add(vm);
+            OpenTabs.Add(vm);
         }
+        [RelayCommand] private void CloseTab(object tab)
+        {
+            // Don't allow closing the first tab (issues list)
+            if (tab is IssuesListTabViewModel)
+                return;
+
+            if (tab is IssueDetailsViewModel issueDetailsVm)
+            {
+                OpenTabs.Remove(issueDetailsVm);
+            }
+        }
+
     }
 }
