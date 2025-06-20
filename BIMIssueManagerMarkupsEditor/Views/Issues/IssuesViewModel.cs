@@ -25,15 +25,16 @@
             LoadIssuesAsync();
             LoadProjectsAsync();
             LoadPriorities();
-            LoadRevitVersions();
 
             ApplyFilterCommand = new RelayCommand(async () => await FilterIssuesAsync());
             ResetFilterCommand = new RelayCommand(async () => await LoadIssuesAsync());
             AddCommentCommand = new RelayCommand<IssueDto>(async issue => await CreateCommentAsync(issue.IssueId));
             OpenIssueDetailsViewCommand = new RelayCommand<IssueDto>(async issue => await OpenIssueDetailsViewAsync(issue.IssueId));
+            CloseIssueTabCommand = new RelayCommand<IssueDetailsViewModel>(vm => { if (vm != null) OpenIssueTabs.Remove(vm); });
         }
 
         [ObservableProperty] private ObservableCollection<IssueDto> issues = new();
+        [ObservableProperty] private ObservableCollection<IssueDetailsViewModel> openIssueTabs = new();
 
         [ObservableProperty] private ObservableCollection<string> projects = new(); 
 
@@ -57,17 +58,11 @@
         public ICommand ResetFilterCommand { get; }
         public ICommand AddCommentCommand { get; }
         public ICommand OpenIssueDetailsViewCommand { get; }
+        public ICommand CloseIssueTabCommand { get; }
 
         private void LoadPriorities()
         {
             Priorities = new ObservableCollection<string>(Enum.GetNames(typeof(Priority)));
-        }
-        private void LoadRevitVersions()
-        {
-            RevitVersionOptions = new ObservableCollection<string>
-            {
-                "2021", "2022", "2023", "2024","2025","2026"
-            };
         }
         private async void LoadProjectsAsync()
         {
@@ -106,20 +101,17 @@
 
             Issues = new ObservableCollection<IssueDto>(filtered);
         }
-
         private async Task CreateCommentAsync(int IssueId)
         {
             CommentViewModel vm = _CommentVmFactory(IssueId);
             await vm.LoadIssueCommentsAsync();
             await _dialogService.ShowDialogAsync<CommentView, CommentViewModel>(vm);
         }
-
         private async Task OpenIssueDetailsViewAsync (int Id)
         {
             IssueDetailsViewModel vm = _serviceProvider.GetRequiredService<IssueDetailsViewModel>();
             await vm.LoadIssueAsync(Id);
-            await _dialogService.ShowDialogAsync<IssueDetailsView, IssueDetailsViewModel>(vm);
-
+            OpenIssueTabs.Add(vm);
         }
     }
 }
