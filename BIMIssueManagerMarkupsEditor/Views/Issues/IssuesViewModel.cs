@@ -24,7 +24,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
             _dialogService = dialogService;
             _serviceProvider = serviceProvider;
 
-            OpenTabs.Add(new IssuesListTabViewModel(this, issueApiService, userSession, serviceProvider, projectApiService));
+            OpenTabs.Add(new IssuesListTabViewModel(this));
             LoadIssuesAsync();
             LoadProjectsAsync();
             LoadPriorities();

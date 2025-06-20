@@ -67,7 +67,7 @@
         </WrapPanel>
 
         <!-- Issues Cards Display -->
-        <hc:TabControl Grid.Row="1" ItemsSource="{Binding OpenTabs}" ShowCloseButton="True" Margin="0,10,0,0">
+        <hc:TabControl Grid.Row="1" ItemsSource="{Binding OpenTabs}" ShowCloseButton="True">
             <hc:Interaction.Triggers>
                 <hc:RoutedEventTrigger RoutedEvent="hc:TabItem.Closed">
                     <hc:EventToCommand Command="{Binding CloseTabCommand}" CommandParameter="{Binding}" />
@@ -78,41 +78,62 @@
                     <TextBlock Text="{Binding Title}"/>
                 </DataTemplate>
             </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <ContentControl>
-                        <ContentControl.Style>
-                            <Style TargetType="ContentControl">
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding}" Value="{x:Type issues:IssuesListTabViewModel}">
-                                        <Setter Property="ContentTemplate">
-                                            <Setter.Value>
-                                                <DataTemplate>
-                                                    <!-- Your existing issues list content -->
-                                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                                        <ItemsControl ItemsSource="{Binding Issues}">
-                                                            <!-- Your existing items template -->
-                                                        </ItemsControl>
-                                                    </ScrollViewer>
-                                                </DataTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </DataTrigger>
-                                    <DataTrigger Binding="{Binding}" Value="{x:Type global:IssueDetailsViewModel}">
-                                        <Setter Property="ContentTemplate">
-                                            <Setter.Value>
-                                                <DataTemplate>
-                                                    <local:IssueDetailsTabView/>
-                                                </DataTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ContentControl.Style>
-                    </ContentControl>
+            <hc:TabControl.Resources>
+                <!-- Template for the main issues list -->
+                <DataTemplate DataType="{x:Type issues:IssuesListTabViewModel}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding Issues}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel IsItemsHost="True" Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <hc:Card Margin="0,0,13,13" Padding="8" Width="318" Height="250">
+                                        <hc:Card.Header>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                                                <TextBlock Text="{Binding Title}" FontWeight="Bold" Margin="5"/>
+                                            </StackPanel>
+                                        </hc:Card.Header>
+
+                                        <Button Command="{Binding DataContext.OpenIssueDetailsViewCommand,
+                                                  RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding .}"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        Padding="0"
+                                        Height="160"
+                                        Width="220"
+                                        Cursor="Hand">
+                                            <Image Source="{Binding ImagePath}"
+                                           Height="160"
+                                           Margin="3"
+                                           Stretch="Uniform"/>
+                                        </Button>
+
+                                        <hc:Card.Footer>
+                                            <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
+                                                <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:MMM dd, yyyy}'}"
+                                                   Margin="5" FontWeight="Bold"/>
+                                                <TextBlock Text="{Binding Priority}"
+                                                   Foreground="#0078D7"
+                                                   FontWeight="SemiBold"
+                                                   Margin="5"/>
+                                            </StackPanel>
+                                        </hc:Card.Footer>
+                                    </hc:Card>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </DataTemplate>
-            </TabControl.ContentTemplate>
+
+                <!-- Template for issue details tabs -->
+                <DataTemplate DataType="{x:Type global:IssueDetailsViewModel}">
+                    <local:IssueDetailsTabView/>
+                </DataTemplate>
+            </hc:TabControl.Resources>
         </hc:TabControl>
 
 

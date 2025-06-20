@@ -1,34 +1,22 @@
-﻿namespace BIMIssueManagerMarkupsEditor.ViewModels.Issues
+﻿using System.ComponentModel;
+
+namespace BIMIssueManagerMarkupsEditor.ViewModels.Issues
 {
-    public class IssuesListTabViewModel : ObservableObject
+    public partial class IssuesListTabViewModel : ObservableObject
     {
         private readonly IssuesViewModel _parentViewModel;
-        private readonly IssueApiService _issueApiService;
-        private readonly ProjectApiService _projectApiService;
-        private readonly UserSessionService _userSession;
-        private readonly Func<int, CommentViewModel> _CommentVmFactory;
+     
 
-        public IssuesListTabViewModel(IssuesViewModel parentViewModel, 
-                                      IssueApiService issueApiService, 
-                                      UserSessionService userSession, 
-                                      IServiceProvider serviceProvider, 
-                                      ProjectApiService projectApiService)
+        public IssuesListTabViewModel(IssuesViewModel parentViewModel) 
         {
             _parentViewModel = parentViewModel;
-            _issueApiService = issueApiService;
-            _userSession = userSession;
-            _projectApiService = projectApiService;
-
-            // Initialize commands
-            LoadIssuesAsync();
+            _parentViewModel.PropertyChanged += ParentViewModel_PropertyChanged;
             ApplyFilterCommand = _parentViewModel.ApplyFilterCommand;
             ResetFilterCommand = _parentViewModel.ResetFilterCommand;
         }
 
         public string Title => "All Issues";
-
-        // Expose the parent's collections
-        public ObservableCollection<IssueDto> Issues;
+        public ObservableCollection<IssueDto> Issues => _parentViewModel.Issues;
         public ObservableCollection<string> Projects => _parentViewModel.Projects;
         public ObservableCollection<string> Priorities => _parentViewModel.Priorities;
 
@@ -37,11 +25,12 @@
         public ICommand ResetFilterCommand { get; }
         public ICommand OpenIssueDetailsViewCommand => _parentViewModel.OpenIssueDetailsViewCommand;
 
-        private async Task LoadIssuesAsync()
+        private void ParentViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            IEnumerable<IssueDto> allIssues = await _issueApiService.GetIssuesByUserIdAsync(_userSession.UserId);
-            Issues = new ObservableCollection<IssueDto>(allIssues);
+            if (e.PropertyName == nameof(IssuesViewModel.Issues))
+            {
+                OnPropertyChanged(nameof(Issues));
+            }
         }
-
     }
 }
