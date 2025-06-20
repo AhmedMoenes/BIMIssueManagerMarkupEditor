@@ -17,50 +17,48 @@
 
         <Grid Grid.Row="0" Margin="0,0,0,16">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- 👤 User Info (Avatar + Identity) -->
-            <Grid Grid.Row="0" Margin="0,0,0,12">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <!-- 👥 Centered User + Company Info Block -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,12">
 
-                <!-- 🟣 Avatar -->
-                <Border Width="80" Height="80" Background="#FF173656" CornerRadius="40"
-                VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Margin="12,0">
-                    <Path Data="{StaticResource LoggedUser}" Fill="White" Width="40" Height="40" Stretch="Uniform" Margin="20"/>
-                </Border>
+                <!-- 👤 User Block -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="12">
+                    <!-- Avatar -->
+                    <Border Width="80" Height="80" Background="#FF173656" CornerRadius="40" Margin="12,0"
+                    VerticalAlignment="Center">
+                        <Path Data="{StaticResource LoggedUser}" Fill="White" Width="40" Height="40" Stretch="Uniform" Margin="20"/>
+                    </Border>
 
-                <!-- 🔵 Name + Email -->
-                <Grid Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0">
-                        <TextBlock Text="{Binding CurrentUser.FullName}" FontSize="20" FontWeight="Bold"/>
+                    <!-- Info -->
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="{Binding CurrentUser.FullName}" FontSize="20" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}"/>
                         <TextBlock Text="Email:" FontSize="11" Foreground="Gray" Margin="0,4,0,0"/>
-                        <TextBlock Text="{Binding CurrentUser.Email}" FontSize="13" FontWeight="SemiBold"/>
+                        <TextBlock Text="{Binding CurrentUser.Email}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"/>
                     </StackPanel>
+                </StackPanel>
 
-                    <!-- 🟢 Company + Role -->
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0,0">
-                        <TextBlock Text="{Binding CurrentUser.CompanyName}" FontSize="16" FontWeight="Bold"/>
+                <!-- 🏢 Company Block -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="12">
+                    <!-- Company Avatar Placeholder -->
+                    <Border Width="80" Height="80" Background="{StaticResource PrimaryBrush}" CornerRadius="40" Margin="12,0"
+                    VerticalAlignment="Center">
+                        <TextBlock Text="🏢" Foreground="White" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+
+                    <!-- Company Info -->
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="{Binding CurrentUser.CompanyName}" FontSize="20" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}"/>
                         <TextBlock Text="Role:" FontSize="11" Foreground="Gray" Margin="0,6,0,0"/>
-                        <TextBlock Text="{Binding CurrentUser.Role}" FontSize="13" FontWeight="SemiBold"/>
+                        <TextBlock Text="{Binding CurrentUser.Role}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"/>
                     </StackPanel>
-                </Grid>
-
-
-            </Grid>
+                </StackPanel>
+            </StackPanel>
 
             <!-- 📊 Stats Summary -->
-            <UniformGrid Grid.Row="1" Columns="3" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                <!-- Created Issues -->
+            <UniformGrid Grid.Row="1" Columns="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,10,0,0">
                 <Border Background="#EDF4FF" CornerRadius="6" Padding="10" Margin="4">
                     <StackPanel>
                         <TextBlock Text="Created" FontWeight="SemiBold" Foreground="#173656"/>
@@ -69,7 +67,6 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Assigned Issues -->
                 <Border Background="#E8FAE6" CornerRadius="6" Padding="10" Margin="4">
                     <StackPanel>
                         <TextBlock Text="Assigned" FontWeight="SemiBold" Foreground="#173656"/>
@@ -78,7 +75,6 @@
                     </StackPanel>
                 </Border>
 
-                <!-- Projects Joined -->
                 <Border Background="#FFF5E5" CornerRadius="6" Padding="10" Margin="4">
                     <StackPanel>
                         <TextBlock Text="Joined" FontWeight="SemiBold" Foreground="#173656"/>
@@ -88,7 +84,6 @@
                 </Border>
             </UniformGrid>
         </Grid>
-
 
         <!-- 🔹 Dashboard Charts -->
         <Grid Grid.Row="1">

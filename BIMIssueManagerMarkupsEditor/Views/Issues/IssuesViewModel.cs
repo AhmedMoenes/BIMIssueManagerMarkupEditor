@@ -113,7 +113,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
             await vm.LoadIssueAsync(Id);
             OpenTabs.Add(vm);
         }
-        [RelayCommand] private void CloseTab(object tab)
+        [RelayCommand] public void CloseTab(object tab)
         {
             // Don't allow closing the first tab (issues list)
             if (tab is IssuesListTabViewModel)
