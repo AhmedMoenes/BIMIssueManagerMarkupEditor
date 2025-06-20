@@ -6,53 +6,79 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
         mc:Ignorable="d" 
-        MaxWidth="300" MaxHeight="600" 
-        WindowStartupLocation="CenterScreen" ResizeMode="CanResize">
+        Title="Add Team Member"
+        Height="480"
+        MaxHeight="900" MaxWidth="700"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResize">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="30" HorizontalAlignment="Center">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <TextBlock Text="Add Team Member" FontSize="18" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+        <!-- Logo Header -->
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,20">
+            <Image Source="{Binding LogoIcon}" Width="240" Margin="0,0,0,5"/>
+        </StackPanel>
 
-            <!-- User Fields -->
-            <hc:TextBox hc:InfoElement.Placeholder="First Name" Text="{Binding NewUser.FirstName}" Margin="0,5"/>
-            <hc:TextBox hc:InfoElement.Placeholder="Last Name" Text="{Binding NewUser.LastName}" Margin="0,5"/>
-            <hc:TextBox hc:InfoElement.Placeholder="Username" Text="{Binding NewUser.UserName}" Margin="0,5"/>
-            <hc:TextBox hc:InfoElement.Placeholder="Email" Text="{Binding NewUser.Email}" Margin="0,5"/>
-            <hc:PasswordBox hc:InfoElement.Placeholder="Password" x:Name="PasswordBox" Margin="0,5"/>
-            <hc:ComboBox hc:InfoElement.Placeholder="Role"
-                         ItemsSource="{Binding AvailableRoles}"
-                         SelectedItem="{Binding NewUser.Role}"
-                         Margin="0,5"/>
+        <!-- Two Column Form -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Button Content="Create User"
+                <!-- Left Column -->
+                <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Top">
+                    <TextBlock Text="First Name" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="First Name"
+                                Text="{Binding NewUser.FirstName}"
+                                Height="35" Margin="0,0,0,10"/>
+
+                    <TextBlock Text="Last Name" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Last Name"
+                                Text="{Binding NewUser.LastName}"
+                                Height="35" Margin="0,0,0,10"/>
+
+                    <TextBlock Text="Username" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Username"
+                                Text="{Binding NewUser.UserName}"
+                                Height="35"/>
+                </StackPanel>
+
+                <!-- Right Column -->
+                <StackPanel Grid.Column="1" Margin="10" VerticalAlignment="Top">
+                    <TextBlock Text="Email" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Email"
+                                Text="{Binding NewUser.Email}"
+                                Height="35" Margin="0,0,0,10"/>
+
+                    <TextBlock Text="Password" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <hc:PasswordBox x:Name="PasswordBox"
+                                    hc:InfoElement.Placeholder="Password"
+                                    Height="35" Margin="0,0,0,10"/>
+
+                    <TextBlock Text="Role" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <hc:ComboBox hc:InfoElement.Placeholder="Role"
+                                 ItemsSource="{Binding AvailableRoles}"
+                                 SelectedItem="{Binding NewUser.Role}"
+                                 Height="35"/>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Create Button -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Add Member"
                     Command="{Binding CreateUserCommand}"
                     CommandParameter="{Binding ElementName=PasswordBox}"
                     Style="{StaticResource ButtonPrimary}"
-                    Width="120"
-                    Margin="0,10,0,0"
-                    HorizontalAlignment="Center"/>
-
-            <!-- Assign to Project -->
-            <!--<TextBlock Text="Assign to Project" FontWeight="Bold" Margin="0,20,0,5"/>
-            <hc:ComboBox hc:InfoElement.Placeholder="User"
-                         ItemsSource="{Binding TeamMembers}"
-                         DisplayMemberPath="FullName"
-                         SelectedItem="{Binding SelectedMember}"
-                         Margin="0,5"/>
-            <hc:ComboBox hc:InfoElement.Placeholder="Projects"
-                         ItemsSource="{Binding Projects}"
-                         SelectedItem="{Binding SelectedProject}"
-                         DisplayMemberPath="ProjectName"
-                         Margin="0,5"/>
-
-            <Button Content="Assign to Projects"
-                    Command="{Binding AssignToProjectsCommand}"
-                    Style="{StaticResource ButtonPrimary}"
-                    Width="150"
-                    Margin="0,10,0,0"
-                    HorizontalAlignment="Center"/>-->
-
+                    hc:IconElement.Geometry="{StaticResource Add}"
+                    Width="140"/>
         </StackPanel>
-    </ScrollViewer>
+    </Grid>
 </Window>

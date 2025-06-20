@@ -6,42 +6,59 @@
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
         xmlns:global="clr-namespace:"
         xmlns:hc="https://handyorg.github.io/handycontrol"
-        d:DataContext="{d:DesignInstance Type = local:AssignUserToProjectViewModel, IsDesignTimeCreatable=True}"
+        d:DataContext="{d:DesignInstance Type=local:AssignUserToProjectViewModel, IsDesignTimeCreatable=True}"
         mc:Ignorable="d"
-        MaxWidth="300" MaxHeight="320" WindowStartupLocation="CenterScreen">
+        Title="Assign User"
+        MaxWidth="330" MaxHeight="400"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="30" HorizontalAlignment="Center">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <!-- Assign Button -->
+        </Grid.RowDefinitions>
 
-            <!-- Title -->
-            <TextBlock Text="Assign Users to Project"
-                       FontSize="18"
-                       FontWeight="Bold"
-                       Margin="0,0,0,20"
-                       HorizontalAlignment="Center"/>
-
-            <!-- Project Selector -->
-            <TextBlock Text="Select Project" FontWeight="SemiBold" FontSize="12" Margin="0,0,0,5"/>
-            <hc:ComboBox ItemsSource="{Binding Projects}"
-                      SelectedItem="{Binding SelectedProject}"
-                      DisplayMemberPath="ProjectName"
-                      Margin="0,5"
-                      Height="30"/>
-
-            <!-- Users Multi-Selector -->
-            <TextBlock Text="Select Member" FontWeight="SemiBold" FontSize="12" Margin="0,0,0,5"/>
-            <hc:ComboBox ItemsSource="{Binding Members}"
-                              DisplayMemberPath="FullName"
-                              Margin="0,5"
-                              Height="30"/>
-
-            <!-- Submit Button -->
-            <Button Content="Assign"
-                    Command="{Binding AssignToProjectsCommand}"
-                    Style="{StaticResource ButtonPrimary}"
-                    Margin="0,20,0,0"
-                    HorizontalAlignment="Center"
-                    Width="100"/>
+        <!-- Logo and Header -->
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,20">
+            <Image Source="{Binding LogoIcon}" Width="240" Margin="0,0,0,5"/>
         </StackPanel>
-    </ScrollViewer>
+
+        <!-- Scrollable Form -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0" HorizontalAlignment="Center" Width="250">
+
+                <!-- Project Selector -->
+                <TextBlock Text="Projects" FontWeight="Bold" Margin="0,0,0,4"/>
+                <hc:ComboBox ItemsSource="{Binding Projects}"
+                             SelectedItem="{Binding SelectedProject}"
+                             hc:InfoElement.Placeholder="Select Project"
+                             hc:InfoElement.Necessary="True"
+                             DisplayMemberPath="ProjectName"
+                             Margin="0,0,0,10"
+                             Height="35"/>
+
+                <!-- Users Selector -->
+                <TextBlock Text="Member" FontWeight="Bold" Margin="0,10,0,4"/>
+                <hc:ComboBox ItemsSource="{Binding Members}"
+                             SelectedItem="{Binding SelectedMember}"
+                             DisplayMemberPath="FullName"
+                             hc:InfoElement.Placeholder="Select Member"
+                             hc:InfoElement.Necessary="True"
+                             Margin="0,0,0,5"
+                             Height="35"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Assign Button -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Assign"
+                    Width="100"
+                    hc:IconElement.Geometry="{StaticResource Assign}"
+                    Command="{Binding AssignToProjectsCommand}"
+                    Style="{StaticResource ButtonPrimary}"/>
+        </StackPanel>
+    </Grid>
 </Window>

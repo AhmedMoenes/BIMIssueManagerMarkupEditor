@@ -26,8 +26,9 @@
         [ObservableProperty] private CompanyUserDto selectedMember;
         [ObservableProperty] private ProjectOverviewDto selectedProject;
 
-        [RelayCommand]
-        private async Task AssignToProjectsAsync()
+        public string LogoIcon => IconPaths.GetIcon(AppIcon.Logo);
+
+        [RelayCommand] private async Task AssignToProjectsAsync()
         {
             if (SelectedMember == null || SelectedProject == null)
             {
@@ -48,7 +49,6 @@
             await LoadProjectsAsync();
             RequestClose.Invoke();
         }
-
         private async Task LoadUsersAsync()
         {
             IEnumerable<CompanyUserDto> allMembers = Enumerable.Empty<CompanyUserDto>();
@@ -56,7 +56,6 @@
 
             Members = new ObservableCollection<CompanyUserDto>(allMembers);
         }
-
         private async Task LoadProjectsAsync()
         {
             IEnumerable<ProjectOverviewDto> companyProjects = Enumerable.Empty<ProjectOverviewDto>();

@@ -14,7 +14,7 @@
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
 
-    <Grid Margin="20">
+    <Grid Margin="20,0,20,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -33,7 +33,7 @@
                           hc:InfoElement.ShowClearButton="True"
                           hc:InfoElement.Placeholder="Search projects..."
                           HorizontalAlignment="Left"
-                          Width="200"
+                          Width="400"
                           Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
                           Command="{Binding SearchCommand}"
                           CommandParameter="{Binding Text, RelativeSource={RelativeSource Self}}"/>
