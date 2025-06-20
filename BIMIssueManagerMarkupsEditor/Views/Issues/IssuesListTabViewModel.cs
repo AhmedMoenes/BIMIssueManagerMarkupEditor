@@ -15,7 +15,7 @@ namespace BIMIssueManagerMarkupsEditor.ViewModels.Issues
             ResetFilterCommand = _parentViewModel.ResetFilterCommand;
         }
 
-        public string Title => "All Issues";
+        public string Title => "Your Created/Assigned Issues";
         public ObservableCollection<IssueDto> Issues => _parentViewModel.Issues;
         public ObservableCollection<string> Projects => _parentViewModel.Projects;
         public ObservableCollection<string> Priorities => _parentViewModel.Priorities;
@@ -23,7 +23,6 @@ namespace BIMIssueManagerMarkupsEditor.ViewModels.Issues
         // Expose the parent's commands
         public ICommand ApplyFilterCommand { get; }
         public ICommand ResetFilterCommand { get; }
-        public ICommand OpenIssueDetailsViewCommand => _parentViewModel.OpenIssueDetailsViewCommand;
 
         private void ParentViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {

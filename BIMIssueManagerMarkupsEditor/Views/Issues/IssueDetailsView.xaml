@@ -5,10 +5,13 @@
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
+           xmlns:global="clr-namespace:"
            mc:Ignorable="d"
            Width="960" Height="640"
            WindowStartupLocation="CenterScreen"
-           ResizeMode="CanResize">
+           ResizeMode="CanResize"
+           d:DataContext="{d:DesignInstance Type=global:IssueDetailsViewModel, IsDesignTimeCreatable=True}">
+
 
     <Window.Resources>
         <converters:InverseBoolConverter x:Key="InverseBoolConverter" />

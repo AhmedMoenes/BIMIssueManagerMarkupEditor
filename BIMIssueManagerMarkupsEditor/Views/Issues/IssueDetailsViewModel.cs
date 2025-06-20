@@ -19,6 +19,11 @@
     }
 
     [ObservableProperty] private IssueDto? issue;
+    public string Title => Issue?.Title ?? "Issue Details";
+    partial void OnIssueChanged(IssueDto? value)
+    {
+        OnPropertyChanged(nameof(Title));
+    }
 
     [RelayCommand] private async Task MarkAsResolved()
     {
