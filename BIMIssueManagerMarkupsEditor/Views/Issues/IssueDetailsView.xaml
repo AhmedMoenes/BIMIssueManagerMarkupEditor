@@ -7,6 +7,7 @@
            xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
            xmlns:global="clr-namespace:"
            mc:Ignorable="d"
+           Title="Issue Details" 
            Width="960" Height="640"
            WindowStartupLocation="CenterScreen"
            ResizeMode="CanResize"
