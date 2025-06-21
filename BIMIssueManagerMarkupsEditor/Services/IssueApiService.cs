@@ -27,7 +27,7 @@
         }
         public Task<HttpResponseMessage> UpdateAsync(int id, UpdateIssueDto dto) => PutAsync(Issue.Update(id), dto);
         public Task<HttpResponseMessage> UpdateResolvedStatusAsync(int id, bool status) => PutAsync(Issue.MarkAsResolved(id), status);
-        public Task<HttpResponseMessage> DeleteAsync(int id) => DeleteAsync(Issue.Delete(id));
+        public Task<HttpResponseMessage> DeleteAsync(int id) => base.DeleteAsync(Issue.Delete(id));
         public async Task<IEnumerable<IssueDto>> GetIssuesByProjectIdAsync(int projectId)
         {
             return await GetAsync<List<IssueDto>>(Issue.GetByProjectId(projectId));

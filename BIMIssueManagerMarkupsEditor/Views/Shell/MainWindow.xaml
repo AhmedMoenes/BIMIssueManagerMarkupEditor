@@ -74,7 +74,10 @@
                           HorizontalAlignment="Center"/>
                     <hc:SplitButton.DropDownContent>
                         <StackPanel>
-                            <MenuItem Header="Logout" Command="{Binding LogoutCommand}" Width="70"  />
+                            <MenuItem Header="Logout" 
+                                      Command="{Binding LogoutCommand}"
+                                      Foreground="{StaticResource PrimaryBrush}"
+                                      Width="70"  />
                         </StackPanel>
                     </hc:SplitButton.DropDownContent>
                 </hc:SplitButton>
@@ -118,7 +121,7 @@
                          Tag="{StaticResource Company}" />
                 <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
 
-                <RadioButton Content="Teams"
+                <RadioButton Content="Members"
                          GroupName="Nav"
                          Command="{Binding NavigateTeamsCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
@@ -141,12 +144,17 @@
                          Command="{Binding NavigateViewerCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
                          Tag="{StaticResource Viewer}" />
+                <RadioButton Content="AI Assistant"
+                         GroupName="Nav"
+                         Command="{Binding NavigateAIAssistant}"
+                         Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Tag="{StaticResource RobotSolid}" />
             </StackPanel>
         </Border>
 
         <!-- Main content area -->
         <ContentControl Grid.Row="1" Grid.Column="1"
                         Content="{Binding CurrentView}"
-                        Margin="0,1,10,10" />
+                        Margin="0,1,0,0" />
     </Grid>
 </Window>

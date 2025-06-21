@@ -27,12 +27,12 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 
             Console.WriteLine("✅ CoreWebView2 ready");
 
-            //WebView.CoreWebView2.OpenDevToolsWindow();
+            WebView.CoreWebView2.OpenDevToolsWindow();
             WebView.WebMessageReceived += WebView_WebMessageReceived;
 
             Console.WriteLine("✅ WebMessageReceived event attached");
 
-            WebView.Source = new Uri("http://localhost:5173/");
+            WebView.Source = new Uri("http://localhost:5174/");
         }
 
         private void WebView_WebMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)

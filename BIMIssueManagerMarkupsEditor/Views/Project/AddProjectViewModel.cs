@@ -29,6 +29,8 @@
         [ObservableProperty] private string newLabelName;
         [ObservableProperty] private string newAreaName;
 
+        public string LogoIcon => IconPaths.GetIcon(AppIcon.Logo);
+
         [RelayCommand] private void AddLabel()
         {
             if (!string.IsNullOrWhiteSpace(NewLabelName))
@@ -37,7 +39,6 @@
                 NewLabelName = string.Empty;
             }
         }
-
         [RelayCommand] private void AddArea()
         {
             if (!string.IsNullOrWhiteSpace(NewAreaName))
@@ -46,7 +47,6 @@
                 NewAreaName = string.Empty;
             }
         }
-
         [RelayCommand] async Task CreateProjectAsync()
         {
             if (Project == null || string.IsNullOrWhiteSpace(Project.ProjectName))
@@ -61,13 +61,11 @@
                 StartDate = null,
                 EndDate = null
             };
+            await LoadProjectsAsync();
             ProjectLabels.Clear();
             ProjectAreas.Clear();
-
-            await LoadProjectsAsync();
             RequestClose?.Invoke();
         }
-
         private async Task LoadProjectsAsync()
         {
             IEnumerable<ProjectOverviewDto> userProjects = Enumerable.Empty<ProjectOverviewDto>();
@@ -87,7 +85,6 @@
 
             Projects = new ObservableCollection<ProjectOverviewDto>(userProjects);
         }
-
         private async Task LoadCompaniesAsync()
         {
             IEnumerable<CompanyOverviewDto> allCompanies = Enumerable.Empty<CompanyOverviewDto>();

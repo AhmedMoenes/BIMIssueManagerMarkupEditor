@@ -12,7 +12,8 @@
         Teams,
         Issues,
         Chat,
-        Viewer
+        Viewer,
+        AIAssistant
     }
 
     public static class IconPaths

@@ -41,6 +41,7 @@
         public string IssuesIcon => IconPaths.GetIcon(AppIcon.Issues);
         public string ChatIcon => IconPaths.GetIcon(AppIcon.Chat);
         public string ViewerIcon => IconPaths.GetIcon(AppIcon.Viewer);
+        public string AIAssistantIcon => IconPaths.GetIcon(AppIcon.AIAssistant);
         #endregion
 
         #region Navigation
@@ -92,6 +93,11 @@
         private void NavigateViewer()
         {
             CurrentView = _provider.GetRequiredService<ModelViewerViewModel>();
+        }
+        [RelayCommand]
+        private void NavigateAIAssistant()
+        {
+            CurrentView = _provider.GetRequiredService<AIAssistantViewModel>();
         }
         #endregion
         [RelayCommand]

@@ -6,59 +6,82 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Company"
         mc:Ignorable="d"
-        MaxWidth="300" MaxHeight="500" WindowStartupLocation="CenterScreen" ResizeMode="CanResize">
+        Title="Add Company"
+        Height="550"
+        MaxHeight="900" MaxWidth="900"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="30" HorizontalAlignment="Center">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <!-- Title -->
-            <TextBlock Text="Create New Company" FontSize="18" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Center"/>
-
-            <!-- Company Info -->
-            <hc:TextBox hc:InfoElement.Placeholder="Company Name"
-                        Text="{Binding Company.CompanyName, UpdateSourceTrigger=PropertyChanged}"
-                        Margin="0,5"/>
-
-            <hc:TextBox hc:InfoElement.Placeholder="Description"
-                        Text="{Binding Company.Description, UpdateSourceTrigger=PropertyChanged}"
-                        Margin="0,5"/>
-
-            <!-- Section Label -->
-            <TextBlock Text="Company Admin Info"
-                       FontWeight="SemiBold"
-                       FontSize="12"
-                       Margin="0,10,0,5"/>
-
-            <!-- Admin Info Fields -->
-            <hc:TextBox hc:InfoElement.Placeholder="First Name"
-                        Text="{Binding Company.FirstName, UpdateSourceTrigger=PropertyChanged}"
-                        Margin="0,5"/>
-
-            <hc:TextBox hc:InfoElement.Placeholder="Last Name"
-                        Text="{Binding Company.LastName, UpdateSourceTrigger=PropertyChanged}"
-                        Margin="0,5"/>
-
-            <hc:TextBox hc:InfoElement.Placeholder="Username"
-                        Text="{Binding Company.UserName, UpdateSourceTrigger=PropertyChanged}"
-                        Margin="0,5"/>
-
-            <hc:TextBox hc:InfoElement.Placeholder="Email"
-                        Text="{Binding Company.Email, UpdateSourceTrigger=PropertyChanged}"
-                        Margin="0,5"/>
-
-            <!-- Password Field -->
-            <hc:PasswordBox x:Name="PasswordBox"
-                            hc:InfoElement.Placeholder="Password"
-                            ShowEyeButton="True"
-                            Margin="0,5"/>
-
-            <!-- Submit Button -->
-            <Button Content="Create Company"
-                    Command="{Binding CreateCompanyCommand}"
-                    Style="{StaticResource ButtonPrimary}"
-                    CommandParameter="{Binding ElementName=PasswordBox}"
-                    Margin="0,20,0,0"
-                    HorizontalAlignment="Center"/>
+        <!-- Header -->
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,0,0,20">
+            <Image Source="{Binding LogoIcon}" Width="240" Margin="0,0,0,5"/>
         </StackPanel>
-    </ScrollViewer>
+
+        <!-- Scrollable Form with Two Columns -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Column -->
+                <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Stretch">
+                    <TextBlock Text="Company Name" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Enter Company Name"
+                                Text="{Binding Company.CompanyName, UpdateSourceTrigger=PropertyChanged}"
+                                Height="35"/>
+
+                    <TextBlock Text="Description" FontWeight="Bold" Margin="0,10,0,4"/>
+                    <hc:TextBox Text="{Binding Company.Description, UpdateSourceTrigger=PropertyChanged}"
+                                Padding="5"
+                                VerticalContentAlignment="Top"
+                                AcceptsReturn="True"
+                                VerticalScrollBarVisibility="Auto"
+                                Height="170"
+                                TextWrapping="Wrap"
+                                hc:InfoElement.Placeholder="Write Company Description"/>
+                </StackPanel>
+
+                <!-- Right Column -->
+                <StackPanel Grid.Column="1" Margin="10" VerticalAlignment="Top">
+                    <TextBlock Text="Company Admin Info" FontWeight="Bold" Margin="0,0,0,4"/>
+
+                    <hc:TextBox hc:InfoElement.Placeholder="First Name"
+                                Text="{Binding Company.FirstName, UpdateSourceTrigger=PropertyChanged}"
+                                Height="35" Margin="0,0,0,7"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Last Name"
+                                Text="{Binding Company.LastName, UpdateSourceTrigger=PropertyChanged}"
+                                Height="35" Margin="0,7"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Username"
+                                Text="{Binding Company.UserName, UpdateSourceTrigger=PropertyChanged}"
+                                Height="35" Margin="0,7"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Email"
+                                Text="{Binding Company.Email, UpdateSourceTrigger=PropertyChanged}"
+                                Height="35" Margin="0,7"/>
+                    <hc:PasswordBox x:Name="PasswordBox"
+                                    hc:InfoElement.Placeholder="Password"
+                                    ShowEyeButton="True"
+                                    Height="35" Margin="0,7"/>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <!-- Fixed Submit Button -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Add Company"
+                    Command="{Binding CreateCompanyCommand}"
+                    CommandParameter="{Binding ElementName=PasswordBox}"
+                    Style="{StaticResource ButtonPrimary}"
+                    hc:IconElement.Geometry="{StaticResource Add}"
+                    Width="140"/>
+        </StackPanel>
+    </Grid>
 </Window>

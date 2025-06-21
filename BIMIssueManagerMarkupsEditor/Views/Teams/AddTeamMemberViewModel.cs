@@ -31,6 +31,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
         [ObservableProperty] private ProjectTeamMemberDto selectedMember;
         [ObservableProperty] private ProjectOverviewDto selectedProject;
 
+        public string LogoIcon => IconPaths.GetIcon(AppIcon.Logo);
+
         [RelayCommand] private async Task CreateUserAsync(PasswordBox passwordBox)
         {
             newUser.CompanyId = _userSession.CurrentUser.CompanyId;
@@ -41,7 +43,6 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
             await LoadUsersAsync();
             await LoadProjectsAsync();
         }
-
         private async Task LoadUsersAsync()
         {
             IEnumerable<ProjectTeamMemberDto> members = Enumerable.Empty<ProjectTeamMemberDto>();
@@ -57,7 +58,6 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
 
             TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(members);
         }
-
         private async Task LoadProjectsAsync()
         {
             IEnumerable<ProjectOverviewDto> companyProjects = Enumerable.Empty<ProjectOverviewDto>();

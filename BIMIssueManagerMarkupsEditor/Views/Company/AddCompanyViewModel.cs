@@ -6,6 +6,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Company
     {
         private readonly CompanyApiService _companyApiService;
         private readonly UserSessionService _userSession;
+        public event Action? RequestClose;
         public AddCompanyViewModel(CompanyApiService companyApiService,
                                    UserSessionService userSession)
         {
@@ -18,6 +19,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.Company
 
         [ObservableProperty] private ObservableCollection<CompanyOverviewDto> companies = new();
         [ObservableProperty] private CreateCompanyWithAdminDto company;
+
+        public string LogoIcon => IconPaths.GetIcon(AppIcon.Logo);
 
         [RelayCommand] private async Task CreateCompanyAsync(PasswordBox passwordBox)
         {
@@ -46,6 +49,5 @@ namespace BIMIssueManagerMarkupsEditor.Views.Company
             Companies = new ObservableCollection<CompanyOverviewDto>(allCompanies);
         }
 
-        public event Action? RequestClose;
     }
 }
