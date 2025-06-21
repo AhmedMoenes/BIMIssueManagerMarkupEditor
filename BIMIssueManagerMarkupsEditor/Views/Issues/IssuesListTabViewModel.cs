@@ -15,7 +15,7 @@ namespace BIMIssueManagerMarkupsEditor.ViewModels.Issues
             ResetFilterCommand = _parentViewModel.ResetFilterCommand;
         }
 
-        public string Title => "Your Created/Assigned Issues";
+        public string Title => "Created/Assigned Issues";
         public ObservableCollection<IssueDto> Issues => _parentViewModel.Issues;
         public ObservableCollection<string> Projects => _parentViewModel.Projects;
         public ObservableCollection<string> Priorities => _parentViewModel.Priorities;

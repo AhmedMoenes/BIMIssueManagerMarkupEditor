@@ -40,6 +40,7 @@
             return;
 
         await _issueApiService.DeleteAsync(Issue.IssueId);
+        RequestClose.Invoke();
     }
     [RelayCommand] private async Task EditIssue()
     {

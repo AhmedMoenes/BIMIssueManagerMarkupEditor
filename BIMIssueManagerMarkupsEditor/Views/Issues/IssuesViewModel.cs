@@ -25,12 +25,13 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
             _serviceProvider = serviceProvider;
 
             OpenTabs.Add(new IssuesListTabViewModel(this));
+            SelectedTab = OpenTabs.First();
             LoadIssuesAsync();
             LoadProjectsAsync();
             LoadPriorities();
 
             ApplyFilterCommand = new RelayCommand(async () => await FilterIssuesAsync());
-            ResetFilterCommand = new RelayCommand(async () => await LoadIssuesAsync());
+            ResetFilterCommand = new RelayCommand(async () => await ResetFiltersAsync());
             AddCommentCommand = new RelayCommand<IssueDto>(async issue => await CreateCommentAsync(issue.IssueId));
             OpenIssueDetailsViewCommand = new RelayCommand<IssueDto>(async issue => await OpenIssueDetailsViewAsync(issue.IssueId));
             CloseIssueTabCommand = new RelayCommand<IssueDetailsViewModel>(vm => { if (vm != null) OpenIssueTabs.Remove(vm); });
@@ -42,10 +43,10 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
         [ObservableProperty] private ObservableCollection<string> projects = new(); 
         [ObservableProperty] private string selectedProject;
         [ObservableProperty] private ObservableCollection<string> assignedToUser = new();
-        [ObservableProperty] private string selectedAssignee;
         [ObservableProperty] private ObservableCollection<string> priorities = new();
-        [ObservableProperty] private Priority selectedPriority;
+        [ObservableProperty] private Priority? selectedPriority;
         [ObservableProperty] private DateTime? selectedDate;
+        [ObservableProperty] private object? selectedTab;
 
         public ICommand ApplyFilterCommand { get; }
         public ICommand ResetFilterCommand { get; }
@@ -94,6 +95,13 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
 
             Issues = new ObservableCollection<IssueDto>(filtered);
         }
+        private async Task ResetFiltersAsync()
+        {
+            SelectedProject = null;
+            SelectedPriority = null;
+            SelectedDate = null;
+            await LoadIssuesAsync();
+        }
         private async Task CreateCommentAsync(int IssueId)
         {
             CommentViewModel vm = _CommentVmFactory(IssueId);
@@ -111,6 +119,12 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
 
             IssueDetailsViewModel vm = _serviceProvider.GetRequiredService<IssueDetailsViewModel>();
             await vm.LoadIssueAsync(Id);
+            vm.RequestClose += async () =>
+            {
+                OpenTabs.Remove(vm);
+                await LoadIssuesAsync();
+                SelectedTab = OpenTabs.FirstOrDefault();
+            };
             OpenTabs.Add(vm);
         }
         [RelayCommand] public void CloseTab(object tab)
@@ -123,6 +137,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
             {
                 OpenTabs.Remove(issueDetailsVm);
             }
+            SelectedTab = OpenTabs.FirstOrDefault();
         }
 
     }
