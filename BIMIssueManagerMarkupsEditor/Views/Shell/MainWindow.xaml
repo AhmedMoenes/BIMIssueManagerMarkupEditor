@@ -144,6 +144,11 @@
                          Command="{Binding NavigateViewerCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
                          Tag="{StaticResource Viewer}" />
+                <RadioButton Content="AI Assistant"
+                         GroupName="Nav"
+                         Command="{Binding NavigateViewerCommand}"
+                         Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Tag="{StaticResource Viewer}" />
             </StackPanel>
         </Border>
 
