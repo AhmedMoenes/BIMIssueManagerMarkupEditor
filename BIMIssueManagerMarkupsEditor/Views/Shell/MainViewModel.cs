@@ -93,6 +93,10 @@
         {
             CurrentView = _provider.GetRequiredService<ModelViewerViewModel>();
         }
+        private void NavigateAIAssistant()
+        {
+            CurrentView = _provider.GetRequiredService<AIAssistantViewModel>();
+        }
         #endregion
         [RelayCommand]
         private async Task LogoutAsync()
