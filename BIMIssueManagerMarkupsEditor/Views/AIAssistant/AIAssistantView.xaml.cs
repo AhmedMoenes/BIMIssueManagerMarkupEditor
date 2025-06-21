@@ -18,10 +18,10 @@ namespace BIMIssueManagerMarkupsEditor.Views.AIAssistant
     /// <summary>
     /// Interaction logic for AIAssistant.xaml
     /// </summary>
-    public partial class AIAssistant : UserControl
+    public partial class AIAssistantView : UserControl
     {
         private readonly AIAssistantViewModel _viewModel = new();
-        public AIAssistant()
+        public AIAssistantView()
         {
             InitializeComponent();
             DataContext = _viewModel;

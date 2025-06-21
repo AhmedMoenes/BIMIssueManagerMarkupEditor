@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BIMIssueManagerMarkupsEditor.Views.AIAssistant
 {
-    public class AIAssistantViewModel : ObservableObject
+    public partial class AIAssistantViewModel : ObservableObject
     {
     }
 }
