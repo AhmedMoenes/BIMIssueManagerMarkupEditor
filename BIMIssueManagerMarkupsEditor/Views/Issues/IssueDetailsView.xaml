@@ -6,9 +6,10 @@
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
            mc:Ignorable="d"
+           Title="Issue Details" 
            Width="960" Height="640"
            WindowStartupLocation="CenterScreen"
-           ResizeMode="CanResize">
+           ResizeMode="NoResize">
 
     <Window.Resources>
         <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
