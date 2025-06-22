@@ -49,11 +49,8 @@
         }
         [RelayCommand] async Task CreateProjectAsync()
         {
-            if (Project == null || string.IsNullOrWhiteSpace(Project.ProjectName))
-                return;
             Project.Labels = ProjectLabels.ToList();
             Project.Areas = ProjectAreas.ToList();
-
             await _projectApiService.CreateProjectAsync(Project);
 
             Project = new CreateProjectDto
@@ -61,9 +58,10 @@
                 StartDate = null,
                 EndDate = null
             };
-            await LoadProjectsAsync();
+
             ProjectLabels.Clear();
             ProjectAreas.Clear();
+            await LoadProjectsAsync();
             RequestClose?.Invoke();
         }
         private async Task LoadProjectsAsync()
