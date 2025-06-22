@@ -63,7 +63,10 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
                 .OrderBy(g => g.First().CreatedAt)
                 .ToDictionary(g => g.Key, g => g.Count());
 
-                MonthlyActivitySeries = new ISeries[]
+            var monthValues = groupedByMonth.Values.ToArray();
+            var monthLabels = groupedByMonth.Keys.ToArray();
+
+            MonthlyActivitySeries = new ISeries[]
                 {
                     new ColumnSeries<int>
                     {
@@ -82,18 +85,20 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
                     }
                 };
 
-                YAxes = new Axis[]
+                int maxValue = monthValues.DefaultIfEmpty(0).Max();
+
+            YAxes = new Axis[]
                 {
                     new Axis
                     {
                         Labeler = value => value.ToString("N0"),
                         Name = "Issues Count",
                         MinLimit = 0,
-                        MaxLimit = Math.Max(3, groupedByMonth.Values.Max() + 1),
+                        MaxLimit = Math.Max(3, maxValue + 1),
                         LabelsAlignment = Align.Middle,
                         SeparatorsPaint = new SolidColorPaint(SKColors.LightGray),
-                        UnitWidth = 1,           
-                        MinStep = 1              
+                        UnitWidth = 1,
+                        MinStep = 1
                     }
                 };
         }
