@@ -100,6 +100,7 @@
             CurrentView = _provider.GetRequiredService<AIAssistantViewModel>();
         }
         #endregion
+
         [RelayCommand]
         private async Task LogoutAsync()
         {

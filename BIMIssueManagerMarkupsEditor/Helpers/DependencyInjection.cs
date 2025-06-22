@@ -45,8 +45,8 @@
             services.TryAddTransient<ModelViewerViewModel>();
             services.TryAddTransient<LoginViewModel>();
             services.TryAddTransient<CommentViewModel>();
-            services.AddTransient<EditIssueViewModel>();
-            services.AddTransient<EditIssueView>();
+            services.TryAddTransient<EditIssueViewModel>();
+            services.TryAddTransient<EditIssueView>();
             services.TryAddTransient<AIAssistantView>();
             services.TryAddTransient<AIAssistantViewModel>();
 

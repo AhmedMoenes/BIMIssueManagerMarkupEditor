@@ -9,6 +9,7 @@
              xmlns:vmIssues="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues"
              xmlns:vmChat="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Chat"
              xmlns:vmViewer="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Viewer"
+             xmlns:vmAIAssistant="clr-namespace:BIMIssueManagerMarkupsEditor.Views.AIAssistant"
              xmlns:viewUser="clr-namespace:BIMIssueManagerMarkupsEditor.Views.User"
              xmlns:viewMarkup="clr-namespace:BIMIssueManagerMarkupsEditor.Views.MarkupEditor"
              xmlns:viewProject="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
@@ -17,8 +18,7 @@
              xmlns:viewIssues="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues"
              xmlns:viewChat="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Chat"
              xmlns:viewViewer="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Viewer"
-             xmlns:viewAIAssistant="clr-namespace:BIMIssueManagerMarkupsEditor.Views.AIAssistant"
-             xmlns:vmAIAssistant="clr-namespace:BIMIssueManagerMarkupsEditor.Views.AIAssistant">
+             xmlns:viewAIAssistant="clr-namespace:BIMIssueManagerMarkupsEditor.Views.AIAssistant">
 
 
 
@@ -58,9 +58,11 @@
                     <DataTemplate DataType="{x:Type vmViewer:ModelViewerViewModel}">
                         <viewViewer:ModelViewerView />
                     </DataTemplate>
+
                     <DataTemplate DataType="{x:Type vmAIAssistant:AIAssistantViewModel}">
                         <viewAIAssistant:AIAssistantView />
                     </DataTemplate>
+
                 </ResourceDictionary>
                 <ResourceDictionary Source="Resources/HandyControlResources.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Resources/Styles.xaml"/>
