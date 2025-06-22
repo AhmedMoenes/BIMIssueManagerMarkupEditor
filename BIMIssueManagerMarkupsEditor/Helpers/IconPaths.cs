@@ -30,6 +30,7 @@
         public static string Issues => $"{BasePath}/issues.png";
         public static string Chat => $"{BasePath}/chat.png";
         public static string Viewer => $"{BasePath}/viewer.png";
+        public static string AIAssistant =>$"{BasePath}/AIAssistant.png";
 
         public static string GetIcon(AppIcon icon) => icon switch
         {
