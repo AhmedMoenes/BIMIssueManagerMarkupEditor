@@ -32,17 +32,17 @@ namespace BIMIssueManagerMarkupsEditor.Views.AIAssistant
             await AssistantWebView.EnsureCoreWebView2Async();
 
 
-            AssistantWebView.NavigationCompleted += (s, e) =>
-            {
-                if (e.IsSuccess)
-                {
-                    MessageBox.Show("✅ WebView2 navigated successfully");
-                }
-                else
-                {
-                    MessageBox.Show($"❌ Navigation failed: {e.WebErrorStatus}");
-                }
-            };
+            //AssistantWebView.NavigationCompleted += (s, e) =>
+            //{
+            //    if (e.IsSuccess)
+            //    {
+            //        MessageBox.Show("✅ WebView2 navigated successfully");
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show($"❌ Navigation failed: {e.WebErrorStatus}");
+            //    }
+            //};
 
             AssistantWebView.Source = new Uri("http://localhost:5500");
         }
