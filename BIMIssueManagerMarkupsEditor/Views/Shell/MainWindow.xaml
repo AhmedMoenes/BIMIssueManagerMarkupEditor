@@ -11,7 +11,7 @@
         WindowState="Maximized"
         MinWidth="800" MinHeight="600"
         ResizeMode="CanResize"
-        WindowStartupLocation="CenterScreen" Icon="pack://application:,,,/Resources/Icons/logo.png"
+        WindowStartupLocation="CenterScreen" Icon="pack://application:,,,/Resources/Icons/logo-in.png"
         d:DataContext="{d:DesignInstance Type = local:MainViewModel, IsDesignTimeCreatable=True}">
 
     <Window.Resources>

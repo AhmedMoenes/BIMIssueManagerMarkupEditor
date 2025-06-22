@@ -47,8 +47,6 @@
         {
             AddCompanyViewModel addCompanyViewModel = _serviceProvider.GetRequiredService<AddCompanyViewModel>();
             await _dialogService.ShowDialogAsync<AddCompanyView, AddCompanyViewModel>(addCompanyViewModel);
-
-            await LoadCompaniesAsync();
         }
 
         [RelayCommand]
