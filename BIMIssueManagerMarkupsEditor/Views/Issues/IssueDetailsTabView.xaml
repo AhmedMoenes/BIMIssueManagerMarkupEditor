@@ -8,7 +8,6 @@
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues" 
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance Type= global:IssueDetailsViewModel }"
              Background="{StaticResource ContentBackgroundBrush}">
 
     <UserControl.Resources>
@@ -189,7 +188,6 @@
 
         <!-- 📷 Right: Snapshot full height -->
         <StackPanel Grid.Column="1" VerticalAlignment="Top">
-            <TextBlock Text="📷 Snapshot" FontWeight="SemiBold" FontSize="16" Margin="0,8,0,8"/>
             <Border BorderBrush="{StaticResource BackgroundBrush}" BorderThickness="1" CornerRadius="8">
                 <Image Source="{Binding Issue.ImagePath}"
                        hc:Magnifier.Instance="{x:Static hc:Magnifier.Default}"

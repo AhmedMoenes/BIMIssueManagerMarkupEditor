@@ -47,7 +47,7 @@
                 NewAreaName = string.Empty;
             }
         }
-        [RelayCommand] async Task CreateProjectAsync()
+        [RelayCommand] private async Task CreateProjectAsync()
         {
             Project.Labels = ProjectLabels.ToList();
             Project.Areas = ProjectAreas.ToList();
@@ -59,8 +59,6 @@
                 EndDate = null
             };
 
-            ProjectLabels.Clear();
-            ProjectAreas.Clear();
             await LoadProjectsAsync();
             RequestClose?.Invoke();
         }
