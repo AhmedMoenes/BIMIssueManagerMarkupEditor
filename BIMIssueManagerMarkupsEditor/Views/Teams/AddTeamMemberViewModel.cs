@@ -2,25 +2,23 @@
 
 namespace BIMIssueManagerMarkupsEditor.Views.Teams
 {
-    public partial class AddTeamMemberViewModel : ObservableObject
+    public partial class AddTeamMemberViewModel : ObservableObject, IDialogAware
     {
         private readonly UserSessionService _userSession;
         private readonly ProjectTeamMemberApiService _projectTeamMemberService;
-        private readonly ProjectApiService _projectApiService;
         private readonly UserApiService _userApiService;
+        public event Action? RequestClose;
+
         public AddTeamMemberViewModel(UserSessionService userSession, 
                                       ProjectTeamMemberApiService projectTeamMemberServiceApi, 
-                                      UserApiService userApiService,
-                                      ProjectApiService projectApiService)
+                                      UserApiService userApiService)
         {
             _userSession = userSession;
             _projectTeamMemberService = projectTeamMemberServiceApi;
             _userApiService = userApiService;
-            _projectApiService = projectApiService;
-
             newUser = new RegisterUserDto();
+
             LoadUsersAsync();
-            LoadProjectsAsync();
         }
 
         [ObservableProperty] private ObservableCollection<UserDto> users = new();
@@ -40,8 +38,10 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
             await _userApiService.RegisterUserAsync(newUser);
             newUser = new RegisterUserDto();
             newUser.Password = null;
+
             await LoadUsersAsync();
-            await LoadProjectsAsync();
+            RequestClose.Invoke();
+            
         }
         private async Task LoadUsersAsync()
         {
@@ -58,12 +58,6 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
 
             TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(members);
         }
-        private async Task LoadProjectsAsync()
-        {
-            IEnumerable<ProjectOverviewDto> companyProjects = Enumerable.Empty<ProjectOverviewDto>();
-
-            companyProjects = await _projectApiService.GetForCompanyAsync(_userSession.CurrentUser.CompanyId);
-            Projects = new ObservableCollection<ProjectOverviewDto>(companyProjects);
-        }
+ 
     }
 }

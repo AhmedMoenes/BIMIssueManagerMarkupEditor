@@ -43,8 +43,6 @@
             };
 
             await _projectTeamMemberService.AssignUserToProjectsAsync(dto);
-            selectedMember = null;
-            selectedProject = null;
             await LoadUsersAsync();
             await LoadProjectsAsync();
             RequestClose.Invoke();
@@ -59,8 +57,8 @@
         private async Task LoadProjectsAsync()
         {
             IEnumerable<ProjectOverviewDto> companyProjects = Enumerable.Empty<ProjectOverviewDto>();
-
             companyProjects = await _projectApiService.GetForCompanyAsync(_userSession.CurrentUser.CompanyId);
+
             Projects = new ObservableCollection<ProjectOverviewDto>(companyProjects);
         }
 

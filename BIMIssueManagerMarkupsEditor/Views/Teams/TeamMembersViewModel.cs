@@ -6,32 +6,59 @@
         private readonly IDialogService _dialogService;
         private readonly UserSessionService _userSession;
         private readonly ProjectTeamMemberApiService _projectTeamMemberService;
+        private readonly ProjectApiService _projectApiService;
         private readonly UserApiService _userApiService;
         public TeamMembersViewModel(ProjectTeamMemberApiService projectTeamMemberService,
                                     UserSessionService userSession,
                                     IServiceProvider serviceProvider,
                                     IDialogService dialogService,
-                                    UserApiService userApiService)
+                                    UserApiService userApiService,
+                                    ProjectApiService projectApiService)
         {
             _projectTeamMemberService = projectTeamMemberService;
             _userSession = userSession;
             _serviceProvider = serviceProvider;
             _dialogService = dialogService;
             _userApiService = userApiService;
+            _projectApiService = projectApiService;
 
             LoadUsersAsync();
         }
 
         private ObservableCollection<ProjectTeamMemberDto> allMembers = new();
         [ObservableProperty] private ObservableCollection<ProjectTeamMemberDto> teamMembers = new();
+        [ObservableProperty] private ObservableCollection<ProjectOverviewDto> projects = new();
         [ObservableProperty] private ProjectTeamMemberDto selectedMember;
         [ObservableProperty] private string searchQuery;
         public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
         public bool IsCompanyAdmin => _userSession.IsInRole("CompanyAdmin");
+      
+        [RelayCommand] private async Task OpenAddTeamMemberViewAsync()
+        {
+            AddTeamMemberViewModel addTeamMemberViewModel = _serviceProvider.GetRequiredService<AddTeamMemberViewModel>();
+            await _dialogService.ShowDialogAsync<AddTeamMemberView, AddTeamMemberViewModel>(addTeamMemberViewModel);
+        }
 
+        [RelayCommand] private async Task OpenAssignToProjectView()
+        {
+            AssignUserToProjectViewModel assignUserToProjectViewModel = _serviceProvider.GetRequiredService<AssignUserToProjectViewModel>();
+            await _dialogService.ShowDialogAsync<AssignUserToProjectView, AssignUserToProjectViewModel>(assignUserToProjectViewModel);
+            LoadUsersAsync();
+            LoadProjectsAsync();
+        }
 
+        [RelayCommand]
+        private async Task DeleteSelectedMemberAsync()
+        {
+            if (selectedMember == null)
+                return;
 
-        private async void LoadUsersAsync()
+            await _userApiService.DeleteAsync(selectedMember.UserId);
+            selectedMember = null;
+            LoadUsersAsync();
+        }
+
+        private async Task LoadUsersAsync()
         {
             IEnumerable<ProjectTeamMemberDto> members = Enumerable.Empty<ProjectTeamMemberDto>();
 
@@ -48,27 +75,12 @@
             TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(members);
         }
 
-        [RelayCommand] private async Task OpenAddTeamMemberViewAsync()
+        private async Task LoadProjectsAsync()
         {
-            AddTeamMemberViewModel addTeamMemberViewModel = _serviceProvider.GetRequiredService<AddTeamMemberViewModel>();
-            await _dialogService.ShowDialogAsync<AddTeamMemberView, AddTeamMemberViewModel>(addTeamMemberViewModel);
-        }
+            IEnumerable<ProjectOverviewDto> companyProjects = Enumerable.Empty<ProjectOverviewDto>();
+            companyProjects = await _projectApiService.GetForCompanyAsync(_userSession.CurrentUser.CompanyId);
 
-        [RelayCommand] private async Task OpenAssignToProjectView()
-        {
-            AssignUserToProjectViewModel assignUserToProjectViewModel = _serviceProvider.GetRequiredService<AssignUserToProjectViewModel>();
-            await _dialogService.ShowDialogAsync<AssignUserToProjectView, AssignUserToProjectViewModel>(assignUserToProjectViewModel);
-        }
-
-        [RelayCommand]
-        private async Task DeleteSelectedMemberAsync()
-        {
-            if (selectedMember == null)
-                return;
-
-            await _userApiService.DeleteAsync(selectedMember.UserId);
-            selectedMember = null;
-            LoadUsersAsync();
+            Projects = new ObservableCollection<ProjectOverviewDto>(companyProjects);
         }
 
         [RelayCommand]
