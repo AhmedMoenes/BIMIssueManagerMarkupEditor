@@ -47,6 +47,8 @@
             services.TryAddTransient<CommentViewModel>();
             services.AddTransient<EditIssueViewModel>();
             services.AddTransient<EditIssueView>();
+            services.TryAddTransient<AIAssistantView>();
+            services.TryAddTransient<AIAssistantViewModel>();
 
             services.AddTransient<Func<int, EditIssueViewModel>>(provider => issueId =>
                 new EditIssueViewModel(
