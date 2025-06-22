@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
+             xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues" 
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type= global:IssueDetailsViewModel }"
              Background="{StaticResource ContentBackgroundBrush}">
 
     <UserControl.Resources>
@@ -20,20 +22,61 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" Margin="0,0,20,0">
+        <ScrollViewer Grid.Column="0" 
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto"
+                      Margin="0,0,20,0">
             <StackPanel>
 
                 <DockPanel LastChildFill="False" Margin="0,0,0,12">
                     <TextBlock Text="{Binding Issue.Title}" FontSize="20" FontWeight="Bold"
                                Foreground="{StaticResource PrimaryBrush}" VerticalAlignment="Center" DockPanel.Dock="Left"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                        <Button Command="{Binding MarkAsResolvedCommand}"
+                                IsEnabled="{Binding Issue.IsResolved, Converter={StaticResource InverseBoolConverter}}"
+                                Style="{StaticResource ButtonPrimary}" Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Width="16" Height="16"
+                                      Fill="White"
+                                      Stretch="Uniform"
+                                      Margin="0,0,8,0"
+                                      Data="{StaticResource Resolved}"/>
+                                <TextBlock Text="Mark as Resolved" VerticalAlignment="Center" Foreground="White"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Command="{Binding AddCommentCommand}"
+                                Style="{StaticResource ButtonPrimary}" Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Width="16" Height="16"
+                                      Fill="White"
+                                      Stretch="Uniform"
+                                      Margin="0,0,8,0"
+                                      Data="{StaticResource Add}"/>
+                                <TextBlock Text="Add Comment" VerticalAlignment="Center" Foreground="White"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Command="{Binding DeleteIssueCommand}"
+                                Style="{StaticResource ButtonDanger}" Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Width="16" Height="16"
+                                      Fill="White"
+                                      Stretch="Uniform"
+                                      Margin="0,0,8,0"
+                                      Data="{StaticResource Delete}"/>
+                                <TextBlock Text="Delete" VerticalAlignment="Center" Foreground="White"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                 </DockPanel>
 
-                <Border BorderBrush="{StaticResource PrimaryBrush}"
+                <!--<Border BorderBrush="{StaticResource PrimaryBrush}"
                         BorderThickness="1"
                         CornerRadius="8"
                         Padding="12"
                         Margin="0,0,0,16"
-                        Background="White">
+                        Background="White">-->
 
                     <StackPanel>
 
@@ -70,7 +113,7 @@
 
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="✔ Resolved:" FontWeight="SemiBold" FontSize="14" Margin="0,6"/>
                             <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Issue.IsResolved}" FontSize="13" FontWeight="Bold"
-                       Foreground="{Binding Issue.IsResolved, Converter={StaticResource BoolToColorConverter}}" Margin="6,6,0,6"/>
+                                       Foreground="{Binding Issue.IsResolved, Converter={StaticResource BoolToColorConverter}}" Margin="6,6,0,6"/>
 
                             <TextBlock Grid.Row="2" Grid.Column="2" Text="🕒 Created At:" FontWeight="SemiBold" FontSize="14" Margin="20,6,0,6"/>
                             <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding Issue.CreatedAt, StringFormat='{}{0:dd-MM-yyyy HH:mm}'}"
@@ -98,23 +141,30 @@
 
 
                         <!-- 📝 Description -->
-                        <TextBlock Text="📝 Description:" FontWeight="SemiBold" FontSize="16" Margin="0,12,0,6"/>
+                        <TextBlock Text="📝 Description:" 
+                                   FontWeight="Bold" FontSize="16"
+                                   Foreground="{StaticResource PrimaryBrush}"
+                                   Margin="0,12,0,6"/>
                         <Border Background="#FAFAFA" Padding="10" CornerRadius="6">
                             <TextBlock Text="{Binding Issue.Description}"
-                       TextWrapping="Wrap"
-                       TextAlignment="Justify"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Foreground="{StaticResource PrimaryBrush}"/>
+                            TextWrapping="Wrap"
+                            TextAlignment="Justify"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Foreground="{StaticResource PrimaryBrush}"/>
                         </Border>
                     </StackPanel>
-                </Border>
+                <!--</Border>-->
 
 
                 <!-- 💬 Comments -->
-                <Border BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,0">
+                <!--<Border BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,0">-->
                     <StackPanel>
-                        <TextBlock Text="💬 Comments:" FontWeight="SemiBold" FontSize="16" Margin="0,0,0,10"/>
+                        <TextBlock Text="💬 Comments:" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"
+                                   Foreground="{StaticResource PrimaryBrush}"
+                                   Margin="0,20,0,10"/>
                         <ItemsControl ItemsSource="{Binding Issue.Comments}" MinHeight="260">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -133,14 +183,14 @@
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
                     </StackPanel>
-                </Border>
+                <!--</Border>-->
             </StackPanel>
         </ScrollViewer>
 
         <!-- 📷 Right: Snapshot full height -->
         <StackPanel Grid.Column="1" VerticalAlignment="Top">
             <TextBlock Text="📷 Snapshot" FontWeight="SemiBold" FontSize="16" Margin="0,8,0,8"/>
-            <Border BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="1" CornerRadius="8">
+            <Border BorderBrush="{StaticResource BackgroundBrush}" BorderThickness="1" CornerRadius="8">
                 <Image Source="{Binding Issue.ImagePath}"
                        hc:Magnifier.Instance="{x:Static hc:Magnifier.Default}"
                        Stretch="Uniform"
