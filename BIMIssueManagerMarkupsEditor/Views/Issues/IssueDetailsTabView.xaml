@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
+             xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Issues" 
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type= global:IssueDetailsViewModel }"
              Background="{StaticResource ContentBackgroundBrush}">
 
     <UserControl.Resources>
@@ -52,6 +54,18 @@
                                       Margin="0,0,8,0"
                                       Data="{StaticResource Add}"/>
                                 <TextBlock Text="Add Comment" VerticalAlignment="Center" Foreground="White"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Command="{Binding DeleteIssueCommand}"
+                                Style="{StaticResource ButtonDanger}" Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Width="16" Height="16"
+                                      Fill="White"
+                                      Stretch="Uniform"
+                                      Margin="0,0,8,0"
+                                      Data="{StaticResource Delete}"/>
+                                <TextBlock Text="Delete" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -127,7 +141,10 @@
 
 
                         <!-- 📝 Description -->
-                        <TextBlock Text="📝 Description:" FontWeight="SemiBold" FontSize="16" Margin="0,12,0,6"/>
+                        <TextBlock Text="📝 Description:" 
+                                   FontWeight="Bold" FontSize="16"
+                                   Foreground="{StaticResource PrimaryBrush}"
+                                   Margin="0,12,0,6"/>
                         <Border Background="#FAFAFA" Padding="10" CornerRadius="6">
                             <TextBlock Text="{Binding Issue.Description}"
                             TextWrapping="Wrap"
@@ -143,7 +160,11 @@
                 <!-- 💬 Comments -->
                 <!--<Border BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,0">-->
                     <StackPanel>
-                        <TextBlock Text="💬 Comments:" FontWeight="SemiBold" FontSize="16" Margin="0,20,0,10"/>
+                        <TextBlock Text="💬 Comments:" 
+                                   FontWeight="Bold" 
+                                   FontSize="16"
+                                   Foreground="{StaticResource PrimaryBrush}"
+                                   Margin="0,20,0,10"/>
                         <ItemsControl ItemsSource="{Binding Issue.Comments}" MinHeight="260">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
