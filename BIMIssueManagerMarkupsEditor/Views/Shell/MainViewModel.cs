@@ -18,7 +18,8 @@
         #region Roles
         public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
         public bool IsCompanyAdmin => _userSession.IsInRole("CompanyAdmin");
-        public bool IsProjectLeader => _userSession.IsInRole("ProjectLeader");
+        public bool IsAdmin => _userSession.IsInRole("CompanyAdmin") || _userSession.IsInRole("SuperAdmin");
+        public bool IsUser => !_userSession.IsInRole("SuperAdmin");
         #endregion
 
         #region LoggedInUserSummary
