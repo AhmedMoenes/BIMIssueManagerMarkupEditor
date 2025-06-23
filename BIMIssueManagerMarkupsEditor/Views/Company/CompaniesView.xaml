@@ -87,10 +87,10 @@
                       HeadersVisibility="Column"
                       Grid.Column="0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Company Name" Binding="{Binding CompanyName}" Width="Auto" />
-                    <DataGridTextColumn Header="Company Users" Binding="{Binding UsersCount}" Width="Auto" />
-                    <DataGridTextColumn Header="Company Projects" Binding="{Binding ProjectsCount}" Width="Auto" />
-                    <DataGridTextColumn Header="Company Issues" Binding="{Binding IssuesCount}" Width="Auto" />
+                    <DataGridTextColumn Header="Company Name" Binding="{Binding CompanyName}" Width="*" />
+                    <DataGridTextColumn Header="Company Users" Binding="{Binding UsersCount}" Width="*" />
+                    <DataGridTextColumn Header="Company Projects" Binding="{Binding ProjectsCount}" Width="*" />
+                    <DataGridTextColumn Header="Company Issues" Binding="{Binding IssuesCount}" Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -116,7 +116,7 @@
                     </Border>
                 </UniformGrid>
                 <Border BorderBrush="#CCC" BorderThickness="1" CornerRadius="8" Padding="10">
-                    <lvc:PieChart Series="{Binding ChartSeries}" LegendPosition="Bottom" Width="250" Height="250" />
+                    <lvc:PieChart Series="{Binding ChartSeries}" LegendPosition="Bottom" Width="250" Height="400" />
                 </Border>
             </StackPanel>
         </Grid>

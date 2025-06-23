@@ -137,7 +137,7 @@
                     </Border>
                 </UniformGrid>
                 <Border BorderBrush="#CCC" BorderThickness="1" CornerRadius="8" Padding="10">
-                    <lvc:PieChart Series="{Binding ChartSeries}" LegendPosition="Bottom" Width="250" Height="250" />
+                    <lvc:PieChart Series="{Binding ChartSeries}" LegendPosition="Bottom" Width="250" Height="400" />
                 </Border>
             </StackPanel>
         </Grid>
