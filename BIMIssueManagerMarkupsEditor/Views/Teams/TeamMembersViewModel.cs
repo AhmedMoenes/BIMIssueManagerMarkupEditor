@@ -66,12 +66,24 @@
             {
                 members = await _projectTeamMemberService.GetAll();
             }
+            else if (_userSession.IsInRole("CompanyAdmin"))
+            {
+                var projects = await _projectApiService.GetForCompanyAsync(_userSession.CurrentUser.CompanyId);
+                List<ProjectTeamMemberDto> companyMembers = new();
+
+                foreach (var project in projects)
+                {
+                    var projectMembers = await _projectTeamMemberService.GetByProjectAsync(project.ProjectId);
+                    companyMembers.AddRange(projectMembers);
+                }
+
+                members = companyMembers;
+            }
             else
             {
                 members = await _projectTeamMemberService.GetByUserAsync(_userSession.UserId);
             }
 
-            allMembers = new ObservableCollection<ProjectTeamMemberDto>(members);
             TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(members);
         }
 

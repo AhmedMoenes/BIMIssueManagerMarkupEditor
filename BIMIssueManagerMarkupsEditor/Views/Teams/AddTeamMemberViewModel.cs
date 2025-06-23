@@ -6,16 +6,19 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
     {
         private readonly UserSessionService _userSession;
         private readonly ProjectTeamMemberApiService _projectTeamMemberService;
+        private readonly ProjectApiService _projectApiService;
         private readonly UserApiService _userApiService;
         public event Action? RequestClose;
 
         public AddTeamMemberViewModel(UserSessionService userSession, 
                                       ProjectTeamMemberApiService projectTeamMemberServiceApi, 
-                                      UserApiService userApiService)
+                                      UserApiService userApiService,
+                                      ProjectApiService projectApiService)
         {
             _userSession = userSession;
             _projectTeamMemberService = projectTeamMemberServiceApi;
             _userApiService = userApiService;
+            _projectApiService = projectApiService;
             newUser = new RegisterUserDto();
 
             LoadUsersAsync();
@@ -50,6 +53,19 @@ namespace BIMIssueManagerMarkupsEditor.Views.Teams
             if (_userSession.IsInRole("SuperAdmin"))
             {
                 members = await _projectTeamMemberService.GetAll();
+            }
+            else if (_userSession.IsInRole("CompanyAdmin"))
+            {
+                var projects = await _projectApiService.GetForCompanyAsync(_userSession.CurrentUser.CompanyId);
+                List<ProjectTeamMemberDto> companyMembers = new();
+
+                foreach (var project in projects)
+                {
+                    var projectMembers = await _projectTeamMemberService.GetByProjectAsync(project.ProjectId);
+                    companyMembers.AddRange(projectMembers);
+                }
+
+                members = companyMembers;
             }
             else
             {
