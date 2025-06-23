@@ -99,7 +99,7 @@
             <!-- Pie Chart: Created Issues -->
             <Border BorderBrush="#CCC" BorderThickness="1" CornerRadius="8" Padding="10" Margin="8" Grid.Column="0">
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Created Issues" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16" Margin="0,0,0,25"/>
+                    <TextBlock Text="Created Issues" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic" Foreground="{StaticResource PrimaryBrush}" FontSize="16" Margin="0,0,0,5"/>
                     <Grid>
                         <lvc:PieChart Series="{Binding CreatedIssueSeries}"
                                       LegendPosition="Bottom"
@@ -134,7 +134,7 @@
             <!-- Pie Chart: Assigned Issues -->
             <Border BorderBrush="#CCC" BorderThickness="1" CornerRadius="8" Padding="10" Margin="8" Grid.Column="1">
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Assigned Issues" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16" Margin="0,0,0,25"/>
+                    <TextBlock Text="Assigned Issues" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic" Foreground="{StaticResource PrimaryBrush}" FontSize="16" Margin="0,0,0,5"/>
                     <Grid>
                         <lvc:PieChart Series="{Binding AssignedIssueSeries}"
                                       LegendPosition="Bottom"
@@ -169,7 +169,7 @@
             <!--    Column Chart -->
             <Border BorderBrush="#CCC" BorderThickness="1" CornerRadius="8" Padding="10" Margin="8" Grid.Column="2">
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Monthly Activity" HorizontalAlignment="Center" FontWeight="Bold" FontSize="16" Margin="0,0,0,25"/>
+                    <TextBlock Text="Monthly Activity" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic" Foreground="{StaticResource PrimaryBrush}" FontSize="16" Margin="0,0,0,5"/>
                     <Grid>
                         <lvc:CartesianChart Series="{Binding MonthlyActivitySeries}"
                                             XAxes="{Binding XAxes}"

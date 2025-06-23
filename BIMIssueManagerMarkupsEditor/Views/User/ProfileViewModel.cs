@@ -111,6 +111,13 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
                     {
                         Labeler = value => value.ToString("N0"),
                         Name = "Issues Count",
+                        NamePaint = new SolidColorPaint(SKColors.SlateGray)
+                        {
+                            SKTypeface = SKTypeface.FromFamilyName(
+                                null, 
+                                SKFontStyle.BoldItalic)
+                        }, 
+                        NameTextSize = 16,
                         MinLimit = 0,
                         MaxLimit = Math.Max(3, maxValue + 1),
                         LabelsAlignment = Align.Middle,
