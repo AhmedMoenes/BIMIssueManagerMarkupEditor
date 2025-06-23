@@ -31,8 +31,9 @@
             </Grid.ColumnDefinitions>
 
             <hc:SearchBar Grid.Column="0"
+                          Style="{StaticResource SearchBarPlus}"
                           hc:InfoElement.ShowClearButton="True"
-                          hc:InfoElement.Placeholder="Search projects..."
+                          hc:InfoElement.Placeholder="Search members..."
                           HorizontalAlignment="Left"
                           Width="400"
                           Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
