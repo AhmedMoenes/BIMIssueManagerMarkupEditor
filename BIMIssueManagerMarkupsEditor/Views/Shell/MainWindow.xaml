@@ -92,7 +92,7 @@
 
                 <Image Source="{Binding LogoInIcon}"
                        Height="80"
-                       Margin="10,10,10,25"
+                       Margin="10,10,15,25"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"/>
 

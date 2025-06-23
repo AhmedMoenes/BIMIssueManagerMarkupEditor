@@ -4,12 +4,10 @@
 
     <!-- Brushes -->
     <SolidColorBrush x:Key="PrimaryBrush" Color="#244061"/>
-    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#F3F3F3"/>
-    <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="#E1E1E1"/>
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="White"/>
+    <SolidColorBrush x:Key="SidebarBackgroundBrush" Color="White"/>
     <SolidColorBrush x:Key="ContentBackgroundBrush" Color="White"/>
-    <SolidColorBrush x:Key="PrimaryAccentBrush" Color="#0078D7"/>
     <SolidColorBrush x:Key="TextBrush" Color="#333333"/>
-    <SolidColorBrush x:Key="SecondaryTextBrush" Color="#666666"/>
     <SolidColorBrush x:Key="DividerBrush" Color="#CCCCCC"/>
     <SolidColorBrush x:Key="ButtonHoverBrush" Color="#D6EFFF"/>
 
@@ -63,8 +61,13 @@
                     </Border>
 
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource SidebarBackgroundBrush}"/>
+                            <Setter TargetName="IconPath" Property="Fill" Value="{StaticResource PrimaryBrush}"/>
+                            <Setter TargetName="Label" Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="White"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource SidebarBackgroundBrush}"/>
                             <Setter TargetName="IconPath" Property="Fill" Value="{StaticResource PrimaryBrush}"/>
                             <Setter TargetName="Label" Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
                         </Trigger>
