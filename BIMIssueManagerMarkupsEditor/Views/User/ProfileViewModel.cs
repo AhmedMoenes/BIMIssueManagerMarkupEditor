@@ -17,10 +17,28 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
         [ObservableProperty]
         private CurrentUserDto currentUser;
 
-        public IEnumerable<ISeries> CreatedIssueSeries { get; set; }
-        public IEnumerable<ISeries> AssignedIssueSeries { get; set; }
-        public IEnumerable<ISeries> MonthlyActivitySeries { get; set; }
+        [ObservableProperty] private IEnumerable<ISeries> createdIssueSeries;
+        public bool HasCreatedIssueData => CreatedIssueSeries?.OfType<PieSeries<int>>()
+            .Any(s => s.Values?.Sum() > 0) == true;
+        partial void OnCreatedIssueSeriesChanged(IEnumerable<ISeries> value)
+        {
+            OnPropertyChanged(nameof(HasCreatedIssueData));
+        }
 
+        [ObservableProperty] private IEnumerable<ISeries> assignedIssueSeries;
+        public bool HasAssignedIssueData => AssignedIssueSeries?.OfType<PieSeries<int>>()
+            .Any(s => s.Values?.Sum() > 0) == true;
+        partial void OnAssignedIssueSeriesChanged(IEnumerable<ISeries> value)
+        {
+            OnPropertyChanged(nameof(HasAssignedIssueData));
+        }
+        [ObservableProperty] private IEnumerable<ISeries> monthlyActivitySeries;
+        public bool HasMonthlyActivityData => MonthlyActivitySeries?.OfType<ColumnSeries<int>>()
+            .Any(s => s.Values?.Sum() > 0) == true;
+        partial void OnMonthlyActivitySeriesChanged(IEnumerable<ISeries> value)
+        {
+            OnPropertyChanged(nameof(HasMonthlyActivityData));
+        }
         public Axis[] XAxes { get; set; }
         public Axis[] YAxes { get; set; }
 
