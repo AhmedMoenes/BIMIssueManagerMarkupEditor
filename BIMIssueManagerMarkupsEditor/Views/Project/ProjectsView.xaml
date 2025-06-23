@@ -6,7 +6,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
              xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type = local:ProjectsViewModel, IsDesignTimeCreatable=True}">
 
@@ -90,22 +91,55 @@
             </Button>
         </Grid>
 
-        <DataGrid ItemsSource="{Binding Projects}" 
-                  SelectedItem="{Binding SelectedProject}"
-                  ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  IsReadOnly="True"
-                  HeadersVisibility="Column"
-                  Grid.Row="1">
-            <DataGrid.Columns >
-                <DataGridTextColumn Header="Project Name" Binding="{Binding ProjectName}" Width="Auto" />
-                <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='{}{0:dd MMM, yyyy}'}" Width="Auto" />
-                <DataGridTextColumn Header="End Date" Binding="{Binding EndDate, StringFormat='{}{0:dd MMM, yyyy}'}" Width="Auto" />
-                <DataGridTextColumn Header="Issues Count" Binding="{Binding IssuesCount}" Width="Auto"/>
-                <DataGridTextColumn Header="Companies In Project" Binding="{Binding CompanyNames.Count}" Width="Auto" />
-                <DataGridTextColumn Header="Members In Project" Binding="{Binding MembersCount}" Width="Auto" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <DataGrid ItemsSource="{Binding Projects}"
+                      SelectedItem="{Binding SelectedProject}"
+                      ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      Grid.Column="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Project Name" Binding="{Binding ProjectName}" Width="*" />
+                    <DataGridTextColumn Header="Start Date" Binding="{Binding StartDate, StringFormat='{}{0:dd MMM, yyyy}'}" Width="*" />
+                    <DataGridTextColumn Header="End Date" Binding="{Binding EndDate, StringFormat='{}{0:dd MMM, yyyy}'}" Width="*" />
+                    <DataGridTextColumn Header="Issues Count" Binding="{Binding IssuesCount}" Width="*"/>
+                    <DataGridTextColumn Header="Companies In Project" Binding="{Binding CompanyNames.Count}" Width="*" />
+                    <DataGridTextColumn Header="Members In Project" Binding="{Binding MembersCount}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                <UniformGrid Columns="3" Margin="0,0,0,10">
+                    <Border Background="#EDF4FF" CornerRadius="6" Padding="10" Margin="4">
+                        <StackPanel>
+                            <TextBlock Text="Projects" FontWeight="SemiBold" Foreground="#173656"/>
+                            <TextBlock Text="{Binding TotalProjects}" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#E8FAE6" CornerRadius="6" Padding="10" Margin="4">
+                        <StackPanel>
+                            <TextBlock Text="Issues" FontWeight="SemiBold" Foreground="#173656"/>
+                            <TextBlock Text="{Binding TotalIssues}" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#FFF5E5" CornerRadius="6" Padding="10" Margin="4">
+                        <StackPanel>
+                            <TextBlock Text="Members" FontWeight="SemiBold" Foreground="#173656"/>
+                            <TextBlock Text="{Binding TotalMembers}" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                </UniformGrid>
+                <Border BorderBrush="#CCC" BorderThickness="1" CornerRadius="8" Padding="10">
+                    <lvc:PieChart Series="{Binding ChartSeries}" LegendPosition="Bottom" Width="250" Height="250" />
+                </Border>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

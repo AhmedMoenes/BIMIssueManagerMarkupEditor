@@ -30,6 +30,10 @@
         [ObservableProperty] private ObservableCollection<ProjectOverviewDto> projects = new();
         [ObservableProperty] private ProjectTeamMemberDto selectedMember;
         [ObservableProperty] private string searchQuery;
+        [ObservableProperty] private int totalMembers;
+        [ObservableProperty] private int totalProjects;
+
+        [ObservableProperty] private IEnumerable<ISeries> chartSeries;
         public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
         public bool IsCompanyAdmin => _userSession.IsInRole("CompanyAdmin");
       
@@ -85,6 +89,7 @@
             }
 
             TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(members);
+            UpdateStatistics();
         }
 
         private async Task LoadProjectsAsync()
@@ -101,6 +106,8 @@
             if (string.IsNullOrWhiteSpace(query))
             {
                 TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(allMembers);
+                UpdateStatistics();
+                UpdateCharts();
             }
             else
             {
@@ -112,11 +119,41 @@
                     .ToList();
 
                 TeamMembers = new ObservableCollection<ProjectTeamMemberDto>(filtered);
+                UpdateStatistics();
+                UpdateCharts();
             }
         }
         partial void OnSearchQueryChanged(string value)
         {
             Search(value);
+        }
+        private void UpdateStatistics()
+        {
+            TotalMembers = TeamMembers?.Count ?? 0;
+            TotalProjects = TeamMembers?.Select(t => t.ProjectName).Distinct().Count() ?? 0;
+            UpdateCharts();
+        }
+
+        partial void OnTeamMembersChanged(ObservableCollection<ProjectTeamMemberDto> value)
+        {
+            UpdateStatistics();
+        }
+
+        private void UpdateCharts()
+        {
+            var grouped = TeamMembers?
+                              .GroupBy(t => t.ProjectName)
+                              .ToDictionary(g => g.Key, g => g.Count())
+                          ?? new Dictionary<string, int>();
+
+            ChartSeries = grouped
+                .Select(kvp => new PieSeries<int>
+                {
+                    Values = new[] { kvp.Value },
+                    Name = kvp.Key
+                })
+                .Cast<ISeries>()
+                .ToArray();
         }
     }
 }

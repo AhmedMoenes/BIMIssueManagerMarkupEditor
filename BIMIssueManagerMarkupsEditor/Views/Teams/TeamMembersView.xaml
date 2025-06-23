@@ -6,6 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
              xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type = local:TeamMembersViewModel, IsDesignTimeCreatable=True}">
@@ -85,21 +86,48 @@
         </Grid>
 
         <!-- Members List -->
-        <DataGrid Grid.Column="0"
-                  Grid.Row="1"
-                  ItemsSource="{Binding TeamMembers}"
-                  SelectedItem="{Binding SelectedMember}"
-                  ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  IsReadOnly="True"
-                  HeadersVisibility="Column">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="Auto" />
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="Auto" />
-                <DataGridTextColumn Header="User Projects" Binding="{Binding ProjectName}" Width="Auto" />
-                <DataGridTextColumn Header="User Role" Binding="{Binding Role}" Width="Auto" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Grid.Column="0"
+                      ItemsSource="{Binding TeamMembers}"
+                      SelectedItem="{Binding SelectedMember}"
+                      ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="*" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
+                    <DataGridTextColumn Header="User Projects" Binding="{Binding ProjectName}" Width="*" />
+                    <DataGridTextColumn Header="User Role" Binding="{Binding Role}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                <TextBlock Text="Statistics" FontSize="16" FontWeight="Bold" Margin="0,0,0,10" />
+                <UniformGrid Columns="2" Margin="0,0,0,10">
+                    <Border Background="#EDF4FF" CornerRadius="6" Padding="10" Margin="4">
+                        <StackPanel>
+                            <TextBlock Text="Members" FontWeight="SemiBold" Foreground="#173656"/>
+                            <TextBlock Text="{Binding TotalMembers}" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#E8FAE6" CornerRadius="6" Padding="10" Margin="4">
+                        <StackPanel>
+                            <TextBlock Text="Projects" FontWeight="SemiBold" Foreground="#173656"/>
+                            <TextBlock Text="{Binding TotalProjects}" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                </UniformGrid>
+                <Border BorderBrush="#CCC" BorderThickness="1" CornerRadius="8" Padding="10">
+                    <lvc:PieChart Series="{Binding ChartSeries}" LegendPosition="Bottom" Width="250" Height="250" />
+                </Border>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

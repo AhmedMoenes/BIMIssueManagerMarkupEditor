@@ -6,6 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.ViewModels.Issues"
              xmlns:converters="clr-namespace:BIMIssueManagerMarkupsEditor.Converters"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -71,20 +72,53 @@
             </Button>
         </Grid>
 
-        <DataGrid ItemsSource="{Binding Companies}" 
-                  SelectedItem="{Binding SelectedCompany}"
-                  ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  IsReadOnly="True"
-                  HeadersVisibility="Column"
-                  Grid.Row="1">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Company Name" Binding="{Binding CompanyName}" Width="Auto" />
-                <DataGridTextColumn Header="Company Users" Binding="{Binding UsersCount}" Width="Auto" />
-                <DataGridTextColumn Header="Company Projects" Binding="{Binding ProjectsCount}" Width="Auto" />
-                <DataGridTextColumn Header="Company Issues" Binding="{Binding IssuesCount}" Width="Auto" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <DataGrid ItemsSource="{Binding Companies}"
+                      SelectedItem="{Binding SelectedCompany}"
+                      ColumnHeaderStyle="{StaticResource CustomColumnHeaderStyle}"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      Grid.Column="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Company Name" Binding="{Binding CompanyName}" Width="Auto" />
+                    <DataGridTextColumn Header="Company Users" Binding="{Binding UsersCount}" Width="Auto" />
+                    <DataGridTextColumn Header="Company Projects" Binding="{Binding ProjectsCount}" Width="Auto" />
+                    <DataGridTextColumn Header="Company Issues" Binding="{Binding IssuesCount}" Width="Auto" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                <UniformGrid Columns="3" Margin="0,0,0,10">
+                    <Border Background="#EDF4FF" CornerRadius="6" Padding="10" Margin="4">
+                        <StackPanel>
+                            <TextBlock Text="Companies" FontWeight="SemiBold" Foreground="#173656"/>
+                            <TextBlock Text="{Binding TotalCompanies}" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#E8FAE6" CornerRadius="6" Padding="10" Margin="4">
+                        <StackPanel>
+                            <TextBlock Text="Projects" FontWeight="SemiBold" Foreground="#173656"/>
+                            <TextBlock Text="{Binding TotalProjects}" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Background="#FFF5E5" CornerRadius="6" Padding="10" Margin="4">
+                        <StackPanel>
+                            <TextBlock Text="Users" FontWeight="SemiBold" Foreground="#173656"/>
+                            <TextBlock Text="{Binding TotalUsers}" FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Border>
+                </UniformGrid>
+                <Border BorderBrush="#CCC" BorderThickness="1" CornerRadius="8" Padding="10">
+                    <lvc:PieChart Series="{Binding ChartSeries}" LegendPosition="Bottom" Width="250" Height="250" />
+                </Border>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

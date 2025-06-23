@@ -30,7 +30,7 @@
                 <!-- 👤 User Block -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="12,0">
                     <!-- Avatar -->
-                    <Border Width="80" Height="80" Background="#FF173656" CornerRadius="40" Margin="12,0"
+                    <Border Width="80" Height="80" Background="#FF173656" CornerRadius="40" Margin="20,0"
                     VerticalAlignment="Center">
                         <Path Data="{StaticResource LoggedUser}" Fill="White" Width="40" Height="40" Stretch="Uniform" Margin="20"/>
                     </Border>
@@ -46,7 +46,7 @@
                 <!-- 🏢 Company Block -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="12,0">
                     <!-- Company Avatar Placeholder -->
-                    <Border Width="80" Height="80" Background="{StaticResource PrimaryBrush}" CornerRadius="40" Margin="12,0"
+                    <Border Width="80" Height="80" Background="{StaticResource PrimaryBrush}" CornerRadius="40" Margin="20,0"
                     VerticalAlignment="Center">
                         <TextBlock Text="🏢" Foreground="White" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>

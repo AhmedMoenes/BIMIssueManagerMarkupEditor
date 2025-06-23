@@ -23,6 +23,11 @@
         [ObservableProperty] private ObservableCollection<CompanyOverviewDto> companies = new();
         [ObservableProperty] private CompanyOverviewDto selectedCompany;
         [ObservableProperty] private string searchQuery;
+        [ObservableProperty] private int totalCompanies;
+        [ObservableProperty] private int totalProjects;
+        [ObservableProperty] private int totalUsers;
+
+        [ObservableProperty] private IEnumerable<ISeries> chartSeries;
         public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
 
         private async Task LoadCompaniesAsync()
@@ -40,6 +45,7 @@
 
             allCompanies = new ObservableCollection<CompanyOverviewDto>(companies);
             Companies = new ObservableCollection<CompanyOverviewDto>(companies);
+            UpdateStatistics();
         }
 
         [RelayCommand]
@@ -66,6 +72,8 @@
             if (string.IsNullOrWhiteSpace(query))
             {
                 Companies = new ObservableCollection<CompanyOverviewDto>(allCompanies);
+                UpdateStatistics();
+                UpdateCharts();
             }
             else
             {
@@ -74,11 +82,38 @@
                     .ToList();
 
                 Companies = new ObservableCollection<CompanyOverviewDto>(filtered);
+                UpdateStatistics();
+                UpdateCharts();
             }
         }
         partial void OnSearchQueryChanged(string value)
         {
             Search(value);
+        }
+
+        private void UpdateStatistics()
+        {
+            TotalCompanies = Companies?.Count ?? 0;
+            TotalProjects = Companies?.Sum(c => c.ProjectsCount) ?? 0;
+            TotalUsers = Companies?.Sum(c => c.UsersCount) ?? 0;
+            UpdateCharts();
+        }
+
+        partial void OnCompaniesChanged(ObservableCollection<CompanyOverviewDto> value)
+        {
+            UpdateStatistics();
+        }
+
+        private void UpdateCharts()
+        {
+            ChartSeries = Companies?
+                .Select(c => new PieSeries<int>
+                {
+                    Values = new[] { c.ProjectsCount },
+                    Name = c.CompanyName
+                })
+                .Cast<ISeries>()
+                .ToArray() ?? Array.Empty<ISeries>();
         }
     }
 }

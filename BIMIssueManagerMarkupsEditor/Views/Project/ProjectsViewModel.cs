@@ -25,6 +25,12 @@
         [ObservableProperty] private ObservableCollection<ProjectOverviewDto> projects = new();
         [ObservableProperty] private ProjectOverviewDto selectedProject;
         [ObservableProperty] private string searchQuery;
+
+        [ObservableProperty] private int totalProjects;
+        [ObservableProperty] private int totalIssues;
+        [ObservableProperty] private int totalMembers;
+
+        [ObservableProperty] private IEnumerable<ISeries> chartSeries;
         public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
 
         private async Task LoadProjectsAsync()
@@ -46,6 +52,8 @@
 
             allProjects = new ObservableCollection<ProjectOverviewDto>(userProjects);
             Projects = new ObservableCollection<ProjectOverviewDto>(userProjects);
+            UpdateStatistics();
+            UpdateCharts();
         }
         [RelayCommand] private async Task OpenAddProjectViewAsync()
         {
@@ -72,6 +80,8 @@
             if (string.IsNullOrWhiteSpace(query))   
             {
                 Projects = new ObservableCollection<ProjectOverviewDto>(allProjects);
+                UpdateStatistics();
+                UpdateCharts();
             }
             else
             {
@@ -80,6 +90,8 @@
                                              || p.Description?.Contains(query, StringComparison.OrdinalIgnoreCase)
                                              == true)
                                              .ToList();
+                UpdateStatistics();
+                UpdateCharts();
 
                 Projects = new ObservableCollection<ProjectOverviewDto>(filtered);
             }
@@ -87,6 +99,31 @@
         partial void OnSearchQueryChanged(string value)
         {
             Search(value);
+        }
+
+        private void UpdateStatistics()
+        {
+            TotalProjects = Projects?.Count ?? 0;
+            TotalIssues = Projects?.Sum(p => p.IssuesCount) ?? 0;
+            TotalMembers = Projects?.Sum(p => p.MembersCount) ?? 0;
+            UpdateCharts();
+        }
+
+        partial void OnProjectsChanged(ObservableCollection<ProjectOverviewDto> value)
+        {
+            UpdateStatistics();
+        }
+
+        private void UpdateCharts()
+        {
+            ChartSeries = Projects?
+                .Select(p => new PieSeries<int>
+                {
+                    Values = new[] { p.IssuesCount },
+                    Name = p.ProjectName
+                })
+                .Cast<ISeries>()
+                .ToArray() ?? Array.Empty<ISeries>();
         }
     }
 }
