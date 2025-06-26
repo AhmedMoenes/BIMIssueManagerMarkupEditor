@@ -17,10 +17,28 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
         [ObservableProperty]
         private CurrentUserDto currentUser;
 
-        public IEnumerable<ISeries> CreatedIssueSeries { get; set; }
-        public IEnumerable<ISeries> AssignedIssueSeries { get; set; }
-        public IEnumerable<ISeries> MonthlyActivitySeries { get; set; }
+        [ObservableProperty] private IEnumerable<ISeries> createdIssueSeries;
+        public bool HasCreatedIssueData => CreatedIssueSeries?.OfType<PieSeries<int>>()
+            .Any(s => s.Values?.Sum() > 0) == true;
+        partial void OnCreatedIssueSeriesChanged(IEnumerable<ISeries> value)
+        {
+            OnPropertyChanged(nameof(HasCreatedIssueData));
+        }
 
+        [ObservableProperty] private IEnumerable<ISeries> assignedIssueSeries;
+        public bool HasAssignedIssueData => AssignedIssueSeries?.OfType<PieSeries<int>>()
+            .Any(s => s.Values?.Sum() > 0) == true;
+        partial void OnAssignedIssueSeriesChanged(IEnumerable<ISeries> value)
+        {
+            OnPropertyChanged(nameof(HasAssignedIssueData));
+        }
+        [ObservableProperty] private IEnumerable<ISeries> monthlyActivitySeries;
+        public bool HasMonthlyActivityData => MonthlyActivitySeries?.OfType<ColumnSeries<int>>()
+            .Any(s => s.Values?.Sum() > 0) == true;
+        partial void OnMonthlyActivitySeriesChanged(IEnumerable<ISeries> value)
+        {
+            OnPropertyChanged(nameof(HasMonthlyActivityData));
+        }
         public Axis[] XAxes { get; set; }
         public Axis[] YAxes { get; set; }
 
@@ -93,6 +111,13 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
                     {
                         Labeler = value => value.ToString("N0"),
                         Name = "Issues Count",
+                        NamePaint = new SolidColorPaint(SKColors.SlateGray)
+                        {
+                            SKTypeface = SKTypeface.FromFamilyName(
+                                null, 
+                                SKFontStyle.BoldItalic)
+                        }, 
+                        NameTextSize = 16,
                         MinLimit = 0,
                         MaxLimit = Math.Max(3, maxValue + 1),
                         LabelsAlignment = Align.Middle,

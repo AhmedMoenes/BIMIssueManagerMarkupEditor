@@ -34,6 +34,12 @@
         [ObservableProperty] private int totalProjects;
 
         [ObservableProperty] private IEnumerable<ISeries> chartSeries;
+        public bool HasChartData => ChartSeries?.OfType<PieSeries<int>>()
+            .Any(s => s.Values?.Sum() > 0) == true;
+        partial void OnChartSeriesChanged(IEnumerable<ISeries> value)
+        {
+            OnPropertyChanged(nameof(HasChartData));
+        }
         public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
         public bool IsCompanyAdmin => _userSession.IsInRole("CompanyAdmin");
       

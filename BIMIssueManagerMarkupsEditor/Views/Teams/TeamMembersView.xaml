@@ -31,8 +31,9 @@
             </Grid.ColumnDefinitions>
 
             <hc:SearchBar Grid.Column="0"
+                          Style="{StaticResource SearchBarPlus}"
                           hc:InfoElement.ShowClearButton="True"
-                          hc:InfoElement.Placeholder="Search projects..."
+                          hc:InfoElement.Placeholder="Search members..."
                           HorizontalAlignment="Left"
                           Width="400"
                           Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}"
@@ -124,7 +125,35 @@
                     </Border>
                 </UniformGrid>
                 <Border BorderBrush="#CCC" BorderThickness="1" CornerRadius="8" Padding="10">
-                    <lvc:PieChart Series="{Binding ChartSeries}" LegendPosition="Bottom" Width="250" Height="400" />
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Members by Project" HorizontalAlignment="Center" FontWeight="Bold" FontStyle="Italic" Foreground="{StaticResource PrimaryBrush}" FontSize="16" Margin="0,0,0,5"/>
+                        <Grid>
+                            <lvc:PieChart Series="{Binding ChartSeries}" LegendPosition="Bottom" Width="250" Height="400">
+                                <lvc:PieChart.Style>
+                                    <Style TargetType="lvc:PieChart">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding HasChartData}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </lvc:PieChart.Style>
+                            </lvc:PieChart>
+                            <TextBlock Text="No statistics available yet" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding HasChartData}" Value="False">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </StackPanel>
                 </Border>
             </StackPanel>
         </Grid>

@@ -93,7 +93,7 @@
 
                 <Image Source="{Binding LogoInIcon}"
                        Height="80"
-                       Margin="10,10,10,25"
+                       Margin="10,10,15,25"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"/>
 
@@ -113,15 +113,15 @@
                          GroupName="Nav"
                          Command="{Binding NavigateProjectsCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                          Tag="{StaticResource Project}" />
-                <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
 
                 <RadioButton Content="Companies"
                          GroupName="Nav"
                          Command="{Binding NavigateCompaniesCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Visibility="{Binding IsAdmin, Converter={StaticResource BoolToVisibilityConverter}}"
                          Tag="{StaticResource Company}" />
-                <!--Visibility="{Binding IsCompanyAdmin, Converter={StaticResource BoolToVisibilityConverter}}"-->
 
                 <RadioButton Content="Members"
                          GroupName="Nav"
@@ -133,7 +133,8 @@
                          GroupName="Nav"
                          Command="{Binding NavigateIssuesCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
-                         Tag="{StaticResource Issues}" />
+                         Tag="{StaticResource Issues}"
+                         Visibility="{Binding IsUser, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
                 <!--<RadioButton Content="Chat"
                          GroupName="Nav"
