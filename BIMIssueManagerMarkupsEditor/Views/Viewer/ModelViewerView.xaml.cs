@@ -27,7 +27,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 
             Console.WriteLine("✅ CoreWebView2 ready");
 
-            WebView.CoreWebView2.OpenDevToolsWindow();
+           // WebView.CoreWebView2.OpenDevToolsWindow();
             WebView.WebMessageReceived += WebView_WebMessageReceived;
 
             Console.WriteLine("✅ WebMessageReceived event attached");

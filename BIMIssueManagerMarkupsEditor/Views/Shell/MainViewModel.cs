@@ -1,4 +1,6 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Views.Shell
+﻿using BIMIssueManagerMarkupsEditor.Views.Editor;
+
+namespace BIMIssueManagerMarkupsEditor.Views.Shell
 {
     public partial class MainViewModel : ObservableObject, IDialogAware
     {
@@ -43,6 +45,7 @@
         public string ChatIcon => IconPaths.GetIcon(AppIcon.Chat);
         public string ViewerIcon => IconPaths.GetIcon(AppIcon.Viewer);
         public string AIAssistantIcon => IconPaths.GetIcon(AppIcon.AIAssistant);
+        public string EditorIcon => IconPaths.GetIcon(AppIcon.Editor);
         #endregion
 
         #region Navigation
@@ -99,6 +102,11 @@
         private void NavigateAIAssistant()
         {
             CurrentView = _provider.GetRequiredService<AIAssistantViewModel>();
+        }
+        [RelayCommand]
+        private void NavigateEditor()
+        {
+            CurrentView = _provider.GetRequiredService<EditorViewModel>();
         }
         #endregion
 

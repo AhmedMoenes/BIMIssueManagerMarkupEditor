@@ -1,4 +1,6 @@
-﻿namespace BIMIssueManagerMarkupsEditor.Helpers
+﻿using BIMIssueManagerMarkupsEditor.Views.Editor;
+
+namespace BIMIssueManagerMarkupsEditor.Helpers
 {
     public static class DependencyInjection
     {
@@ -49,6 +51,8 @@
             services.TryAddTransient<EditIssueView>();
             services.TryAddTransient<AIAssistantView>();
             services.TryAddTransient<AIAssistantViewModel>();
+            services.TryAddTransient<EditorViewModel>();
+            services.TryAddTransient<EditorView>();
 
             services.AddTransient<Func<int, EditIssueViewModel>>(provider => issueId =>
                 new EditIssueViewModel(
