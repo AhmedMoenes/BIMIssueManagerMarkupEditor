@@ -25,12 +25,13 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="20.474"/>
+            <ColumnDefinition Width="139.526"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Top bar -->
-        <Border Grid.Row="0" Grid.ColumnSpan="2"
+        <Border Grid.Row="0" Grid.ColumnSpan="3"
                 BorderThickness="0,0,0,0"
                 BorderBrush="{StaticResource PrimaryBrush}">
             <Grid VerticalAlignment="Center">
@@ -42,7 +43,8 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Logo --><!--
+                <!-- Logo -->
+                <!--
                 <Border BorderThickness="0"
                                       BorderBrush="{StaticResource PrimaryBrush}">
                     <StackPanel Grid.Column="0" Background="{StaticResource PrimaryBrush}"
@@ -85,7 +87,7 @@
         </Border>
 
         <!-- Sidebar -->
-        <Border Grid.RowSpan="2" Grid.Column="0" BorderThickness="0" BorderBrush="{StaticResource PrimaryBrush}">
+        <Border Grid.RowSpan="2" Grid.Column="0" BorderThickness="0" BorderBrush="{StaticResource PrimaryBrush}" Grid.ColumnSpan="2">
             <StackPanel Background="{StaticResource PrimaryBrush}" 
                     Orientation="Vertical">
 
@@ -153,7 +155,7 @@
         </Border>
 
         <!-- Main content area -->
-        <ContentControl Grid.Row="1" Grid.Column="1"
+        <ContentControl Grid.Row="1" Grid.Column="2"
                         Content="{Binding CurrentView}"
                         Margin="0,1,0,0" />
     </Grid>

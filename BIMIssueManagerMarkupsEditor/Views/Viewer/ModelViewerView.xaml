@@ -9,7 +9,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Viewer -->
-        <wv2:WebView2 x:Name="WebView" Grid.Column="0" />
+        <wv2:WebView2 x:Name="WebView"  />
 
          
         <StackPanel Grid.Column="1" Margin="10">
