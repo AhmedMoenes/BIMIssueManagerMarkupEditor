@@ -12,10 +12,67 @@
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="0,0,0,16">
+        <!-- Top bar -->
+        <Border Grid.Row="0" Grid.ColumnSpan="3"
+                BorderThickness="0,0,0,0"
+                BorderBrush="{StaticResource PrimaryBrush}">
+            <Grid VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Logo -->
+                <!--
+                <Border BorderThickness="0"
+                                      BorderBrush="{StaticResource PrimaryBrush}">
+                    <StackPanel Grid.Column="0" Background="{StaticResource PrimaryBrush}"
+                                Width="160">
+                        <Image Source="{Binding LogoInIcon}"
+                               Height="70" 
+                               VerticalAlignment="Center" 
+                               Margin="5,0"/>
+                    </StackPanel>
+                </Border>-->
+                <!-- User Info -->
+                <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding UserFullName}" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}" FontSize="16"/>
+                    <TextBlock Text="{Binding UserCompany}" Foreground="{StaticResource PrimaryBrush}" FontSize="12"/>
+                </StackPanel>
+
+                <!-- Profile Button -->
+                <hc:SplitButton Grid.Column="3" Margin="10"
+                                Command="{Binding NavigateProfileCommand}"
+                                Background="{StaticResource ContentBackgroundBrush}"
+                                Height="45">
+
+                    <Path Data="{StaticResource User}"
+                          Fill="{StaticResource PrimaryBrush}"
+                          Width="32"
+                          Height="32"
+                          Stretch="Uniform"
+                          VerticalAlignment="Center"
+                          HorizontalAlignment="Center"/>
+                    <hc:SplitButton.DropDownContent>
+                        <StackPanel>
+                            <MenuItem Header="Logout" 
+                                      Command="{Binding LogoutCommand}"
+                                      Foreground="{StaticResource PrimaryBrush}"
+                                      Width="70"  />
+                        </StackPanel>
+                    </hc:SplitButton.DropDownContent>
+                </hc:SplitButton>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="0,0,0,16">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -89,7 +146,7 @@
         </Grid>
 
         <!-- 🔹 Dashboard Charts -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
