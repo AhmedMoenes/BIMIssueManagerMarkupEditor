@@ -13,7 +13,8 @@
         Issues,
         Chat,
         Viewer,
-        AIAssistant
+        AIAssistant,
+        Editor
     }
 
     public static class IconPaths

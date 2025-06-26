@@ -135,7 +135,11 @@
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
                          Tag="{StaticResource Issues}"
                          Visibility="{Binding IsUser, Converter={StaticResource BoolToVisibilityConverter}}"/>
-
+                <RadioButton Content="Editor"
+                         GroupName="Nav"
+                         Command="{Binding NavigateEditorCommand}"
+                         Style="{StaticResource SidebarIconRadioButtonStyle}"
+                         Tag="{StaticResource Editor}" />
                 <!--<RadioButton Content="Chat"
                          GroupName="Nav"
                          Command="{Binding NavigateChatCommand}"
