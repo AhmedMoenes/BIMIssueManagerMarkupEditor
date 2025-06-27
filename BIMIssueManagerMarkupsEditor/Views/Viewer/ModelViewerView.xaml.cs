@@ -12,28 +12,45 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
         {
             InitializeComponent();
             DataContext = _viewModel;
-            InitViewer();
+            InitializeViewer();
         }
 
-        private async void InitViewer()
+        //private async void InitViewer()
+        //{
+        //    await WebView.EnsureCoreWebView2Async();
+
+        //    if (WebView.CoreWebView2 == null)
+        //    {
+        //        Console.WriteLine("❌ CoreWebView2 not initialized!");
+        //        return;
+        //    }
+
+        //    Console.WriteLine("✅ CoreWebView2 ready");
+
+        //   // WebView.CoreWebView2.OpenDevToolsWindow();
+        //    WebView.WebMessageReceived += WebView_WebMessageReceived;
+
+        //    Console.WriteLine("✅ WebMessageReceived event attached");
+
+        //    WebView.Source = new Uri("http://localhost:5174/");
+        //}
+        private async void InitializeViewer()
         {
             await WebView.EnsureCoreWebView2Async();
 
-            if (WebView.CoreWebView2 == null)
-            {
-                Console.WriteLine("❌ CoreWebView2 not initialized!");
-                return;
-            }
+            string distPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Viewer", "dist");
 
-            Console.WriteLine("✅ CoreWebView2 ready");
+            // ⛳️ استخدم virtual host بدل file:/// لتفادي CORS
+            WebView.CoreWebView2.SetVirtualHostNameToFolderMapping(
+                "app", distPath, CoreWebView2HostResourceAccessKind.Allow);
 
-           // WebView.CoreWebView2.OpenDevToolsWindow();
-            WebView.WebMessageReceived += WebView_WebMessageReceived;
+            WebView.Source = new Uri("https://app/index.html");
 
-            Console.WriteLine("✅ WebMessageReceived event attached");
-
-            WebView.Source = new Uri("http://localhost:5174/");
+            // للتجريب فقط
+            //WebView.CoreWebView2.OpenDevToolsWindow();
         }
+
+
 
         private void WebView_WebMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
         {
