@@ -1,0 +1,416 @@
+:root {
+    --primary-color: #2196F3;
+    --primary-dark: #1976D2;
+    --secondary-color: #455A64;
+    --background-color: #f5f5f5;
+    --surface-color: #ffffff;
+    --error-color: #f44336;
+    --success-color: #4CAF50;
+    --text-primary: #212121;
+    --text-secondary: #757575;
+    --border-radius: 8px;
+    --shadow-1: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-2: 0 4px 8px rgba(0,0,0,0.1);
+    --header-height: 64px;
+    --toolbar-height: 80px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+}
+
+.app-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--surface-color);
+}
+
+.app-header {
+    height: var(--header-height);
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--shadow-1);
+}
+
+    .app-header h1 {
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    .app-header i {
+        margin-right: 10px;
+    }
+
+.main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.toolbar {
+    background-color: #244061;
+    height: var(--toolbar-height);
+    display: flex;
+    gap: 0;
+    padding: 10px;
+    border-bottom: 1px solid rgba(222, 226, 230, 0.5);
+    align-items: flex-start;
+    backdrop-filter: blur(8px);
+}
+
+.tool-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
+    border-radius: var(--border-radius);
+    align-items: center;
+    min-height: 60px;
+}
+
+.section-label {
+    position: absolute;
+    top: -10px;
+    left: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.tool-divider {
+    width: 1px;
+    height: 40px;
+    background-color: rgba(222, 226, 230, 0.5);
+    margin: 0 8px;
+    align-self: center;
+}
+
+/* Specific section styles */
+.file-section {
+    background-color: transparent;
+}
+
+.drawing-tools {
+    background-color: transparent;
+}
+
+.text-tools {
+    background-color: transparent;
+}
+
+.shape-tools {
+    background-color: transparent;
+}
+
+.action-buttons {
+    background-color: transparent;
+}
+
+/* Existing styles with some adjustments */
+.tool-btn {
+    padding: 8px;
+    background-color: white;
+    border: white;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 35px;
+    color: #2196f3;
+    backdrop-filter: blur(4px);
+}
+
+    .tool-btn:hover {
+        background-color: rgba(33, 150, 243, 0.1);
+        border-color: rgba(33, 150, 243, 0.3);
+        transform: translateY(-1px);
+    }
+
+    .tool-btn.active {
+        background-color: white;
+        border-color: rgba(33, 150, 243, 0.5);
+        color: var(--primary-color);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+.brush-size-wrapper {
+    display: flex;
+    color: #2196f3;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    background-color: white;
+    border: white;
+    border-radius: var(--border-radius);
+    min-width: 150px;
+    backdrop-filter: blur(4px);
+}
+
+.line-style-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    background-color: white;
+    border: white;
+    border-radius: var(--border-radius);
+    min-width: 120px;
+    backdrop-filter: blur(4px);
+}
+
+    .line-style-wrapper select {
+        border: none;
+        background: transparent;
+        padding: 2px 5px;
+        font-family: inherit;
+        font-size: 14px;
+        color: #2196f3;
+        cursor: pointer;
+        outline: none;
+        width: 100%;
+    }
+
+.color-picker-wrapper {
+    position: relative;
+    color: #2196f3;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: white;
+    border-radius: var(--border-radius);
+    padding: 4px;
+    backdrop-filter: blur(4px);
+}
+
+.upload-btn {
+    background-color: rgba(33, 150, 243, 0.1);
+    color: var(--primary-color);
+    padding: 8px 16px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(33, 150, 243, 0.3);
+    backdrop-filter: blur(4px);
+}
+
+    .upload-btn:hover {
+        background-color: rgba(33, 150, 243, 0.2);
+        border-color: rgba(33, 150, 243, 0.5);
+    }
+
+    .upload-btn input {
+        display: none;
+    }
+
+#colorPicker {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+#brushSize {
+    width: 100px;
+    margin: 0 10px;
+}
+
+.canvas-container {
+    position: relative;
+    flex: 1;
+    background-color: white;
+    overflow: hidden;
+}
+
+#imageCanvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    z-index: 2;
+}
+
+.canvas-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    color: var(--text-secondary);
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 1;
+    user-select: none;
+}
+
+    .canvas-placeholder i {
+        font-size: 48px;
+    }
+
+    .canvas-placeholder p {
+        font-size: 16px;
+    }
+
+.text-input-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.text-input-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-2);
+    min-width: 300px;
+}
+
+#textInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: var(--border-radius);
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.text-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#fontFamily {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #dee2e6;
+    border-radius: var(--border-radius);
+}
+
+.format-btn {
+    display: none; /* Hidden by default */
+}
+
+    .format-btn.visible {
+        display: flex;
+    }
+
+/* When text tool is active, show format buttons */
+#textBtn.active ~ .format-btn {
+    display: flex;
+}
+
+/* Rest of the format button styles */
+.format-btn {
+    padding: 8px;
+    background-color: var(--surface-color);
+    border: 1px solid #dee2e6;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-items: center;
+    justify-content: center;
+    min-width: 35px;
+    color: var(--secondary-color);
+}
+
+    .format-btn:hover {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+
+    .format-btn.active {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-color);
+    }
+
+.text-controls button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#confirmText {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+    #confirmText:hover {
+        background-color: var(--primary-dark);
+    }
+
+#cancelText {
+    background-color: var(--error-color);
+    color: white;
+}
+
+    #cancelText:hover {
+        background-color: #d32f2f;
+    }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .toolbar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .tool-section {
+        flex: 1 1 calc(50% - 16px);
+        min-width: 200px;
+    }
+
+    .tool-divider {
+        display: none;
+    }
+
+    .brush-size-wrapper {
+        min-width: 120px;
+    }
+}
