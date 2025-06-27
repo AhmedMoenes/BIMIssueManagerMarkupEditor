@@ -46,7 +46,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 
             WebView.Source = new Uri("https://app/index.html");
 
-            // للتجريب فقط
+            // 
             //WebView.CoreWebView2.OpenDevToolsWindow();
         }
 
