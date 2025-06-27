@@ -82,4 +82,9 @@
     <Folder Include="Resources\Editor\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="Resources\Editor\**\*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 </Project>
