@@ -79,6 +79,7 @@
     <Folder Include="Messaging\" />
     <Folder Include="Controls\" />
     <Folder Include="Commands\" />
+    <Folder Include="Resources\Editor\" />
   </ItemGroup>
 
 </Project>
