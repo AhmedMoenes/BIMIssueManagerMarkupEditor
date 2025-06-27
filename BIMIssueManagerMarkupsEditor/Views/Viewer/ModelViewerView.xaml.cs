@@ -40,7 +40,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 
             string distPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Viewer", "dist");
 
-            // ⛳️ استخدم virtual host بدل file:/// لتفادي CORS
+           
             WebView.CoreWebView2.SetVirtualHostNameToFolderMapping(
                 "app", distPath, CoreWebView2HostResourceAccessKind.Allow);
 
