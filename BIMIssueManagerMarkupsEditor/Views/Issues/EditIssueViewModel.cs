@@ -1,6 +1,4 @@
-﻿using BIMIssueManagerMarkupsEditor.ApiRoutes;
-using BIMIssueManagerMarkupsEditor.Services;
-using DTOs.IssueLabel;
+﻿using DTOs.IssueLabel;
 
 public partial class EditIssueViewModel : ObservableObject, IDialogAware
 {

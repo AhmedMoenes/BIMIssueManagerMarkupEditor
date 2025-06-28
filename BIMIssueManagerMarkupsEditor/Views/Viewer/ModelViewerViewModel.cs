@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 {
