@@ -71,6 +71,7 @@
         {
             AssignCompaniesToProjectViewModel assignCompaniesToProjectViewModel = _serviceProvider.GetRequiredService<AssignCompaniesToProjectViewModel>();
             await _dialogService.ShowDialogAsync<AssignCompaniesToProjectView, AssignCompaniesToProjectViewModel>(assignCompaniesToProjectViewModel);
+            await LoadProjectsAsync();
         }
         [RelayCommand] private async Task DeleteSelectedProjectAsync()
         {
