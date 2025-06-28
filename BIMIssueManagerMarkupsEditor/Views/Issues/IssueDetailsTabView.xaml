@@ -69,16 +69,8 @@
                         </Button>
 
                         <Button Command="{Binding MarkUpIssueCommand}"
-                                Style="{StaticResource ButtonPrimary}" Margin="5">
-                            <StackPanel Orientation="Horizontal">
-                                <Path Width="16" Height="16"
-                                      Fill="White"
-                                      Stretch="Uniform"
-                                      Margin="0,0,8,0"
-                                      Data="{StaticResource Markup}"/>
-                                <TextBlock Text="Markup Issue" VerticalAlignment="Center" Foreground="White"/>
-                            </StackPanel>
-                        </Button>
+                                Style="{StaticResource ButtonIcon}" Margin="5"
+                                hc:IconElement.Geometry="{StaticResource Markup}"/>
                     </StackPanel>
                 </DockPanel>
 

@@ -46,6 +46,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.Login
 
                 MainWindow mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
                 MainViewModel mainWindowVM = _serviceProvider.GetRequiredService<MainViewModel>();
+                mainWindowVM.RefreshUserInfo();
+                mainWindowVM.NavigateProfileCommand.Execute(null);
                 mainWindow.DataContext = mainWindowVM;
                 mainWindow.Show();
 

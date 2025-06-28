@@ -58,6 +58,15 @@
         private async Task OpenAddCompanyViewAsync()
         {
             AddCompanyViewModel addCompanyViewModel = _serviceProvider.GetRequiredService<AddCompanyViewModel>();
+
+            async void Handler()
+            {
+                await LoadCompaniesAsync();
+                addCompanyViewModel.RequestClose -= Handler;
+            }
+
+            addCompanyViewModel.RequestClose += Handler;
+
             await _dialogService.ShowDialogAsync<AddCompanyView, AddCompanyViewModel>(addCompanyViewModel);
         }
 

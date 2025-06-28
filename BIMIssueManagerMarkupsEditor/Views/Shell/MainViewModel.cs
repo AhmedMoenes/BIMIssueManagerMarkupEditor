@@ -16,6 +16,19 @@ namespace BIMIssueManagerMarkupsEditor.Views.Shell
             _authApiService = authApiService;
             NavigateProfile();
         }
+        public void RefreshUserInfo()
+        {
+            OnPropertyChanged(nameof(IsSuperAdmin));
+            OnPropertyChanged(nameof(IsCompanyAdmin));
+            OnPropertyChanged(nameof(IsAdmin));
+            OnPropertyChanged(nameof(IsUser));
+
+            OnPropertyChanged(nameof(UserFullName));
+            OnPropertyChanged(nameof(UserEmail));
+            OnPropertyChanged(nameof(UserRole));
+            OnPropertyChanged(nameof(UserCompany));
+        }
+
 
         #region Roles
         public bool IsSuperAdmin => _userSession.IsInRole("SuperAdmin");
