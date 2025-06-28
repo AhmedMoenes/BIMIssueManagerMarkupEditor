@@ -9,12 +9,11 @@ public partial class IssueDetailsViewModel : ObservableObject , IDialogAware
     private readonly MainViewModel _mainViewModel;
     public event Action? RequestClose;
 
-    public IssueDetailsViewModel(
-        IssueApiService issueApiService,
-        IDialogService dialogService,
-        IServiceProvider serviceProvider,
-        Func<int, CommentViewModel> commentVmFactory,
-        MainViewModel mainViewModel)
+    public IssueDetailsViewModel(IssueApiService issueApiService,
+                                 IDialogService dialogService,
+                                 IServiceProvider serviceProvider,
+                                 Func<int, CommentViewModel> commentVmFactory,
+                                 MainViewModel mainViewModel)
     {
         _issueApiService = issueApiService;
         _dialogService = dialogService;
@@ -25,9 +24,11 @@ public partial class IssueDetailsViewModel : ObservableObject , IDialogAware
 
     [ObservableProperty] private IssueDto? issue;
     public string Title => Issue?.Title ?? "Issue Details";
+    public bool HasComments => Issue?.Comments?.Any() == true;
     partial void OnIssueChanged(IssueDto? value)
     {
         OnPropertyChanged(nameof(Title));
+        OnPropertyChanged(nameof(HasComments));
     }
 
     [RelayCommand] 
@@ -40,6 +41,7 @@ public partial class IssueDetailsViewModel : ObservableObject , IDialogAware
         await _issueApiService.UpdateResolvedStatusAsync(Issue.IssueId, true);
         OnPropertyChanged(nameof(Issue));
     }
+
     [RelayCommand] 
     private async Task DeleteIssue()
     {
