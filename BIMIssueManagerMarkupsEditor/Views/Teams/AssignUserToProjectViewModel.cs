@@ -37,9 +37,9 @@
 
             AssignUserToProjectDto dto = new AssignUserToProjectDto
             {
-                UserId = selectedMember.Id,
+                UserId = SelectedMember.Id,
                 ProjectId = SelectedProject.ProjectId,
-                Role = selectedMember.Role
+                Role = SelectedMember.Role
             };
 
             await _projectTeamMemberService.AssignUserToProjectsAsync(dto);
