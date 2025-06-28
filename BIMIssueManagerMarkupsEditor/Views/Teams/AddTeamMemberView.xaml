@@ -44,14 +44,26 @@
                                 Text="{Binding NewUser.LastName}"
                                 Height="35" Margin="0,0,0,10"/>
 
-                    <TextBlock Text="Username" FontWeight="Bold" Margin="0,0,0,4"/>
-                    <hc:TextBox hc:InfoElement.Placeholder="Username"
-                                Text="{Binding NewUser.UserName}"
-                                Height="35"/>
+                    <TextBlock Text="Position" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Position"
+                                Text="{Binding NewUser.Position}"
+                                Height="35" Margin="0,0,0,10"/>
+
+                    <TextBlock Text="Phone Number" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Phone Number"
+                                Text="{Binding NewUser.PhoneNumber}"
+                                Height="35" Margin="0,0,0,10"/>
+
+
+                   
                 </StackPanel>
 
                 <!-- Right Column -->
                 <StackPanel Grid.Column="1" Margin="10" VerticalAlignment="Top">
+                    <TextBlock Text="Username" FontWeight="Bold" Margin="0,0,0,4"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Username"
+                                Text="{Binding NewUser.UserName}"
+                                Height="35"  Margin="0,0,0,10"/>
                     <TextBlock Text="Email" FontWeight="Bold" Margin="0,0,0,4"/>
                     <hc:TextBox hc:InfoElement.Placeholder="Email"
                                 Text="{Binding NewUser.Email}"

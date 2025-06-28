@@ -45,7 +45,7 @@
                                 VerticalContentAlignment="Top"
                                 AcceptsReturn="True"
                                 VerticalScrollBarVisibility="Auto"
-                                Height="170"
+                                Height="265"
                                 TextWrapping="Wrap"
                                 hc:InfoElement.Placeholder="Write Company Description"/>
                 </StackPanel>
@@ -60,6 +60,13 @@
                     <hc:TextBox hc:InfoElement.Placeholder="Last Name"
                                 Text="{Binding Company.LastName, UpdateSourceTrigger=PropertyChanged}"
                                 Height="35" Margin="0,7"/>
+                    <hc:TextBox hc:InfoElement.Placeholder="Position"
+                                Text="{Binding Company.Position, UpdateSourceTrigger=PropertyChanged}"
+                                Height="35" Margin="0,7"/>
+
+                    <hc:TextBox hc:InfoElement.Placeholder="Phone Number"
+                                Text="{Binding Company.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
+                                Height="35" Margin="0,7"/>
                     <hc:TextBox hc:InfoElement.Placeholder="Username"
                                 Text="{Binding Company.UserName, UpdateSourceTrigger=PropertyChanged}"
                                 Height="35" Margin="0,7"/>
@@ -70,6 +77,7 @@
                                     hc:InfoElement.Placeholder="Password"
                                     ShowEyeButton="True"
                                     Height="35" Margin="0,7"/>
+
                 </StackPanel>
             </Grid>
         </ScrollViewer>

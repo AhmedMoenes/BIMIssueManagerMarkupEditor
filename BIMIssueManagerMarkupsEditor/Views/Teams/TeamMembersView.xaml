@@ -104,6 +104,8 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}" Width="*" />
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
+                    <DataGridTextColumn Header="Position" Binding="{Binding Position}" Width="*" />
+                    <DataGridTextColumn Header="Phone" Binding="{Binding PhoneNumber}" Width="*" />
                     <DataGridTextColumn Header="User Projects" Binding="{Binding ProjectName}" Width="*" />
                     <DataGridTextColumn Header="User Role" Binding="{Binding Role}" Width="*" />
                 </DataGrid.Columns>

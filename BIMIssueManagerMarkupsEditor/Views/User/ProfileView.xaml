@@ -62,6 +62,8 @@
                         <TextBlock Text="{Binding CurrentUser.FullName}" FontSize="20" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}"/>
                         <TextBlock Text="Email:" FontSize="11" Foreground="Gray" Margin="0,4,0,0"/>
                         <TextBlock Text="{Binding CurrentUser.Email}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"/>
+                        <TextBlock Text="Phone:" FontSize="11" Foreground="Gray" Margin="0,4,0,0"/>
+                        <TextBlock Text="{Binding CurrentUser.PhoneNumber}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"/>
                     </StackPanel>
                 </StackPanel>
 
@@ -78,6 +80,8 @@
                         <TextBlock Text="{Binding CurrentUser.CompanyName}" FontSize="20" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}"/>
                         <TextBlock Text="Role:" FontSize="11" Foreground="Gray" Margin="0,6,0,0"/>
                         <TextBlock Text="{Binding CurrentUser.Role}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"/>
+                        <TextBlock Text="Position:" FontSize="11" Foreground="Gray" Margin="0,4,0,0"/>
+                        <TextBlock Text="{Binding CurrentUser.Position}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
