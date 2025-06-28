@@ -30,7 +30,7 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.TryAddTransient<AssignCompaniesToProjectView>();
             services.TryAddTransient<AddCompanyView>();
             services.TryAddTransient<IssueDetailsView>();
-            services.TryAddTransient<MainViewModel>();
+            services.TryAddSingleton<MainViewModel>();
             services.TryAddTransient<MarkupEditorViewModel>();
             services.TryAddTransient<ProfileViewModel>();
             services.TryAddTransient<ProjectsViewModel>();

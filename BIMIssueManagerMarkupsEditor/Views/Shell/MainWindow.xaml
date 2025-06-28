@@ -161,7 +161,6 @@
 
         <!-- Main content area -->
         <ContentControl Grid.Row="1" Grid.Column="2"
-                        Content="{Binding CurrentView}"
-                        Margin="0,1,0,0" />
+                        Content="{Binding CurrentView}"/>
     </Grid>
 </Window>

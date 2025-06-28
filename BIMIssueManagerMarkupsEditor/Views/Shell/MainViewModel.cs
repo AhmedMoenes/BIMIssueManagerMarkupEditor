@@ -49,7 +49,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Shell
         #endregion
 
         #region Navigation
-        [ObservableProperty] private ObservableObject currentView;
+        [ObservableProperty] private  ObservableObject currentView;
 
         [RelayCommand]
         private void NavigateMarkup()
