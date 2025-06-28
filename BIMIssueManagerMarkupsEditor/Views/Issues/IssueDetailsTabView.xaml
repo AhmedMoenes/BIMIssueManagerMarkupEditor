@@ -67,10 +67,6 @@
                                 <TextBlock Text="Delete" VerticalAlignment="Center" Foreground="White"/>
                             </StackPanel>
                         </Button>
-
-                        <Button Command="{Binding MarkUpIssueCommand}"
-                                Style="{StaticResource ButtonIcon}" Margin="5"
-                                hc:IconElement.Geometry="{StaticResource Markup}"/>
                     </StackPanel>
                 </DockPanel>
 
@@ -191,15 +187,30 @@
         </ScrollViewer>
 
         <!-- 📷 Right: Snapshot full height -->
-        <StackPanel Grid.Column="1" VerticalAlignment="Top">
-            <Border BorderBrush="{StaticResource BackgroundBrush}" BorderThickness="1" CornerRadius="8">
+        <Border Grid.Column="1"
+                BorderBrush="{StaticResource BackgroundBrush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                VerticalAlignment="Stretch">
+            <Grid>
                 <Image Source="{Binding Issue.ImagePath}"
                        hc:Magnifier.Instance="{x:Static hc:Magnifier.Default}"
                        Stretch="Uniform"
                        MaxWidth="1000"
                        MinHeight="600"
                        Margin="6"/>
-            </Border>
-        </StackPanel>
+                <Button Command="{Binding MarkUpIssueCommand}"
+                        Width="80"
+                        Height="80"
+                        Content="Markup"
+                        Foreground="{StaticResource PrimaryBrush}"
+                        ToolTip="Add Markup To The Issue"
+                        Style="{StaticResource ButtonIcon}"
+                        hc:IconElement.Geometry="{StaticResource Markup}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="10"/>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>
