@@ -30,86 +30,28 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Top bar --><!--
-        <Border Grid.Row="0" Grid.ColumnSpan="3"
-                BorderThickness="0,0,0,0"
-                BorderBrush="{StaticResource PrimaryBrush}">
-            <Grid VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-
-                --><!-- Logo -->
-                <!--
-                <Border BorderThickness="0"
-                                      BorderBrush="{StaticResource PrimaryBrush}">
-                    <StackPanel Grid.Column="0" Background="{StaticResource PrimaryBrush}"
-                                Width="160">
-                        <Image Source="{Binding LogoInIcon}"
-                               Height="70" 
-                               VerticalAlignment="Center" 
-                               Margin="5,0"/>
-                    </StackPanel>
-                </Border>-->
-                <!-- User Info --><!--
-                <StackPanel Grid.Column="2" Orientation="Vertical" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding UserFullName}" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}" FontSize="16"/>
-                    <TextBlock Text="{Binding UserCompany}" Foreground="{StaticResource PrimaryBrush}" FontSize="12"/>
-                </StackPanel>
-
-                --><!-- Profile Button --><!--
-                <hc:SplitButton Grid.Column="3" Margin="10"
-                                Command="{Binding NavigateProfileCommand}"
-                                Background="{StaticResource ContentBackgroundBrush}"
-                                Height="45">
-
-                    <Path Data="{StaticResource User}"
-                          Fill="{StaticResource PrimaryBrush}"
-                          Width="32"
-                          Height="32"
-                          Stretch="Uniform"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Center"/>
-                    <hc:SplitButton.DropDownContent>
-                        <StackPanel>
-                            <MenuItem Header="Logout" 
-                                      Command="{Binding LogoutCommand}"
-                                      Foreground="{StaticResource PrimaryBrush}"
-                                      Width="70"  />
-                        </StackPanel>
-                    </hc:SplitButton.DropDownContent>
-                </hc:SplitButton>
-            </Grid>
-        </Border>-->
-
         <!-- Sidebar -->
         <Border Grid.RowSpan="2" Grid.Column="0" BorderThickness="0" BorderBrush="{StaticResource PrimaryBrush}" Grid.ColumnSpan="2">
-            <StackPanel Background="{StaticResource PrimaryBrush}" 
-                    Orientation="Vertical">
+            <Grid Background="{StaticResource PrimaryBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-                <Image Source="{Binding LogoInIcon}"
+                <Image Grid.Row="0" Source="{Binding LogoInIcon}"
                        Height="80"
                        Margin="10,10,15,25"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"/>
 
-                <!--<RadioButton Content="Markup Editor"
-                         GroupName="Nav"
-                         Command="{Binding NavigateMarkupCommand}"
-                         Style="{StaticResource SidebarIconRadioButtonStyle}"
-                         Tag="{StaticResource Markup}" />-->
+                <StackPanel Grid.Row="1">
 
-                <RadioButton Content="Profile"
-                         GroupName="Nav"
-                         Command="{Binding NavigateProfileCommand}"
-                         Style="{StaticResource SidebarIconRadioButtonStyle}"
-                         Tag="{StaticResource Profile}" />
-
-                <RadioButton Content="Projects"
+                    <RadioButton Content="Profile"
+                                 GroupName="Nav"
+                                 Command="{Binding NavigateProfileCommand}"
+                                 Style="{StaticResource SidebarIconRadioButtonStyle}"
+                                 Tag="{StaticResource Profile}" />
+                    <RadioButton Content="Projects"
                          GroupName="Nav"
                          Command="{Binding NavigateProjectsCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
@@ -140,23 +82,23 @@
                          Command="{Binding NavigateEditorCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
                          Tag="{StaticResource Editor}" />
-                <!--<RadioButton Content="Chat"
-                         GroupName="Nav"
-                         Command="{Binding NavigateChatCommand}"
-                         Style="{StaticResource SidebarIconRadioButtonStyle}"
-                         Tag="{StaticResource Chat}" />-->
 
                 <RadioButton Content="Viewer"
                          GroupName="Nav"
                          Command="{Binding NavigateViewerCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
                          Tag="{StaticResource Viewer}" />
-                <RadioButton Content="AI Assistant"
-                         GroupName="Nav"
-                         Command="{Binding NavigateAIAssistantCommand}"
-                         Style="{StaticResource SidebarIconRadioButtonStyle}"
-                         Tag="{StaticResource RobotSolid}" />
-            </StackPanel>
+                    <RadioButton Content="AI Assistant"
+                                 GroupName="Nav"
+                                 Command="{Binding NavigateAIAssistantCommand}"
+                                 Style="{StaticResource SidebarIconRadioButtonStyle}"
+                                 Tag="{StaticResource RobotSolid}" />
+                    <Button Content="Logout"
+                            Tag="{StaticResource User}"
+                            Command="{Binding LogoutCommand}"
+                            Style="{StaticResource SidebarButtonStyle}"/>
+                </StackPanel>
+            </Grid>
         </Border>
 
         <!-- Main content area -->

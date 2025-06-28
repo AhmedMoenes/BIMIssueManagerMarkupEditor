@@ -17,6 +17,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
         [ObservableProperty]
         private CurrentUserDto currentUser;
 
+        #region Statistics
+
         [ObservableProperty] private IEnumerable<ISeries> createdIssueSeries;
         public bool HasCreatedIssueData => CreatedIssueSeries?.OfType<PieSeries<int>>()
             .Any(s => s.Values?.Sum() > 0) == true;
@@ -94,16 +96,16 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
                     }
                 };
 
-                XAxes = new Axis[]
-                {
+            XAxes = new Axis[]
+            {
                     new Axis
                     {
                         Labels = groupedByMonth.Keys.ToArray(),
                         LabelsRotation = 15
                     }
-                };
+            };
 
-                int maxValue = monthValues.DefaultIfEmpty(0).Max();
+            int maxValue = monthValues.DefaultIfEmpty(0).Max();
 
             YAxes = new Axis[]
                 {
@@ -114,9 +116,9 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
                         NamePaint = new SolidColorPaint(SKColors.SlateGray)
                         {
                             SKTypeface = SKTypeface.FromFamilyName(
-                                null, 
+                                null,
                                 SKFontStyle.BoldItalic)
-                        }, 
+                        },
                         NameTextSize = 16,
                         MinLimit = 0,
                         MaxLimit = Math.Max(3, maxValue + 1),
@@ -126,6 +128,9 @@ namespace BIMIssueManagerMarkupsEditor.Views.User
                         MinStep = 1
                     }
                 };
+
+            #endregion
+
         }
     }
 }

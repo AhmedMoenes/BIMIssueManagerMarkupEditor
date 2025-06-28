@@ -77,6 +77,59 @@
         </Setter>
     </Style>
 
+    <Style x:Key="SidebarButtonStyle" TargetType="Button">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Margin" Value="0,0,0,0"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Height" Value="70"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        Padding="10,0"
+                        Cursor="Hand"
+                        SnapsToDevicePixels="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Path x:Name="IconPath"
+                              Data="{TemplateBinding Tag}"
+                              Fill="{TemplateBinding Foreground}"
+                              Width="32"
+                              Height="32"
+                              Stretch="Uniform"
+                              VerticalAlignment="Center"
+                              Margin="10,0" />
+
+                            <TextBlock x:Name="Label"
+                                   Grid.Column="1"
+                                   Text="{TemplateBinding Content}"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   VerticalAlignment="Center"
+                                   FontWeight="Light"
+                                   FontSize="{TemplateBinding FontSize}"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource SidebarBackgroundBrush}"/>
+                            <Setter TargetName="IconPath" Property="Fill" Value="{StaticResource PrimaryBrush}"/>
+                            <Setter TargetName="Label" Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ButtonHoverBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <!--DataGrid Header Style-->
     <Style x:Key="CustomColumnHeaderStyle" TargetType="DataGridColumnHeader">
