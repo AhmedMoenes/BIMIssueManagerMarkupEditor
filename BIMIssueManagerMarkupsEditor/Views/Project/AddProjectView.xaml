@@ -7,10 +7,11 @@
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Project"
         mc:Ignorable="d"
         Title="Create Project"
-        Height="550"
+        Height="650"
         MaxHeight="900" MaxWidth="900"
         ResizeMode="CanResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="pack://application:,,,/Resources/Icons/logo-in.png">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -24,24 +25,23 @@
             <Image Source="{Binding LogoIcon}" Width="240" Margin="0,0,0,5"/>
         </StackPanel>
 
-        <!-- Scrollable Two-Column Form -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <Grid Margin="0,0,0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60*" />
-                    <ColumnDefinition Width="40*" />
-                </Grid.ColumnDefinitions>
+        <!-- Two-Column Form with Scrollable Right Side -->
+        <Grid Grid.Row="1" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60*" />
+                <ColumnDefinition Width="40*" />
+            </Grid.ColumnDefinitions>
 
-                <!-- Left Column -->
-                <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Stretch">
-                    <TextBlock Text="Project Name" FontWeight="Bold" Margin="0,0,0,4"/>
-                    <hc:TextBox hc:InfoElement.Placeholder="Enter Project Name"
+            <!-- Left Column -->
+            <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Stretch">
+                <TextBlock Text="Project Name" FontWeight="Bold" Margin="0,0,0,4"/>
+                <hc:TextBox hc:InfoElement.Placeholder="Enter Project Name"
                                 hc:InfoElement.Necessary="True"
                                 Text="{Binding Project.ProjectName}"
                                 Height="35"/>
 
-                    <TextBlock Text="Description" FontWeight="Bold" Margin="0,10,0,4"/>
-                    <hc:TextBox Text="{Binding Project.Description, UpdateSourceTrigger=PropertyChanged}"
+                <TextBlock Text="Description" FontWeight="Bold" Margin="0,10,0,4"/>
+                <hc:TextBox Text="{Binding Project.Description, UpdateSourceTrigger=PropertyChanged}"
                                 Padding="5"
                                 VerticalContentAlignment="Top"
                                 AcceptsReturn="True"
@@ -49,10 +49,12 @@
                                 Height="170"
                                 TextWrapping="Wrap"
                                 hc:InfoElement.Placeholder="Write Project Description"/>
-                </StackPanel>
+            </StackPanel>
 
-                <!-- Right Column -->
-                <StackPanel Grid.Column="1" Margin="10" VerticalAlignment="Top">
+            <!-- Right Column -->
+            <!-- Right Column -->
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="10" VerticalAlignment="Top">
 
                     <TextBlock Text="Start Date" Margin="0,0,0,4" FontWeight="Bold"/>
                     <hc:DatePicker hc:InfoElement.Placeholder="Enter Project Start Date"
@@ -102,8 +104,8 @@
                         </hc:TagContainer.ItemTemplate>
                     </hc:TagContainer>
                 </StackPanel>
-            </Grid>
-        </ScrollViewer>
+            </ScrollViewer>
+        </Grid>
 
         <!-- Fixed Create Button -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">

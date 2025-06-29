@@ -7,10 +7,11 @@
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Company"
         mc:Ignorable="d"
         Title="Add Company"
-        Height="550"
+        Height="650"
         MaxHeight="900" MaxWidth="900"
         ResizeMode="CanResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="pack://application:,,,/Resources/Icons/logo-in.png">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
@@ -24,15 +25,14 @@
             <Image Source="{Binding LogoIcon}" Width="240" Margin="0,0,0,5"/>
         </StackPanel>
 
-        <!-- Scrollable Form with Two Columns -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <Grid Margin="0,0,0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+        <!-- Form with Scrollable Right Column -->
+        <Grid Grid.Row="1" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-                <!-- Left Column -->
+            <!-- Left Column -->
                 <StackPanel Grid.Column="0" Margin="10" VerticalAlignment="Stretch">
                     <TextBlock Text="Company Name" FontWeight="Bold" Margin="0,0,0,4"/>
                     <hc:TextBox hc:InfoElement.Placeholder="Enter Company Name"
@@ -51,7 +51,9 @@
                 </StackPanel>
 
                 <!-- Right Column -->
-                <StackPanel Grid.Column="1" Margin="10" VerticalAlignment="Top">
+            <!-- Right Column -->
+            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="10" VerticalAlignment="Top">
                     <TextBlock Text="Company Admin Info" FontWeight="Bold" Margin="0,0,0,4"/>
 
                     <hc:TextBox hc:InfoElement.Placeholder="First Name"
@@ -79,8 +81,8 @@
                                     Height="35" Margin="0,7"/>
 
                 </StackPanel>
-            </Grid>
-        </ScrollViewer>
+            </ScrollViewer>
+        </Grid>
 
         <!-- Fixed Submit Button -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">

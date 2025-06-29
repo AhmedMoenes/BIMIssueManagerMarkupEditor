@@ -6,7 +6,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Chat"
         mc:Ignorable="d"
-        Title="Comments" Height="700" Width="700" WindowStartupLocation="CenterScreen">
+        Title="Comments" Height="700" Width="700" WindowStartupLocation="CenterScreen"
+        Icon="pack://application:,,,/Resources/Icons/logo-in.png">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>

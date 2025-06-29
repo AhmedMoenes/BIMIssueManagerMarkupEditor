@@ -10,7 +10,8 @@
         Height="480"
         MaxHeight="900" MaxWidth="700"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResize">
+        ResizeMode="CanResize"
+        Icon="pack://application:,,,/Resources/Icons/logo-in.png">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>

@@ -11,7 +11,8 @@
         Title="Assign User"
         MaxWidth="330" MaxHeight="400"
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="pack://application:,,,/Resources/Icons/logo-in.png">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>

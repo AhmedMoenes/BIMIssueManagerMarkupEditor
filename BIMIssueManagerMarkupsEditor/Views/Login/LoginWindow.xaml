@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Login"
         mc:Ignorable="d"
         Title="Login" Height="420" Width="330"
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        Icon="pack://application:,,,/Resources/Icons/logo-in.png">
 
     <Grid Margin="20">
         <Grid.RowDefinitions>
