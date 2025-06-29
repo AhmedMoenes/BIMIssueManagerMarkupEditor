@@ -164,9 +164,10 @@
                        MinHeight="600"
                        Margin="10"/>
                 <Button Command="{Binding MarkUpIssueCommand}"
-                        Width="65"
-                        Height="65"
-                        Foreground="{StaticResource DarkWarningBrush}"
+                        Width="50"
+                        Height="50"
+                        Foreground ="White"
+                        Background="{StaticResource PrimaryBrush}"
                         Content="Markup"
                         ToolTip="Add Markup To The Issue"
                         Style="{StaticResource ButtonIcon}"
