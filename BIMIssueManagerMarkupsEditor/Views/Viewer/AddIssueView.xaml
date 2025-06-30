@@ -70,8 +70,8 @@
                     <hc:TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" Height="35" hc:InfoElement.Placeholder="Enter Issue Title"/>
 
                     <TextBlock Text="⚡Priority" FontWeight="Bold" Margin="0,10,0,4"/>
-                    <ComboBox ItemsSource="{Binding Priorities}"
-                              SelectedItem="{Binding PriorityChoice}" Height="35"/>
+                    <ComboBox  ItemsSource="{Binding Source={x:Static local:PriorityValues.All}}"
+                               SelectedItem="{Binding PriorityChoice}" Height="35"/>
 
                     <TextBlock Text="🏷Labels" FontWeight="Bold" Margin="10,10,0,4"/>
                     <ComboBox ItemsSource="{Binding Labels}"
@@ -99,7 +99,7 @@
                     hc:IconElement.Geometry="{StaticResource SaveGeometry}"
                     Style="{StaticResource ButtonPrimary}"
                     Width="100" Margin="0,0,10,0"/>
-            
+
         </StackPanel>
     </Grid>
 </Window>

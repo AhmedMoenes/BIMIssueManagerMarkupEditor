@@ -133,5 +133,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 
         }
 
+        public static readonly List<Priority> All = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
+
     }
 }
