@@ -1,10 +1,7 @@
-﻿using BIMIssueManagerMarkupsEditor.ApiRoutes;
-using DTOs.IssueLabel;
+﻿using DTOs.IssueLabel;
 using DTOs.Snapshots;
 using HandyControl.Controls;
 using HandyControl.Data;
-using HandyControl.Interactivity;
-using HandyControl.Tools;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -130,10 +127,9 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 
         private System.Windows.Window? _activeWindow;
         [RelayCommand]
-        private void TakeSnapShot()
+        private async Task TakeSnapShotAsync()
         {
-            _activeWindow = WindowHelper.GetActiveWindow();
-            _activeWindow.Hide();
+            _activeWindow?.Hide();
 
             new Screenshot().Start();
         }
@@ -150,11 +146,15 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
             {
                 // Save image to disk
                 var encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create((BitmapSource)imageSource));
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    encoder.Frames.Add(BitmapFrame.Create((BitmapSource)imageSource));
+                
                 using (var stream = new FileStream(tempPath, FileMode.Create))
                 {
                     encoder.Save(stream);
                 }
+                });
 
                 // Upload to API
                 using var multipart = new MultipartFormDataContent();
