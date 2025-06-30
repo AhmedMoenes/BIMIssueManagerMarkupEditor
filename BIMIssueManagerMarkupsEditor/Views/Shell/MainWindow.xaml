@@ -87,7 +87,7 @@
                          GroupName="Nav"
                          Command="{Binding NavigateViewerCommand}"
                          Style="{StaticResource SidebarIconRadioButtonStyle}"
-                         Tag="{StaticResource Viewer}" />
+                         Tag="{StaticResource Viewer}" Checked="RadioButton_Checked" />
                     <RadioButton Content="AI Assistant"
                                  GroupName="Nav"
                                  Command="{Binding NavigateAIAssistantCommand}"

@@ -6,18 +6,22 @@
         <wv2:WebView2 x:Name="WebView"  />
 
         <Popup IsOpen="True"
-               Placement="Relative"
-               HorizontalAlignment="Right"
-               VerticalAlignment="Top"
-               AllowsTransparency="True"
-               StaysOpen="True">
-            <Button Content="Add Issue"
-                    Background="Red"
-                    Padding="10,5"
-                    Margin="0,10,10,0"
-                    Command="{Binding OpenAddIssueWindowCommand}"
-            />
+       Placement="Relative"
+       PlacementTarget="{Binding ElementName=PopupPlacementTarget}"
+       AllowsTransparency="True"
+       StaysOpen="True"
+       HorizontalOffset="1274"
+       VerticalOffset="120">
+            <Button Width="60" Height="60"
+            Background="#244061"
+            BorderBrush="Transparent"
+            Padding="0"
+            Command="{Binding OpenAddIssueWindowCommand}">
+                <Path Stretch="Uniform"
+                     Width="24" Height="24"
+                     Fill="White"
+                     Data="{StaticResource AlertCircleOutline}" />
+            </Button>
         </Popup>
-
     </Grid>
 </UserControl>
