@@ -1,6 +1,12 @@
 ﻿using BIMIssueManagerMarkupsEditor.ApiRoutes;
 using DTOs.IssueLabel;
 using DTOs.Snapshots;
+using HandyControl.Controls;
+using HandyControl.Data;
+using HandyControl.Interactivity;
+using HandyControl.Tools;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 {
@@ -18,6 +24,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
             _userSession = userSession;
             _issueApiService = issueApiService;
             _projectApiService = projectApiService;
+            Screenshot.Snapped += Screenshot_Snapped;
 
             Projects = new();
             Areas = new();
@@ -77,7 +84,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
         }
 
         [RelayCommand]
-        private async Task SaveAsync()
+        private async Task SaveIssueAsync()
         {
             var dto = new CreateIssueDto
             {
@@ -100,12 +107,12 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
             var created = await _issueApiService.CreateAsync(dto);
             if (created is not null)
             {
-                MessageBox.Show("Issue Created!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                HandyControl.Controls.MessageBox.Show("Issue Created!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 ResetForm();
             }
             else
             {
-                MessageBox.Show("Failed to create issue.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                HandyControl.Controls.MessageBox.Show("Failed to create issue.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         }
@@ -121,18 +128,81 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
             SelectedProject = null;
         }
 
-        [RelayCommand]
-        private void SaveIssue()
-        {
-
-        }
-
+        private System.Windows.Window? _activeWindow;
         [RelayCommand]
         private void TakeSnapShot()
         {
+            _activeWindow = WindowHelper.GetActiveWindow();
+            _activeWindow.Hide();
 
+            new Screenshot().Start();
         }
 
+        private void Screenshot_Snapped(object? sender, FunctionEventArgs<ImageSource> e)
+        {
+            _ = HandleScreenshotAsync(e.Info);
+        }
+        private async Task HandleScreenshotAsync(ImageSource imageSource)
+        {
+            string tempPath = Path.Combine(Path.GetTempPath(), $"Snapshot_{DateTime.Now:yyyyMMdd_HHmmss}.png");
+
+            try
+            {
+                // Save image to disk
+                var encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create((BitmapSource)imageSource));
+                using (var stream = new FileStream(tempPath, FileMode.Create))
+                {
+                    encoder.Save(stream);
+                }
+
+                // Upload to API
+                using var multipart = new MultipartFormDataContent();
+                multipart.Add(new StreamContent(File.OpenRead(tempPath)), "file", Path.GetFileName(tempPath));
+
+                using var client = new HttpClient { BaseAddress = new Uri("https://localhost:44374/") };
+                var response = await client.PostAsync("/api/Snapshot/upload", multipart);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    ShowMessage("Upload failed!", "Error");
+                    return;
+                }
+
+                var rawPath = await response.Content.ReadAsStringAsync();
+                if (!rawPath.StartsWith("http"))
+                {
+                    rawPath = "https://localhost:44374/" + rawPath.TrimStart('/');
+                }
+
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    SnapshotImagePath = rawPath;
+                    ShowMessage("Snapshot uploaded and linked!", "Success");
+                });
+            }
+            catch (Exception ex)
+            {
+                ShowMessage($"Error uploading image: {ex.Message}", "Error");
+            }
+            finally
+            {
+                await Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    _activeWindow?.Show();
+                });
+            }
+        }
+        private void ShowMessage(string msg, string caption)
+        {
+            HandyControl.Controls.MessageBox.Show(msg, caption, MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public void Dispose()
+        {
+            Screenshot.Snapped -= Screenshot_Snapped;
+        }
+        
         public static readonly List<Priority> All = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
 
     }
