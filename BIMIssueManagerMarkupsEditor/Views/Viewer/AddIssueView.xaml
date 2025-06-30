@@ -61,7 +61,10 @@
                 </Border>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Style="{StaticResource ButtonPrimary}" Width="40" Content="📷" ToolTip="Take Snapshot" Command="{Binding TakeSnapShotCommand}"/>
+                    <Button Style="{StaticResource ButtonPrimary}" Content="Take Snapshot" 
+                            hc:IconElement.Geometry="{StaticResource Camera}"
+                            ToolTip="Take Snapshot" 
+                            Command="{Binding TakeSnapShotCommand}"/>
                 </StackPanel>
             </StackPanel>
 
