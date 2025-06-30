@@ -12,6 +12,7 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.TryAddSingleton<UserSessionService>();
             services.TryAddScoped<IssueApiService>();
             services.TryAddScoped<ProjectTeamMemberApiService>();
+            services.TryAddSingleton<IWindowService, WindowService>();
             services.TryAddScoped<ProjectApiService>();
             services.TryAddScoped<UserApiService>();
             services.TryAddScoped<CommentApiService>();

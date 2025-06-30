@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:BIMIssueManagerMarkupsEditor.Views.Teams"
         mc:Ignorable="d" 
         Title="Add Team Member"
-        Height="480"
+        MinHeight="550"
         MaxHeight="900" MaxWidth="700"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResize"

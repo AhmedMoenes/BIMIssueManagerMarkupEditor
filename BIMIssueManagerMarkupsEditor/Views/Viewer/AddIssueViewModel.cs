@@ -13,14 +13,18 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
         private readonly UserSessionService _userSession;
         private readonly IssueApiService _issueApiService;
         private readonly ProjectApiService _projectApiService;
-
+        private readonly IWindowService _windowService;
+        public Action? RequestWindowHide { get; set; }
+        public Action? RequestWindowShow { get; set; }
         public AddIssueViewModel(UserSessionService userSession, 
                                  IssueApiService issueApiService, 
-                                 ProjectApiService projectApiService)
+                                 ProjectApiService projectApiService,
+                                 IWindowService windowService)
         {
             _userSession = userSession;
             _issueApiService = issueApiService;
             _projectApiService = projectApiService;
+            _windowService = windowService;
             Screenshot.Snapped += Screenshot_Snapped;
 
             Projects = new();
@@ -129,8 +133,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
         [RelayCommand]
         private async Task TakeSnapShotAsync()
         {
-            _activeWindow?.Hide();
-
+            RequestWindowHide?.Invoke();
+            await Task.Delay(200); // optional to ensure it's hidden first
             new Screenshot().Start();
         }
 
@@ -178,7 +182,9 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
                 await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
                     SnapshotImagePath = rawPath;
-                    ShowMessage("Snapshot uploaded and linked!", "Success");
+                    ShowMessage("Snapshot Added!", "Success");
+                    RequestWindowHide?.Invoke();
+
                 });
             }
             catch (Exception ex)
@@ -189,7 +195,7 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
             {
                 await Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    _activeWindow?.Show();
+                    RequestWindowShow?.Invoke();
                 });
             }
         }

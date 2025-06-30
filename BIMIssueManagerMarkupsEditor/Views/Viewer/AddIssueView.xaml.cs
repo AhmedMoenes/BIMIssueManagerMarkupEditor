@@ -22,6 +22,22 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
         public AddIssueView()
         {
             InitializeComponent();
+            DataContextChanged += OnDataContextChanged;
+        }
+
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (DataContext is AddIssueViewModel vm)
+            {
+                vm.RequestWindowHide = () =>
+                {
+                    this.Hide();
+                };
+                vm.RequestWindowShow = () =>
+                {
+                    this.Show();
+                };
+            }
         }
     }
 }
