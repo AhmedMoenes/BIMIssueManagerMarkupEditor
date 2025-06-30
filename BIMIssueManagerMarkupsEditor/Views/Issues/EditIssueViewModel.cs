@@ -4,14 +4,12 @@ public partial class EditIssueViewModel : ObservableObject, IDialogAware
 {
     private readonly ProjectApiService _projectApiService;
     private readonly IssueApiService _issueApiService;
-    private readonly LookupApiService _lookupService;
     private readonly int _issueId;
 
-    public EditIssueViewModel(IssueApiService issueApiService, LookupApiService lookupService, ProjectApiService projectApiService, int issueId)
+    public EditIssueViewModel(IssueApiService issueApiService, ProjectApiService projectApiService, int issueId)
     {
         _projectApiService = projectApiService;
         _issueApiService = issueApiService;
-        _lookupService = lookupService;
         _issueId = issueId;
 
         PriorityOptions = Enum.GetValues(typeof(Priority)).Cast<Priority>().ToList();
@@ -51,9 +49,9 @@ public partial class EditIssueViewModel : ObservableObject, IDialogAware
 
     private async Task LoadLookupsByProjectIdAsync(int projectId)
     {
-        var areas = await _lookupService.GetAreasByProjectIdAsync(projectId);
-        var users = await _lookupService.GetUsersByProjectIdAsync(projectId);
-        var labels = await _lookupService.GetLabelsByProjectIdAsync(projectId);
+        var areas = await _issueApiService.GetAreasByProjectIdAsync(projectId);
+        var users = await _issueApiService.GetUsersByProjectIdAsync(projectId);
+        var labels = await _issueApiService.GetLabelsByProjectIdAsync(projectId);
 
         Areas = new ObservableCollection<AreaDto>(areas);
         Users = new ObservableCollection<UserDto>(users);

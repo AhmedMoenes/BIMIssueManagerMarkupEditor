@@ -16,7 +16,6 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.TryAddScoped<UserApiService>();
             services.TryAddScoped<CommentApiService>();
             services.TryAddScoped<CompanyApiService>();
-            services.TryAddTransient<LookupApiService>();
             return services;
         }
         public static IServiceCollection AddViewModels(this IServiceCollection services)
@@ -60,7 +59,6 @@ namespace BIMIssueManagerMarkupsEditor.Helpers
             services.AddTransient<Func<int, EditIssueViewModel>>(provider => issueId =>
                 new EditIssueViewModel(
                     provider.GetRequiredService<IssueApiService>(),
-                    provider.GetRequiredService<LookupApiService>(),
                     provider.GetRequiredService<ProjectApiService>(),
                     issueId));
 
