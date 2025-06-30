@@ -1,14 +1,28 @@
 ﻿using System.Text.Json;
+using HandyControl.Controls;
 
 namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 {
     public partial class ModelViewerViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private string? selectedElementJson;
+        private IServiceProvider _serviceProvider;
+        private IDialogService _dialogService;
+        [ObservableProperty] private string? selectedElementJson;
 
-        [ObservableProperty]
-        private string? selectedElementId;
+        [ObservableProperty] private string? selectedElementId;
+
+
+        public ModelViewerViewModel(IServiceProvider serviceProvider,
+            IDialogService dialogService)
+        {
+            _serviceProvider = serviceProvider;
+            _dialogService = dialogService;
+        }
+
+        public ModelViewerViewModel()
+        {
+            
+        }
 
         public void HandleWebMessage(string json)
         {
@@ -35,6 +49,13 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
                 SelectedElementJson = "❌ Error parsing: " + ex.Message;
                 SelectedElementId = "❌ Error";
             }
+        }
+
+        [RelayCommand]
+        public void OpenAddIssueWindow()
+        {
+            var viewModel = _serviceProvider.GetRequiredService<AddIssueViewModel>();
+            _dialogService.ShowDialogAsync<AddIssueView, AddIssueViewModel>(viewModel);
         }
     }
 }

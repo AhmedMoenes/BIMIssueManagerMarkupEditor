@@ -5,12 +5,12 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 {
     public partial class ModelViewerView : UserControl
     {
-        private readonly ModelViewerViewModel _viewModel = new();
-
-        public ModelViewerView()
+        private readonly IServiceProvider _serviceProvider;
+        public ModelViewerView(ModelViewerViewModel viewModel, IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             InitializeComponent();
-            DataContext = _viewModel;
+            DataContext = viewModel;
             InitializeViewer();
         }
 
@@ -45,11 +45,8 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 
             WebView.Source = new Uri("https://app/index.html");
 
-            // 
             //WebView.CoreWebView2.OpenDevToolsWindow();
         }
-
-
 
         private void WebView_WebMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
         {
@@ -58,10 +55,9 @@ namespace BIMIssueManagerMarkupsEditor.Views.Viewer
 
             if (!string.IsNullOrWhiteSpace(json))
             {
-                _viewModel.HandleWebMessage(json);
+                _serviceProvider.GetRequiredService<ModelViewerViewModel>().HandleWebMessage(json);
             }
         }
-
 
     }
 }

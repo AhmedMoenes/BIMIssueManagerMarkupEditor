@@ -3,26 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf">
     <Grid>
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="2*" />
-        </Grid.ColumnDefinitions>-->
-
-        <!-- Viewer -->
         <wv2:WebView2 x:Name="WebView"  />
 
-         
-        <!--<StackPanel Grid.Column="1" Margin="10">
-            <TextBlock Text="Selected Element ID:" FontWeight="Bold" />
-            <TextBox Text="{Binding SelectedElementId}" IsReadOnly="True" Margin="0,5,0,10" />
+        <Popup IsOpen="True"
+               Placement="Relative"
+               HorizontalAlignment="Right"
+               VerticalAlignment="Top"
+               AllowsTransparency="True"
+               StaysOpen="True">
+            <Button Content="Add Issue"
+                    Background="Red"
+                    Padding="10,5"
+                    Margin="0,10,10,0"
+                    Command="{Binding OpenAddIssueWindowCommand}"
+            />
+        </Popup>
 
-            <TextBlock Text="Full Element JSON:" FontWeight="Bold" />
-            <TextBox Text="{Binding SelectedElementJson}" 
-                     AcceptsReturn="True"
-                     TextWrapping="Wrap"
-                     VerticalScrollBarVisibility="Auto"
-                     Height="400"
-                     IsReadOnly="True" />
-        </StackPanel>-->
     </Grid>
 </UserControl>
