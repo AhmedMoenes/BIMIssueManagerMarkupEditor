@@ -110,34 +110,11 @@ namespace BIMIssueManagerMarkupsEditor.Views.Issues
         }
         private async Task OpenIssueDetailsViewAsync (int Id)
         {
-            var existingTab = OpenTabs.OfType<IssueDetailsViewModel>().FirstOrDefault(t => t.Issue?.IssueId == Id);
-            if (existingTab != null)
-            {
-                // Tab already exists, just select it
-                return;
-            }
-
+           
             IssueDetailsViewModel vm = _serviceProvider.GetRequiredService<IssueDetailsViewModel>();
             await vm.LoadIssueAsync(Id);
-            vm.RequestClose += async () =>
-            {
-                OpenTabs.Remove(vm);
-                await LoadIssuesAsync();
-                SelectedTab = OpenTabs.FirstOrDefault();
-            };
-            OpenTabs.Add(vm);
-        }
-        [RelayCommand] public void CloseTab(object tab)
-        {
-            // Don't allow closing the first tab (issues list)
-            if (tab is IssuesListTabViewModel)
-                return;
-
-            if (tab is IssueDetailsViewModel issueDetailsVm)
-            {
-                OpenTabs.Remove(issueDetailsVm);
-            }
-            SelectedTab = OpenTabs.FirstOrDefault();
+            vm.RequestClose += async () => { await LoadIssuesAsync(); };
+            await _dialogService.ShowDialogAsync<IssueDetailsView, IssueDetailsViewModel>(vm);
         }
 
     }
